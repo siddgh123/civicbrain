@@ -1,0 +1,5 @@
+﻿source_id,source_type,source_name,source_location_or_url,license_or_permission,classes_available,planned_use
+S1,Public Dataset,RDD2022-India,https://universe.roboflow.com/prakhar-kpb1v/rdd2022-india-il8ju/dataset/5,CC BY 4.0,"Pothole;Road Damage","Supplementary training data for Pothole and Road Damage"
+S2,Public Dataset,Waterlogging Dataset,Project download source,To be documented,"Waterlogging","Training data for Waterlogging"
+S3,Public Dataset,GarbagePile,https://universe.roboflow.com/objectdetectiondemo-irh54/garbagepile/dataset/1,CC BY 4.0,"Garbage Accumulation","Training data for Garbage Accumulation"
+S4,Project-specific,Talegaon-Dabhade field/project images,Project team collection,Project-owned/collected images,"Pothole;Garbage Accumulation;Waterlogging;Road Damage","Future/local-domain project images"

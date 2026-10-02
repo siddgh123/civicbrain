@@ -1,0 +1,3 @@
+pair_type,pair_count,mean_distance_m,median_distance_m,max_distance_m,mean_time_difference_h,median_time_difference_h,max_time_difference_h,same_category_count
+synthetic_negative,150,122.188,135.352,228.148,1414.105,1135.233,4169.983,100
+synthetic_positive,150,43.58,43.345,79.945,37.008,37.238,71.89,150

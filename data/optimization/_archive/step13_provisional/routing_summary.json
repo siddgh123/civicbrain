@@ -1,0 +1,18 @@
+{
+  "step": "13_routing_model",
+  "routing_method": "OR-Tools RoutingModel",
+  "objective": "minimize total road distance",
+  "routing_groups": 105,
+  "successful_groups": 105,
+  "scheduled_jobs_routed": 241,
+  "total_distance_m": 1477464.0,
+  "total_distance_km": 1477.464,
+  "total_travel_time_s": 154681.0,
+  "total_travel_time_min": 2578.016666666667,
+  "validation_status": "PASS",
+  "outputs": {
+    "route_results": "data\\optimization\\routing\\route_results.csv",
+    "routing_validation": "data\\optimization\\routing\\routing_validation.csv",
+    "routing_summary": "data\\optimization\\routing\\routing_summary.json"
+  }
+}

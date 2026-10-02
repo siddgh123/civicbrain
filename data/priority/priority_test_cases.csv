@@ -1,0 +1,8 @@
+test_case,description,ward_number,severity_score,location_risk_score,frequency_score,wait_time_score,infrastructure_importance_score,historical_risk_score
+TC001,Normal isolated pothole,23,50,25,0,0,25,0
+TC002,Critical pothole near important facility,6,100,100,60,50,100,40
+TC003,Long waiting complaint,16,50,25,20,100,50,20
+TC004,Complaint near hospital,1,50,100,20,20,50,20
+TC005,Repeated nearby complaints,15,50,50,100,30,50,80
+TC006,High population impact complaint,6,75,50,20,20,50,20
+TC007,Low risk isolated complaint,22,25,10,0,0,25,0

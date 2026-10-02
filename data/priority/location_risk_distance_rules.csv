@@ -1,0 +1,6 @@
+distance_min_m,distance_max_m,risk_multiplier,source
+0,100,1.00,project_scoring_configuration
+100,300,0.75,project_scoring_configuration
+300,500,0.50,project_scoring_configuration
+500,1000,0.25,project_scoring_configuration
+1000,999999,0.00,project_scoring_configuration

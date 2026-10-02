@@ -1,0 +1,17 @@
+﻿source_value,source_type,work_type,team_type,mapping_status,reason
+Blocked Drain,step10_issue_type,WATER,WATER,VALIDATED,"CivicBrain Step 13 approved operational grouping: Blocked Drain is grouped under WATER for the four-category operational scope. This is a project-level normalization rule, not an official TDMC departmental classification."
+Garbage Accumulation,step10_issue_type,GARBAGE,GARBAGE,VALIDATED,CivicBrain Step 13 approved operational grouping: Garbage Accumulation is handled under GARBAGE.
+Other,step10_issue_type,,,REVIEW_REQUIRED,Other cannot be deterministically assigned to one of the four approved operational work types from the available category value alone. Keep in REVIEW_REQUIRED and exclude from executable Step 13 jobs until manually classified.
+Pothole,step10_issue_type,ROAD,ROAD,VALIDATED,CivicBrain Step 13 approved operational grouping: Pothole is handled under ROAD.
+Road Damage,step10_issue_type,ROAD,ROAD,VALIDATED,CivicBrain Step 13 approved operational grouping: Road Damage is handled under ROAD.
+Streetlight,step10_issue_type,ELECTRICITY,ELECTRICITY,VALIDATED,CivicBrain Step 13 approved operational grouping: Streetlight is handled under ELECTRICITY.
+Water Leakage,step10_issue_type,WATER,WATER,VALIDATED,CivicBrain Step 13 approved operational grouping: Water Leakage is handled under WATER.
+Waterlogging,step10_issue_type,WATER,WATER,VALIDATED,CivicBrain Step 13 approved operational grouping: Waterlogging is handled under WATER.
+Blocked Drain,step8_category,WATER,WATER,VALIDATED,"CivicBrain Step 13 approved operational grouping: Blocked Drain is grouped under WATER for the four-category operational scope. This is a project-level normalization rule, not an official TDMC departmental classification."
+Garbage Accumulation,step8_category,GARBAGE,GARBAGE,VALIDATED,CivicBrain Step 13 approved operational grouping: Garbage Accumulation is handled under GARBAGE.
+Other,step8_category,,,REVIEW_REQUIRED,Other cannot be deterministically assigned to one of the four approved operational work types from the available category value alone. Keep in REVIEW_REQUIRED and exclude from executable Step 13 jobs until manually classified.
+Pothole,step8_category,ROAD,ROAD,VALIDATED,CivicBrain Step 13 approved operational grouping: Pothole is handled under ROAD.
+Road Damage,step8_category,ROAD,ROAD,VALIDATED,CivicBrain Step 13 approved operational grouping: Road Damage is handled under ROAD.
+Streetlight,step8_category,ELECTRICITY,ELECTRICITY,VALIDATED,CivicBrain Step 13 approved operational grouping: Streetlight is handled under ELECTRICITY.
+Water Leakage,step8_category,WATER,WATER,VALIDATED,CivicBrain Step 13 approved operational grouping: Water Leakage is handled under WATER.
+Waterlogging,step8_category,WATER,WATER,VALIDATED,CivicBrain Step 13 approved operational grouping: Waterlogging is handled under WATER.

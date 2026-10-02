@@ -1,0 +1,118 @@
+# =============================================================================
+# CivicBrain .gitignore  (kit file - keep at the repo root)
+# Secrets, personal data, large binaries and build output never go to git.
+# =============================================================================
+
+# ---------- secrets ----------
+.env
+.env.*
+!.env.example
+!.env.test.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+secrets/
+credentials*.json
+service-account*.json
+
+# ---------- personal data / runtime files ----------
+storage/
+backups/
+*.backup
+*.dump
+civicbrain_backup
+logs/
+*.log
+
+# ---------- local tool binaries / hand-offs ----------
+tools/mailpit/
+kaggle_upload/
+kaggle_download/
+*.local.json
+
+# ---------- Claude Code personal files (the shared .claude/settings.json, rules and skills ARE committed) ----------
+.claude/settings.local.json
+CLAUDE.local.md
+.claude/worktrees/
+
+# ---------- OS / editors ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# ---------- backend (Maven / Java) ----------
+backend/target/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+backend/src/main/resources/static/
+
+# ---------- frontend (Node / Vite / Playwright) ----------
+node_modules/
+frontend/dist/
+dist/
+coverage/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+**/playwright/.auth/
+**/.auth/
+*.tsbuildinfo
+.vite/
+
+# ---------- Python / AI service ----------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+.coverage.*
+# model weights and caches (SHA-256 recorded in ai-service/models/MANIFEST.json, which IS committed)
+ai-service/.ultralytics/
+ai-service/models/*
+!ai-service/models/MANIFEST.json
+!ai-service/models/README.md
+*.pt
+*.onnx
+*.engine
+*.safetensors
+runs/
+wandb/
+
+# ---------- datasets (large; keep CSVs, scripts and cards) ----------
+data/yolo/images/
+data/yolo/labels/
+data/yolo/raw/
+data/yolo/backup_*/
+data/yolo_v2/
+data/yolo/mvp/
+data/**/*.zip
+data/**/*.tar
+data/**/*.7z
+*.cache
+
+# ---------- GIS / routing data ----------
+infra/osrm/data/
+*.osm.pbf
+*.osrm*
+# (gis/raw/official_sources/*.tif is small (~1.3 MB) and needed for the P1 QGIS check: keep it tracked)
+
+# ---------- test fixtures that are generated ----------
+tests/fixtures/images/camera.y4m
+*.y4m
+
+# P01: not part of the project (kept on disk, never committed; see docs/INVENTORY.md)
+# old YOLO backup (2,822 images + labels, ~147 MB) and the 20 dataset photos of the Step 9 visual check
+data/yolo/archive/backup_before_final_merge/
+data/yolo/visual_validation/

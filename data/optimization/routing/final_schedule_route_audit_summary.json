@@ -1,0 +1,23 @@
+{
+  "step": "13_final_route_shift_audit",
+  "groups_total": 105,
+  "groups_passed": 60,
+  "travel_time_violations": 45,
+  "route_structure_errors": 0,
+  "jobs_audited": 241,
+  "total_service_h": 865.8,
+  "total_travel_h": 42.967,
+  "max_route_group": {
+    "group_index": "47",
+    "team_id": "T002",
+    "schedule_date": "2026-10-14",
+    "job_count": 3,
+    "total_route_time_h": 9.738,
+    "finish_time": "17:44"
+  },
+  "overall_status": "REVIEW_REQUIRED",
+  "outputs": {
+    "audit_csv": "data\\optimization\\routing\\final_schedule_route_audit.csv",
+    "summary_json": "data\\optimization\\routing\\final_schedule_route_audit_summary.json"
+  }
+}

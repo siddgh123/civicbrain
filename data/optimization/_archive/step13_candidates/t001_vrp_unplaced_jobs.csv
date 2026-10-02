@@ -1,0 +1,4 @@
+job_id,team_id,original_schedule_date,original_group_index,priority_score,service_duration_h,reason,status
+179,T002,2026-09-30,33,44.22,9.0,NOT_REPAIRED,UNSCHEDULED
+143,T003,2026-09-28,61,33.38,9.0,NOT_REPAIRED,UNSCHEDULED
+11,T001,2026-09-29,2,42.57,8.7,TRAVEL_AWARE_VRP_LEFT_UNSCHEDULED,UNSCHEDULED

@@ -1,0 +1,13 @@
+metric,value
+mean_precision,0.7001490555149092
+std_precision,0.05397148671837468
+mean_recall,0.9266666666666667
+std_recall,0.04346134936801765
+mean_f1,0.7972483846767968
+std_f1,0.048116396469228793
+total_tp,139.0
+total_fp,60.0
+total_tn,90.0
+total_fn,11.0
+mean_selected_threshold,0.594
+std_selected_threshold,0.0054772255750516665

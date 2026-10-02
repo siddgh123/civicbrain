@@ -1,0 +1,17 @@
+﻿metric,value
+total_complaints,500
+eligible_jobs,441
+excluded_jobs,59
+excluded_duplicate_children,4
+excluded_uncertain_or_review,2
+excluded_closed_or_completed,0
+excluded_invalid_gps,0
+excluded_unmapped_work_types,53
+excluded_missing_or_invalid_resource_fields,0
+excluded_missing_or_invalid_priority,0
+excluded_category_issue_type_mismatch,0
+work_type_road,130
+work_type_water,178
+work_type_garbage,66
+work_type_electricity,67
+standalone_candidates,DETERMINED_DURING_CLUSTERING

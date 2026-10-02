@@ -1,0 +1,18 @@
+# =============================================================================
+# CivicBrain | infra/osrm/docker-compose.yml - OSRM road-routing server for the action-plan optimizer
+# Humans only:  pwsh -NoProfile -File scripts\dev\start-osrm.ps1   (prepare the data first: README.md)
+# The image tag is pinned HERE and nowhere else (prepare-osrm.ps1 reuses this service).
+# Tags are published as vX.Y.Z-debian on ghcr.io (checked 2026-09-30: v26.8.0-debian is the newest
+# image; the v26.9.0 GitHub release has no image yet). Never use `latest` - it moves without warning.
+# =============================================================================
+name: civicbrain-osrm
+services:
+  osrm:
+    image: ghcr.io/project-osrm/osrm-backend:v26.8.0-debian
+    container_name: civicbrain-osrm
+    command: ["osrm-routed", "--algorithm", "mld", "--max-table-size", "200", "/data/talegaon.osrm"]
+    ports:
+      - "127.0.0.1:5000:5000"      # localhost only
+    volumes:
+      - ./data:/data               # talegaon.osm.pbf + generated talegaon.osrm.* files (git-ignored)
+    restart: unless-stopped

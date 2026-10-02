@@ -1,0 +1,26 @@
+# CivicBrain line endings: normalise text in the repo, keep the right endings on checkout.
+* text=auto
+# Windows scripts
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+# Unix scripts and wrappers (run in CI / Docker / WSL)
+*.sh  text eol=lf
+mvnw  text eol=lf
+# SQL: LF everywhere so checksums (Flyway) are identical on every laptop and in CI
+*.sql text eol=lf
+# data and binaries
+*.geojson text eol=lf
+*.csv  text eol=lf
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.tif  binary
+*.pdf  binary
+*.onnx binary
+*.pt   binary
+*.pbf  binary
+*.y4m  binary
+*.gpkg binary
+*.zip  binary
+*.jar  binary

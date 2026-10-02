@@ -1,0 +1,8 @@
+﻿team_id,equipment_type,quantity,available,valid_from,valid_to,source,assumption_note
+T001,joint_cutting_machine,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T001,plate_compactor,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T002,drain_cleaning_tools,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T002,truck_5_5_cum_per_10_mt,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T002,water_leakage_repair_tools,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T003,manual_garbage_collection_tools,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.
+T004,electrical_maintenance_tools,1,True,,,synthetic_prototype,Prototype quantity=1 for sequential scheduling. Not verified municipal inventory.

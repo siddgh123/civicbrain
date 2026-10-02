@@ -1,0 +1,19 @@
+{
+  "status": "experimental",
+  "selection_method": "5-fold calibration mean F1, with ties broken by mean precision, mean recall, wider window, then lower threshold.",
+  "folds": 5,
+  "random_seed": 42,
+  "recent_window_days": 7,
+  "weight_config": "text70_distance20_recency10",
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "threshold": 0.59,
+  "heldout_mean_precision": 0.7018212592801363,
+  "heldout_std_precision": 0.05346725649566221,
+  "heldout_mean_recall": 0.9466666666666667,
+  "heldout_std_recall": 0.03800584750330459,
+  "heldout_mean_f1": 0.8053740641723394,
+  "heldout_std_f1": 0.0430676872876572,
+  "note": "Experimental only. The benchmark is synthetic-by-construction. This configuration is not official TDMC policy and is not frozen until final validation/documentation."
+}

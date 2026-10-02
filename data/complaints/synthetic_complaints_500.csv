@@ -1,0 +1,501 @@
+complaint_id,category,title,description,is_synthetic
+1,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+2,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+3,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+4,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+5,Pothole,Road pothole,Deep pothole noticed on the road.,true
+6,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+7,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+8,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+9,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+10,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+11,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+12,Streetlight,Broken streetlight,Streetlight requires repair.,true
+13,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+14,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+15,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+16,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+17,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+18,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+19,Pothole,Road pothole,Deep pothole noticed on the road.,true
+20,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+21,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+22,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+23,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+24,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+25,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+26,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+27,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+28,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+29,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+30,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+31,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+32,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+33,Streetlight,Broken streetlight,Streetlight requires repair.,true
+34,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+35,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+36,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+37,Other,Civic issue,A municipal issue has been reported.,true
+38,Other,Civic issue,A municipal issue has been reported.,true
+39,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+40,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+41,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+42,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+43,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+44,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+45,Other,Civic issue,A municipal issue has been reported.,true
+46,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+47,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+48,Other,Civic issue,A municipal issue has been reported.,true
+49,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+50,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+51,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+52,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+53,Pothole,Road pothole,Deep pothole noticed on the road.,true
+54,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+55,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+56,Pothole,Road pothole,Deep pothole noticed on the road.,true
+57,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+58,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+59,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+60,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+61,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+62,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+63,Streetlight,Broken streetlight,Streetlight requires repair.,true
+64,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+65,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+66,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+67,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+68,Other,Civic issue,A municipal issue has been reported.,true
+69,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+70,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+71,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+72,Pothole,Road pothole,Deep pothole noticed on the road.,true
+73,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+74,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+75,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+76,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+77,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+78,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+79,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+80,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+81,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+82,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+83,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+84,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+85,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+86,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+87,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+88,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+89,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+90,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+91,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+92,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+93,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+94,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+95,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+96,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+97,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+98,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+99,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+100,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+101,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+102,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+103,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+104,Pothole,Road pothole,Deep pothole noticed on the road.,true
+105,Streetlight,Broken streetlight,Streetlight requires repair.,true
+106,Streetlight,Broken streetlight,Streetlight requires repair.,true
+107,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+108,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+109,Streetlight,Broken streetlight,Streetlight requires repair.,true
+110,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+111,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+112,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+113,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+114,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+115,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+116,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+117,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+118,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+119,Other,Civic issue,A municipal issue has been reported.,true
+120,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+121,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+122,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+123,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+124,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+125,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+126,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+127,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+128,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+129,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+130,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+131,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+132,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+133,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+134,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+135,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+136,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+137,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+138,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+139,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+140,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+141,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+142,Streetlight,Broken streetlight,Streetlight requires repair.,true
+143,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+144,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+145,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+146,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+147,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+148,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+149,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+150,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+151,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+152,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+153,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+154,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+155,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+156,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+157,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+158,Streetlight,Broken streetlight,Streetlight requires repair.,true
+159,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+160,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+161,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+162,Pothole,Road pothole,Deep pothole noticed on the road.,true
+163,Pothole,Road pothole,Deep pothole noticed on the road.,true
+164,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+165,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+166,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+167,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+168,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+169,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+170,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+171,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+172,Other,Civic issue,A municipal issue has been reported.,true
+173,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+174,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+175,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+176,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+177,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+178,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+179,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+180,Streetlight,Broken streetlight,Streetlight requires repair.,true
+181,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+182,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+183,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+184,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+185,Streetlight,Broken streetlight,Streetlight requires repair.,true
+186,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+187,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+188,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+189,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+190,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+191,Pothole,Road pothole,Deep pothole noticed on the road.,true
+192,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+193,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+194,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+195,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+196,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+197,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+198,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+199,Other,Civic issue,A municipal issue has been reported.,true
+200,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+201,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+202,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+203,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+204,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+205,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+206,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+207,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+208,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+209,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+210,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+211,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+212,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+213,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+214,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+215,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+216,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+217,Streetlight,Broken streetlight,Streetlight requires repair.,true
+218,Pothole,Road pothole,Deep pothole noticed on the road.,true
+219,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+220,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+221,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+222,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+223,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+224,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+225,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+226,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+227,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+228,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+229,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+230,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+231,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+232,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+233,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+234,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+235,Other,Civic issue,A municipal issue has been reported.,true
+236,Other,Civic issue,A municipal issue has been reported.,true
+237,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+238,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+239,Pothole,Road pothole,Deep pothole noticed on the road.,true
+240,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+241,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+242,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+243,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+244,Pothole,Road pothole,Deep pothole noticed on the road.,true
+245,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+246,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+247,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+248,Other,Civic issue,A municipal issue has been reported.,true
+249,Other,Civic issue,A municipal issue has been reported.,true
+250,Streetlight,Broken streetlight,Streetlight requires repair.,true
+251,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+252,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+253,Other,Civic issue,A municipal issue has been reported.,true
+254,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+255,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+256,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+257,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+258,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+259,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+260,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+261,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+262,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+263,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+264,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+265,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+266,Pothole,Road pothole,Deep pothole noticed on the road.,true
+267,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+268,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+269,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+270,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+271,Other,Civic issue,A municipal issue has been reported.,true
+272,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+273,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+274,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+275,Pothole,Road pothole,Deep pothole noticed on the road.,true
+276,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+277,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+278,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+279,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+280,Streetlight,Broken streetlight,Streetlight requires repair.,true
+281,Other,Civic issue,A municipal issue has been reported.,true
+282,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+283,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+284,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+285,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+286,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+287,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+288,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+289,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+290,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+291,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+292,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+293,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+294,Other,Civic issue,A municipal issue has been reported.,true
+295,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+296,Pothole,Road pothole,Deep pothole noticed on the road.,true
+297,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+298,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+299,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+300,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+301,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+302,Pothole,Road pothole,Deep pothole noticed on the road.,true
+303,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+304,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+305,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+306,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+307,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+308,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+309,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+310,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+311,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+312,Pothole,Road pothole,Deep pothole noticed on the road.,true
+313,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+314,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+315,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+316,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+317,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+318,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+319,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+320,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+321,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+322,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+323,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+324,Other,Civic issue,A municipal issue has been reported.,true
+325,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+326,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+327,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+328,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+329,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+330,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+331,Other,Civic issue,A municipal issue has been reported.,true
+332,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+333,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+334,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+335,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+336,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+337,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+338,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+339,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+340,Other,Civic issue,A municipal issue has been reported.,true
+341,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+342,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+343,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+344,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+345,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+346,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+347,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+348,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+349,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+350,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+351,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+352,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+353,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+354,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+355,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+356,Other,Civic issue,A municipal issue has been reported.,true
+357,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+358,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+359,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+360,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+361,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+362,Other,Civic issue,A municipal issue has been reported.,true
+363,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+364,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+365,Pothole,Road pothole,Deep pothole noticed on the road.,true
+366,Pothole,Road pothole,Deep pothole noticed on the road.,true
+367,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+368,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+369,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+370,Streetlight,Broken streetlight,Streetlight requires repair.,true
+371,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+372,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+373,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+374,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+375,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+376,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+377,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+378,Other,Civic issue,A municipal issue has been reported.,true
+379,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+380,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+381,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+382,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+383,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+384,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+385,Streetlight,Broken streetlight,Streetlight requires repair.,true
+386,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+387,Streetlight,Broken streetlight,Streetlight requires repair.,true
+388,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+389,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+390,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+391,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+392,Other,Civic issue,A municipal issue has been reported.,true
+393,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+394,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+395,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+396,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+397,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+398,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+399,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+400,Streetlight,Broken streetlight,Streetlight requires repair.,true
+401,Streetlight,Broken streetlight,Streetlight requires repair.,true
+402,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+403,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+404,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+405,Streetlight,Broken streetlight,Streetlight requires repair.,true
+406,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+407,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+408,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+409,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+410,Pothole,Road pothole,Deep pothole noticed on the road.,true
+411,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+412,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+413,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+414,Streetlight,Streetlight not working,Streetlight is not functioning.,true
+415,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+416,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+417,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+418,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+419,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+420,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+421,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+422,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+423,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+424,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+425,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+426,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+427,Other,Civic issue,A municipal issue has been reported.,true
+428,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+429,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+430,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+431,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+432,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+433,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+434,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+435,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+436,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+437,Pothole,Road pothole,Deep pothole noticed on the road.,true
+438,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+439,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+440,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+441,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+442,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+443,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+444,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+445,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+446,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+447,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+448,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+449,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+450,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+451,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+452,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+453,Water Leakage,Water leakage,Water is leaking from a pipeline.,true
+454,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+455,Other,Civic issue,A municipal issue has been reported.,true
+456,Water Leakage,Pipeline leakage,A water pipeline appears to be leaking.,true
+457,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+458,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+459,Other,Public infrastructure issue,An issue with public infrastructure has been noticed.,true
+460,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+461,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+462,Other,Civic issue,A municipal issue has been reported.,true
+463,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+464,Blocked Drain,Drain cleaning required,Drain requires cleaning and maintenance.,true
+465,Pothole,Road pothole,Deep pothole noticed on the road.,true
+466,Garbage Accumulation,Garbage accumulation,Garbage has accumulated near the roadside.,true
+467,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+468,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+469,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+470,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+471,Streetlight,Broken streetlight,Streetlight requires repair.,true
+472,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+473,Streetlight,Dark road due to streetlight,Streetlight is not working at night.,true
+474,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+475,Pothole,Dangerous pothole,Pothole is creating a safety problem for commuters.,true
+476,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+477,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+478,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+479,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+480,Garbage Accumulation,Waste dumped on road,Waste has been dumped near the road.,true
+481,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+482,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+483,Streetlight,Broken streetlight,Streetlight requires repair.,true
+484,Waterlogging,Road flooded with water,Standing water is causing difficulty for commuters.,true
+485,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+486,Pothole,Pothole on road,Large pothole causing difficulty for vehicles.,true
+487,Blocked Drain,Blocked drain,Drain is blocked and water is not flowing.,true
+488,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+489,Other,Civic issue,A municipal issue has been reported.,true
+490,Blocked Drain,Drain blockage,Waste has blocked the drainage system.,true
+491,Road Damage,Road repair required,Damaged portion of road requires maintenance.,true
+492,Water Leakage,Leakage near road,Water leakage is observed near the road.,true
+493,Waterlogging,Waterlogging on road,Rainwater has accumulated on the road.,true
+494,Road Damage,Damaged road,Road surface is damaged and needs repair.,true
+495,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+496,Waterlogging,Water accumulation,Water is accumulated in the area.,true
+497,Other,Other municipal complaint,A municipal service-related issue has been reported.,true
+498,Garbage Accumulation,Garbage not collected,Garbage has not been collected from the area.,true
+499,Road Damage,Broken road surface,Road has cracks and damaged portions.,true
+500,Waterlogging,Water accumulation,Water is accumulated in the area.,true

@@ -1,0 +1,15 @@
+{
+  "baseline_name": "FIFO Greedy Baseline",
+  "scheduled_jobs": 191,
+  "routing_groups": 110,
+  "successful_groups": 110,
+  "failed_groups": 0,
+  "distance_matrix_rows": 927,
+  "time_matrix_rows": 927,
+  "node_mapping_rows": 301,
+  "depot_id": "D001",
+  "depot_latitude": 18.729411,
+  "depot_longitude": 73.699489,
+  "route_order": "FIFO baseline sequence",
+  "status": "PASS"
+}

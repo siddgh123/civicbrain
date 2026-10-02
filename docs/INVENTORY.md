@@ -1,0 +1,52 @@
+# INVENTORY — research files on the build laptop (P01, 2026-10-02)
+
+Read-only inventory of the old CivicBrain research files copied into `C:\dev\civicbrain` (Step 0). Nothing was moved,
+changed or deleted. Status: **OK** = usable as is · **NEEDS ADAPTING** = the named prompt must change how it is used ·
+**UNKNOWN** = check in the named prompt. **No research file the prompts need is missing** → no fallback (P03b, P09, P12) is needed.
+
+## 1. Files the prompts use
+| Path | Present? | Count / size | Used by | Format peek | Status |
+|---|---|---|---|---|---|
+| `data/yolo/data.yaml` | yes | 141 B | P03 | no `path` key; `train: images/train`, `val: images/val`, `test: images/test`; `nc: 4`; `names: ['Pothole', 'Garbage Accumulation', 'Waterlogging', 'Road Damage']` (= frozen order 0-3) | OK (P03 `prepare_mvp_dataset` writes its own yaml with an absolute `path`) |
+| `data/yolo/images/train` · `val` · `test` | yes | 2,708 · 351 · 339 `.jpg` (137.7 · 18.3 · 17.1 MB) | P03, P08 | git-ignored | OK |
+| `data/yolo/labels/train` · `val` · `test` | yes | 2,708 · 351 · 339 `.txt`; 0 empty; 0 image/label name mismatches | P03 (P03b **not** needed) | every line 5 fields, class ids only 0-3. Boxes: train 0=2135 1=488 2=352 3=2616 · val 0=246 1=105 2=44 3=342 · test 0=299 1=38 2=45 3=321. Samples: `train/image_29.txt` → `2 0.500000 0.679688 1.000000 0.640625`; `val/image_145.txt` → `2 0.5 0.559896 1.0 0.880208`; `test/India_008067_…txt` → `3 0.4229 0.6944 0.7014 0.5417` | OK (class 2 Waterlogging and class 1 in test are small - P03 reports it) |
+| `data/yolo/class_definition.csv`, `class_distribution.csv`, `dataset_sources.csv` (4 rows) | yes | small | P03, P29 | `class_distribution.csv` counts (2680/631/441/3279) are from the pre-split pool, not the current split | OK (P29: use P03's `dataset_report.json` numbers) |
+| `data/priority/priority_factor_dataset.csv` | yes | 500 rows | P09 golden test | `complaint_id,ward_id,ward_population,population_score,population_source,population_source_year,severity_level,severity_score,severity_source,location_risk_score,frequency_count,frequency_score,wait_days,wait_time_score,road_id,road_type,infrastructure_importance_score,infrastructure_source,historical_count,historical_risk_score` | OK |
+| `data/priority/priority_scores.csv` | yes | 500 rows (same 500 ids, 1-500) | P09 golden test | `complaint_id,ward_id,severity_score,population_score,location_risk_score,frequency_score,wait_time_score,infrastructure_importance_score,historical_risk_score,priority_score,priority_level,priority_reasons`; `priority_score` has 2 decimals; levels HIGH 74 · MEDIUM 423 · LOW 3 | OK (P09: compare after the engine's own rounding) |
+| `data/priority/official_ward_population.csv` | yes | 23 rows | P09 | `ward_number,ward_population,source,source_year` | OK |
+| `data/priority/` engine inputs: `priority_rules.csv` (7), `population_impact.csv` (500), `ward_population_scores.csv` (23), `priority_test_cases.csv` (7) | yes | | P09 (read by `priority_engine.py`) | `population_impact.csv`: `complaint_id,ward_id,ward_population,population_score,…` | **NEEDS ADAPTING (P09):** the research column `ward_id` is really the **ward number** (500/500 equal `complaint_ward_mapping.ward_number`; populations match `official_ward_population` by ward_number). DB `ward_id` ≠ `ward_number` (ward 1 = ward_id 21) → the live writer must look up population by `wards.ward_number` |
+| other `data/priority/*.csv` (rules + per-factor scores: severity, location risk, frequency, wait time, infrastructure, historical risk, `complaint_ward_mapping`) | yes | 16 files, 2-500 rows | P09 (reference) | rules files: `rule_name,value,unit,source` / `…,importance_score,source` | OK |
+| `scripts/priority/priority_engine.py` | yes | 13.0 KB | P09 port | imports `csv`, `pathlib` only; paths `Path(__file__).parents[2]/data/priority/…`; no DB, no absolute paths | OK |
+| other `scripts/priority/*.py` (7: build_population_impact, build_priority_factor_dataset, build_severity_scores, calculate_population_score, calculate_priority_scores, severity_mapper, validate_priority_scores) | yes | 2-7 KB | P09 (reference) | `csv` + `pathlib`, repo-relative paths | OK |
+| `data/duplicates/duplicate_engine_results.csv` | yes | 109 pairs (DUPLICATE 4 · UNCERTAIN 1 · NOT_DUPLICATE 104) | P09 repro test | `pair_id,complaint_id_1,complaint_id_2,text_similarity,distance_meters,distance_score,time_difference_hours,recency_score,duplicate_score,decision,decision_source,review_required,submitted_at_1,submitted_at_2` | OK (one pair of each label exists) |
+| `data/duplicates/duplicate_engine_config.json` | yes | 1.4 KB | P09 | keys: status, engine_version, candidate_radius_meters, recent_window_days, text_model, text_weight, distance_weight, recency_weight, duplicate_threshold, uncertain_lower_bound, decision_rules, master_rule, uncertain_rule, original_records, source_data, validation | OK |
+| `scripts/duplicates/run_duplicate_engine_and_load.py` | yes | 35.7 KB | P09 port | imports numpy, pandas, **psycopg2**, sentence_transformers, getpass; constants = frozen (300 m, 7 d, 0.70/0.20/0.10, ≥0.59, 0.55); DB password from env `CIVICBRAIN_DB_PASSWORD` or `getpass` (no literal) | **NEEDS ADAPTING (P09):** port the scoring only; DB access via the worker's psycopg 3 (psycopg2 is not pinned) |
+| `data/resources/models/cost_model.json`, `duration_model.json`, `workers_model.json` | yes | 304 · 295 · 262 KB | P12 | top-level keys `learner, version`; XGBoost **3.4.1** (= pinned `xgboost==3.4.1`); `reg:squarederror`; 14 features (`latitude, longitude, estimated_area, issue_type_*` one-hot, `severity_*`) | OK |
+| `scripts/resources/predict_resource_estimate.py` | yes | 2.5 KB | P12 | imports pandas, pathlib, `xgboost.XGBRegressor`; models from `Path(__file__).parents[2]/data/resources/models`; issue types Blocked Drain, Garbage Accumulation, Other, Pothole, Road Damage, Streetlight, Water Leakage, Waterlogging; severities High/Low/Medium | UNKNOWN (P12: map DB category names + severity to these strings; loads the 3 models on every call → load once) |
+| `data/resources/processed/resource_dataset.csv`, `raw/{equipment_master (10), material_master (2), resource_assumptions (24)}.csv` | yes | 500 / small | P12 (reference) | `complaint_id,issue_type,…,estimated_workers,estimated_duration_hours,…,total_cost,…` (synthetic) | OK (synthetic - keep labelled) |
+| `scripts/optimization/routing/*.py` (Step 13 OR-Tools) | yes | 12 files, 3.5-52 KB | P17 (settings reference) | imports csv, json, `ortools.constraint_solver`, **urllib** (OSRM); paths `ROOT = Path(".")` (cwd-relative `data/optimization/...`); `OSRM_URL = "https://router.project-osrm.org/table/v1/driving"` in 6 files | **NEEDS ADAPTING (P17):** reuse only the solver settings; MVP travel times are haversine, no network calls |
+| `data/optimization/routing/depot_master.csv` | yes | 1 row | P17 (reference) | `depot_id,depot_name,latitude,longitude,location_reference,source,source_type,verification_status` | OK (D001 is prototype; values in DB `depots`) |
+| `data/complaints/*` (kit) | yes | `synthetic_complaints_500.csv` 500 · `kit_authored_train.csv` 160 · `sanity_test_mvp.csv` 40 · `README.md` | P08, P29 | `complaint_id,category,title,description,is_synthetic` / `text,category,language,source` | OK |
+| `gis/tdmc_wards_clean_v2.geojson` (kit) | yes | 178 KB, 23 features | P04/P15 (reference) | properties `ward_id, ward_number (1-23), ward_name, ward_scheme, source, area_km2` | OK |
+
+## 2. Kept on disk, not used in the MVP (never moved or deleted)
+| Path | Count / size | git |
+|---|---|---|
+| `data/yolo/raw/` (source datasets: RDD, garbage, waterlogging, `final_merge`, old visual checks) | 33,059 files, 874.0 MB | ignored (kit rule `data/yolo/raw/`) |
+| `data/yolo/archive/backup_before_final_merge/` | 2,822 images (146.8 MB) + 2,822 labels | **ignored (P01)** |
+| `data/yolo/visual_validation/` | 20 dataset photos (1.1 MB) | **ignored (P01)** - no dataset photos in git |
+| `data/yolo/archive/data.yaml_before_path_fix.yaml`, `data/yolo/verified/step9_final_freeze_audit.txt`, `data/yolo/*.csv`, `data/yolo/README.md` | small | committed (provenance; `README.md` has garbled characters from an old PowerShell write - cosmetic) |
+| `data/yolo/processed/` | empty | - |
+| `data/optimization/` (`action_plan, clusters, config, evaluation, jobs, preflight, scheduling, teams, _archive`) | 90 files, 1.5 MB (CSV/JSON) | committed (Step 13 research results) |
+| `data/gis/` (`processed` incl. `tdmc_gis.gpkg` 139 KB and `tdmc_roads.geojson` 1.3 MB; `raw/TDMC_Draft_Ward_Formation_2025.pdf` 5.1 MB; `raw/official_sources/tdmc_boundary_georeferenced.tif` 1.4 MB + `tdmc_boundary_reference.png` 0.5 MB; `verified/`) | 22 files | committed (GIS sources; largest 5.1 MB) |
+| `data/duplicates/` (32 other benchmark/evaluation files) | ≈ 1 MB | committed |
+| `scripts/yolo/*.py` (16 dataset conversion/inspection scripts) | small | committed. Hard-coded `C:\Users\…\OneDrive\Desktop\CivicBrain` at `convert_garbage_pile_to_civicbrain.py:10`, `inspect_garbage_pile_converted.py:7`, `split_waterlogging_dataset.py:11`, `validate_garbage_pile_converted.py:10` - not run in the MVP |
+| `scripts/optimization/{action_plan, clustering, evaluation, jobs, preflight, scheduling, teams}` | 20 files | committed. `jobs/build_eligible_jobs.py`, `preflight/step13_input_preflight.py` use psycopg2 with password from env/`getpass` (no literal); OneDrive paths only in comments; `evaluation/build_step13_baseline_osrm_matrices.py` calls the public OSRM server |
+| `scripts/complaints/validate_complaints.py`, `scripts/resources/*` (5 other) | small | committed |
+
+## 3. Repository root and big files
+- Kit-unknown root files: only `KIT_FIXES.md` (the human's note on 5 kit fixes, 2 Oct) - committed as documentation.
+  None of the example stray files (`ers`, `exit`, `f`, `rstr`, `sd`, `te`) exist.
+- Files > 20 MB anywhere in the folder: **none** (checked after `git init`). Largest committed file: `data/gis/raw/TDMC_Draft_Ward_Formation_2025.pdf` (5.1 MB).
+- Secret scan (P01 step 5) of 126 `.py/.sql/.json/.ipynb/.md/.yaml/.txt` files under `scripts/` and `data/`: password literal,
+  `PGPASSWORD`, `postgres://user:pass@`, key/token literal → **0 hits**. The three DB scripts read `CIVICBRAIN_DB_PASSWORD` or ask with `getpass`.

@@ -1,0 +1,7 @@
+input_factor,purpose,data_source
+issue_type,Type of civic problem,complaint_dataset
+image_evidence,Visual evidence of problem,YOLO/image analysis
+extent_size,Physical extent or affected size,resource_dataset/project data
+safety_risk,Potential safety impact,project methodology
+affected_area,Area affected by the issue,resource_dataset/project data
+location,Geographic context of complaint,PostGIS/GIS data

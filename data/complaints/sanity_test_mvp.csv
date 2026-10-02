@@ -1,0 +1,41 @@
+text,category,language,source
+There is a deep hole on the road outside my house,Pothole,en,kit_authored
+gaddhe ki wajah se scooter gir gaya,Pothole,hi-Latn,kit_authored
+amchya galli madhe khadde padle aahet,Pothole,mr-Latn,kit_authored
+"pothole at the signal, cars swerving suddenly",Pothole,en,kit_authored
+"road par khadda hai, raat ko dikhta nahi",Pothole,hi-Latn,kit_authored
+The tar road is broken into pieces near the hospital,Road Damage,en,kit_authored
+"road ki halat kharab hai, patthar nikal aaye",Road Damage,hi-Latn,kit_authored
+rastyachi dambar nighun geli aahe,Road Damage,mr-Latn,kit_authored
+cracks all over the road surface,Road Damage,en,kit_authored
+"rasta tutla aahe, durusti kara",Road Damage,mr-Latn,kit_authored
+Garbage not lifted from the corner of our street,Garbage Accumulation,en,kit_authored
+kachra pada hai aur koi uthata nahi,Garbage Accumulation,hi-Latn,kit_authored
+"ithe kachra takla jato, ghan vas yeto",Garbage Accumulation,mr-Latn,kit_authored
+overflowing garbage container near the hospital,Garbage Accumulation,en,kit_authored
+plastic kachra rastyavar pasarla aahe,Garbage Accumulation,mr-Latn,kit_authored
+Rainwater collected in front of the shops,Waterlogging,en,kit_authored
+baarish me pura road paani me doob gaya,Waterlogging,hi-Latn,kit_authored
+pavsat rasta talyasarkha hoto,Waterlogging,mr-Latn,kit_authored
+"street flooded, water entering ground floor homes",Waterlogging,en,kit_authored
+paani sachlyamule chalta yet nahi,Waterlogging,mr-Latn,kit_authored
+Pipe under the road leaking clean water,Water Leakage,en,kit_authored
+"nal ka pipe toota hai, paani beh raha hai",Water Leakage,hi-Latn,kit_authored
+panyachi line futli aahe ani paani vaya jaat aahe,Water Leakage,mr-Latn,kit_authored
+leaking water main near the temple,Water Leakage,en,kit_authored
+"valve kharab aahe, paani galat aahe",Water Leakage,mr-Latn,kit_authored
+Sewer is choked and overflowing near the shop,Blocked Drain,en,kit_authored
+"naali me kachra phasa hai, paani ruk gaya",Blocked Drain,hi-Latn,kit_authored
+gatar tumbali aahe ani durgandhi yete,Blocked Drain,mr-Latn,kit_authored
+drain blocked with plastic bags,Blocked Drain,en,kit_authored
+manhole overflow hot aahe,Blocked Drain,mr-Latn,kit_authored
+The lamp post outside our building is dead,Streetlight,en,kit_authored
+raat ko light nahi jalti,Streetlight,hi-Latn,kit_authored
+rastyavarcha diva band padla aahe,Streetlight,mr-Latn,kit_authored
+street lights flickering the whole night,Streetlight,en,kit_authored
+khambavarchi light chalu nahi,Streetlight,mr-Latn,kit_authored
+Monkeys are entering houses in our colony,Other,en,kit_authored
+dukaan walon ne road par saaman rakha hai,Other,hi-Latn,kit_authored
+"zad padle aahe, vahtuk band aahe",Other,mr-Latn,kit_authored
+loud speakers playing late at night,Other,en,kit_authored
+park madhe zopala tutla aahe,Other,mr-Latn,kit_authored

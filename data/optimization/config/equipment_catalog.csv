@@ -1,0 +1,8 @@
+﻿equipment_type,description,available_quantity,status,source
+drain_cleaning_tools,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+electrical_maintenance_tools,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+joint_cutting_machine,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+manual_garbage_collection_tools,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+plate_compactor,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+truck_5_5_cum_per_10_mt,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement
+water_leakage_repair_tools,Observed normalized equipment requirement from existing Step 10 resource data.,,TO_BE_CONFIGURED,step10_observed_requirement

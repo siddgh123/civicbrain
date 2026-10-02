@@ -1,0 +1,501 @@
+complaint_id,issue_type,latitude,longitude,created_at,status,is_synthetic,severity,estimated_area,estimated_workers,estimated_duration_hours,labour_cost,material_cost,equipment_cost,transport_cost,total_cost,required_equipment,severity_source,area_source
+1,Waterlogging,18.718913,73.695537,2026-07-03 11:23:10,SUBMITTED,true,Low,6.34,2,4.2,596.4,0.0,1090.0,500,2186.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+2,Pothole,18.711556,73.685263,2026-06-28 16:02:10,SUBMITTED,true,Medium,5.87,3,4.9,1071.88,0.0,1130.0,500,2701.88,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+3,Pothole,18.72155,73.681183,2026-04-03 08:07:10,SUBMITTED,true,High,7.43,4,6.7,1979.85,0.0,1130.0,500,3609.85,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+4,Waterlogging,18.72176,73.674409,2026-08-02 05:13:10,SUBMITTED,true,Low,7.36,2,4.7,667.4,0.0,1090.0,500,2257.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+5,Streetlight,18.718989,73.681604,2026-06-16 16:36:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+6,Waterlogging,18.707803,73.703354,2026-06-14 22:48:10,SUBMITTED,true,High,71.73,4,38.9,11494.95,0.0,1090.0,500,13084.95,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+7,Other,18.735365,73.686964,2026-04-22 17:52:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+8,Water Leakage,18.748939,73.700491,2026-08-15 10:01:10,SUBMITTED,true,Medium,7.27,3,5.6,1225.0,0.0,0.0,500,1725.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+9,Waterlogging,18.738355,73.677477,2026-08-24 15:44:10,SUBMITTED,true,High,58.52,4,32.3,9544.65,0.0,1090.0,500,11134.65,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+10,Road Damage,18.735886,73.692573,2026-07-23 06:45:10,SUBMITTED,true,Low,5.86,2,3.9,553.8,0.0,1130.0,500,2183.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+11,Road Damage,18.744647,73.672273,2026-06-20 01:20:10,SUBMITTED,true,Medium,13.43,3,8.7,1903.12,0.0,1130.0,500,3533.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+12,Blocked Drain,18.711538,73.70901,2026-08-06 13:56:10,SUBMITTED,true,High,22.12,4,14.1,4166.55,0.0,0.0,500,4666.55,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+13,Blocked Drain,18.71345,73.681737,2026-05-25 18:02:10,SUBMITTED,true,Low,2.78,2,2.4,340.8,0.0,0.0,500,840.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+14,Road Damage,18.709432,73.68996,2026-09-13 00:24:10,SUBMITTED,true,Medium,9.28,3,6.6,1443.75,0.0,1130.0,500,3073.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+15,Water Leakage,18.707491,73.689099,2026-07-09 09:38:10,SUBMITTED,true,High,29.48,4,17.7,5230.35,0.0,0.0,500,5730.35,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+16,Water Leakage,18.706592,73.685354,2026-06-04 02:48:10,SUBMITTED,true,Low,3.08,2,2.5,355.0,0.0,0.0,500,855.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+17,Garbage Accumulation,18.721036,73.663815,2026-09-16 09:02:10,SUBMITTED,true,Medium,10.22,3,7.1,1553.12,0.0,0.0,500,2053.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+18,Road Damage,18.724494,73.67242,2026-07-31 19:11:10,SUBMITTED,true,High,23.63,4,14.8,4373.4,0.0,1130.0,500,6003.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+19,Blocked Drain,18.714201,73.702246,2026-06-08 13:23:10,SUBMITTED,true,Low,4.03,2,3.0,426.0,0.0,0.0,500,926.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+20,Waterlogging,18.742849,73.675648,2026-05-15 20:10:10,SUBMITTED,true,Medium,37.64,3,20.8,4550.0,0.0,1090.0,500,6140.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+21,Other,18.715538,73.705398,2026-08-03 09:05:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+22,Garbage Accumulation,18.725686,73.692422,2026-07-08 09:35:10,SUBMITTED,true,Low,4.87,2,3.4,482.8,0.0,0.0,500,982.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+23,Other,18.724337,73.696787,2026-04-11 04:35:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+24,Other,18.727831,73.659978,2026-07-25 12:51:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+25,Road Damage,18.714425,73.700506,2026-06-23 23:29:10,SUBMITTED,true,Low,4.88,2,3.4,482.8,0.0,1130.0,500,2112.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+26,Pothole,18.745232,73.679339,2026-05-11 09:20:10,SUBMITTED,true,Medium,5.24,3,4.6,1006.25,0.0,1130.0,500,2636.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+27,Pothole,18.732264,73.671243,2026-08-12 16:50:10,SUBMITTED,true,High,9.89,4,7.9,2334.45,0.0,1130.0,500,3964.45,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+28,Water Leakage,18.721486,73.663696,2026-04-17 08:00:10,SUBMITTED,true,Low,2.34,2,2.2,312.4,0.0,0.0,500,812.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+29,Water Leakage,18.749032,73.701772,2026-05-21 01:19:10,SUBMITTED,true,Medium,10.48,3,7.2,1575.0,0.0,0.0,500,2075.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+30,Garbage Accumulation,18.716238,73.682679,2026-07-24 23:29:10,SUBMITTED,true,High,23.09,4,14.5,4284.75,0.0,0.0,500,4784.75,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+31,Road Damage,18.736814,73.691387,2026-05-04 06:10:10,SUBMITTED,true,Low,3.06,2,2.5,355.0,0.0,1130.0,500,1985.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+32,Pothole,18.723272,73.689378,2026-03-28 14:43:10,SUBMITTED,true,Medium,3.23,3,3.6,787.5,0.0,1130.0,500,2417.5,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+33,Garbage Accumulation,18.715826,73.694564,2026-03-27 01:49:10,SUBMITTED,true,High,23.55,4,14.8,4373.4,0.0,0.0,500,4873.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+34,Road Damage,18.731321,73.660842,2026-07-01 08:55:10,SUBMITTED,true,Low,5.64,2,3.8,539.6,0.0,1130.0,500,2169.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+35,Other,18.740285,73.668394,2026-04-08 07:25:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+36,Road Damage,18.73499,73.696539,2026-05-27 03:52:10,SUBMITTED,true,High,26.57,4,16.3,4816.65,0.0,1130.0,500,6446.65,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+37,Blocked Drain,18.704755,73.688437,2026-06-30 14:26:10,SUBMITTED,true,Low,4.05,2,3.0,426.0,0.0,0.0,500,926.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+38,Garbage Accumulation,18.743202,73.701678,2026-09-21 14:57:10,SUBMITTED,true,Medium,11.39,3,7.7,1684.38,0.0,0.0,500,2184.38,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+39,Blocked Drain,18.74141,73.68025,2026-04-21 15:28:10,SUBMITTED,true,High,18.15,4,12.1,3575.55,0.0,0.0,500,4075.55,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+40,Pothole,18.745703,73.710214,2026-04-20 21:50:10,SUBMITTED,true,Low,1.92,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+41,Garbage Accumulation,18.704513,73.690248,2026-04-25 18:25:10,SUBMITTED,true,Medium,8.81,3,6.4,1400.0,0.0,0.0,500,1900.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+42,Pothole,18.728986,73.669021,2026-08-10 08:17:10,SUBMITTED,true,High,9.84,4,7.9,2334.45,0.0,1130.0,500,3964.45,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+43,Waterlogging,18.721757,73.689021,2026-08-20 17:17:10,SUBMITTED,true,Low,5.39,2,3.7,525.4,0.0,1090.0,500,2115.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+44,Garbage Accumulation,18.729336,73.678047,2026-05-22 20:38:10,SUBMITTED,true,Medium,9.09,3,6.5,1421.88,0.0,0.0,500,1921.88,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+45,Streetlight,18.71092,73.676163,2026-05-08 03:56:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+46,Waterlogging,18.71374,73.698561,2026-06-15 08:37:10,SUBMITTED,true,Low,13.88,2,7.9,1121.8,0.0,1090.0,500,2711.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+47,Water Leakage,18.711668,73.677248,2026-08-02 22:40:10,SUBMITTED,true,Medium,8.52,3,6.3,1378.12,0.0,0.0,500,1878.12,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+48,Streetlight,18.74258,73.683168,2026-05-13 10:43:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+49,Streetlight,18.724511,73.699869,2026-05-10 13:53:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+50,Pothole,18.729984,73.701845,2026-07-17 13:51:10,SUBMITTED,true,Medium,4.49,3,4.2,918.75,0.0,1130.0,500,2548.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+51,Other,18.69997,73.710779,2026-09-16 23:11:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+52,Waterlogging,18.739938,73.682166,2026-07-30 13:52:10,SUBMITTED,true,Low,14.78,2,8.4,1192.8,0.0,1090.0,500,2782.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+53,Road Damage,18.738965,73.698919,2026-08-18 07:50:10,SUBMITTED,true,Medium,15.41,3,9.7,2121.88,0.0,1130.0,500,3751.88,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+54,Blocked Drain,18.746327,73.681773,2026-05-05 14:37:10,SUBMITTED,true,High,28.7,4,17.4,5141.7,0.0,0.0,500,5641.7,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+55,Pothole,18.74256,73.689952,2026-05-08 09:14:10,SUBMITTED,true,Low,1.18,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+56,Road Damage,18.730533,73.674342,2026-08-11 14:16:10,SUBMITTED,true,Medium,19.59,3,11.8,2581.25,0.0,1130.0,500,4211.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+57,Streetlight,18.725632,73.671015,2026-09-18 02:13:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+58,Other,18.724645,73.682854,2026-08-12 04:51:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+59,Waterlogging,18.746221,73.675831,2026-06-12 11:55:10,SUBMITTED,true,Medium,20.6,3,12.3,2690.62,0.0,1090.0,500,4280.62,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+60,Blocked Drain,18.747178,73.699928,2026-08-26 00:24:10,SUBMITTED,true,High,19.62,4,12.8,3782.4,0.0,0.0,500,4282.4,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+61,Road Damage,18.739684,73.681993,2026-09-13 08:43:10,SUBMITTED,true,Low,5.47,2,3.7,525.4,0.0,1130.0,500,2155.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+62,Waterlogging,18.733725,73.677143,2026-09-19 00:20:10,SUBMITTED,true,Medium,38.2,3,21.1,4615.62,0.0,1090.0,500,6205.62,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+63,Waterlogging,18.731818,73.6685,2026-06-11 09:59:10,SUBMITTED,true,High,57.81,4,31.9,9426.45,0.0,1090.0,500,11016.45,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+64,Garbage Accumulation,18.71135,73.704399,2026-06-27 11:15:10,SUBMITTED,true,Low,3.43,2,2.7,383.4,0.0,0.0,500,883.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+65,Pothole,18.702321,73.692826,2026-06-01 21:31:10,SUBMITTED,true,Medium,4.24,3,4.1,896.87,0.0,1130.0,500,2526.87,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+66,Water Leakage,18.717839,73.68523,2026-06-10 13:48:10,SUBMITTED,true,High,16.06,4,11.0,3250.5,0.0,0.0,500,3750.5,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+67,Water Leakage,18.704701,73.700546,2026-07-27 17:50:10,SUBMITTED,true,Low,2.22,2,2.1,298.2,0.0,0.0,500,798.2,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+68,Other,18.742112,73.671598,2026-04-25 17:35:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+69,Water Leakage,18.728124,73.666805,2026-04-17 04:38:10,SUBMITTED,true,High,25.26,4,15.6,4609.8,0.0,0.0,500,5109.8,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+70,Pothole,18.744199,73.702924,2026-07-01 07:14:10,SUBMITTED,true,Low,2.82,2,2.4,340.8,0.0,1130.0,500,1970.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+71,Garbage Accumulation,18.72379,73.69997,2026-09-01 23:34:10,SUBMITTED,true,Medium,8.24,3,6.1,1334.38,0.0,0.0,500,1834.38,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+72,Waterlogging,18.731674,73.699532,2026-08-15 14:37:10,SUBMITTED,true,High,42.94,4,24.5,7239.75,0.0,1090.0,500,8829.75,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+73,Blocked Drain,18.740532,73.681583,2026-03-27 11:02:10,SUBMITTED,true,Low,2.84,2,2.4,340.8,0.0,0.0,500,840.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+74,Water Leakage,18.724026,73.679415,2026-06-06 15:34:10,SUBMITTED,true,Medium,13.6,3,8.8,1925.0,0.0,0.0,500,2425.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+75,Garbage Accumulation,18.703196,73.688815,2026-09-20 07:40:10,SUBMITTED,true,High,21.76,4,13.9,4107.45,0.0,0.0,500,4607.45,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+76,Pothole,18.735849,73.666246,2026-09-12 23:28:10,SUBMITTED,true,Low,1.74,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+77,Other,18.72682,73.695278,2026-06-05 05:28:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+78,Other,18.733245,73.663524,2026-07-19 23:31:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+79,Streetlight,18.732956,73.693157,2026-06-29 04:54:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+80,Road Damage,18.733849,73.677797,2026-08-21 11:35:10,SUBMITTED,true,Medium,11.26,3,7.6,1662.5,0.0,1130.0,500,3292.5,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+81,Streetlight,18.747218,73.690957,2026-04-29 02:45:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+82,Waterlogging,18.747555,73.711733,2026-08-25 12:09:10,SUBMITTED,true,Low,6.45,2,4.2,596.4,0.0,1090.0,500,2186.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+83,Other,18.722392,73.671198,2026-06-22 16:12:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+84,Pothole,18.733102,73.692631,2026-08-23 12:36:10,SUBMITTED,true,High,10.39,4,8.2,2423.1,0.0,1130.0,500,4053.1,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+85,Streetlight,18.733553,73.681752,2026-05-30 08:50:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+86,Blocked Drain,18.723963,73.698702,2026-08-10 14:35:10,SUBMITTED,true,Medium,12.92,3,8.5,1859.38,0.0,0.0,500,2359.38,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+87,Pothole,18.701828,73.702407,2026-08-13 23:33:10,SUBMITTED,true,High,6.88,4,6.4,1891.2,0.0,1130.0,500,3521.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+88,Blocked Drain,18.744799,73.695336,2026-08-13 12:07:10,SUBMITTED,true,Low,3.19,2,2.6,369.2,0.0,0.0,500,869.2,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+89,Streetlight,18.750156,73.712589,2026-03-28 21:18:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+90,Garbage Accumulation,18.715866,73.708556,2026-07-16 23:38:10,SUBMITTED,true,High,18.06,4,12.0,3546.0,0.0,0.0,500,4046.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+91,Waterlogging,18.72561,73.668609,2026-08-10 19:34:10,SUBMITTED,true,Low,5.84,2,3.9,553.8,0.0,1090.0,500,2143.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+92,Road Damage,18.707791,73.68375,2026-07-19 22:45:10,SUBMITTED,true,Medium,13.05,3,8.5,1859.38,0.0,1130.0,500,3489.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+93,Water Leakage,18.746709,73.693052,2026-05-03 17:02:10,SUBMITTED,true,High,28.69,4,17.3,5112.15,0.0,0.0,500,5612.15,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+94,Garbage Accumulation,18.705952,73.713198,2026-04-17 07:46:10,SUBMITTED,true,Low,3.64,2,2.8,397.6,0.0,0.0,500,897.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+95,Streetlight,18.7425,73.673887,2026-07-01 13:59:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+96,Pothole,18.700618,73.710745,2026-04-08 21:22:10,SUBMITTED,true,High,8.22,4,7.1,2098.05,0.0,1130.0,500,3728.05,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+97,Waterlogging,18.715758,73.681486,2026-05-28 21:57:10,SUBMITTED,true,Low,6.95,2,4.5,639.0,0.0,1090.0,500,2229.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+98,Garbage Accumulation,18.747353,73.705085,2026-09-19 02:50:10,SUBMITTED,true,Medium,8.56,3,6.3,1378.12,0.0,0.0,500,1878.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+99,Pothole,18.741034,73.663238,2026-03-27 08:23:10,SUBMITTED,true,High,8.42,4,7.2,2127.6,0.0,1130.0,500,3757.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+100,Streetlight,18.721975,73.698412,2026-09-08 05:48:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+101,Other,18.72554,73.680751,2026-08-08 07:13:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+102,Blocked Drain,18.724277,73.701108,2026-05-19 02:29:10,SUBMITTED,true,High,17.22,4,11.6,3427.8,0.0,0.0,500,3927.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+103,Water Leakage,18.711014,73.694151,2026-08-23 06:33:10,SUBMITTED,true,Low,4.94,2,3.5,497.0,0.0,0.0,500,997.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+104,Road Damage,18.733586,73.6618,2026-03-27 21:51:10,SUBMITTED,true,Medium,19.52,3,11.8,2581.25,0.0,1130.0,500,4211.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+105,Road Damage,18.720734,73.67043,2026-03-29 16:45:10,SUBMITTED,true,High,37.56,4,21.8,6441.9,0.0,1130.0,500,8071.9,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+106,Waterlogging,18.746247,73.68768,2026-06-04 02:33:10,SUBMITTED,true,Low,12.11,2,7.1,1008.2,0.0,1090.0,500,2598.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+107,Road Damage,18.703185,73.692243,2026-09-01 13:30:10,SUBMITTED,true,Medium,10.96,3,7.5,1640.62,0.0,1130.0,500,3270.62,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+108,Waterlogging,18.739159,73.679611,2026-07-21 09:22:10,SUBMITTED,true,High,45.22,4,25.6,7564.8,0.0,1090.0,500,9154.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+109,Water Leakage,18.726379,73.661032,2026-07-18 10:49:10,SUBMITTED,true,Low,2.84,2,2.4,340.8,0.0,0.0,500,840.8,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+110,Pothole,18.708814,73.684291,2026-07-15 03:12:10,SUBMITTED,true,Medium,5.8,3,4.9,1071.88,0.0,1130.0,500,2701.88,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+111,Water Leakage,18.704281,73.691613,2026-05-23 11:49:10,SUBMITTED,true,High,27.41,4,16.7,4934.85,0.0,0.0,500,5434.85,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+112,Blocked Drain,18.727578,73.664462,2026-09-11 07:10:10,SUBMITTED,true,Low,3.44,2,2.7,383.4,0.0,0.0,500,883.4,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+113,Blocked Drain,18.741849,73.687401,2026-08-19 05:33:10,SUBMITTED,true,Medium,5.31,3,4.7,1028.12,0.0,0.0,500,1528.12,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+114,Blocked Drain,18.716845,73.692027,2026-05-16 17:21:10,SUBMITTED,true,High,18.61,4,12.3,3634.65,0.0,0.0,500,4134.65,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+115,Waterlogging,18.743469,73.701299,2026-07-30 05:57:10,SUBMITTED,true,Low,13.96,2,8.0,1136.0,0.0,1090.0,500,2726.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+116,Road Damage,18.741645,73.667358,2026-04-14 06:13:10,SUBMITTED,true,Medium,17.86,3,10.9,2384.38,0.0,1130.0,500,4014.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+117,Pothole,18.723623,73.696094,2026-07-25 17:15:10,SUBMITTED,true,High,7.44,4,6.7,1979.85,0.0,1130.0,500,3609.85,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+118,Garbage Accumulation,18.729343,73.688705,2026-08-28 23:49:10,SUBMITTED,true,Low,4.13,2,3.1,440.2,0.0,0.0,500,940.2,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+119,Streetlight,18.709212,73.685721,2026-06-23 15:34:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+120,Blocked Drain,18.707197,73.705235,2026-03-28 03:02:10,SUBMITTED,true,High,22.72,4,14.4,4255.2,0.0,0.0,500,4755.2,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+121,Blocked Drain,18.72955,73.671712,2026-08-11 08:10:10,SUBMITTED,true,Low,2.26,2,2.1,298.2,0.0,0.0,500,798.2,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+122,Water Leakage,18.742823,73.693833,2026-05-03 03:32:10,SUBMITTED,true,Medium,10.1,3,7.0,1531.25,0.0,0.0,500,2031.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+123,Garbage Accumulation,18.729791,73.685719,2026-05-23 00:21:10,SUBMITTED,true,High,15.79,4,10.9,3220.95,0.0,0.0,500,3720.95,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+124,Road Damage,18.74758,73.713316,2026-06-05 04:07:10,SUBMITTED,true,Low,7.8,2,4.9,695.8,0.0,1130.0,500,2325.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+125,Streetlight,18.726841,73.664112,2026-07-22 07:56:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+126,Garbage Accumulation,18.741783,73.701445,2026-03-31 20:58:10,SUBMITTED,true,High,23.59,4,14.8,4373.4,0.0,0.0,500,4873.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+127,Garbage Accumulation,18.703099,73.712564,2026-07-30 22:37:10,SUBMITTED,true,Low,2.13,2,2.1,298.2,0.0,0.0,500,798.2,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+128,Streetlight,18.742852,73.699448,2026-03-31 03:28:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+129,Other,18.730024,73.673977,2026-09-08 08:06:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+130,Pothole,18.74545,73.709165,2026-07-14 23:34:10,SUBMITTED,true,Low,2.04,2,2.0,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+131,Road Damage,18.738144,73.699735,2026-09-10 18:34:10,SUBMITTED,true,Medium,11.79,3,7.9,1728.12,0.0,1130.0,500,3358.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+132,Pothole,18.73591,73.686803,2026-04-01 16:18:10,SUBMITTED,true,High,8.47,4,7.2,2127.6,0.0,1130.0,500,3757.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+133,Waterlogging,18.738449,73.685778,2026-05-16 11:18:10,SUBMITTED,true,Low,9.94,2,6.0,852.0,0.0,1090.0,500,2442.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+134,Water Leakage,18.731247,73.680002,2026-04-26 07:56:10,SUBMITTED,true,Medium,9.84,3,6.9,1509.38,0.0,0.0,500,2009.38,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+135,Blocked Drain,18.704764,73.685684,2026-06-11 23:19:10,SUBMITTED,true,High,25.04,4,15.5,4580.25,0.0,0.0,500,5080.25,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+136,Pothole,18.737511,73.693818,2026-09-04 23:35:10,SUBMITTED,true,Low,2.15,2,2.1,298.2,0.0,1130.0,500,1928.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+137,Streetlight,18.699874,73.696841,2026-09-19 16:18:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+138,Road Damage,18.722397,73.676431,2026-04-13 02:26:10,SUBMITTED,true,High,23.87,4,14.9,4402.95,0.0,1130.0,500,6032.95,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+139,Other,18.719177,73.692476,2026-06-01 14:28:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+140,Streetlight,18.746309,73.670392,2026-09-04 16:00:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+141,Other,18.727946,73.693161,2026-05-29 14:18:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+142,Waterlogging,18.713915,73.689461,2026-04-01 05:25:10,SUBMITTED,true,Low,10.83,2,6.4,908.8,0.0,1090.0,500,2498.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+143,Garbage Accumulation,18.732905,73.700567,2026-08-14 19:23:10,SUBMITTED,true,Medium,14.06,3,9.0,1968.75,0.0,0.0,500,2468.75,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+144,Other,18.726595,73.666426,2026-08-27 04:37:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+145,Streetlight,18.705366,73.702745,2026-07-14 18:38:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+146,Pothole,18.70838,73.712042,2026-09-10 06:10:10,SUBMITTED,true,Medium,3.4,3,3.7,809.38,0.0,1130.0,500,2439.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+147,Blocked Drain,18.722607,73.688217,2026-04-17 13:56:10,SUBMITTED,true,High,24.08,4,15.0,4432.5,0.0,0.0,500,4932.5,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+148,Waterlogging,18.700939,73.699985,2026-08-13 23:35:10,SUBMITTED,true,Low,9.04,2,5.5,781.0,0.0,1090.0,500,2371.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+149,Garbage Accumulation,18.719472,73.701042,2026-09-06 00:28:10,SUBMITTED,true,Medium,5.71,3,4.9,1071.88,0.0,0.0,500,1571.88,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+150,Streetlight,18.732903,73.691252,2026-07-28 19:09:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+151,Blocked Drain,18.722971,73.676385,2026-08-09 07:04:10,SUBMITTED,true,Low,4.12,2,3.1,440.2,0.0,0.0,500,940.2,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+152,Pothole,18.744242,73.702914,2026-04-11 11:02:10,SUBMITTED,true,Medium,5.93,3,5.0,1093.75,0.0,1130.0,500,2723.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+153,Streetlight,18.742628,73.68404,2026-04-29 20:39:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+154,Road Damage,18.712096,73.706491,2026-07-09 23:27:10,SUBMITTED,true,Low,4.02,2,3.0,426.0,0.0,1130.0,500,2056.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+155,Streetlight,18.703707,73.688038,2026-08-10 08:30:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+156,Water Leakage,18.733527,73.70074,2026-05-01 15:53:10,SUBMITTED,true,High,22.32,4,14.2,4196.1,0.0,0.0,500,4696.1,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+157,Streetlight,18.736026,73.663866,2026-06-03 15:58:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+158,Other,18.741628,73.682274,2026-04-12 13:00:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+159,Garbage Accumulation,18.74194,73.708114,2026-04-09 06:19:10,SUBMITTED,true,High,20.92,4,13.5,3989.25,0.0,0.0,500,4489.25,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+160,Water Leakage,18.742126,73.661901,2026-04-14 04:30:10,SUBMITTED,true,Low,2.37,2,2.2,312.4,0.0,0.0,500,812.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+161,Road Damage,18.720562,73.673792,2026-07-11 15:59:10,SUBMITTED,true,Medium,14.22,3,9.1,1990.62,0.0,1130.0,500,3620.62,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+162,Other,18.709213,73.684581,2026-07-14 00:47:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+163,Streetlight,18.719956,73.665313,2026-07-22 20:09:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+164,Pothole,18.71861,73.709287,2026-06-09 19:39:10,SUBMITTED,true,Medium,3.29,3,3.6,787.5,0.0,1130.0,500,2417.5,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+165,Waterlogging,18.714263,73.709298,2026-07-24 01:58:10,SUBMITTED,true,High,40.67,4,23.3,6885.15,0.0,1090.0,500,8475.15,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+166,Streetlight,18.733933,73.693743,2026-06-05 09:23:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+167,Road Damage,18.702787,73.690677,2026-09-17 13:30:10,SUBMITTED,true,Medium,10.75,3,7.4,1618.75,0.0,1130.0,500,3248.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+168,Blocked Drain,18.741575,73.686887,2026-05-17 08:58:10,SUBMITTED,true,High,26.18,4,16.1,4757.55,0.0,0.0,500,5257.55,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+169,Pothole,18.729937,73.664255,2026-04-21 13:14:10,SUBMITTED,true,Low,1.51,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+170,Blocked Drain,18.717415,73.701683,2026-04-16 01:06:10,SUBMITTED,true,Medium,12.87,3,8.4,1837.5,0.0,0.0,500,2337.5,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+171,Water Leakage,18.730419,73.697204,2026-05-13 13:39:10,SUBMITTED,true,High,26.72,4,16.4,4846.2,0.0,0.0,500,5346.2,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+172,Blocked Drain,18.719217,73.664032,2026-04-22 10:10:10,SUBMITTED,true,Low,3.06,2,2.5,355.0,0.0,0.0,500,855.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+173,Road Damage,18.738069,73.662911,2026-08-12 22:42:10,SUBMITTED,true,Medium,11.89,3,7.9,1728.12,0.0,1130.0,500,3358.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+174,Streetlight,18.718823,73.691313,2026-05-23 09:28:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+175,Garbage Accumulation,18.713984,73.710513,2026-03-28 09:33:10,SUBMITTED,true,Low,3.33,2,2.7,383.4,0.0,0.0,500,883.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+176,Other,18.745217,73.678675,2026-08-26 18:57:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+177,Streetlight,18.73422,73.675,2026-07-24 00:20:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+178,Streetlight,18.721534,73.700275,2026-08-28 13:53:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+179,Water Leakage,18.738932,73.668921,2026-08-02 05:38:10,SUBMITTED,true,Medium,14.02,3,9.0,1968.75,0.0,0.0,500,2468.75,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+180,Blocked Drain,18.736975,73.667488,2026-08-08 17:59:10,SUBMITTED,true,High,17.16,4,11.6,3427.8,0.0,0.0,500,3927.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+181,Pothole,18.729698,73.703231,2026-05-21 12:42:10,SUBMITTED,true,Low,2.16,2,2.1,298.2,0.0,1130.0,500,1928.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+182,Streetlight,18.72308,73.660723,2026-04-13 14:48:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+183,Water Leakage,18.745784,73.678086,2026-06-12 20:30:10,SUBMITTED,true,High,16.62,4,11.3,3339.15,0.0,0.0,500,3839.15,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+184,Garbage Accumulation,18.744246,73.666605,2026-07-10 19:02:10,SUBMITTED,true,Low,2.83,2,2.4,340.8,0.0,0.0,500,840.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+185,Pothole,18.741636,73.681627,2026-07-05 18:43:10,SUBMITTED,true,Medium,5.7,3,4.8,1050.0,0.0,1130.0,500,2680.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+186,Blocked Drain,18.70677,73.709613,2026-04-29 00:04:10,SUBMITTED,true,High,20.13,4,13.1,3871.05,0.0,0.0,500,4371.05,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+187,Road Damage,18.732263,73.695006,2026-04-13 16:45:10,SUBMITTED,true,Low,4.76,2,3.4,482.8,0.0,1130.0,500,2112.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+188,Water Leakage,18.700434,73.710671,2026-08-12 10:12:10,SUBMITTED,true,Medium,12.9,3,8.4,1837.5,0.0,0.0,500,2337.5,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+189,Other,18.728528,73.672879,2026-09-13 06:15:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+190,Garbage Accumulation,18.705586,73.706314,2026-07-03 04:44:10,SUBMITTED,true,Low,2.22,2,2.1,298.2,0.0,0.0,500,798.2,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+191,Other,18.72008,73.684076,2026-04-21 02:18:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+192,Water Leakage,18.726635,73.677574,2026-08-02 08:28:10,SUBMITTED,true,High,20.6,4,13.3,3930.15,0.0,0.0,500,4430.15,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+193,Garbage Accumulation,18.72646,73.692226,2026-03-29 06:19:10,SUBMITTED,true,Low,3.69,2,2.8,397.6,0.0,0.0,500,897.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+194,Road Damage,18.72169,73.666914,2026-04-02 18:04:10,SUBMITTED,true,Medium,17.78,3,10.9,2384.38,0.0,1130.0,500,4014.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+195,Garbage Accumulation,18.748926,73.679425,2026-08-15 18:47:10,SUBMITTED,true,High,23.93,4,15.0,4432.5,0.0,0.0,500,4932.5,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+196,Water Leakage,18.725565,73.662726,2026-04-01 11:47:10,SUBMITTED,true,Low,3.95,2,3.0,426.0,0.0,0.0,500,926.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+197,Streetlight,18.718293,73.676189,2026-04-18 06:58:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+198,Waterlogging,18.723304,73.680961,2026-04-29 10:26:10,SUBMITTED,true,High,42.12,4,24.1,7121.55,0.0,1090.0,500,8711.55,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+199,Streetlight,18.74177,73.689991,2026-08-22 22:18:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+200,Road Damage,18.709571,73.699529,2026-05-04 11:12:10,SUBMITTED,true,Medium,8.55,3,6.3,1378.12,0.0,1130.0,500,3008.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+201,Water Leakage,18.71792,73.68211,2026-08-23 04:46:10,SUBMITTED,true,High,16.01,4,11.0,3250.5,0.0,0.0,500,3750.5,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+202,Pothole,18.745908,73.675877,2026-05-30 07:09:10,SUBMITTED,true,Low,2.53,2,2.3,326.6,0.0,1130.0,500,1956.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+203,Water Leakage,18.728087,73.692374,2026-04-30 08:44:10,SUBMITTED,true,Medium,5.91,3,5.0,1093.75,0.0,0.0,500,1593.75,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+204,Streetlight,18.72359,73.671489,2026-07-02 23:53:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+205,Pothole,18.745043,73.711412,2026-07-02 22:33:10,SUBMITTED,true,Low,1.87,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+206,Road Damage,18.717139,73.67322,2026-08-03 05:11:10,SUBMITTED,true,Medium,8.1,3,6.0,1312.5,0.0,1130.0,500,2942.5,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+207,Garbage Accumulation,18.742225,73.694155,2026-06-01 08:48:10,SUBMITTED,true,High,22.59,4,14.3,4225.65,0.0,0.0,500,4725.65,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+208,Waterlogging,18.731385,73.689326,2026-08-16 22:45:10,SUBMITTED,true,Low,7.79,2,4.9,695.8,0.0,1090.0,500,2285.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+209,Water Leakage,18.712423,73.676394,2026-06-18 21:08:10,SUBMITTED,true,Medium,10.57,3,7.3,1596.88,0.0,0.0,500,2096.88,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+210,Streetlight,18.739002,73.682644,2026-05-24 04:15:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+211,Waterlogging,18.721894,73.689609,2026-07-07 21:20:10,SUBMITTED,true,Low,10.65,2,6.3,894.6,0.0,1090.0,500,2484.6,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+212,Waterlogging,18.698939,73.699667,2026-05-30 05:51:10,SUBMITTED,true,Medium,24.91,3,14.5,3171.88,0.0,1090.0,500,4761.88,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+213,Garbage Accumulation,18.729991,73.657848,2026-09-09 16:23:10,SUBMITTED,true,High,17.28,4,11.6,3427.8,0.0,0.0,500,3927.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+214,Pothole,18.711609,73.679376,2026-05-22 01:12:10,SUBMITTED,true,Low,2.03,2,2.0,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+215,Water Leakage,18.725295,73.680354,2026-04-17 21:13:10,SUBMITTED,true,Medium,5.44,3,4.7,1028.12,0.0,0.0,500,1528.12,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+216,Road Damage,18.739755,73.668086,2026-06-15 16:41:10,SUBMITTED,true,High,37.18,4,21.6,6382.8,0.0,1130.0,500,8012.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+217,Pothole,18.713637,73.702108,2026-07-18 01:46:10,SUBMITTED,true,Low,2.92,2,2.5,355.0,0.0,1130.0,500,1985.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+218,Waterlogging,18.709516,73.685995,2026-06-21 06:44:10,SUBMITTED,true,Medium,22.51,3,13.3,2909.38,0.0,1090.0,500,4499.38,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+219,Other,18.743785,73.689458,2026-04-17 12:45:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+220,Other,18.716663,73.690944,2026-09-16 08:37:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+221,Waterlogging,18.747673,73.675254,2026-09-18 19:56:10,SUBMITTED,true,Medium,21.14,3,12.6,2756.25,0.0,1090.0,500,4346.25,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+222,Streetlight,18.749218,73.707989,2026-06-18 22:14:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+223,Streetlight,18.720537,73.670656,2026-06-19 14:21:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+224,Pothole,18.699142,73.699801,2026-04-24 06:13:10,SUBMITTED,true,Medium,3.19,3,3.6,787.5,0.0,1130.0,500,2417.5,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+225,Streetlight,18.724124,73.683821,2026-07-20 06:36:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+226,Waterlogging,18.71339,73.696749,2026-05-26 15:02:10,SUBMITTED,true,Low,9.84,2,5.9,837.8,0.0,1090.0,500,2427.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+227,Garbage Accumulation,18.748471,73.679676,2026-09-20 08:05:10,SUBMITTED,true,Medium,8.99,3,6.5,1421.88,0.0,0.0,500,1921.88,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+228,Waterlogging,18.747194,73.689245,2026-04-01 06:12:10,SUBMITTED,true,High,76.78,4,41.4,12233.7,0.0,1090.0,500,13823.7,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+229,Water Leakage,18.732716,73.698966,2026-05-14 16:43:10,SUBMITTED,true,Low,3.59,2,2.8,397.6,0.0,0.0,500,897.6,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+230,Streetlight,18.707702,73.711775,2026-05-30 04:51:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+231,Waterlogging,18.700904,73.690829,2026-05-02 01:27:10,SUBMITTED,true,High,74.18,4,40.1,11849.55,0.0,1090.0,500,13439.55,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+232,Other,18.739015,73.673463,2026-05-11 17:37:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+233,Blocked Drain,18.717848,73.69996,2026-08-24 19:50:10,SUBMITTED,true,Medium,11.82,3,7.9,1728.12,0.0,0.0,500,2228.12,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+234,Water Leakage,18.736459,73.698978,2026-09-07 17:25:10,SUBMITTED,true,High,20.13,4,13.1,3871.05,0.0,0.0,500,4371.05,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+235,Other,18.73403,73.672912,2026-05-31 20:44:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+236,Garbage Accumulation,18.720864,73.687677,2026-06-19 23:38:10,SUBMITTED,true,Medium,11.73,3,7.9,1728.12,0.0,0.0,500,2228.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+237,Garbage Accumulation,18.744636,73.668135,2026-04-09 03:14:10,SUBMITTED,true,High,24.34,4,15.2,4491.6,0.0,0.0,500,4991.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+238,Waterlogging,18.717774,73.676034,2026-09-20 18:13:10,SUBMITTED,true,Low,12.96,2,7.5,1065.0,0.0,1090.0,500,2655.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+239,Blocked Drain,18.746747,73.698051,2026-04-11 23:59:10,SUBMITTED,true,Medium,6.19,3,5.1,1115.62,0.0,0.0,500,1615.62,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+240,Waterlogging,18.747459,73.704303,2026-04-13 07:48:10,SUBMITTED,true,High,74.56,4,40.3,11908.65,0.0,1090.0,500,13498.65,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+241,Blocked Drain,18.708582,73.699752,2026-09-05 16:39:10,SUBMITTED,true,Low,4.06,2,3.0,426.0,0.0,0.0,500,926.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+242,Blocked Drain,18.719762,73.664312,2026-06-01 10:59:10,SUBMITTED,true,Medium,8.35,3,6.2,1356.25,0.0,0.0,500,1856.25,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+243,Pothole,18.745877,73.669693,2026-07-25 19:31:10,SUBMITTED,true,High,11.87,4,8.9,2629.95,0.0,1130.0,500,4259.95,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+244,Streetlight,18.702955,73.700962,2026-08-22 07:58:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+245,Other,18.716407,73.699685,2026-06-21 06:09:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+246,Streetlight,18.736832,73.696764,2026-09-01 14:23:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+247,Garbage Accumulation,18.704054,73.700021,2026-09-05 07:15:10,SUBMITTED,true,Low,3.37,2,2.7,383.4,0.0,0.0,500,883.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+248,Other,18.729474,73.672145,2026-08-10 08:02:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+249,Streetlight,18.749103,73.672912,2026-09-06 13:58:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+250,Water Leakage,18.708596,73.690718,2026-05-27 03:05:10,SUBMITTED,true,Low,3.16,2,2.6,369.2,0.0,0.0,500,869.2,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+251,Garbage Accumulation,18.715874,73.693443,2026-04-02 23:13:10,SUBMITTED,true,Medium,9.45,3,6.7,1465.62,0.0,0.0,500,1965.62,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+252,Pothole,18.704392,73.704792,2026-08-05 03:10:10,SUBMITTED,true,High,10.66,4,8.3,2452.65,0.0,1130.0,500,4082.65,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+253,Road Damage,18.700858,73.707906,2026-09-08 08:34:10,SUBMITTED,true,Low,5.69,2,3.8,539.6,0.0,1130.0,500,2169.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+254,Water Leakage,18.741592,73.670947,2026-09-11 04:57:10,SUBMITTED,true,Medium,8.75,3,6.4,1400.0,0.0,0.0,500,1900.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+255,Garbage Accumulation,18.727956,73.693191,2026-04-26 02:35:10,SUBMITTED,true,High,15.83,4,10.9,3220.95,0.0,0.0,500,3720.95,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+256,Water Leakage,18.731463,73.672525,2026-08-23 12:41:10,SUBMITTED,true,Low,3.47,2,2.7,383.4,0.0,0.0,500,883.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+257,Road Damage,18.729838,73.687953,2026-06-15 18:38:10,SUBMITTED,true,Medium,11.8,3,7.9,1728.12,0.0,1130.0,500,3358.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+258,Blocked Drain,18.700968,73.703583,2026-06-19 03:03:10,SUBMITTED,true,High,24.8,4,15.4,4550.7,0.0,0.0,500,5050.7,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+259,Road Damage,18.729456,73.691191,2026-06-04 16:35:10,SUBMITTED,true,Low,3.2,2,2.6,369.2,0.0,1130.0,500,1999.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+260,Pothole,18.714819,73.696184,2026-03-26 17:52:10,SUBMITTED,true,Medium,3.63,3,3.8,831.25,0.0,1130.0,500,2461.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+261,Other,18.719926,73.672604,2026-07-28 15:50:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+262,Blocked Drain,18.716652,73.704811,2026-08-27 14:23:10,SUBMITTED,true,Low,2.94,2,2.5,355.0,0.0,0.0,500,855.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+263,Streetlight,18.714641,73.698857,2026-03-29 12:00:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+264,Garbage Accumulation,18.709635,73.711166,2026-04-30 19:57:10,SUBMITTED,true,High,24.33,4,15.2,4491.6,0.0,0.0,500,4991.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+265,Garbage Accumulation,18.730582,73.66086,2026-09-15 22:02:10,SUBMITTED,true,Low,4.43,2,3.2,454.4,0.0,0.0,500,954.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+266,Blocked Drain,18.734912,73.667475,2026-05-04 23:59:10,SUBMITTED,true,Medium,14.66,3,9.3,2034.38,0.0,0.0,500,2534.38,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+267,Streetlight,18.721019,73.693531,2026-08-25 03:45:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+268,Streetlight,18.721952,73.695101,2026-05-28 00:02:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+269,Other,18.728237,73.699472,2026-08-17 15:53:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+270,Waterlogging,18.724825,73.658499,2026-04-24 06:28:10,SUBMITTED,true,High,73.88,4,39.9,11790.45,0.0,1090.0,500,13380.45,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+271,Streetlight,18.748955,73.713485,2026-04-02 20:49:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+272,Streetlight,18.745933,73.675162,2026-06-28 04:40:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+273,Road Damage,18.71441,73.71305,2026-08-07 11:05:10,SUBMITTED,true,High,23.84,4,14.9,4402.95,0.0,1130.0,500,6032.95,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+274,Other,18.730377,73.671703,2026-09-14 14:45:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+275,Pothole,18.743916,73.706069,2026-08-23 12:38:10,SUBMITTED,true,Medium,5.28,3,4.6,1006.25,0.0,1130.0,500,2636.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+276,Blocked Drain,18.748492,73.699151,2026-06-14 10:26:10,SUBMITTED,true,High,20.59,4,13.3,3930.15,0.0,0.0,500,4430.15,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+277,Road Damage,18.730701,73.694247,2026-06-22 07:27:10,SUBMITTED,true,Low,7.51,2,4.8,681.6,0.0,1130.0,500,2311.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+278,Blocked Drain,18.733976,73.665547,2026-04-12 22:37:10,SUBMITTED,true,Medium,14.07,3,9.0,1968.75,0.0,0.0,500,2468.75,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+279,Garbage Accumulation,18.72489,73.672824,2026-05-28 04:28:10,SUBMITTED,true,High,21.16,4,13.6,4018.8,0.0,0.0,500,4518.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+280,Waterlogging,18.711497,73.70985,2026-06-07 06:53:10,SUBMITTED,true,Low,8.1,2,5.0,710.0,0.0,1090.0,500,2300.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+281,Water Leakage,18.704351,73.69337,2026-04-09 22:25:10,SUBMITTED,true,Medium,5.2,3,4.6,1006.25,0.0,0.0,500,1506.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+282,Road Damage,18.716518,73.695262,2026-04-19 03:09:10,SUBMITTED,true,High,33.43,4,19.7,5821.35,0.0,1130.0,500,7451.35,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+283,Waterlogging,18.719114,73.681133,2026-06-04 21:40:10,SUBMITTED,true,Low,12.25,2,7.1,1008.2,0.0,1090.0,500,2598.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+284,Garbage Accumulation,18.730856,73.674274,2026-04-11 20:13:10,SUBMITTED,true,Medium,5.33,3,4.7,1028.12,0.0,0.0,500,1528.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+285,Pothole,18.707415,73.699155,2026-05-30 13:06:10,SUBMITTED,true,High,9.48,4,7.7,2275.35,0.0,1130.0,500,3905.35,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+286,Blocked Drain,18.739809,73.676386,2026-06-22 15:17:10,SUBMITTED,true,Low,3.48,2,2.7,383.4,0.0,0.0,500,883.4,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+287,Garbage Accumulation,18.70989,73.698548,2026-06-26 02:51:10,SUBMITTED,true,Medium,10.56,3,7.3,1596.88,0.0,0.0,500,2096.88,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+288,Water Leakage,18.715465,73.691655,2026-06-14 23:50:10,SUBMITTED,true,High,29.02,4,17.5,5171.25,0.0,0.0,500,5671.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+289,Other,18.746436,73.704468,2026-04-22 06:42:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+290,Garbage Accumulation,18.727051,73.659009,2026-04-14 21:33:10,SUBMITTED,true,Medium,10.43,3,7.2,1575.0,0.0,0.0,500,2075.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+291,Streetlight,18.710444,73.676972,2026-06-04 00:53:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+292,Other,18.746171,73.694458,2026-04-17 04:49:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+293,Garbage Accumulation,18.72897,73.702937,2026-04-05 03:37:10,SUBMITTED,true,Medium,9.78,3,6.9,1509.38,0.0,0.0,500,2009.38,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+294,Garbage Accumulation,18.711744,73.711958,2026-06-01 20:08:10,SUBMITTED,true,High,17.64,4,11.8,3486.9,0.0,0.0,500,3986.9,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+295,Waterlogging,18.710319,73.682086,2026-03-29 06:22:10,SUBMITTED,true,Low,13.62,2,7.8,1107.6,0.0,1090.0,500,2697.6,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+296,Blocked Drain,18.726204,73.690741,2026-04-12 00:59:10,SUBMITTED,true,Medium,5.73,3,4.9,1071.88,0.0,0.0,500,1571.88,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+297,Streetlight,18.747848,73.682364,2026-07-27 04:02:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+298,Pothole,18.720192,73.679074,2026-08-17 02:56:10,SUBMITTED,true,Low,1.41,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+299,Other,18.739224,73.699838,2026-08-15 23:26:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+300,Water Leakage,18.7453,73.711439,2026-07-05 05:37:10,SUBMITTED,true,High,23.97,4,15.0,4432.5,0.0,0.0,500,4932.5,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+301,Water Leakage,18.698259,73.704137,2026-07-06 01:57:10,SUBMITTED,true,Low,3.2,2,2.6,369.2,0.0,0.0,500,869.2,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+302,Water Leakage,18.715139,73.709095,2026-04-07 01:39:10,SUBMITTED,true,Medium,14.65,3,9.3,2034.38,0.0,0.0,500,2534.38,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+303,Pothole,18.712143,73.68387,2026-04-27 08:14:10,SUBMITTED,true,High,6.19,4,6.1,1802.55,0.0,1130.0,500,3432.55,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+304,Road Damage,18.744056,73.66462,2026-06-10 02:28:10,SUBMITTED,true,Low,3.67,2,2.8,397.6,0.0,1130.0,500,2027.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+305,Pothole,18.706265,73.700427,2026-06-19 22:59:10,SUBMITTED,true,Medium,3.55,3,3.8,831.25,0.0,1130.0,500,2461.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+306,Waterlogging,18.708529,73.700901,2026-09-03 17:39:10,SUBMITTED,true,High,57.19,4,31.6,9337.8,0.0,1090.0,500,10927.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+307,Garbage Accumulation,18.71043,73.70865,2026-05-02 13:33:10,SUBMITTED,true,Low,3.91,2,3.0,426.0,0.0,0.0,500,926.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+308,Road Damage,18.715665,73.701143,2026-05-29 06:22:10,SUBMITTED,true,Medium,10.25,3,7.1,1553.12,0.0,1130.0,500,3183.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+309,Waterlogging,18.748823,73.711924,2026-06-20 16:19:10,SUBMITTED,true,High,42.54,4,24.3,7180.65,0.0,1090.0,500,8770.65,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+310,Garbage Accumulation,18.731006,73.67736,2026-05-08 16:34:10,SUBMITTED,true,Low,3.65,2,2.8,397.6,0.0,0.0,500,897.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+311,Blocked Drain,18.718204,73.685532,2026-06-24 20:52:10,SUBMITTED,true,Medium,13.2,3,8.6,1881.25,0.0,0.0,500,2381.25,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+312,Pothole,18.708443,73.688413,2026-03-29 15:41:10,SUBMITTED,true,High,9.9,4,8.0,2364.0,0.0,1130.0,500,3994.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+313,Road Damage,18.743726,73.687037,2026-06-26 11:53:10,SUBMITTED,true,Low,5.82,2,3.9,553.8,0.0,1130.0,500,2183.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+314,Pothole,18.747505,73.702194,2026-08-06 20:18:10,SUBMITTED,true,Medium,3.59,3,3.8,831.25,0.0,1130.0,500,2461.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+315,Blocked Drain,18.711963,73.674918,2026-06-16 22:19:10,SUBMITTED,true,High,21.15,4,13.6,4018.8,0.0,0.0,500,4518.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+316,Pothole,18.734062,73.683254,2026-07-22 12:06:10,SUBMITTED,true,Low,1.05,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+317,Other,18.73699,73.707455,2026-04-01 18:33:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+318,Water Leakage,18.746725,73.676946,2026-08-24 02:16:10,SUBMITTED,true,High,25.48,4,15.7,4639.35,0.0,0.0,500,5139.35,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+319,Waterlogging,18.703044,73.709652,2026-04-19 09:08:10,SUBMITTED,true,Low,6.78,2,4.4,624.8,0.0,1090.0,500,2214.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+320,Road Damage,18.734391,73.673828,2026-08-11 12:35:10,SUBMITTED,true,Medium,13.35,3,8.7,1903.12,0.0,1130.0,500,3533.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+321,Pothole,18.738515,73.698165,2026-05-06 08:29:10,SUBMITTED,true,High,7.65,4,6.8,2009.4,0.0,1130.0,500,3639.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+322,Streetlight,18.744755,73.696661,2026-07-04 02:36:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+323,Other,18.711131,73.688227,2026-06-22 02:21:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+324,Waterlogging,18.739631,73.705332,2026-09-17 03:19:10,SUBMITTED,true,High,63.6,4,34.8,10283.4,0.0,1090.0,500,11873.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+325,Garbage Accumulation,18.700206,73.708973,2026-08-02 06:23:10,SUBMITTED,true,Low,3.65,2,2.8,397.6,0.0,0.0,500,897.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+326,Blocked Drain,18.738887,73.70828,2026-06-04 14:22:10,SUBMITTED,true,Medium,6.04,3,5.0,1093.75,0.0,0.0,500,1593.75,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+327,Streetlight,18.701216,73.696518,2026-04-24 08:58:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+328,Pothole,18.744371,73.691444,2026-04-16 17:50:10,SUBMITTED,true,Low,2.28,2,2.1,298.2,0.0,1130.0,500,1928.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+329,Garbage Accumulation,18.719793,73.698208,2026-06-08 22:50:10,SUBMITTED,true,Medium,13.3,3,8.7,1903.12,0.0,0.0,500,2403.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+330,Waterlogging,18.724223,73.668931,2026-06-25 01:50:10,SUBMITTED,true,High,78.04,4,42.0,12411.0,0.0,1090.0,500,14001.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+331,Waterlogging,18.723705,73.68095,2026-05-23 17:25:10,SUBMITTED,true,Low,13.36,2,7.7,1093.4,0.0,1090.0,500,2683.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+332,Other,18.710869,73.699181,2026-07-07 22:18:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+333,Other,18.718576,73.700844,2026-07-21 19:30:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+334,Water Leakage,18.749543,73.674427,2026-03-28 05:38:10,SUBMITTED,true,Low,4.77,2,3.4,482.8,0.0,0.0,500,982.8,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+335,Pothole,18.749419,73.676707,2026-06-26 11:09:10,SUBMITTED,true,Medium,3.43,3,3.7,809.38,0.0,1130.0,500,2439.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+336,Road Damage,18.718166,73.669959,2026-03-30 17:05:10,SUBMITTED,true,High,20.13,4,13.1,3871.05,0.0,1130.0,500,5501.05,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+337,Blocked Drain,18.73234,73.670409,2026-07-17 11:03:10,SUBMITTED,true,Low,2.61,2,2.3,326.6,0.0,0.0,500,826.6,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+338,Road Damage,18.740991,73.665255,2026-04-09 13:31:10,SUBMITTED,true,Medium,9.31,3,6.7,1465.62,0.0,1130.0,500,3095.62,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+339,Garbage Accumulation,18.745605,73.68504,2026-05-02 08:48:10,SUBMITTED,true,High,17.12,4,11.6,3427.8,0.0,0.0,500,3927.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+340,Streetlight,18.717097,73.693737,2026-04-22 12:14:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+341,Water Leakage,18.741965,73.68977,2026-07-24 21:24:10,SUBMITTED,true,Medium,10.82,3,7.4,1618.75,0.0,0.0,500,2118.75,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+342,Road Damage,18.705785,73.697765,2026-09-08 19:08:10,SUBMITTED,true,High,22.42,4,14.2,4196.1,0.0,1130.0,500,5826.1,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+343,Road Damage,18.715226,73.692083,2026-08-07 02:01:10,SUBMITTED,true,Low,3.94,2,3.0,426.0,0.0,1130.0,500,2056.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+344,Streetlight,18.743522,73.694443,2026-08-15 23:36:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+345,Road Damage,18.745666,73.676703,2026-09-01 20:38:10,SUBMITTED,true,High,35.41,4,20.7,6116.85,0.0,1130.0,500,7746.85,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+346,Road Damage,18.717761,73.666644,2026-06-17 22:58:10,SUBMITTED,true,Low,5.8,2,3.9,553.8,0.0,1130.0,500,2183.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+347,Road Damage,18.741964,73.705886,2026-08-31 10:46:10,SUBMITTED,true,Medium,12.2,3,8.1,1771.88,0.0,1130.0,500,3401.88,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+348,Blocked Drain,18.747447,73.682489,2026-04-02 14:38:10,SUBMITTED,true,High,28.08,4,17.0,5023.5,0.0,0.0,500,5523.5,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+349,Pothole,18.717804,73.707089,2026-07-10 11:31:10,SUBMITTED,true,Low,1.82,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+350,Pothole,18.729533,73.667872,2026-03-28 02:20:10,SUBMITTED,true,Medium,5.67,3,4.8,1050.0,0.0,1130.0,500,2680.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+351,Streetlight,18.73063,73.701902,2026-04-20 17:15:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+352,Streetlight,18.74498,73.67152,2026-07-22 04:26:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+353,Streetlight,18.725445,73.66227,2026-05-22 02:48:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+354,Streetlight,18.723644,73.669384,2026-05-31 20:41:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+355,Road Damage,18.738315,73.660742,2026-07-18 15:07:10,SUBMITTED,true,Low,3.8,2,2.9,411.8,0.0,1130.0,500,2041.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+356,Other,18.735645,73.687316,2026-08-17 21:01:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+357,Road Damage,18.707873,73.691184,2026-08-07 21:58:10,SUBMITTED,true,High,23.68,4,14.8,4373.4,0.0,1130.0,500,6003.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+358,Waterlogging,18.742779,73.710169,2026-07-19 19:19:10,SUBMITTED,true,Low,12.65,2,7.3,1036.6,0.0,1090.0,500,2626.6,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+359,Blocked Drain,18.707488,73.686911,2026-05-24 08:06:10,SUBMITTED,true,Medium,5.93,3,5.0,1093.75,0.0,0.0,500,1593.75,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+360,Streetlight,18.73942,73.693679,2026-05-15 23:41:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+361,Waterlogging,18.724037,73.657895,2026-09-16 15:54:10,SUBMITTED,true,Low,14.13,2,8.1,1150.2,0.0,1090.0,500,2740.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+362,Blocked Drain,18.747553,73.690122,2026-07-22 13:04:10,SUBMITTED,true,Medium,12.67,3,8.3,1815.63,0.0,0.0,500,2315.63,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+363,Pothole,18.740527,73.678478,2026-07-16 22:40:10,SUBMITTED,true,High,10.68,4,8.3,2452.65,0.0,1130.0,500,4082.65,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+364,Water Leakage,18.741164,73.702735,2026-06-26 09:18:10,SUBMITTED,true,Low,4.35,2,3.2,454.4,0.0,0.0,500,954.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+365,Pothole,18.724155,73.690029,2026-09-03 00:02:10,SUBMITTED,true,Medium,5.03,3,4.5,984.38,0.0,1130.0,500,2614.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+366,Waterlogging,18.736106,73.67241,2026-09-18 03:34:10,SUBMITTED,true,High,42.76,4,24.4,7210.2,0.0,1090.0,500,8800.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+367,Waterlogging,18.712349,73.680783,2026-07-02 14:07:10,SUBMITTED,true,Low,5.35,2,3.7,525.4,0.0,1090.0,500,2115.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+368,Waterlogging,18.715209,73.687286,2026-04-16 21:25:10,SUBMITTED,true,Medium,36.93,3,20.5,4484.38,0.0,1090.0,500,6074.38,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+369,Streetlight,18.735545,73.697363,2026-05-28 21:28:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+370,Pothole,18.733186,73.702844,2026-09-16 05:20:10,SUBMITTED,true,Low,1.25,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+371,Waterlogging,18.729608,73.686722,2026-08-21 21:28:10,SUBMITTED,true,Medium,22.77,3,13.4,2931.25,0.0,1090.0,500,4521.25,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+372,Streetlight,18.731634,73.662956,2026-08-15 12:50:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+373,Garbage Accumulation,18.725221,73.700488,2026-08-23 02:55:10,SUBMITTED,true,Low,2.1,2,2.0,284.0,0.0,0.0,500,784.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+374,Road Damage,18.732704,73.698154,2026-04-11 06:15:10,SUBMITTED,true,Medium,11.98,3,8.0,1750.0,0.0,1130.0,500,3380.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+375,Other,18.740105,73.684628,2026-07-30 18:17:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+376,Pothole,18.71899,73.700709,2026-09-07 16:14:10,SUBMITTED,true,Low,2.34,2,2.2,312.4,0.0,1130.0,500,1942.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+377,Pothole,18.70113,73.7074,2026-08-03 10:04:10,SUBMITTED,true,Medium,3.72,3,3.9,853.12,0.0,1130.0,500,2483.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+378,Blocked Drain,18.739821,73.700082,2026-08-28 04:50:10,SUBMITTED,true,High,15.34,4,10.7,3161.85,0.0,0.0,500,3661.85,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+379,Water Leakage,18.727174,73.662417,2026-07-21 06:01:10,SUBMITTED,true,Low,2.09,2,2.0,284.0,0.0,0.0,500,784.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+380,Streetlight,18.740812,73.678463,2026-06-18 13:38:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+381,Road Damage,18.745357,73.69899,2026-04-20 20:38:10,SUBMITTED,true,High,29.59,4,17.8,5259.9,0.0,1130.0,500,6889.9,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+382,Garbage Accumulation,18.701621,73.704298,2026-07-07 15:39:10,SUBMITTED,true,Low,2.17,2,2.1,298.2,0.0,0.0,500,798.2,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+383,Streetlight,18.747069,73.674628,2026-05-12 11:18:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+384,Blocked Drain,18.746917,73.685866,2026-03-27 12:45:10,SUBMITTED,true,High,24.67,4,15.3,4521.15,0.0,0.0,500,5021.15,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+385,Waterlogging,18.714593,73.703411,2026-06-05 03:41:10,SUBMITTED,true,Low,14.26,2,8.1,1150.2,0.0,1090.0,500,2740.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+386,Other,18.737664,73.666363,2026-08-02 03:59:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+387,Garbage Accumulation,18.744491,73.695314,2026-05-28 14:05:10,SUBMITTED,true,High,21.6,4,13.8,4077.9,0.0,0.0,500,4577.9,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+388,Pothole,18.730029,73.682666,2026-08-19 18:58:10,SUBMITTED,true,Low,2.61,2,2.3,326.6,0.0,1130.0,500,1956.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+389,Waterlogging,18.738877,73.70174,2026-08-28 07:13:10,SUBMITTED,true,Medium,31.72,3,17.9,3915.62,0.0,1090.0,500,5505.62,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+390,Streetlight,18.710454,73.699978,2026-09-15 13:31:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+391,Water Leakage,18.7081,73.697963,2026-03-28 04:25:10,SUBMITTED,true,Low,3.48,2,2.7,383.4,0.0,0.0,500,883.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+392,Water Leakage,18.71801,73.665614,2026-08-26 21:21:10,SUBMITTED,true,Medium,11.15,3,7.6,1662.5,0.0,0.0,500,2162.5,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+393,Blocked Drain,18.736452,73.672974,2026-07-05 15:01:10,SUBMITTED,true,High,20.61,4,13.3,3930.15,0.0,0.0,500,4430.15,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+394,Water Leakage,18.729779,73.659264,2026-04-08 22:54:10,SUBMITTED,true,Low,4.94,2,3.5,497.0,0.0,0.0,500,997.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+395,Blocked Drain,18.719175,73.686336,2026-05-06 01:55:10,SUBMITTED,true,Medium,8.71,3,6.4,1400.0,0.0,0.0,500,1900.0,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+396,Pothole,18.745196,73.673582,2026-04-21 01:18:10,SUBMITTED,true,High,6.3,4,6.2,1832.1,0.0,1130.0,500,3462.1,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+397,Garbage Accumulation,18.718944,73.692785,2026-08-22 03:53:10,SUBMITTED,true,Low,2.36,2,2.2,312.4,0.0,0.0,500,812.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+398,Other,18.74887,73.705229,2026-08-29 11:49:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+399,Water Leakage,18.721912,73.682864,2026-06-19 05:50:10,SUBMITTED,true,High,15.53,4,10.8,3191.4,0.0,0.0,500,3691.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+400,Streetlight,18.730114,73.679245,2026-07-06 02:27:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+401,Waterlogging,18.70091,73.695333,2026-05-16 03:26:10,SUBMITTED,true,Medium,27.44,3,15.7,3434.38,0.0,1090.0,500,5024.38,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+402,Waterlogging,18.729678,73.698991,2026-05-30 05:06:10,SUBMITTED,true,High,72.88,4,39.4,11642.7,0.0,1090.0,500,13232.7,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+403,Garbage Accumulation,18.749328,73.676364,2026-09-13 11:54:10,SUBMITTED,true,Low,2.75,2,2.4,340.8,0.0,0.0,500,840.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+404,Blocked Drain,18.738657,73.689679,2026-07-16 07:27:10,SUBMITTED,true,Medium,5.87,3,4.9,1071.88,0.0,0.0,500,1571.88,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+405,Streetlight,18.724833,73.678517,2026-04-18 11:35:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+406,Waterlogging,18.701347,73.707062,2026-08-17 20:42:10,SUBMITTED,true,Low,9.21,2,5.6,795.2,0.0,1090.0,500,2385.2,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+407,Blocked Drain,18.708432,73.712359,2026-04-18 10:28:10,SUBMITTED,true,Medium,11.58,3,7.8,1706.25,0.0,0.0,500,2206.25,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+408,Pothole,18.7373,73.700072,2026-07-07 11:38:10,SUBMITTED,true,High,10.79,4,8.4,2482.2,0.0,1130.0,500,4112.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+409,Pothole,18.728057,73.682323,2026-04-28 20:01:10,SUBMITTED,true,Low,2.65,2,2.3,326.6,0.0,1130.0,500,1956.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+410,Road Damage,18.713107,73.707904,2026-06-27 05:11:10,SUBMITTED,true,Medium,9.77,3,6.9,1509.38,0.0,1130.0,500,3139.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+411,Pothole,18.719417,73.667296,2026-05-04 16:36:10,SUBMITTED,true,High,7.3,4,6.7,1979.85,0.0,1130.0,500,3609.85,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+412,Water Leakage,18.725496,73.696323,2026-08-04 15:08:10,SUBMITTED,true,Low,2.86,2,2.4,340.8,0.0,0.0,500,840.8,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+413,Water Leakage,18.748095,73.67701,2026-06-19 21:45:10,SUBMITTED,true,Medium,13.21,3,8.6,1881.25,0.0,0.0,500,2381.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+414,Waterlogging,18.722852,73.696541,2026-06-12 23:20:10,SUBMITTED,true,High,56.9,4,31.4,9278.7,0.0,1090.0,500,10868.7,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+415,Garbage Accumulation,18.703188,73.697322,2026-04-21 05:19:10,SUBMITTED,true,Low,4.33,2,3.2,454.4,0.0,0.0,500,954.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+416,Pothole,18.711029,73.690629,2026-05-16 10:53:10,SUBMITTED,true,Medium,3.76,3,3.9,853.12,0.0,1130.0,500,2483.12,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+417,Water Leakage,18.718311,73.688915,2026-05-12 17:53:10,SUBMITTED,true,High,28.97,4,17.5,5171.25,0.0,0.0,500,5671.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+418,Pothole,18.7336,73.702835,2026-06-17 00:58:10,SUBMITTED,true,Low,1.65,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+419,Garbage Accumulation,18.732682,73.67191,2026-07-29 07:57:10,SUBMITTED,true,Medium,11.24,3,7.6,1662.5,0.0,0.0,500,2162.5,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+420,Water Leakage,18.748228,73.673262,2026-08-03 05:04:10,SUBMITTED,true,High,15.4,4,10.7,3161.85,0.0,0.0,500,3661.85,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+421,Water Leakage,18.700496,73.696922,2026-06-21 18:02:10,SUBMITTED,true,Low,3.96,2,3.0,426.0,0.0,0.0,500,926.0,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+422,Waterlogging,18.724413,73.695034,2026-06-19 09:44:10,SUBMITTED,true,Medium,24.65,3,14.3,3128.12,0.0,1090.0,500,4718.12,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+423,Blocked Drain,18.732258,73.677022,2026-08-10 06:30:10,SUBMITTED,true,High,19.85,4,12.9,3811.95,0.0,0.0,500,4311.95,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+424,Pothole,18.721774,73.70271,2026-08-18 02:01:10,SUBMITTED,true,Low,2.12,2,2.1,298.2,0.0,1130.0,500,1928.2,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+425,Pothole,18.743328,73.67845,2026-04-04 14:03:10,SUBMITTED,true,Medium,4.26,3,4.1,896.87,0.0,1130.0,500,2526.87,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+426,Other,18.701292,73.702967,2026-04-03 03:57:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+427,Water Leakage,18.717191,73.679116,2026-07-22 08:33:10,SUBMITTED,true,Low,2.49,2,2.2,312.4,0.0,0.0,500,812.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+428,Garbage Accumulation,18.743274,73.68614,2026-07-16 15:53:10,SUBMITTED,true,Medium,7.55,3,5.8,1268.75,0.0,0.0,500,1768.75,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+429,Other,18.749773,73.706584,2026-05-12 06:18:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+430,Streetlight,18.741052,73.696804,2026-05-15 06:52:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+431,Blocked Drain,18.733922,73.680395,2026-07-14 11:03:10,SUBMITTED,true,Medium,14.68,3,9.3,2034.38,0.0,0.0,500,2534.38,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+432,Other,18.701872,73.698259,2026-07-01 02:39:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+433,Other,18.732024,73.700567,2026-08-18 04:48:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+434,Road Damage,18.725584,73.681272,2026-04-30 04:24:10,SUBMITTED,true,Medium,12.34,3,8.2,1793.75,0.0,1130.0,500,3423.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+435,Water Leakage,18.744607,73.686233,2026-06-07 07:24:10,SUBMITTED,true,High,29.76,4,17.9,5289.45,0.0,0.0,500,5789.45,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+436,Waterlogging,18.743084,73.668768,2026-05-24 22:29:10,SUBMITTED,true,Low,8.82,2,5.4,766.8,0.0,1090.0,500,2356.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+437,Waterlogging,18.733193,73.681761,2026-06-02 18:06:10,SUBMITTED,true,Medium,28.27,3,16.1,3521.88,0.0,1090.0,500,5111.88,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+438,Water Leakage,18.744867,73.69263,2026-07-15 08:40:10,SUBMITTED,true,High,18.12,4,12.1,3575.55,0.0,0.0,500,4075.55,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+439,Water Leakage,18.719141,73.693702,2026-05-31 17:37:10,SUBMITTED,true,Low,3.21,2,2.6,369.2,0.0,0.0,500,869.2,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+440,Pothole,18.703462,73.703968,2026-06-07 00:22:10,SUBMITTED,true,Medium,3.37,3,3.7,809.38,0.0,1130.0,500,2439.38,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+441,Pothole,18.731871,73.664429,2026-05-08 19:46:10,SUBMITTED,true,High,7.07,4,6.5,1920.75,0.0,1130.0,500,3550.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+442,Garbage Accumulation,18.719216,73.685165,2026-08-08 09:43:10,SUBMITTED,true,Low,3.1,2,2.5,355.0,0.0,0.0,500,855.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+443,Garbage Accumulation,18.698109,73.709755,2026-07-20 04:59:10,SUBMITTED,true,Medium,12.57,3,8.3,1815.63,0.0,0.0,500,2315.63,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+444,Garbage Accumulation,18.711911,73.691136,2026-07-15 01:39:10,SUBMITTED,true,High,19.63,4,12.8,3782.4,0.0,0.0,500,4282.4,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+445,Other,18.704374,73.707286,2026-09-04 08:48:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+446,Blocked Drain,18.737501,73.683148,2026-04-15 06:04:10,SUBMITTED,true,Medium,12.87,3,8.4,1837.5,0.0,0.0,500,2337.5,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+447,Other,18.71192,73.685786,2026-05-20 15:54:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+448,Garbage Accumulation,18.749166,73.713575,2026-08-26 02:58:10,SUBMITTED,true,Low,2.84,2,2.4,340.8,0.0,0.0,500,840.8,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+449,Garbage Accumulation,18.733181,73.665716,2026-06-20 19:44:10,SUBMITTED,true,Medium,6.9,3,5.5,1203.12,0.0,0.0,500,1703.12,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+450,Garbage Accumulation,18.737359,73.689754,2026-05-19 19:07:10,SUBMITTED,true,High,16.45,4,11.2,3309.6,0.0,0.0,500,3809.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+451,Streetlight,18.730168,73.677,2026-09-04 23:26:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+452,Road Damage,18.725662,73.689217,2026-06-14 14:16:10,SUBMITTED,true,Medium,12.1,3,8.1,1771.88,0.0,1130.0,500,3401.88,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+453,Garbage Accumulation,18.723915,73.667936,2026-08-20 18:40:10,SUBMITTED,true,High,18.56,4,12.3,3634.65,0.0,0.0,500,4134.65,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+454,Streetlight,18.733636,73.69235,2026-07-03 10:24:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+455,Road Damage,18.731211,73.704981,2026-05-19 09:05:10,SUBMITTED,true,Medium,18.87,3,11.4,2493.75,0.0,1130.0,500,4123.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+456,Waterlogging,18.737686,73.672835,2026-09-20 16:12:10,SUBMITTED,true,High,69.93,4,38.0,11229.0,0.0,1090.0,500,12819.0,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+457,Road Damage,18.748905,73.706117,2026-07-19 21:46:10,SUBMITTED,true,Low,6.76,2,4.4,624.8,0.0,1130.0,500,2254.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+458,Road Damage,18.750238,73.713709,2026-06-16 04:00:10,SUBMITTED,true,Medium,8.86,3,6.4,1400.0,0.0,1130.0,500,3030.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+459,Streetlight,18.741429,73.698755,2026-07-03 02:22:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+460,Pothole,18.703627,73.687526,2026-05-30 16:00:10,SUBMITTED,true,Low,1.6,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+461,Pothole,18.741407,73.679615,2026-05-07 08:37:10,SUBMITTED,true,Medium,5.16,3,4.6,1006.25,0.0,1130.0,500,2636.25,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+462,Blocked Drain,18.710072,73.683545,2026-07-13 09:59:10,SUBMITTED,true,High,23.89,4,14.9,4402.95,0.0,0.0,500,4902.95,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+463,Pothole,18.705154,73.694017,2026-08-24 19:37:10,SUBMITTED,true,Low,1.41,2,2,284.0,0.0,1130.0,500,1914.0,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+464,Other,18.736649,73.694732,2026-08-23 03:14:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+465,Other,18.736712,73.660629,2026-08-08 07:03:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+466,Road Damage,18.715657,73.712237,2026-06-23 11:29:10,SUBMITTED,true,Low,7.5,2,4.8,681.6,0.0,1130.0,500,2311.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+467,Other,18.732328,73.660372,2026-06-21 23:55:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+468,Garbage Accumulation,18.70738,73.704434,2026-04-02 04:31:10,SUBMITTED,true,High,29.94,4,18.0,5319.0,0.0,0.0,500,5819.0,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+469,Blocked Drain,18.747308,73.705372,2026-08-22 01:36:10,SUBMITTED,true,Low,2.8,2,2.4,340.8,0.0,0.0,500,840.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+470,Streetlight,18.746701,73.711185,2026-08-14 15:53:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+471,Blocked Drain,18.704967,73.699264,2026-05-02 17:57:10,SUBMITTED,true,High,29.73,4,17.9,5289.45,0.0,0.0,500,5789.45,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+472,Waterlogging,18.73839,73.705235,2026-06-26 11:21:10,SUBMITTED,true,Low,13.84,2,7.9,1121.8,0.0,1090.0,500,2711.8,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+473,Water Leakage,18.749144,73.707006,2026-06-29 01:18:10,SUBMITTED,true,Medium,8.36,3,6.2,1356.25,0.0,0.0,500,1856.25,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+474,Other,18.725149,73.696585,2026-06-25 20:11:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+475,Streetlight,18.724522,73.664295,2026-08-25 14:00:10,SUBMITTED,true,Low,0.0,2,2,284.0,0.0,0.0,500,784.0,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+476,Other,18.733425,73.657947,2026-05-14 16:50:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+477,Water Leakage,18.738787,73.691718,2026-04-23 19:42:10,SUBMITTED,true,High,24.25,4,15.1,4462.05,0.0,0.0,500,4962.05,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+478,Road Damage,18.74059,73.673013,2026-04-18 06:25:10,SUBMITTED,true,Low,7.82,2,4.9,695.8,0.0,1130.0,500,2325.8,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+479,Waterlogging,18.723756,73.66004,2026-05-31 19:12:10,SUBMITTED,true,Medium,37.94,3,21.0,4593.75,0.0,1090.0,500,6183.75,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+480,Pothole,18.718566,73.665891,2026-06-09 21:08:10,SUBMITTED,true,High,8.36,4,7.2,2127.6,0.0,1130.0,500,3757.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+481,Pothole,18.724128,73.697662,2026-06-28 04:15:10,SUBMITTED,true,Low,2.36,2,2.2,312.4,0.0,1130.0,500,1942.4,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+482,Blocked Drain,18.71168,73.678391,2026-04-03 01:08:10,SUBMITTED,true,Medium,10.21,3,7.1,1553.12,0.0,0.0,500,2053.12,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+483,Other,18.721797,73.688114,2026-04-18 06:26:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+484,Water Leakage,18.731125,73.681692,2026-08-02 05:09:10,SUBMITTED,true,Low,3.72,2,2.9,411.8,0.0,0.0,500,911.8,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+485,Blocked Drain,18.737192,73.688495,2026-08-18 03:08:10,SUBMITTED,true,Medium,6.4,3,5.2,1137.5,0.0,0.0,500,1637.5,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+486,Pothole,18.735588,73.687928,2026-06-06 00:30:10,SUBMITTED,true,High,7.03,4,6.5,1920.75,0.0,1130.0,500,3550.75,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+487,Pothole,18.723108,73.680618,2026-04-28 12:07:10,SUBMITTED,true,Low,2.64,2,2.3,326.6,0.0,1130.0,500,1956.6,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+488,Garbage Accumulation,18.741461,73.676662,2026-05-30 23:20:10,SUBMITTED,true,Medium,6.12,3,5.1,1115.62,0.0,0.0,500,1615.62,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+489,Garbage Accumulation,18.728546,73.696914,2026-05-04 20:25:10,SUBMITTED,true,High,29.08,4,17.5,5171.25,0.0,0.0,500,5671.25,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+490,Blocked Drain,18.738441,73.669059,2026-07-25 12:51:10,SUBMITTED,true,Low,4.7,2,3.4,482.8,0.0,0.0,500,982.8,Drain Cleaning Tools,synthetic_assumption,synthetic_assumption
+491,Streetlight,18.733929,73.661544,2026-04-22 15:03:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+492,Water Leakage,18.730371,73.686672,2026-05-28 03:36:10,SUBMITTED,true,High,27.08,4,16.5,4875.75,0.0,0.0,500,5375.75,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+493,Garbage Accumulation,18.733821,73.670224,2026-06-26 00:18:10,SUBMITTED,true,Low,4.69,2,3.3,468.6,0.0,0.0,500,968.6,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+494,Garbage Accumulation,18.717276,73.689144,2026-08-21 07:33:10,SUBMITTED,true,Medium,11.27,3,7.6,1662.5,0.0,0.0,500,2162.5,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption
+495,Other,18.708301,73.688068,2026-04-09 13:13:10,SUBMITTED,true,High,0.0,4,3.0,886.5,0.0,0.0,500,1386.5,General Maintenance Tools,synthetic_assumption,synthetic_assumption
+496,Waterlogging,18.723408,73.686261,2026-04-27 03:04:10,SUBMITTED,true,Low,12.3,2,7.2,1022.4,0.0,1090.0,500,2612.4,Truck 5.5 cum per 10 MT,synthetic_assumption,synthetic_assumption
+497,Streetlight,18.711296,73.68482,2026-07-12 08:26:10,SUBMITTED,true,Medium,0.0,3,2,437.5,0.0,0.0,500,937.5,Electrical Maintenance Tools,synthetic_assumption,synthetic_assumption
+498,Road Damage,18.735448,73.705675,2026-04-20 09:57:10,SUBMITTED,true,High,29.64,4,17.8,5259.9,0.0,1130.0,500,6889.9,Joint Cutting Machine; Plate Compactor,synthetic_assumption,synthetic_assumption
+499,Water Leakage,18.709845,73.698122,2026-09-13 15:52:10,SUBMITTED,true,Low,2.34,2,2.2,312.4,0.0,0.0,500,812.4,Water Leakage Repair Tools,synthetic_assumption,synthetic_assumption
+500,Garbage Accumulation,18.741162,73.668089,2026-04-16 00:16:10,SUBMITTED,true,Medium,12.97,3,8.5,1859.38,0.0,0.0,500,2359.38,Manual Garbage Collection Tools,synthetic_assumption,synthetic_assumption

@@ -1,0 +1,20 @@
+{
+  "status": "experimental",
+  "time_window_days": 7,
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "duplicate_threshold": 0.59,
+  "uncertain_lower_bound": 0.55,
+  "decision_rules": {
+    "duplicate": "score >= 0.59",
+    "uncertain": "0.55 <= score < 0.59",
+    "not_duplicate": "score < 0.55",
+    "missing_required_input": "UNCERTAIN",
+    "outside_candidate_radius": "NOT_DUPLICATE candidate decision"
+  },
+  "validation_cases": 27,
+  "passed_cases": 27,
+  "failed_cases": 0,
+  "note": "The 0.55 uncertain lower bound is a proposed safety band based on the previously tested threshold range. It is not an official TDMC rule and is not frozen. Benchmark data are synthetic-by-construction."
+}

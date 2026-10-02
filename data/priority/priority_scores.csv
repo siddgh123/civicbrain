@@ -1,0 +1,501 @@
+complaint_id,ward_id,severity_score,population_score,location_risk_score,frequency_score,wait_time_score,infrastructure_importance_score,historical_risk_score,priority_score,priority_level,priority_reasons
+1,1,25.0,97.05,0.0,0.0,39.42,50.0,42.86,36.54,MEDIUM,High population impact | Medium infrastructure importance
+2,17,50.0,65.1,0.0,0.0,43.09,50.0,7.14,34.79,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+3,14,75.0,38.74,50.0,0.0,25.44,50.0,7.14,42.82,MEDIUM,High/Critical severity | Moderate location risk | Medium infrastructure importance
+4,1,25.0,97.05,0.0,0.0,22.09,50.0,42.86,34.8,MEDIUM,High population impact | Medium infrastructure importance
+5,19,50.0,87.37,16.25,0.0,5.94,50.0,14.29,37.57,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+6,6,75.0,100.0,0.0,0.0,66.41,25.0,14.29,45.57,MEDIUM,High/Critical severity | High population impact | Moderate waiting time
+7,6,25.0,100.0,0.0,0.0,39.92,25.0,35.71,32.56,MEDIUM,High population impact
+8,15,50.0,88.48,100.0,0.0,42.58,50.0,71.43,59.67,HIGH,Medium severity | High population impact | High location risk | Medium infrastructure importance | Historical recurrence
+9,15,75.0,88.48,75.0,0.0,46.85,50.0,14.29,56.89,HIGH,High/Critical severity | High population impact | High location risk | Medium infrastructure importance
+10,23,25.0,42.48,0.0,0.0,42.16,50.0,21.43,26.48,MEDIUM,Medium infrastructure importance
+11,15,50.0,88.48,0.0,0.0,57.27,50.0,35.71,42.57,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+12,5,75.0,77.8,25.0,0.0,65.99,50.0,7.14,48.98,MEDIUM,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance
+13,16,25.0,43.99,47.5,0.0,78.25,100.0,14.29,44.23,MEDIUM,Long waiting time | Important/critical infrastructure
+14,17,50.0,65.1,20.0,0.0,20.91,50.0,21.43,37.0,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+15,13,75.0,39.82,50.0,0.0,79.84,75.0,0.0,51.46,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Important/critical infrastructure
+16,1,25.0,97.05,0.0,0.0,33.93,50.0,28.57,34.56,MEDIUM,High population impact | Medium infrastructure importance
+17,15,50.0,88.48,60.0,0.0,23.86,50.0,92.86,53.94,HIGH,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance | Persistent historical recurrence
+18,10,75.0,41.35,0.0,0.0,11.07,75.0,0.0,37.31,MEDIUM,High/Critical severity | Important/critical infrastructure
+19,5,25.0,77.8,25.0,0.0,21.11,50.0,21.43,33.42,MEDIUM,High population impact | Medium infrastructure importance
+20,13,50.0,39.82,60.0,0.0,94.68,50.0,7.14,45.16,MEDIUM,Medium severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+21,8,75.0,49.93,0.0,10.0,5.67,50.0,14.29,36.74,MEDIUM,High/Critical severity | Medium infrastructure importance
+22,15,25.0,88.48,25.0,0.0,91.16,50.0,21.43,42.03,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+23,15,50.0,88.48,50.0,0.0,73.5,50.0,14.29,49.55,MEDIUM,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+24,17,75.0,65.1,0.0,0.0,64.27,75.0,0.0,46.19,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Important/critical infrastructure
+25,18,25.0,48.85,25.0,0.0,97.89,50.0,0.0,34.62,MEDIUM,Long waiting time | Medium infrastructure importance
+26,6,50.0,100.0,0.0,0.0,45.89,25.0,21.43,37.98,MEDIUM,Medium severity | High population impact
+27,15,75.0,88.48,25.0,10.0,61.38,25.0,14.29,48.09,MEDIUM,High/Critical severity | High population impact | Moderate waiting time
+28,12,25.0,58.41,25.0,0.0,68.33,50.0,0.0,33.09,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+29,15,50.0,88.48,50.0,0.0,3.8,50.0,57.14,46.87,MEDIUM,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance | Historical recurrence
+30,7,75.0,42.93,0.0,0.0,30.42,50.0,0.0,35.73,MEDIUM,High/Critical severity | Medium infrastructure importance
+31,23,25.0,42.48,0.0,0.0,28.18,75.0,14.29,28.12,MEDIUM,Important/critical infrastructure
+32,5,50.0,77.8,0.0,0.0,70.33,50.0,21.43,40.85,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+33,19,75.0,87.37,0.0,0.0,92.66,50.0,0.0,48.62,MEDIUM,High/Critical severity | High population impact | Long waiting time | Medium infrastructure importance
+34,13,25.0,39.82,50.0,0.0,6.5,50.0,14.29,29.3,MEDIUM,Moderate location risk | Medium infrastructure importance
+35,7,50.0,42.93,0.0,0.0,10.53,50.0,7.14,28.21,MEDIUM,Medium severity | Medium infrastructure importance
+36,6,75.0,100.0,0.0,0.0,50.56,75.0,14.29,51.48,HIGH,High/Critical severity | High population impact | Moderate waiting time | Important/critical infrastructure
+37,1,25.0,97.05,20.0,0.0,33.44,50.0,28.57,37.51,MEDIUM,High population impact | Medium infrastructure importance
+38,7,50.0,42.93,0.0,0.0,47.42,50.0,0.0,31.18,MEDIUM,Medium severity | Medium infrastructure importance
+39,1,75.0,97.05,25.0,0.0,10.74,50.0,21.43,47.77,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+40,5,25.0,77.8,0.0,0.0,84.44,50.0,0.0,33.86,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+41,16,50.0,43.99,25.0,0.0,38.56,50.0,28.57,37.06,MEDIUM,Medium severity | Medium infrastructure importance
+42,5,75.0,77.8,25.0,0.0,0.7,75.0,21.43,47.63,MEDIUM,High/Critical severity | High population impact | Important/critical infrastructure
+43,6,25.0,100.0,0.0,0.0,86.05,25.0,0.0,33.61,MEDIUM,High population impact | Long waiting time
+44,20,50.0,52.64,0.0,0.0,68.78,75.0,0.0,38.52,MEDIUM,Medium severity | Moderate population impact | Moderate waiting time | Important/critical infrastructure
+45,4,75.0,43.78,50.0,10.0,40.86,50.0,14.29,46.83,MEDIUM,High/Critical severity | Moderate location risk | Medium infrastructure importance
+46,15,25.0,88.48,0.0,0.0,69.96,50.0,21.43,36.16,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+47,19,50.0,87.37,16.25,10.0,0.54,25.0,35.71,36.42,MEDIUM,Medium severity | High population impact
+48,16,75.0,43.99,15.0,0.0,30.94,50.0,21.43,40.34,MEDIUM,High/Critical severity | Medium infrastructure importance
+49,16,25.0,43.99,45.0,0.0,12.87,50.0,35.71,31.96,MEDIUM,Medium infrastructure importance
+50,19,50.0,87.37,75.0,0.0,42.21,50.0,21.43,50.72,HIGH,Medium severity | High population impact | High location risk | Medium infrastructure importance
+51,16,75.0,43.99,47.5,0.0,14.1,100.0,21.43,51.03,HIGH,High/Critical severity | Important/critical infrastructure
+52,1,25.0,97.05,0.0,0.0,78.32,50.0,0.0,36.14,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+53,13,50.0,39.82,50.0,0.0,52.35,50.0,0.0,38.71,MEDIUM,Medium severity | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+54,15,75.0,88.48,75.0,0.0,65.39,50.0,35.71,60.88,HIGH,High/Critical severity | High population impact | High location risk | Moderate waiting time | Medium infrastructure importance
+55,17,25.0,65.1,0.0,0.0,92.6,75.0,0.0,36.52,MEDIUM,Moderate population impact | Long waiting time | Important/critical infrastructure
+56,13,50.0,39.82,75.0,0.0,50.9,75.0,7.14,46.78,MEDIUM,Medium severity | High location risk | Moderate waiting time | Important/critical infrastructure
+57,6,75.0,100.0,0.0,0.0,53.66,25.0,28.57,45.72,MEDIUM,High/Critical severity | High population impact | Moderate waiting time
+58,1,25.0,97.05,40.0,0.0,26.03,50.0,35.71,40.48,MEDIUM,High population impact | Medium infrastructure importance
+59,15,50.0,88.48,25.0,10.0,75.56,25.0,14.29,43.26,MEDIUM,Medium severity | High population impact | Long waiting time
+60,16,75.0,43.99,25.0,0.0,79.07,50.0,0.0,44.51,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+61,5,25.0,77.8,75.0,0.0,7.32,50.0,7.14,38.12,MEDIUM,High population impact | High location risk | Medium infrastructure importance
+62,23,50.0,42.48,0.0,0.0,32.22,50.0,28.57,32.45,MEDIUM,Medium severity | Medium infrastructure importance
+63,20,75.0,52.64,0.0,0.0,12.81,50.0,7.14,36.14,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+64,18,25.0,48.85,25.0,0.0,56.96,50.0,0.0,30.52,MEDIUM,Moderate waiting time | Medium infrastructure importance
+65,14,50.0,38.74,60.0,0.0,5.62,50.0,0.0,35.37,MEDIUM,Medium severity | Moderate location risk | Medium infrastructure importance
+66,6,75.0,100.0,0.0,0.0,87.11,50.0,0.0,49.96,MEDIUM,High/Critical severity | High population impact | Long waiting time | Medium infrastructure importance
+67,1,25.0,97.05,75.0,0.0,57.84,50.0,14.29,46.77,MEDIUM,High population impact | High location risk | Moderate waiting time | Medium infrastructure importance
+68,23,50.0,42.48,0.0,0.0,54.68,50.0,7.14,32.55,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+69,23,75.0,42.48,0.0,0.0,83.4,50.0,7.14,41.68,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+70,17,25.0,65.1,0.0,10.0,7.48,75.0,0.0,29.01,MEDIUM,Moderate population impact | Important/critical infrastructure
+71,16,50.0,43.99,47.5,20.0,84.71,50.0,14.29,45.62,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+72,6,75.0,100.0,0.0,0.0,94.6,25.0,0.0,46.96,MEDIUM,High/Critical severity | High population impact | Long waiting time
+73,1,25.0,97.05,25.0,0.0,25.92,50.0,7.14,35.36,MEDIUM,High population impact | Medium infrastructure importance
+74,8,50.0,49.93,0.0,0.0,71.32,50.0,7.14,35.34,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+75,3,75.0,70.76,25.0,0.0,36.43,50.0,0.0,44.26,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+76,15,25.0,88.48,25.0,0.0,95.49,75.0,0.0,44.07,MEDIUM,High population impact | Long waiting time | Important/critical infrastructure
+77,15,50.0,88.48,50.0,20.0,62.54,50.0,28.57,51.88,HIGH,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+78,2,75.0,55.28,25.0,10.0,96.37,50.0,7.14,49.64,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+79,2,25.0,55.28,25.0,0.0,3.32,50.0,0.0,26.12,MEDIUM,Moderate population impact | Medium infrastructure importance
+80,6,50.0,100.0,0.0,0.0,16.63,75.0,42.86,44.7,MEDIUM,Medium severity | High population impact | Important/critical infrastructure
+81,8,75.0,49.93,0.0,0.0,7.06,50.0,0.0,34.45,MEDIUM,High/Critical severity | Medium infrastructure importance
+82,17,25.0,65.1,20.0,0.0,54.18,50.0,7.14,32.65,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+83,17,50.0,65.1,0.0,0.0,76.05,50.0,0.0,37.37,MEDIUM,Medium severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+84,5,75.0,77.8,0.0,10.0,78.76,75.0,7.14,51.26,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+85,23,25.0,42.48,0.0,0.0,27.3,25.0,21.43,21.25,LOW,Low overall priority factors
+86,8,50.0,49.93,0.0,0.0,59.58,50.0,14.29,34.88,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+87,1,75.0,97.05,0.0,0.0,85.38,75.0,0.0,53.1,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+88,3,25.0,70.76,0.0,0.0,65.85,50.0,0.0,30.95,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+89,9,50.0,43.07,0.0,0.0,15.95,75.0,0.0,31.81,MEDIUM,Medium severity | Important/critical infrastructure
+90,16,75.0,43.99,30.0,0.0,82.47,50.0,7.14,46.31,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+91,23,25.0,42.48,0.0,10.0,73.68,75.0,7.14,32.95,MEDIUM,Moderate waiting time | Important/critical infrastructure
+92,15,50.0,88.48,75.0,0.0,31.58,75.0,35.71,55.0,HIGH,Medium severity | High population impact | High location risk | Important/critical infrastructure
+93,17,75.0,65.1,15.0,0.0,50.37,50.0,7.14,44.02,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+94,16,25.0,43.99,45.0,10.0,89.11,50.0,7.14,37.72,MEDIUM,Long waiting time | Medium infrastructure importance
+95,1,50.0,97.05,0.0,0.0,66.83,50.0,28.57,44.1,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+96,19,75.0,87.37,48.75,0.0,8.71,100.0,7.14,55.75,HIGH,High/Critical severity | High population impact | Important/critical infrastructure
+97,10,25.0,41.35,0.0,0.0,95.85,75.0,0.0,33.29,MEDIUM,Long waiting time | Important/critical infrastructure
+98,16,50.0,43.99,50.0,0.0,16.1,100.0,42.86,47.49,MEDIUM,Medium severity | Moderate location risk | Important/critical infrastructure
+99,8,75.0,49.93,0.0,0.0,48.59,50.0,0.0,38.6,MEDIUM,High/Critical severity | Medium infrastructure importance
+100,16,25.0,43.99,25.0,0.0,68.01,50.0,28.57,33.76,MEDIUM,Moderate waiting time | Medium infrastructure importance
+101,19,50.0,87.37,0.0,0.0,49.54,50.0,7.14,38.77,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+102,15,75.0,88.48,25.0,0.0,29.66,100.0,85.71,62.31,HIGH,High/Critical severity | High population impact | Important/critical infrastructure | Persistent historical recurrence
+103,23,25.0,42.48,0.0,0.0,74.22,75.0,14.29,32.72,MEDIUM,Moderate waiting time | Important/critical infrastructure
+104,20,50.0,52.64,0.0,0.0,21.06,50.0,14.29,31.43,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+105,19,75.0,87.37,75.0,0.0,17.05,50.0,14.29,53.74,HIGH,High/Critical severity | High population impact | High location risk | Medium infrastructure importance
+106,23,25.0,42.48,0.0,0.0,78.21,50.0,14.29,29.37,MEDIUM,Long waiting time | Medium infrastructure importance
+107,15,50.0,88.48,25.0,0.0,92.49,50.0,0.0,46.27,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+108,5,75.0,77.8,25.0,0.0,33.62,75.0,14.29,50.21,HIGH,High/Critical severity | High population impact | Important/critical infrastructure
+109,6,25.0,100.0,0.0,0.0,1.1,50.0,35.71,32.43,MEDIUM,High population impact | Medium infrastructure importance
+110,19,50.0,87.37,75.0,0.0,50.46,100.0,7.14,57.62,HIGH,Medium severity | High population impact | High location risk | Moderate waiting time | Important/critical infrastructure
+111,2,75.0,55.28,25.0,0.0,82.47,50.0,0.0,46.54,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+112,16,25.0,43.99,47.5,0.0,3.99,50.0,57.14,33.59,MEDIUM,Medium infrastructure importance | Historical recurrence
+113,15,50.0,88.48,25.0,0.0,61.9,50.0,7.14,43.93,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+114,17,75.0,65.1,0.0,0.0,34.59,50.0,7.14,40.19,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+115,16,25.0,43.99,40.0,0.0,79.58,50.0,7.14,35.02,MEDIUM,Long waiting time | Medium infrastructure importance
+116,3,50.0,70.76,25.0,0.0,79.22,75.0,0.0,46.04,MEDIUM,Medium severity | Moderate population impact | Long waiting time | Important/critical infrastructure
+117,2,75.0,55.28,50.0,0.0,43.92,50.0,0.0,46.43,MEDIUM,High/Critical severity | Moderate population impact | Moderate location risk | Medium infrastructure importance
+118,15,25.0,88.48,75.0,0.0,94.59,50.0,7.14,48.45,MEDIUM,High population impact | High location risk | Long waiting time | Medium infrastructure importance
+119,1,50.0,97.05,25.0,0.0,71.04,50.0,7.14,46.13,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+120,15,75.0,88.48,75.0,0.0,89.75,100.0,0.0,67.25,HIGH,High/Critical severity | High population impact | High location risk | Long waiting time | Important/critical infrastructure
+121,7,25.0,42.93,0.0,0.0,7.61,50.0,7.14,21.66,LOW,Medium infrastructure importance
+122,20,50.0,52.64,0.0,0.0,50.78,50.0,7.14,33.69,MEDIUM,Medium severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+123,10,75.0,41.35,0.0,0.0,52.55,75.0,0.0,41.46,MEDIUM,High/Critical severity | Moderate waiting time | Important/critical infrastructure
+124,3,25.0,70.76,0.0,0.0,43.33,50.0,7.14,29.41,MEDIUM,Moderate population impact | Medium infrastructure importance
+125,15,50.0,88.48,23.75,0.0,91.0,50.0,0.0,45.93,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+126,6,75.0,100.0,0.0,10.0,75.41,25.0,14.29,47.47,MEDIUM,High/Critical severity | High population impact | Long waiting time
+127,1,25.0,97.05,25.0,0.0,36.65,50.0,0.0,35.72,MEDIUM,High population impact | Medium infrastructure importance
+128,23,50.0,42.48,0.0,0.0,21.06,50.0,35.71,32.05,MEDIUM,Medium severity | Medium infrastructure importance
+129,20,75.0,52.64,0.0,10.0,45.33,50.0,14.29,41.11,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+130,18,25.0,48.85,25.0,0.0,62.85,50.0,7.14,31.83,MEDIUM,Moderate waiting time | Medium infrastructure importance
+131,16,50.0,43.99,71.25,0.0,87.08,50.0,14.29,47.42,MEDIUM,Medium severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+132,14,75.0,38.74,60.0,0.0,92.92,50.0,0.0,50.35,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+133,23,25.0,42.48,0.0,0.0,26.11,50.0,28.57,25.59,MEDIUM,Medium infrastructure importance
+134,15,50.0,88.48,40.0,0.0,32.41,75.0,78.57,54.12,HIGH,Medium severity | High population impact | Important/critical infrastructure | Persistent historical recurrence
+135,6,75.0,100.0,0.0,0.0,38.76,75.0,21.43,51.02,HIGH,High/Critical severity | High population impact | Important/critical infrastructure
+136,1,25.0,97.05,25.0,0.0,40.94,50.0,21.43,38.29,MEDIUM,High population impact | Medium infrastructure importance
+137,23,50.0,42.48,0.0,10.0,19.64,50.0,42.86,33.62,MEDIUM,Medium severity | Medium infrastructure importance
+138,19,75.0,87.37,32.5,0.0,52.85,50.0,14.29,50.94,HIGH,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance
+139,17,25.0,65.1,0.0,0.0,78.81,50.0,0.0,31.4,MEDIUM,Moderate population impact | Long waiting time | Medium infrastructure importance
+140,5,50.0,77.8,0.0,0.0,67.67,50.0,0.0,38.44,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+141,5,75.0,77.8,25.0,0.0,6.07,50.0,28.57,45.13,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+142,15,25.0,88.48,25.0,0.0,58.39,50.0,21.43,38.75,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+143,13,50.0,39.82,25.0,0.0,29.48,50.0,7.14,33.38,MEDIUM,Medium severity | Medium infrastructure importance
+144,16,75.0,43.99,71.25,0.0,64.02,50.0,35.71,53.51,HIGH,High/Critical severity | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+145,4,25.0,43.78,60.0,0.0,16.33,50.0,7.14,31.66,MEDIUM,Moderate location risk | Medium infrastructure importance
+146,23,50.0,42.48,0.0,0.0,12.24,50.0,21.43,29.74,MEDIUM,Medium severity | Medium infrastructure importance
+147,4,75.0,43.78,25.0,0.0,85.39,50.0,0.0,45.11,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+148,16,25.0,43.99,25.0,0.0,47.11,50.0,50.0,33.81,MEDIUM,Medium infrastructure importance | Historical recurrence
+149,23,50.0,42.48,0.0,0.0,16.62,50.0,35.71,31.61,MEDIUM,Medium severity | Medium infrastructure importance
+150,15,75.0,88.48,25.0,0.0,21.45,50.0,35.71,48.99,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+151,15,25.0,88.48,25.0,0.0,92.64,50.0,14.29,41.47,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+152,17,50.0,65.1,15.0,0.0,58.37,50.0,7.14,38.57,MEDIUM,Medium severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+153,12,75.0,58.41,25.0,0.0,72.71,50.0,0.0,46.03,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+154,23,25.0,42.48,0.0,10.0,55.87,50.0,14.29,28.14,MEDIUM,Moderate waiting time | Medium infrastructure importance
+155,8,50.0,49.93,0.0,0.0,54.76,50.0,7.14,33.68,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+156,15,75.0,88.48,75.0,0.0,74.15,50.0,0.0,58.19,HIGH,High/Critical severity | High population impact | High location risk | Moderate waiting time | Medium infrastructure importance
+157,6,25.0,100.0,25.0,0.0,95.53,50.0,0.0,42.05,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+158,23,50.0,42.48,0.0,0.0,59.32,75.0,28.57,38.91,MEDIUM,Medium severity | Moderate waiting time | Important/critical infrastructure
+159,23,75.0,42.48,0.0,0.0,3.46,50.0,57.14,38.68,MEDIUM,High/Critical severity | Medium infrastructure importance | Historical recurrence
+160,23,25.0,42.48,0.0,0.0,57.76,50.0,7.14,26.61,MEDIUM,Moderate waiting time | Medium infrastructure importance
+161,8,50.0,49.93,0.0,0.0,82.36,50.0,0.0,35.73,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+162,4,75.0,43.78,60.0,10.0,79.5,50.0,7.14,51.48,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+163,1,25.0,97.05,0.0,0.0,7.72,50.0,64.29,35.51,MEDIUM,High population impact | Medium infrastructure importance | Historical recurrence
+164,23,50.0,42.48,0.0,0.0,44.43,50.0,42.86,35.1,MEDIUM,Medium severity | Medium infrastructure importance
+165,16,75.0,43.99,25.0,0.0,51.54,50.0,21.43,43.9,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+166,13,25.0,39.82,75.0,0.0,31.34,50.0,28.57,36.96,MEDIUM,High location risk | Medium infrastructure importance
+167,16,50.0,43.99,30.0,0.0,1.94,50.0,28.57,34.15,MEDIUM,Medium severity | Medium infrastructure importance
+168,1,75.0,97.05,50.0,0.0,21.27,50.0,14.29,51.86,HIGH,High/Critical severity | High population impact | Moderate location risk | Medium infrastructure importance
+169,3,25.0,70.76,0.0,0.0,35.28,75.0,0.0,31.64,MEDIUM,Moderate population impact | Important/critical infrastructure
+170,19,50.0,87.37,0.0,0.0,92.94,75.0,0.0,46.15,MEDIUM,Medium severity | High population impact | Long waiting time | Important/critical infrastructure
+171,6,75.0,100.0,0.0,0.0,86.22,25.0,7.14,46.84,MEDIUM,High/Critical severity | High population impact | Long waiting time
+172,23,25.0,42.48,0.0,0.0,87.91,50.0,0.0,28.91,MEDIUM,Long waiting time | Medium infrastructure importance
+173,6,50.0,100.0,0.0,0.0,38.88,75.0,28.57,45.5,MEDIUM,Medium severity | High population impact | Important/critical infrastructure
+174,5,75.0,77.8,50.0,0.0,72.99,50.0,7.14,53.43,HIGH,High/Critical severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+175,13,25.0,39.82,50.0,0.0,98.81,75.0,0.0,40.85,MEDIUM,Moderate location risk | Long waiting time | Important/critical infrastructure
+176,5,50.0,77.8,0.0,0.0,84.28,50.0,0.0,40.1,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+177,8,75.0,49.93,0.0,0.0,46.97,50.0,7.14,39.15,MEDIUM,High/Critical severity | Medium infrastructure importance
+178,15,25.0,88.48,25.0,0.0,11.98,25.0,100.0,38.22,MEDIUM,High population impact | Persistent historical recurrence
+179,1,50.0,97.05,0.0,0.0,89.45,50.0,7.14,44.22,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+180,1,75.0,97.05,50.0,0.0,11.94,50.0,7.14,50.22,HIGH,High/Critical severity | High population impact | Moderate location risk | Medium infrastructure importance
+181,3,25.0,70.76,25.0,0.0,43.3,50.0,14.29,33.87,MEDIUM,Moderate population impact | Medium infrastructure importance
+182,15,50.0,88.48,23.75,0.0,32.04,50.0,21.43,42.18,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+183,15,75.0,88.48,0.0,0.0,50.21,50.0,28.57,47.4,MEDIUM,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance
+184,3,25.0,70.76,0.0,0.0,35.11,50.0,0.0,27.88,MEDIUM,Moderate population impact | Medium infrastructure importance
+185,23,50.0,42.48,0.0,0.0,76.72,50.0,21.43,36.19,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+186,8,75.0,49.93,0.0,10.0,52.46,50.0,14.29,41.41,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+187,14,25.0,38.74,75.0,0.0,21.08,75.0,7.14,37.38,MEDIUM,High location risk | Important/critical infrastructure
+188,4,50.0,43.78,75.0,0.0,4.97,50.0,0.0,38.31,MEDIUM,Medium severity | High location risk | Medium infrastructure importance
+189,19,75.0,87.37,75.0,0.0,67.62,50.0,0.0,57.37,HIGH,High/Critical severity | High population impact | High location risk | Moderate waiting time | Medium infrastructure importance
+190,1,25.0,97.05,0.0,0.0,6.17,50.0,28.57,31.78,MEDIUM,High population impact | Medium infrastructure importance
+191,6,50.0,100.0,0.0,0.0,6.93,25.0,35.71,35.51,MEDIUM,Medium severity | High population impact
+192,11,75.0,65.29,0.0,0.0,67.6,50.0,0.0,42.8,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+193,2,25.0,55.28,0.0,0.0,84.72,50.0,0.0,30.51,MEDIUM,Moderate population impact | Long waiting time | Medium infrastructure importance
+194,18,50.0,48.85,0.0,0.0,22.41,75.0,0.0,33.32,MEDIUM,Medium severity | Important/critical infrastructure
+195,12,75.0,58.41,60.0,0.0,50.01,100.0,0.0,56.51,HIGH,High/Critical severity | Moderate population impact | Moderate location risk | Moderate waiting time | Important/critical infrastructure
+196,16,25.0,43.99,45.0,0.0,40.96,75.0,28.57,37.8,MEDIUM,Important/critical infrastructure
+197,5,50.0,77.8,25.0,0.0,68.45,75.0,0.0,46.02,MEDIUM,Medium severity | High population impact | Moderate waiting time | Important/critical infrastructure
+198,15,75.0,88.48,23.75,0.0,64.12,50.0,57.14,55.21,HIGH,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance | Historical recurrence
+199,15,25.0,88.48,0.0,0.0,17.62,50.0,64.29,35.21,MEDIUM,High population impact | Medium infrastructure importance | Historical recurrence
+200,6,50.0,100.0,0.0,0.0,41.6,25.0,14.29,36.84,MEDIUM,Medium severity | High population impact
+201,15,75.0,88.48,25.0,0.0,5.13,50.0,78.57,51.64,HIGH,High/Critical severity | High population impact | Medium infrastructure importance | Persistent historical recurrence
+202,1,25.0,97.05,25.0,0.0,24.48,50.0,14.29,35.93,MEDIUM,High population impact | Medium infrastructure importance
+203,23,50.0,42.48,0.0,10.0,14.42,50.0,42.86,33.1,MEDIUM,Medium severity | Medium infrastructure importance
+204,4,75.0,43.78,75.0,0.0,34.01,50.0,14.29,48.9,MEDIUM,High/Critical severity | High location risk | Medium infrastructure importance
+205,15,25.0,88.48,25.0,0.0,28.52,50.0,50.0,38.62,MEDIUM,High population impact | Medium infrastructure importance | Historical recurrence
+206,14,50.0,38.74,60.0,0.0,46.8,75.0,0.0,43.24,MEDIUM,Medium severity | Moderate location risk | Important/critical infrastructure
+207,15,75.0,88.48,20.0,10.0,39.81,50.0,85.71,56.07,HIGH,High/Critical severity | High population impact | Medium infrastructure importance | Persistent historical recurrence
+208,15,25.0,88.48,50.0,0.0,44.48,50.0,64.29,45.4,MEDIUM,High population impact | Moderate location risk | Medium infrastructure importance | Historical recurrence
+209,1,50.0,97.05,25.0,0.0,67.37,50.0,0.0,45.04,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+210,16,75.0,43.99,47.5,0.0,16.07,50.0,64.29,48.01,MEDIUM,High/Critical severity | Medium infrastructure importance | Historical recurrence
+211,3,25.0,70.76,0.0,0.0,54.16,50.0,7.14,30.49,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+212,16,50.0,43.99,25.0,0.0,89.45,50.0,7.14,40.01,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+213,17,75.0,65.1,15.0,0.0,22.68,50.0,14.29,41.96,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+214,5,25.0,77.8,75.0,0.0,3.9,100.0,28.57,47.42,MEDIUM,High population impact | High location risk | Important/critical infrastructure
+215,15,50.0,88.48,50.0,0.0,42.16,50.0,71.43,52.13,HIGH,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance | Historical recurrence
+216,6,75.0,100.0,0.0,0.0,10.16,50.0,28.57,45.12,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+217,6,25.0,100.0,0.0,0.0,3.04,25.0,28.57,28.16,MEDIUM,High population impact
+218,1,50.0,97.05,40.0,0.0,17.04,50.0,50.0,47.26,MEDIUM,Medium severity | High population impact | Medium infrastructure importance | Historical recurrence
+219,4,75.0,43.78,50.0,10.0,0.0,50.0,7.14,42.03,MEDIUM,High/Critical severity | Moderate location risk | Medium infrastructure importance
+220,23,25.0,42.48,0.0,0.0,40.19,50.0,21.43,26.28,MEDIUM,Medium infrastructure importance
+221,23,50.0,42.48,0.0,0.0,87.54,50.0,0.0,35.13,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+222,13,75.0,39.82,75.0,0.0,74.83,50.0,0.0,50.96,HIGH,High/Critical severity | High location risk | Moderate waiting time | Medium infrastructure importance
+223,16,25.0,43.99,25.0,0.0,83.14,50.0,7.14,33.13,MEDIUM,Long waiting time | Medium infrastructure importance
+224,14,50.0,38.74,50.0,0.0,54.11,50.0,0.0,38.72,MEDIUM,Medium severity | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+225,17,75.0,65.1,0.0,0.0,75.67,50.0,0.0,43.58,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+226,9,25.0,43.07,0.0,0.0,14.39,75.0,0.0,25.4,MEDIUM,Important/critical infrastructure
+227,6,50.0,100.0,0.0,0.0,57.63,25.0,21.43,39.16,MEDIUM,Medium severity | High population impact | Moderate waiting time
+228,1,75.0,97.05,25.0,0.0,39.45,75.0,35.71,55.82,HIGH,High/Critical severity | High population impact | Important/critical infrastructure
+229,1,25.0,97.05,50.0,0.0,97.27,50.0,0.0,45.53,MEDIUM,High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+230,4,50.0,43.78,80.0,0.0,90.98,100.0,0.0,55.16,HIGH,Medium severity | High location risk | Long waiting time | Important/critical infrastructure
+231,6,75.0,100.0,0.0,0.0,13.63,25.0,50.0,43.86,MEDIUM,High/Critical severity | High population impact | Historical recurrence
+232,17,25.0,65.1,15.0,0.0,61.29,50.0,7.14,32.61,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+233,7,50.0,42.93,0.0,0.0,51.12,50.0,0.0,31.55,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+234,16,75.0,43.99,45.0,0.0,52.77,50.0,42.86,49.16,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+235,15,25.0,88.48,50.0,0.0,42.63,50.0,42.86,43.07,MEDIUM,High population impact | Moderate location risk | Medium infrastructure importance
+236,1,50.0,97.05,25.0,0.0,10.77,75.0,50.0,48.13,MEDIUM,Medium severity | High population impact | Important/critical infrastructure | Historical recurrence
+237,8,75.0,49.93,0.0,0.0,1.81,50.0,14.29,35.35,MEDIUM,High/Critical severity | Medium infrastructure importance
+238,15,25.0,88.48,25.0,0.0,34.19,50.0,28.57,37.05,MEDIUM,High population impact | Medium infrastructure importance
+239,15,50.0,88.48,75.0,0.0,20.7,50.0,35.71,50.16,HIGH,Medium severity | High population impact | High location risk | Medium infrastructure importance
+240,1,75.0,97.05,25.0,0.0,60.44,50.0,14.29,52.03,HIGH,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance
+241,5,25.0,77.8,25.0,0.0,5.51,50.0,35.71,33.29,MEDIUM,High population impact | Medium infrastructure importance
+242,15,50.0,88.48,15.0,0.0,51.86,50.0,50.0,45.71,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance | Historical recurrence
+243,16,75.0,43.99,71.25,0.0,43.29,100.0,50.0,60.37,HIGH,High/Critical severity | Moderate location risk | Important/critical infrastructure | Historical recurrence
+244,18,25.0,48.85,32.5,10.0,41.92,50.0,7.14,31.86,MEDIUM,Medium infrastructure importance
+245,15,50.0,88.48,50.0,0.0,74.89,50.0,0.0,48.26,MEDIUM,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+246,23,75.0,42.48,0.0,0.0,86.59,50.0,0.0,41.28,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+247,16,25.0,43.99,75.0,0.0,71.03,100.0,35.71,49.77,MEDIUM,High location risk | Moderate waiting time | Important/critical infrastructure
+248,3,50.0,70.76,25.0,0.0,25.8,25.0,7.14,33.91,MEDIUM,Medium severity | Moderate population impact
+249,19,75.0,87.37,50.0,0.0,29.24,75.0,7.14,54.24,HIGH,High/Critical severity | High population impact | Moderate location risk | Important/critical infrastructure
+250,15,25.0,88.48,25.0,0.0,68.31,50.0,7.14,38.32,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+251,16,50.0,43.99,25.0,0.0,38.46,50.0,57.14,39.91,MEDIUM,Medium severity | Medium infrastructure importance | Historical recurrence
+252,3,75.0,70.76,0.0,0.0,3.1,50.0,14.29,38.6,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+253,6,25.0,100.0,0.0,10.0,31.78,50.0,42.86,37.21,MEDIUM,High population impact | Medium infrastructure importance
+254,13,50.0,39.82,60.0,10.0,60.26,50.0,7.14,42.71,MEDIUM,Medium severity | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+255,5,75.0,77.8,0.0,0.0,15.04,50.0,7.14,40.14,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+256,5,25.0,77.8,0.0,0.0,85.44,50.0,0.0,33.96,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+257,3,50.0,70.76,50.0,0.0,4.52,50.0,14.29,40.0,MEDIUM,Medium severity | Moderate population impact | Moderate location risk | Medium infrastructure importance
+258,13,75.0,39.82,75.0,0.0,46.14,50.0,14.29,49.52,MEDIUM,High/Critical severity | High location risk | Medium infrastructure importance
+259,6,25.0,100.0,0.0,10.0,83.44,25.0,14.29,35.77,MEDIUM,High population impact | Long waiting time
+260,14,50.0,38.74,50.0,0.0,99.53,50.0,0.0,43.26,MEDIUM,Medium severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+261,15,75.0,88.48,100.0,0.0,46.29,50.0,64.29,65.58,HIGH,High/Critical severity | High population impact | High location risk | Medium infrastructure importance | Historical recurrence
+262,8,25.0,49.93,0.0,10.0,36.34,50.0,21.43,28.02,MEDIUM,Medium infrastructure importance
+263,23,50.0,42.48,0.0,0.0,82.42,75.0,7.14,39.08,MEDIUM,Medium severity | Long waiting time | Important/critical infrastructure
+264,1,75.0,97.05,0.0,0.0,49.04,50.0,28.57,48.57,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+265,18,25.0,48.85,16.25,0.0,11.38,50.0,7.14,25.37,MEDIUM,Medium infrastructure importance
+266,12,50.0,58.41,50.0,0.0,65.84,50.0,0.0,42.85,MEDIUM,Medium severity | Moderate population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+267,2,75.0,55.28,25.0,0.0,28.49,50.0,7.14,41.86,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+268,1,25.0,97.05,0.0,0.0,83.41,50.0,14.29,38.08,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+269,1,50.0,97.05,50.0,0.0,75.2,50.0,21.43,51.72,HIGH,Medium severity | High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+270,18,75.0,48.85,0.0,0.0,33.16,75.0,14.29,42.07,MEDIUM,High/Critical severity | Important/critical infrastructure
+271,5,25.0,77.8,0.0,0.0,3.25,50.0,35.71,29.32,MEDIUM,High population impact | Medium infrastructure importance
+272,15,50.0,88.48,25.0,0.0,78.08,50.0,7.14,45.54,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+273,6,75.0,100.0,0.0,0.0,91.57,75.0,7.14,54.87,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+274,1,25.0,97.05,50.0,10.0,17.25,50.0,14.29,39.96,MEDIUM,High population impact | Moderate location risk | Medium infrastructure importance
+275,4,50.0,43.78,80.0,0.0,91.15,100.0,0.0,55.18,HIGH,Medium severity | High location risk | Long waiting time | Important/critical infrastructure
+276,15,75.0,88.48,25.0,0.0,76.56,25.0,7.14,47.89,MEDIUM,High/Critical severity | High population impact | Long waiting time
+277,23,25.0,42.48,0.0,0.0,86.47,50.0,0.0,28.77,MEDIUM,Long waiting time | Medium infrastructure importance
+278,1,50.0,97.05,75.0,0.0,24.41,50.0,35.71,51.82,HIGH,Medium severity | High population impact | High location risk | Medium infrastructure importance
+279,6,75.0,100.0,0.0,0.0,85.12,25.0,0.0,46.01,MEDIUM,High/Critical severity | High population impact | Long waiting time
+280,16,25.0,43.99,15.0,0.0,4.33,50.0,35.71,26.6,MEDIUM,Medium infrastructure importance
+281,6,50.0,100.0,0.0,0.0,27.77,25.0,50.0,39.03,MEDIUM,Medium severity | High population impact | Historical recurrence
+282,12,75.0,58.41,25.0,0.0,4.84,50.0,7.14,39.96,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+283,23,25.0,42.48,0.0,0.0,64.16,50.0,7.14,27.25,MEDIUM,Moderate waiting time | Medium infrastructure importance
+284,22,50.0,34.61,0.0,0.0,49.66,50.0,0.0,30.16,MEDIUM,Medium severity | Medium infrastructure importance
+285,5,75.0,77.8,0.0,0.0,31.67,50.0,14.29,42.52,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+286,13,25.0,39.82,50.0,0.0,41.32,50.0,21.43,33.5,MEDIUM,Moderate location risk | Medium infrastructure importance
+287,15,50.0,88.48,50.0,0.0,63.08,50.0,42.86,51.37,HIGH,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+288,23,75.0,42.48,0.0,0.0,45.27,25.0,28.57,36.26,MEDIUM,High/Critical severity
+289,1,25.0,97.05,75.0,0.0,22.62,75.0,42.86,49.86,MEDIUM,High population impact | High location risk | Important/critical infrastructure
+290,16,50.0,43.99,50.0,0.0,71.32,100.0,21.43,50.87,HIGH,Medium severity | Moderate location risk | Moderate waiting time | Important/critical infrastructure
+291,10,75.0,41.35,0.0,0.0,31.62,75.0,7.14,40.08,MEDIUM,High/Critical severity | Important/critical infrastructure
+292,19,25.0,87.37,50.0,0.0,26.6,100.0,21.43,46.66,MEDIUM,High population impact | Moderate location risk | Important/critical infrastructure
+293,8,50.0,49.93,0.0,0.0,47.66,50.0,0.0,32.26,MEDIUM,Medium severity | Medium infrastructure importance
+294,22,75.0,34.61,0.0,0.0,99.89,75.0,0.0,45.18,MEDIUM,High/Critical severity | Long waiting time | Important/critical infrastructure
+295,15,25.0,88.48,0.0,0.0,54.41,50.0,21.43,34.61,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+296,3,50.0,70.76,0.0,0.0,3.45,50.0,0.0,30.96,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+297,13,75.0,39.82,25.0,0.0,57.02,50.0,7.14,42.39,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+298,16,25.0,43.99,30.0,0.0,48.22,50.0,28.57,32.53,MEDIUM,Medium infrastructure importance
+299,15,50.0,88.48,50.0,0.0,57.82,50.0,28.57,49.41,MEDIUM,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+300,8,75.0,49.93,0.0,0.0,6.1,50.0,7.14,35.06,MEDIUM,High/Critical severity | Medium infrastructure importance
+301,20,25.0,52.64,0.0,0.0,63.66,50.0,7.14,28.73,MEDIUM,Moderate population impact | Moderate waiting time | Medium infrastructure importance
+302,1,50.0,97.05,50.0,0.0,89.55,50.0,0.0,51.01,HIGH,Medium severity | High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+303,6,75.0,100.0,0.0,0.0,88.67,25.0,7.14,47.08,MEDIUM,High/Critical severity | High population impact | Long waiting time
+304,15,25.0,88.48,0.0,0.0,0.06,50.0,64.29,33.46,MEDIUM,High population impact | Medium infrastructure importance | Historical recurrence
+305,15,50.0,88.48,75.0,10.0,83.0,100.0,35.71,64.89,HIGH,Medium severity | High population impact | High location risk | Long waiting time | Important/critical infrastructure
+306,19,75.0,87.37,25.0,0.0,39.83,50.0,14.29,48.52,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+307,5,25.0,77.8,50.0,0.0,17.52,75.0,28.57,41.28,MEDIUM,High population impact | Moderate location risk | Important/critical infrastructure
+308,6,50.0,100.0,0.0,10.0,89.17,25.0,14.29,42.6,MEDIUM,Medium severity | High population impact | Long waiting time
+309,16,75.0,43.99,30.0,0.0,95.9,50.0,0.0,46.94,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+310,16,25.0,43.99,40.0,10.0,40.43,50.0,21.43,33.53,MEDIUM,Medium infrastructure importance
+311,16,50.0,43.99,60.0,0.0,96.99,50.0,0.0,45.3,MEDIUM,Medium severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+312,16,75.0,43.99,25.0,0.0,71.83,50.0,14.29,45.21,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+313,15,25.0,88.48,40.0,0.0,68.07,50.0,14.29,41.26,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+314,23,50.0,42.48,0.0,0.0,60.6,50.0,14.29,33.86,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+315,16,75.0,43.99,60.0,0.0,92.27,50.0,7.14,51.79,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+316,6,25.0,100.0,0.0,0.0,90.83,25.0,0.0,34.08,MEDIUM,High population impact | Long waiting time
+317,12,50.0,58.41,25.0,0.0,66.69,50.0,0.0,39.18,MEDIUM,Medium severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+318,2,75.0,55.28,40.0,0.0,61.59,50.0,0.0,46.7,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+319,6,25.0,100.0,0.0,0.0,80.73,25.0,0.0,33.07,MEDIUM,High population impact | Long waiting time
+320,16,50.0,43.99,25.0,10.0,11.58,100.0,28.57,42.86,MEDIUM,Medium severity | Important/critical infrastructure
+321,17,75.0,65.1,0.0,0.0,95.4,75.0,0.0,49.3,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Important/critical infrastructure
+322,5,25.0,77.8,0.0,0.0,55.39,50.0,14.29,32.39,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+323,15,50.0,88.48,50.0,10.0,9.59,50.0,42.86,47.02,MEDIUM,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance
+324,5,75.0,77.8,25.0,0.0,89.7,75.0,0.0,54.39,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+325,15,25.0,88.48,50.0,0.0,100.0,50.0,0.0,44.52,MEDIUM,High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+326,5,50.0,77.8,0.0,0.0,1.1,50.0,14.29,33.21,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+327,16,75.0,43.99,30.0,0.0,19.07,50.0,35.71,42.83,MEDIUM,High/Critical severity | Medium infrastructure importance
+328,18,25.0,48.85,25.0,0.0,27.51,50.0,14.29,29.01,MEDIUM,Medium infrastructure importance
+329,23,50.0,42.48,0.0,0.0,73.58,75.0,7.14,38.19,MEDIUM,Medium severity | Moderate waiting time | Important/critical infrastructure
+330,1,75.0,97.05,25.0,0.0,64.74,50.0,7.14,51.75,HIGH,High/Critical severity | High population impact | Moderate waiting time | Medium infrastructure importance
+331,5,25.0,77.8,75.0,0.0,80.18,50.0,14.29,46.12,MEDIUM,High population impact | High location risk | Long waiting time | Medium infrastructure importance
+332,1,50.0,97.05,25.0,0.0,55.73,50.0,21.43,46.02,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+333,19,75.0,87.37,48.75,0.0,9.46,50.0,21.43,49.76,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+334,6,25.0,100.0,0.0,0.0,12.31,25.0,28.57,29.09,MEDIUM,High population impact
+335,16,50.0,43.99,25.0,0.0,78.11,50.0,21.43,40.3,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+336,23,75.0,42.48,0.0,0.0,84.49,75.0,0.0,44.82,MEDIUM,High/Critical severity | Long waiting time | Important/critical infrastructure
+337,16,25.0,43.99,45.0,0.0,71.42,50.0,14.29,35.67,MEDIUM,Moderate waiting time | Medium infrastructure importance
+338,17,50.0,65.1,15.0,0.0,40.97,50.0,14.29,37.54,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+339,6,75.0,100.0,0.0,0.0,92.13,100.0,7.14,58.68,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+340,6,25.0,100.0,0.0,0.0,72.15,25.0,7.14,32.93,MEDIUM,High population impact | Moderate waiting time
+341,15,50.0,88.48,25.0,0.0,70.14,100.0,14.29,52.97,HIGH,Medium severity | High population impact | Moderate waiting time | Important/critical infrastructure
+342,23,75.0,42.48,0.0,0.0,74.8,50.0,0.0,40.1,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+343,23,25.0,42.48,0.0,0.0,93.62,50.0,0.0,29.48,MEDIUM,Long waiting time | Medium infrastructure importance
+344,23,50.0,42.48,0.0,0.0,37.69,50.0,28.57,33.0,MEDIUM,Medium severity | Medium infrastructure importance
+345,8,75.0,49.93,0.0,0.0,49.9,50.0,0.0,38.73,MEDIUM,High/Critical severity | Medium infrastructure importance
+346,15,25.0,88.48,0.0,0.0,18.22,25.0,57.14,30.81,MEDIUM,High population impact | Historical recurrence
+347,1,50.0,97.05,100.0,0.0,85.41,75.0,14.29,63.28,HIGH,Medium severity | High population impact | High location risk | Long waiting time | Important/critical infrastructure
+348,20,75.0,52.64,0.0,0.0,69.08,50.0,0.0,41.05,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+349,8,25.0,49.93,0.0,0.0,41.04,50.0,0.0,25.34,MEDIUM,Medium infrastructure importance
+350,14,50.0,38.74,60.0,0.0,72.43,75.0,7.14,46.52,MEDIUM,Medium severity | Moderate location risk | Moderate waiting time | Important/critical infrastructure
+351,16,75.0,43.99,60.0,0.0,83.58,50.0,21.43,52.35,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+352,11,25.0,65.29,0.0,0.0,23.8,50.0,0.0,25.92,MEDIUM,Moderate population impact | Medium infrastructure importance
+353,16,50.0,43.99,71.25,0.0,11.48,50.0,50.0,43.43,MEDIUM,Medium severity | Moderate location risk | Medium infrastructure importance | Historical recurrence
+354,21,75.0,42.01,0.0,10.0,57.55,75.0,0.0,43.06,MEDIUM,High/Critical severity | Moderate waiting time | Important/critical infrastructure
+355,14,25.0,38.74,75.0,0.0,93.34,50.0,0.0,40.15,MEDIUM,High location risk | Long waiting time | Medium infrastructure importance
+356,23,50.0,42.48,0.0,0.0,2.95,25.0,21.43,25.06,MEDIUM,Medium severity
+357,20,75.0,52.64,0.0,0.0,96.33,75.0,0.0,47.53,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Important/critical infrastructure
+358,15,25.0,88.48,25.0,0.0,24.41,25.0,92.86,38.75,MEDIUM,High population impact | Persistent historical recurrence
+359,14,50.0,38.74,75.0,0.0,17.09,50.0,0.0,38.77,MEDIUM,Medium severity | High location risk | Medium infrastructure importance
+360,5,75.0,77.8,75.0,0.0,30.06,50.0,21.43,54.32,HIGH,High/Critical severity | High population impact | High location risk | Medium infrastructure importance
+361,16,25.0,43.99,25.0,0.0,83.58,50.0,21.43,34.6,MEDIUM,Long waiting time | Medium infrastructure importance
+362,19,50.0,87.37,32.5,0.0,66.56,50.0,0.0,44.64,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+363,8,75.0,49.93,0.0,0.0,78.4,50.0,0.0,41.58,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+364,13,25.0,39.82,80.0,0.0,56.21,75.0,14.29,42.52,MEDIUM,High location risk | Moderate waiting time | Important/critical infrastructure
+365,19,50.0,87.37,0.0,0.0,50.9,50.0,0.0,38.2,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+366,23,75.0,42.48,0.0,0.0,49.23,75.0,14.29,42.72,MEDIUM,High/Critical severity | Important/critical infrastructure
+367,1,25.0,97.05,0.0,0.0,92.28,50.0,7.14,38.25,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+368,8,50.0,49.93,0.0,0.0,74.13,50.0,0.0,34.9,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+369,19,75.0,87.37,75.0,0.0,50.75,100.0,7.14,63.89,HIGH,High/Critical severity | High population impact | High location risk | Moderate waiting time | Important/critical infrastructure
+370,4,25.0,43.78,25.0,0.0,31.31,50.0,14.29,28.63,MEDIUM,Medium infrastructure importance
+371,5,50.0,77.8,0.0,0.0,38.07,50.0,28.57,38.33,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+372,15,75.0,88.48,25.0,0.0,30.36,50.0,28.57,49.16,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+373,3,25.0,70.76,0.0,0.0,77.08,50.0,0.0,32.07,MEDIUM,Moderate population impact | Long waiting time | Medium infrastructure importance
+374,15,50.0,88.48,25.0,0.0,11.63,50.0,50.0,43.19,MEDIUM,Medium severity | High population impact | Medium infrastructure importance | Historical recurrence
+375,13,75.0,39.82,60.0,0.0,30.72,50.0,0.0,44.3,MEDIUM,High/Critical severity | Moderate location risk | Medium infrastructure importance
+376,19,25.0,87.37,16.25,0.0,85.11,50.0,0.0,37.8,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+377,15,50.0,88.48,40.0,0.0,76.62,50.0,21.43,49.08,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+378,4,75.0,43.78,75.0,0.0,68.14,50.0,0.0,50.88,HIGH,High/Critical severity | High location risk | Moderate waiting time | Medium infrastructure importance
+379,6,25.0,100.0,0.0,0.0,27.26,100.0,21.43,41.12,MEDIUM,High population impact | Important/critical infrastructure
+380,1,50.0,97.05,25.0,0.0,43.39,50.0,21.43,44.79,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+381,19,75.0,87.37,0.0,0.0,83.92,50.0,7.14,48.46,MEDIUM,High/Critical severity | High population impact | Long waiting time | Medium infrastructure importance
+382,16,25.0,43.99,47.5,0.0,87.78,50.0,7.14,36.97,MEDIUM,Long waiting time | Medium infrastructure importance
+383,17,50.0,65.1,0.0,0.0,25.63,75.0,7.14,36.79,MEDIUM,Medium severity | Moderate population impact | Important/critical infrastructure
+384,15,75.0,88.48,25.0,0.0,23.62,50.0,35.71,49.2,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+385,6,25.0,100.0,0.0,0.0,65.12,25.0,14.29,32.94,MEDIUM,High population impact | Moderate waiting time
+386,2,50.0,55.28,25.0,0.0,12.83,50.0,14.29,34.75,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+387,23,75.0,42.48,0.0,0.0,57.26,50.0,35.71,41.92,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+388,15,25.0,88.48,50.0,0.0,88.95,50.0,28.57,46.27,MEDIUM,High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+389,23,50.0,42.48,0.0,0.0,44.43,50.0,14.29,32.24,MEDIUM,Medium severity | Medium infrastructure importance
+390,11,75.0,65.29,0.0,0.0,66.25,75.0,0.0,46.42,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Important/critical infrastructure
+391,23,25.0,42.48,0.0,0.0,79.67,50.0,0.0,28.09,MEDIUM,Long waiting time | Medium infrastructure importance
+392,6,50.0,100.0,0.0,0.0,64.08,25.0,14.29,39.09,MEDIUM,Medium severity | High population impact | Moderate waiting time
+393,13,75.0,39.82,50.0,0.0,14.43,50.0,21.43,43.31,MEDIUM,High/Critical severity | Moderate location risk | Medium infrastructure importance
+394,14,25.0,38.74,75.0,10.0,5.22,50.0,7.14,33.05,MEDIUM,High location risk | Medium infrastructure importance
+395,21,50.0,42.01,0.0,0.0,95.18,75.0,0.0,39.57,MEDIUM,Medium severity | Long waiting time | Important/critical infrastructure
+396,7,75.0,42.93,0.0,0.0,31.05,50.0,0.0,35.79,MEDIUM,High/Critical severity | Medium infrastructure importance
+397,15,25.0,88.48,25.0,0.0,48.65,50.0,57.14,41.35,MEDIUM,High population impact | Medium infrastructure importance | Historical recurrence
+398,4,50.0,43.78,60.0,10.0,77.26,50.0,7.14,45.01,MEDIUM,Medium severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+399,5,75.0,77.8,25.0,0.0,33.74,50.0,21.43,47.19,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+400,16,25.0,43.99,25.0,0.0,22.54,50.0,14.29,27.78,MEDIUM,Medium infrastructure importance
+401,8,50.0,49.93,0.0,0.0,25.17,50.0,28.57,32.86,MEDIUM,Medium severity | Medium infrastructure importance
+402,5,75.0,77.8,0.0,0.0,29.13,50.0,21.43,42.98,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+403,1,25.0,97.05,75.0,0.0,91.19,50.0,0.0,48.68,MEDIUM,High population impact | High location risk | Long waiting time | Medium infrastructure importance
+404,2,50.0,55.28,25.0,0.0,98.34,50.0,0.0,41.88,MEDIUM,Medium severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+405,15,75.0,88.48,25.0,0.0,22.44,25.0,42.86,46.05,MEDIUM,High/Critical severity | High population impact
+406,15,25.0,88.48,75.0,0.0,15.87,100.0,35.71,50.93,HIGH,High population impact | High location risk | Important/critical infrastructure
+407,11,50.0,65.29,20.0,0.0,14.76,50.0,0.0,34.27,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+408,4,75.0,43.78,50.0,0.0,82.42,50.0,0.0,48.56,MEDIUM,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+409,16,25.0,43.99,45.0,0.0,93.21,75.0,0.0,40.17,MEDIUM,Long waiting time | Important/critical infrastructure
+410,8,50.0,49.93,0.0,0.0,31.27,50.0,7.14,31.33,MEDIUM,Medium severity | Medium infrastructure importance
+411,23,75.0,42.48,0.0,0.0,41.25,75.0,14.29,41.93,MEDIUM,High/Critical severity | Important/critical infrastructure
+412,1,25.0,97.05,25.0,0.0,30.06,50.0,7.14,35.78,MEDIUM,High population impact | Medium infrastructure importance
+413,15,50.0,88.48,0.0,0.0,76.01,50.0,7.14,41.59,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+414,15,75.0,88.48,25.0,0.0,53.11,100.0,28.57,58.94,HIGH,High/Critical severity | High population impact | Moderate waiting time | Important/critical infrastructure
+415,15,25.0,88.48,0.0,0.0,71.31,50.0,42.86,38.44,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+416,1,50.0,97.05,25.0,0.0,36.04,50.0,50.0,46.91,MEDIUM,Medium severity | High population impact | Medium infrastructure importance | Historical recurrence
+417,13,75.0,39.82,40.0,0.0,80.0,50.0,0.0,46.22,MEDIUM,High/Critical severity | Long waiting time | Medium infrastructure importance
+418,15,25.0,88.48,50.0,0.0,42.22,25.0,78.57,42.85,MEDIUM,High population impact | Moderate location risk | Persistent historical recurrence
+419,5,50.0,77.8,50.0,0.0,54.43,50.0,14.29,46.04,MEDIUM,Medium severity | High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+420,15,75.0,88.48,0.0,0.0,4.27,50.0,50.0,44.95,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance | Historical recurrence
+421,19,25.0,87.37,16.25,0.0,22.04,75.0,7.14,35.96,MEDIUM,High population impact | Important/critical infrastructure
+422,11,50.0,65.29,0.0,10.0,23.76,50.0,7.14,33.88,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+423,13,75.0,39.82,50.0,0.0,92.4,50.0,0.0,48.96,MEDIUM,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+424,18,25.0,48.85,0.0,0.0,30.33,50.0,7.14,24.82,LOW,Medium infrastructure importance
+425,4,50.0,43.78,75.0,0.0,42.8,50.0,7.14,42.81,MEDIUM,Medium severity | High location risk | Medium infrastructure importance
+426,15,75.0,88.48,0.0,0.0,84.6,100.0,7.14,56.2,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+427,16,25.0,43.99,71.25,0.0,95.47,100.0,0.0,48.08,MEDIUM,Moderate location risk | Long waiting time | Important/critical infrastructure
+428,14,50.0,38.74,60.0,0.0,51.7,50.0,0.0,39.98,MEDIUM,Medium severity | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+429,19,75.0,87.37,25.0,0.0,88.44,50.0,0.0,51.95,HIGH,High/Critical severity | High population impact | Long waiting time | Medium infrastructure importance
+430,5,25.0,77.8,0.0,0.0,93.07,50.0,0.0,34.73,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+431,15,50.0,88.48,50.0,0.0,15.14,50.0,42.86,46.57,MEDIUM,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance
+432,7,75.0,42.93,0.0,0.0,45.02,50.0,0.0,37.19,MEDIUM,High/Critical severity | Medium infrastructure importance
+433,15,25.0,88.48,50.0,0.0,77.86,50.0,0.0,42.31,MEDIUM,High population impact | Moderate location risk | Long waiting time | Medium infrastructure importance
+434,6,50.0,100.0,25.0,0.0,65.06,50.0,7.14,45.97,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+435,3,75.0,70.76,25.0,0.0,91.08,50.0,0.0,49.72,MEDIUM,High/Critical severity | Moderate population impact | Long waiting time | Medium infrastructure importance
+436,6,25.0,100.0,0.0,0.0,66.09,25.0,21.43,33.75,MEDIUM,High population impact | Moderate waiting time
+437,4,50.0,43.78,50.0,0.0,36.84,50.0,14.29,39.18,MEDIUM,Medium severity | Moderate location risk | Medium infrastructure importance
+438,6,75.0,100.0,0.0,0.0,79.11,25.0,21.43,47.55,MEDIUM,High/Critical severity | High population impact | Long waiting time
+439,15,25.0,88.48,100.0,10.0,68.27,50.0,50.0,54.85,HIGH,High population impact | High location risk | Moderate waiting time | Medium infrastructure importance | Historical recurrence
+440,23,50.0,42.48,0.0,0.0,81.07,50.0,7.14,35.19,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+441,23,75.0,42.48,0.0,0.0,8.08,50.0,42.86,37.72,MEDIUM,High/Critical severity | Medium infrastructure importance
+442,1,25.0,97.05,50.0,10.0,40.0,50.0,35.71,44.38,MEDIUM,High population impact | Moderate location risk | Medium infrastructure importance
+443,5,50.0,77.8,25.0,0.0,95.39,50.0,0.0,44.96,MEDIUM,Medium severity | High population impact | Long waiting time | Medium infrastructure importance
+444,19,75.0,87.37,75.0,0.0,37.41,50.0,0.0,54.35,HIGH,High/Critical severity | High population impact | High location risk | Medium infrastructure importance
+445,16,25.0,43.99,60.0,0.0,80.11,50.0,14.29,38.79,MEDIUM,Moderate location risk | Long waiting time | Medium infrastructure importance
+446,16,50.0,43.99,15.0,0.0,37.88,50.0,35.71,36.21,MEDIUM,Medium severity | Medium infrastructure importance
+447,14,75.0,38.74,100.0,0.0,42.03,100.0,7.14,59.48,HIGH,High/Critical severity | High location risk | Important/critical infrastructure
+448,5,25.0,77.8,25.0,0.0,29.86,50.0,7.14,32.87,MEDIUM,High population impact | Medium infrastructure importance
+449,23,50.0,42.48,0.0,0.0,47.41,50.0,21.43,33.26,MEDIUM,Medium severity | Medium infrastructure importance
+450,16,75.0,43.99,15.0,0.0,65.4,50.0,42.86,45.92,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+451,4,25.0,43.78,80.0,0.0,52.53,100.0,7.14,45.78,MEDIUM,High location risk | Moderate waiting time | Important/critical infrastructure
+452,23,50.0,42.48,0.0,0.0,31.02,50.0,35.71,33.05,MEDIUM,Medium severity | Medium infrastructure importance
+453,6,75.0,100.0,0.0,0.0,81.95,75.0,7.14,53.91,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+454,6,25.0,100.0,0.0,0.0,20.34,25.0,35.71,30.61,MEDIUM,High population impact
+455,15,50.0,88.48,50.0,0.0,16.13,50.0,71.43,49.53,MEDIUM,Medium severity | High population impact | Moderate location risk | Medium infrastructure importance | Historical recurrence
+456,7,75.0,42.93,0.0,0.0,30.43,50.0,0.0,35.73,MEDIUM,High/Critical severity | Medium infrastructure importance
+457,10,25.0,41.35,0.0,0.0,96.27,50.0,0.0,29.58,MEDIUM,Long waiting time | Medium infrastructure importance
+458,8,50.0,49.93,0.0,0.0,15.62,50.0,21.43,31.19,MEDIUM,Medium severity | Medium infrastructure importance
+459,6,75.0,100.0,0.0,0.0,97.09,75.0,0.0,54.71,HIGH,High/Critical severity | High population impact | Long waiting time | Important/critical infrastructure
+460,15,25.0,88.48,25.0,10.0,65.54,50.0,21.43,40.47,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+461,16,50.0,43.99,15.0,0.0,92.32,50.0,0.0,38.08,MEDIUM,Medium severity | Long waiting time | Medium infrastructure importance
+462,20,75.0,52.64,0.0,0.0,57.31,50.0,0.0,39.88,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+463,18,25.0,48.85,32.5,0.0,68.03,50.0,0.0,32.76,MEDIUM,Moderate waiting time | Medium infrastructure importance
+464,2,50.0,55.28,25.0,0.0,16.94,50.0,7.14,34.45,MEDIUM,Medium severity | Moderate population impact | Medium infrastructure importance
+465,1,75.0,97.05,25.0,0.0,15.39,50.0,57.14,51.81,HIGH,High/Critical severity | High population impact | Medium infrastructure importance | Historical recurrence
+466,1,25.0,97.05,25.0,0.0,31.14,50.0,7.14,35.89,MEDIUM,High population impact | Medium infrastructure importance
+467,12,50.0,58.41,100.0,0.0,76.27,100.0,0.0,58.89,HIGH,Medium severity | Moderate population impact | High location risk | Long waiting time | Important/critical infrastructure
+468,20,75.0,52.64,0.0,0.0,43.69,50.0,0.0,38.52,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+469,13,25.0,39.82,40.0,10.0,58.82,75.0,7.14,37.07,MEDIUM,Moderate waiting time | Important/critical infrastructure
+470,5,50.0,77.8,25.0,10.0,84.69,75.0,7.14,49.35,MEDIUM,Medium severity | High population impact | Long waiting time | Important/critical infrastructure
+471,15,75.0,88.48,25.0,0.0,6.78,100.0,57.14,57.16,HIGH,High/Critical severity | High population impact | Important/critical infrastructure | Historical recurrence
+472,2,25.0,55.28,25.0,0.0,83.45,50.0,0.0,34.14,MEDIUM,Moderate population impact | Long waiting time | Medium infrastructure importance
+473,16,50.0,43.99,50.0,0.0,97.86,100.0,0.0,51.38,HIGH,Medium severity | Moderate location risk | Long waiting time | Important/critical infrastructure
+474,16,75.0,43.99,60.0,0.0,84.01,50.0,0.0,50.25,HIGH,High/Critical severity | Moderate location risk | Long waiting time | Medium infrastructure importance
+475,5,25.0,77.8,25.0,0.0,71.58,50.0,7.14,37.04,MEDIUM,High population impact | Moderate waiting time | Medium infrastructure importance
+476,23,50.0,42.48,0.0,10.0,9.99,50.0,50.0,33.37,MEDIUM,Medium severity | Medium infrastructure importance | Historical recurrence
+477,3,75.0,70.76,25.0,0.0,55.96,50.0,7.14,46.92,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+478,17,25.0,65.1,15.0,0.0,23.29,50.0,14.29,29.52,MEDIUM,Moderate population impact | Medium infrastructure importance
+479,16,50.0,43.99,45.0,0.0,48.41,50.0,7.14,38.9,MEDIUM,Medium severity | Medium infrastructure importance
+480,17,75.0,65.1,0.0,0.0,73.31,50.0,0.0,43.35,MEDIUM,High/Critical severity | Moderate population impact | Moderate waiting time | Medium infrastructure importance
+481,16,25.0,43.99,25.0,10.0,77.95,50.0,28.57,35.75,MEDIUM,Long waiting time | Medium infrastructure importance
+482,19,50.0,87.37,32.5,0.0,4.35,50.0,28.57,41.27,MEDIUM,Medium severity | High population impact | Medium infrastructure importance
+483,23,75.0,42.48,0.0,0.0,14.28,50.0,50.0,39.05,MEDIUM,High/Critical severity | Medium infrastructure importance | Historical recurrence
+484,6,25.0,100.0,0.0,0.0,68.72,75.0,7.14,40.09,MEDIUM,High population impact | Moderate waiting time | Important/critical infrastructure
+485,16,50.0,43.99,25.0,0.0,44.78,50.0,14.29,36.26,MEDIUM,Medium severity | Medium infrastructure importance
+486,18,75.0,48.85,48.75,0.0,25.05,50.0,21.43,45.54,MEDIUM,High/Critical severity | Medium infrastructure importance
+487,6,25.0,100.0,0.0,0.0,3.6,25.0,57.14,31.07,MEDIUM,High population impact | Historical recurrence
+488,23,50.0,42.48,0.0,0.0,58.46,50.0,21.43,34.36,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+489,15,75.0,88.48,0.0,0.0,80.76,50.0,14.29,49.03,MEDIUM,High/Critical severity | High population impact | Long waiting time | Medium infrastructure importance
+490,18,25.0,48.85,16.25,0.0,22.71,50.0,0.0,25.79,MEDIUM,Medium infrastructure importance
+491,15,50.0,88.48,25.0,0.0,65.61,50.0,28.57,46.44,MEDIUM,Medium severity | High population impact | Moderate waiting time | Medium infrastructure importance
+492,22,75.0,34.61,0.0,0.0,59.09,50.0,0.0,37.35,MEDIUM,High/Critical severity | Moderate waiting time | Medium infrastructure importance
+493,16,25.0,43.99,30.0,0.0,1.26,50.0,64.29,31.4,MEDIUM,Medium infrastructure importance | Historical recurrence
+494,18,50.0,48.85,32.5,0.0,70.58,50.0,0.0,39.26,MEDIUM,Medium severity | Moderate waiting time | Medium infrastructure importance
+495,3,75.0,70.76,0.0,10.0,2.61,50.0,21.43,40.27,MEDIUM,High/Critical severity | Moderate population impact | Medium infrastructure importance
+496,15,25.0,88.48,50.0,0.0,55.35,50.0,21.43,42.2,MEDIUM,High population impact | Moderate location risk | Moderate waiting time | Medium infrastructure importance
+497,10,50.0,41.35,0.0,0.0,50.43,75.0,0.0,35.0,MEDIUM,Medium severity | Moderate waiting time | Important/critical infrastructure
+498,1,75.0,97.05,25.0,0.0,37.78,50.0,0.0,48.34,MEDIUM,High/Critical severity | High population impact | Medium infrastructure importance
+499,15,25.0,88.48,0.0,0.0,78.43,50.0,7.14,35.58,MEDIUM,High population impact | Long waiting time | Medium infrastructure importance
+500,16,50.0,43.99,40.0,0.0,27.77,50.0,57.14,41.09,MEDIUM,Medium severity | Medium infrastructure importance | Historical recurrence

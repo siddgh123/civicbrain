@@ -1,0 +1,251 @@
+job_id,complaint_id,work_type,priority_score,reason,details,status
+1,1,WATER,36.54,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+2,2,ROAD,34.79,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+3,3,ROAD,42.82,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+4,4,WATER,34.8,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+8,8,WATER,59.67,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+10,10,ROAD,26.48,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+11,11,ROAD,42.57,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+14,14,ROAD,37.0,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+16,16,WATER,34.56,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+19,19,WATER,33.42,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+26,26,ROAD,37.98,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+29,29,WATER,46.87,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+31,31,ROAD,28.12,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+34,34,ROAD,29.3,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+37,37,WATER,37.51,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+42,42,ROAD,47.63,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+47,47,WATER,36.42,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+50,50,ROAD,50.72,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+61,61,ROAD,38.12,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+65,65,ROAD,35.37,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+67,67,WATER,46.77,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+70,70,ROAD,29.01,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+73,73,WATER,35.36,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+80,80,ROAD,44.7,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+82,82,WATER,32.65,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+86,86,WATER,34.88,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+92,92,ROAD,55.0,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+96,96,ROAD,55.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+99,99,ROAD,38.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+110,110,ROAD,57.62,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+112,112,WATER,33.59,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+113,113,WATER,43.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+117,117,ROAD,46.43,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+121,121,WATER,21.66,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+122,122,WATER,33.69,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+124,124,ROAD,29.41,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+133,133,WATER,25.59,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+134,134,WATER,54.12,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+136,136,ROAD,38.29,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+142,142,WATER,38.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+146,146,ROAD,29.74,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+148,148,WATER,33.81,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+152,152,ROAD,38.57,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+154,154,ROAD,28.14,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+160,160,WATER,26.61,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+164,164,ROAD,35.1,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+167,167,ROAD,34.15,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+169,169,ROAD,31.64,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+173,173,ROAD,45.5,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+181,181,ROAD,33.87,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+187,187,ROAD,37.38,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+188,188,WATER,38.31,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+190,190,GARBAGE,31.78,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+196,196,WATER,37.8,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+200,200,ROAD,36.84,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+202,202,ROAD,35.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+203,203,WATER,33.1,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+205,205,ROAD,38.62,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+206,206,ROAD,43.24,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+208,208,WATER,45.4,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+211,211,WATER,30.49,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+214,214,ROAD,47.42,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+215,215,WATER,52.13,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+217,217,ROAD,28.16,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+224,224,ROAD,38.72,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+226,226,WATER,25.4,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+233,233,WATER,31.55,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+238,238,WATER,37.05,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+239,239,WATER,50.16,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+241,241,WATER,33.29,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+242,242,WATER,45.71,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+243,243,ROAD,60.37,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+252,252,ROAD,38.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+253,253,ROAD,37.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+254,254,WATER,42.71,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+257,257,ROAD,40.0,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+262,262,WATER,28.02,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+278,278,WATER,51.82,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+280,280,WATER,26.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+281,281,WATER,39.03,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+283,283,WATER,27.25,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+285,285,ROAD,42.52,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+286,286,WATER,33.5,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+295,295,WATER,34.61,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+296,296,WATER,30.96,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+298,298,ROAD,32.53,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+301,301,WATER,28.73,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+304,304,ROAD,33.46,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+314,314,ROAD,33.86,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+320,320,ROAD,42.86,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+326,326,WATER,33.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+328,328,ROAD,29.01,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+334,334,WATER,29.09,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+338,338,ROAD,37.54,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+346,346,ROAD,30.81,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+349,349,ROAD,25.34,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+358,358,WATER,38.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+359,359,WATER,38.77,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+364,364,WATER,42.52,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+365,365,ROAD,38.2,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+370,370,ROAD,28.63,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+374,374,ROAD,43.19,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+385,385,WATER,32.94,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+392,392,WATER,39.09,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+394,394,WATER,33.05,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+396,396,ROAD,35.79,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+406,406,WATER,50.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+407,407,WATER,34.27,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+410,410,ROAD,31.33,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+411,411,ROAD,41.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+412,412,WATER,35.78,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+416,416,ROAD,46.91,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+418,418,ROAD,42.85,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+421,421,WATER,35.96,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+424,424,ROAD,24.82,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+425,425,ROAD,42.81,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+441,441,ROAD,37.72,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+446,446,WATER,36.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+452,452,ROAD,33.05,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+458,458,ROAD,31.19,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+466,466,ROAD,35.89,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+469,469,WATER,37.07,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+478,478,ROAD,29.52,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+482,482,WATER,41.27,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+485,485,WATER,36.26,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+486,486,ROAD,45.54,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+487,487,ROAD,31.07,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+490,490,WATER,25.79,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+493,493,GARBAGE,31.4,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+496,496,WATER,42.2,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,FIFO baseline could not place the job within the configured 30-day team schedule horizon.,UNSCHEDULED_BASELINE
+6,6,WATER,45.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 38.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+9,9,WATER,56.89,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 32.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+12,12,WATER,48.98,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+15,15,WATER,51.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+18,18,ROAD,37.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+20,20,WATER,45.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+30,30,GARBAGE,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+33,33,GARBAGE,48.62,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+36,36,ROAD,51.48,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+39,39,WATER,47.77,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+53,53,ROAD,38.71,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+54,54,WATER,60.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+56,56,ROAD,46.78,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+59,59,WATER,43.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+60,60,WATER,44.51,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+62,62,WATER,32.45,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+63,63,WATER,36.14,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+66,66,WATER,49.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+69,69,WATER,41.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+72,72,WATER,46.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+75,75,GARBAGE,44.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+90,90,GARBAGE,46.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+93,93,WATER,44.02,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+102,102,WATER,62.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+104,104,ROAD,31.43,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+105,105,ROAD,53.74,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+108,108,WATER,50.21,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 25.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+111,111,WATER,46.54,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+114,114,WATER,40.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+116,116,ROAD,46.04,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+120,120,WATER,67.25,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+123,123,GARBAGE,41.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+126,126,GARBAGE,47.47,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+135,135,WATER,51.02,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+138,138,ROAD,50.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+147,147,WATER,45.11,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+156,156,WATER,58.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.20h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+159,159,GARBAGE,38.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+161,161,ROAD,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+165,165,WATER,43.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 23.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+168,168,WATER,51.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+171,171,WATER,46.84,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+180,180,WATER,50.22,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+183,183,WATER,47.4,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+186,186,WATER,41.41,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+192,192,WATER,42.8,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+194,194,ROAD,33.32,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+195,195,GARBAGE,56.51,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+198,198,WATER,55.21,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+201,201,WATER,51.64,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+207,207,GARBAGE,56.07,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+212,212,WATER,40.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+213,213,GARBAGE,41.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+216,216,ROAD,45.12,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+218,218,WATER,47.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+221,221,WATER,35.13,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+228,228,WATER,55.82,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 41.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+231,231,WATER,43.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 40.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+234,234,WATER,49.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+237,237,GARBAGE,35.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.20h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+240,240,WATER,52.03,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 40.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+255,255,GARBAGE,40.14,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+258,258,WATER,49.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+264,264,GARBAGE,48.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.20h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+266,266,WATER,42.85,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+270,270,WATER,42.07,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 39.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+273,273,ROAD,54.87,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+276,276,WATER,47.89,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+279,279,GARBAGE,46.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+282,282,ROAD,39.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 19.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+288,288,WATER,36.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+294,294,GARBAGE,45.18,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+300,300,WATER,35.06,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+302,302,WATER,51.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+306,306,WATER,48.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+309,309,WATER,46.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+315,315,WATER,51.79,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+318,318,WATER,46.7,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+324,324,WATER,54.39,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 34.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+330,330,WATER,51.75,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 42.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+336,336,ROAD,44.82,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+339,339,GARBAGE,58.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+342,342,ROAD,40.1,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.20h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+345,345,ROAD,38.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+348,348,WATER,41.05,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+357,357,ROAD,47.53,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+366,366,WATER,42.72,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+368,368,WATER,34.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+371,371,WATER,38.33,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+378,378,WATER,50.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+381,381,ROAD,48.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+384,384,WATER,49.2,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+387,387,GARBAGE,41.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+389,389,WATER,32.24,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+393,393,WATER,43.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+399,399,WATER,47.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+401,401,WATER,32.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+402,402,WATER,42.98,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 39.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+414,414,WATER,58.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+417,417,WATER,46.22,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+420,420,WATER,44.95,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.70h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+422,422,WATER,33.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+423,423,WATER,48.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+431,431,WATER,46.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+435,435,WATER,49.72,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+437,437,WATER,39.18,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+438,438,WATER,47.55,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+444,444,GARBAGE,54.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+450,450,GARBAGE,45.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.20h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+453,453,GARBAGE,53.91,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+455,455,ROAD,49.53,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.40h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+456,456,WATER,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 38.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+462,462,WATER,39.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+468,468,GARBAGE,38.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 18.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+471,471,WATER,57.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+477,477,WATER,46.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.10h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+479,479,WATER,38.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.00h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+489,489,GARBAGE,49.03,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+492,492,WATER,37.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.50h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE
+498,498,ROAD,48.34,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.80h exceeds the 9-hour prototype shift.,UNSCHEDULED_BASELINE

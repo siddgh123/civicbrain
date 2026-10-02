@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "original_jobs": 241,
+  "final_scheduled_jobs": 233,
+  "final_unplaced_jobs": 8,
+  "t001_repair_jobs": [
+    "316",
+    "463",
+    "169",
+    "370",
+    "349"
+  ],
+  "t001_repair_jobs_placed": [],
+  "t001_repair_jobs_remaining": [
+    "169",
+    "316",
+    "349",
+    "370",
+    "463"
+  ],
+  "route_violations": [],
+  "validation": {
+    "ORIGINAL_JOB_COUNT": "PASS",
+    "FINAL_SCHEDULED_JOB_COUNT": "PASS",
+    "ALL_JOBS_ACCOUNTED": "PASS",
+    "SCHEDULE_UNPLACED_DISJOINT": "PASS",
+    "ALL_T001_ROUTES_WITHIN_9H": "PASS",
+    "T001_REPAIR_JOBS_PLACED": "REVIEW"
+  }
+}

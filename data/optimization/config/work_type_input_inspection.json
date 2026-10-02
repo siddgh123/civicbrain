@@ -1,0 +1,112 @@
+{
+  "step": "13.1_work_type_input_inspection",
+  "read_only": true,
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "step8_file": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\complaints\\verified\\complaints_verified.csv",
+  "step10_file": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\resources\\processed\\resource_dataset.csv",
+  "step8_row_count": 500,
+  "step10_row_count": 500,
+  "step8_category_counts": [
+    {
+      "category": "Pothole",
+      "count": 71
+    },
+    {
+      "category": "Streetlight",
+      "count": 69
+    },
+    {
+      "category": "Garbage Accumulation",
+      "count": 67
+    },
+    {
+      "category": "Waterlogging",
+      "count": 62
+    },
+    {
+      "category": "Water Leakage",
+      "count": 61
+    },
+    {
+      "category": "Road Damage",
+      "count": 59
+    },
+    {
+      "category": "Blocked Drain",
+      "count": 57
+    },
+    {
+      "category": "Other",
+      "count": 54
+    }
+  ],
+  "step10_issue_type_counts": [
+    {
+      "issue_type": "Pothole",
+      "count": 71
+    },
+    {
+      "issue_type": "Streetlight",
+      "count": 69
+    },
+    {
+      "issue_type": "Garbage Accumulation",
+      "count": 67
+    },
+    {
+      "issue_type": "Waterlogging",
+      "count": 62
+    },
+    {
+      "issue_type": "Water Leakage",
+      "count": 61
+    },
+    {
+      "issue_type": "Road Damage",
+      "count": 59
+    },
+    {
+      "issue_type": "Blocked Drain",
+      "count": 57
+    },
+    {
+      "issue_type": "Other",
+      "count": 54
+    }
+  ],
+  "join": {
+    "step8_unique_ids": 500,
+    "step10_unique_ids": 500,
+    "common_ids": 500,
+    "only_in_step8": 0,
+    "only_in_step10": 0,
+    "category_issue_normalized_mismatches": 0,
+    "mismatch_examples": []
+  },
+  "resource_field_missing_counts": {
+    "estimated_workers": 0,
+    "estimated_duration_hours": 0,
+    "total_cost": 0,
+    "required_equipment": 0
+  },
+  "frozen_class_mapping_reference": {
+    "pothole": {
+      "canonical_class": "Pothole",
+      "work_type": "ROAD"
+    },
+    "garbage accumulation": {
+      "canonical_class": "Garbage Accumulation",
+      "work_type": "GENERAL"
+    },
+    "waterlogging": {
+      "canonical_class": "Waterlogging",
+      "work_type": "WATER"
+    },
+    "road damage": {
+      "canonical_class": "Road Damage",
+      "work_type": "ROAD"
+    }
+  },
+  "candidate_mapping_file": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\config\\work_type_mapping_candidate.csv",
+  "final_mapping_status_rule": "Do not change CANDIDATE_REVIEW to VALIDATED until actual Step 8/Step 10 values are confirmed to represent the same operational work type. Unmatched values remain REVIEW_REQUIRED."
+}

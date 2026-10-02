@@ -1,0 +1,5 @@
+﻿team_id,team_name,team_type,worker_capacity,working_start,working_end,depot_lat,depot_lon,depot_status,status,source
+T001,Road Team A,ROAD,6,08:00,17:00,,,TO_BE_CONFIGURED,ACTIVE,synthetic_prototype
+T002,Water Team A,WATER,5,08:00,17:00,,,TO_BE_CONFIGURED,ACTIVE,synthetic_prototype
+T003,Garbage Team A,GARBAGE,4,08:00,17:00,,,TO_BE_CONFIGURED,ACTIVE,synthetic_prototype
+T004,Electricity Team A,ELECTRICITY,4,08:00,17:00,,,TO_BE_CONFIGURED,ACTIVE,synthetic_prototype

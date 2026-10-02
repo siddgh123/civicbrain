@@ -1,0 +1,61 @@
+{
+  "step": "13.1_final_work_type_mapping",
+  "read_only_sources": true,
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "step8_file": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\complaints\\verified\\complaints_verified.csv",
+  "step10_file": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\resources\\processed\\resource_dataset.csv",
+  "approved_step13_operational_scope": [
+    "ROAD",
+    "WATER",
+    "GARBAGE",
+    "ELECTRICITY"
+  ],
+  "step9_yolo_classes_unchanged": [
+    "Pothole",
+    "Garbage Accumulation",
+    "Waterlogging",
+    "Road Damage"
+  ],
+  "source_categories": [
+    "Blocked Drain",
+    "Garbage Accumulation",
+    "Other",
+    "Pothole",
+    "Road Damage",
+    "Streetlight",
+    "Water Leakage",
+    "Waterlogging"
+  ],
+  "source_issue_types": [
+    "Blocked Drain",
+    "Garbage Accumulation",
+    "Other",
+    "Pothole",
+    "Road Damage",
+    "Streetlight",
+    "Water Leakage",
+    "Waterlogging"
+  ],
+  "source_join": {
+    "step8_rows": 500,
+    "step10_rows": 500,
+    "common_complaint_ids": 500,
+    "step8_only": 0,
+    "step10_only": 0,
+    "category_issue_type_mismatches": 0
+  },
+  "mapping_rows": {
+    "validated": 14,
+    "review_required": 2,
+    "total": 16
+  },
+  "other_policy": "Other remains REVIEW_REQUIRED and is excluded from executable Step 13 jobs until manually classified.",
+  "outputs": {
+    "final_mapping": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\config\\work_type_mapping.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\config\\work_type_mapping_validation.csv"
+  },
+  "gate": {
+    "status": "PASS",
+    "next_step": "Build eligible_jobs.csv only after this mapping validation passes."
+  }
+}

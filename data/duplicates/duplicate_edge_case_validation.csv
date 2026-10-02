@@ -1,0 +1,28 @@
+case_id,category,expected_decision,actual_decision,score,has_text,has_gps,has_timestamp,distance_meters,pass,note
+BOUNDARY_0_4,decision_boundary,NOT_DUPLICATE,NOT_DUPLICATE,0.4,True,True,True,100.0,True,low score
+BOUNDARY_0_54,decision_boundary,NOT_DUPLICATE,NOT_DUPLICATE,0.54,True,True,True,100.0,True,just below uncertain band
+BOUNDARY_0_55,decision_boundary,UNCERTAIN,UNCERTAIN,0.55,True,True,True,100.0,True,uncertain lower boundary
+BOUNDARY_0_57,decision_boundary,UNCERTAIN,UNCERTAIN,0.57,True,True,True,100.0,True,middle uncertain score
+BOUNDARY_0_58,decision_boundary,UNCERTAIN,UNCERTAIN,0.58,True,True,True,100.0,True,just below duplicate threshold
+BOUNDARY_0_59,decision_boundary,DUPLICATE,DUPLICATE,0.59,True,True,True,100.0,True,exact duplicate threshold
+BOUNDARY_0_6,decision_boundary,DUPLICATE,DUPLICATE,0.6,True,True,True,100.0,True,just above duplicate threshold
+BOUNDARY_0_8,decision_boundary,DUPLICATE,DUPLICATE,0.8,True,True,True,100.0,True,high score
+MISSING_TEXT,missing_required_input,UNCERTAIN,UNCERTAIN,0.95,False,True,True,10.0,True,Missing complaint text
+MISSING_GPS,missing_required_input,UNCERTAIN,UNCERTAIN,0.95,True,False,True,10.0,True,Missing GPS
+MISSING_TIMESTAMP,missing_required_input,UNCERTAIN,UNCERTAIN,0.95,True,True,False,10.0,True,Missing complaint timestamp
+MISSING_TEXT_GPS,missing_required_input,UNCERTAIN,UNCERTAIN,0.95,False,False,True,10.0,True,Missing text and GPS
+MISSING_ALL_REQUIRED,missing_required_input,UNCERTAIN,UNCERTAIN,0.95,False,False,False,10.0,True,"Missing text, GPS and timestamp"
+SPATIAL_3_0,spatial_candidate_boundary,DUPLICATE,DUPLICATE,0.85,True,True,True,3.0,True,very close candidate with high score
+SPATIAL_299_9,spatial_candidate_boundary,DUPLICATE,DUPLICATE,0.85,True,True,True,299.9,True,inside 300 m candidate radius
+SPATIAL_300_0,spatial_candidate_boundary,DUPLICATE,DUPLICATE,0.85,True,True,True,300.0,True,exact 300 m candidate boundary
+SPATIAL_300_1,spatial_candidate_boundary,NOT_DUPLICATE,NOT_DUPLICATE,0.85,True,True,True,300.1,True,outside 300 m candidate radius
+SPATIAL_500_0,spatial_candidate_boundary,NOT_DUPLICATE,NOT_DUPLICATE,0.85,True,True,True,500.0,True,far pair
+SEMANTIC_HIGH_NEAR_RECENT,constructed_evidence_pattern,DUPLICATE,DUPLICATE,0.9,True,True,True,20.0,True,High semantic similarity + near location + recent report; calculated score=0.9000
+SEMANTIC_MEDIUM_BORDERLINE,constructed_evidence_pattern,UNCERTAIN,UNCERTAIN,0.581,True,True,True,140.0,True,Designed to land inside the declared UNCERTAIN score band; calculated score=0.5810
+SEMANTIC_LOW_FAR_OLD,constructed_evidence_pattern,NOT_DUPLICATE,NOT_DUPLICATE,0.305,True,True,True,280.0,True,Weak combined evidence; calculated score=0.3050
+HIGH_TEXT_WEAK_GEOMETRY,constructed_evidence_pattern,DUPLICATE,DUPLICATE,0.67,True,True,True,260.0,True,High text similarity but weak spatial/recency evidence; tests whether the declared 70% text weighting dominates the combined score as configured; calculated score=0.6700
+LOW_TEXT_STRONG_GEOMETRY,constructed_evidence_pattern,UNCERTAIN,UNCERTAIN,0.565,True,True,True,15.0,True,Very close/recent but weak textual similarity; calculated score=0.5650
+DATA_LOWEST_SCORE,representative_benchmark_row,NOT_DUPLICATE,NOT_DUPLICATE,0.10548969999999999,True,True,True,,True,Representative synthetic benchmark row used to inspect deterministic 3-state classification; not official TDMC ground truth.
+DATA_HIGHEST_SCORE,representative_benchmark_row,DUPLICATE,DUPLICATE,0.9569705000000001,True,True,True,,True,Representative synthetic benchmark row used to inspect deterministic 3-state classification; not official TDMC ground truth.
+DATA_BORDERLINE_SCORE,representative_benchmark_row,UNCERTAIN,UNCERTAIN,0.5701510999999999,True,True,True,,True,Representative synthetic benchmark row used to inspect deterministic 3-state classification; not official TDMC ground truth.
+DATA_MOST_RECENT_PAIR,representative_benchmark_row,DUPLICATE,DUPLICATE,0.733884,True,True,True,,True,Representative synthetic benchmark row used to inspect deterministic 3-state classification; not official TDMC ground truth.

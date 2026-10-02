@@ -1,0 +1,25 @@
+issue_type,severity,min_area_m2,max_area_m2
+Pothole,Low,1,3
+Pothole,Medium,3,6
+Pothole,High,6,12
+Garbage Accumulation,Low,2,5
+Garbage Accumulation,Medium,5,15
+Garbage Accumulation,High,15,30
+Waterlogging,Low,5,15
+Waterlogging,Medium,15,40
+Waterlogging,High,40,80
+Road Damage,Low,3,8
+Road Damage,Medium,8,20
+Road Damage,High,20,40
+Water Leakage,Low,2,5
+Water Leakage,Medium,5,15
+Water Leakage,High,15,30
+Blocked Drain,Low,2,5
+Blocked Drain,Medium,5,15
+Blocked Drain,High,15,30
+Streetlight,Low,0,0
+Streetlight,Medium,0,0
+Streetlight,High,0,0
+Other,Low,0,0
+Other,Medium,0,0
+Other,High,0,0

@@ -1,0 +1,17 @@
+﻿source_value,source_type,work_type,team_type,mapping_status,reason
+Blocked Drain,step10_issue_type,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Garbage Accumulation,step10_issue_type,GENERAL,GENERAL,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Garbage Accumulation'. Mapping is suggested only; human/project validation is still required.
+Other,step10_issue_type,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Pothole,step10_issue_type,ROAD,ROAD,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Pothole'. Mapping is suggested only; human/project validation is still required.
+Road Damage,step10_issue_type,ROAD,ROAD,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Road Damage'. Mapping is suggested only; human/project validation is still required.
+Streetlight,step10_issue_type,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Water Leakage,step10_issue_type,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Waterlogging,step10_issue_type,WATER,WATER,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Waterlogging'. Mapping is suggested only; human/project validation is still required.
+Blocked Drain,step8_category,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Garbage Accumulation,step8_category,GENERAL,GENERAL,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Garbage Accumulation'. Mapping is suggested only; human/project validation is still required.
+Other,step8_category,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Pothole,step8_category,ROAD,ROAD,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Pothole'. Mapping is suggested only; human/project validation is still required.
+Road Damage,step8_category,ROAD,ROAD,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Road Damage'. Mapping is suggested only; human/project validation is still required.
+Streetlight,step8_category,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Water Leakage,step8_category,,,REVIEW_REQUIRED,No exact normalized match to the frozen Step 9 classes. Do not assign an operational work type automatically.
+Waterlogging,step8_category,WATER,WATER,CANDIDATE_REVIEW,Exact normalized match to frozen Step 9 class 'Waterlogging'. Mapping is suggested only; human/project validation is still required.

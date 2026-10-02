@@ -1,0 +1,6 @@
+category,total_cases,passed,failed
+constructed_evidence_pattern,5,5,0
+decision_boundary,8,8,0
+missing_required_input,5,5,0
+representative_benchmark_row,4,4,0
+spatial_candidate_boundary,5,5,0

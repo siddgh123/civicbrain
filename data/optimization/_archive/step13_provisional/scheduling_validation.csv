@@ -1,0 +1,11 @@
+﻿check_id,status,actual_value,expected_value,notes
+CP_SAT_SOLVER_STATUS,PASS,FEASIBLE,OPTIMAL or FEASIBLE,CP-SAT must return a usable schedule solution.
+ELIGIBLE_JOB_COUNT,PASS,441,441,Step 13.1 canonical eligible-job count.
+ALL_ELIGIBLE_JOBS_ACCOUNTED_FOR,PASS,441,441,Every eligible job ends SCHEDULED or UNSCHEDULED.
+NO_JOB_SCHEDULED_TWICE,PASS,0,0,Each job may appear at most once in the provisional schedule.
+SCHEDULED_UNSCHEDULED_DISJOINT,PASS,0,0,A job cannot be both SCHEDULED and UNSCHEDULED.
+SHIFT_WINDOW_VALID,PASS,0,0,Scheduled jobs must remain inside 08:00–17:00.
+TEAM_ASSIGNMENT_VALID,PASS,0,0,Only active prototype teams may receive jobs.
+TEAM_NO_OVERLAP,PASS,0,0,One prototype team executes one job at a time.
+INDIVIDUALLY_EXECUTABLE_JOBS,PASS,321,>0,Jobs <= one shift with a feasible team enter CP-SAT.
+LONG_JOBS_EXPLICITLY_UNSCHEDULED,PASS,120,120,Jobs exceeding one shift must remain explicitly unscheduled.

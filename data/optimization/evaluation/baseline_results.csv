@@ -1,0 +1,2 @@
+method,eligible_jobs,scheduled_jobs,unscheduled_jobs,route_groups,service_hours,travel_hours,total_route_hours,total_distance_km,average_jobs_per_shift,route_groups_pass,route_groups_violation
+FIFO_Greedy_Baseline,441,191,250,110,772.2,38.536,810.736,1353.78,1.736,92,18

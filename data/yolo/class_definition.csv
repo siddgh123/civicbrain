@@ -1,0 +1,5 @@
+class_id,class_name,definition
+0,Pothole,"A visible hole or depression in the road surface."
+1,Garbage Accumulation,"Visible accumulated or piled garbage/waste in a public area."
+2,Waterlogging,"Visible standing or accumulated water on a road or public area."
+3,Road Damage,"Visible road deterioration such as cracks or broken surface, excluding clear potholes."

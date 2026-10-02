@@ -1,0 +1,2 @@
+method,eligible_jobs,scheduled_jobs,unscheduled_jobs,route_groups,service_hours,travel_hours,total_route_hours,total_distance_km,average_jobs_per_shift,route_groups_pass,route_groups_violation
+CivicBrain_Travel_Aware_Optimized,441,238,203,109,839.1,38.231251,877.331251,1285.5256,2.183,109,0

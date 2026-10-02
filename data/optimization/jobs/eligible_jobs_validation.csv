@@ -1,0 +1,10 @@
+﻿check_id,status,actual_value,expected_value,notes
+TOTAL_COMPLAINTS,PASS,500,500,Step 13 joins the 500 complaint records.
+ELIGIBLE_JOB_ID_UNIQUENESS,PASS,0,0,Each executable job must appear exactly once.
+ELIGIBLE_WORK_TYPES,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",No operational type outside the four-category scope may enter.
+ELIGIBLE_DUPLICATE_CHILDREN,PASS,0,0,Duplicate children are not executable jobs.
+ELIGIBLE_REVIEW_REQUIRED,PASS,0,0,UNCERTAIN/review rows must not be scheduled.
+ELIGIBLE_LOCATION_VALID,PASS,0,0,All eligible jobs require valid PostGIS WGS84 coordinates.
+ELIGIBLE_RESOURCE_FIELDS,PASS,0,0,"Workers, duration, cost and equipment must be available."
+ELIGIBLE_PRIORITY_FIELDS,PASS,0,0,Frozen Step 11 priority must be present and within 0–100.
+CATEGORY_ISSUE_TYPE_MISMATCHES,PASS,0,0,Step 8 category and Step 10 issue_type must agree.

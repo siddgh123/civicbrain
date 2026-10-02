@@ -1,0 +1,5 @@
+rule_name,value,unit,source
+historical_window,180,days,project_scoring_configuration
+matching_category,exact,category,project_scoring_configuration
+matching_area,same_ward,ward,project_scoring_configuration
+score_method,max_count_normalization,0-100,project_scoring_configuration

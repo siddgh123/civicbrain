@@ -1,0 +1,8 @@
+factor,weight,score_range,method
+severity,0.25,0-100,rule_based
+population_impact,0.15,0-100,normalized
+location_risk,0.15,0-100,PostGIS
+frequency,0.10,0-100,complaint_count
+wait_time,0.10,0-100,time_based
+infrastructure_importance,0.15,0-100,rule_based
+historical_risk,0.10,0-100,historical_data

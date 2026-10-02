@@ -1,0 +1,22 @@
+{
+  "status": "experimental",
+  "time_window_days": 7,
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "duplicate_threshold": 0.59,
+  "uncertain_lower_bound": 0.55,
+  "master_rules": {
+    "duplicate": "Attach to an existing verified master",
+    "uncertain": "Manual review; no automatic merge",
+    "not_duplicate": "Create a new master issue",
+    "missing_or_unresolved_match": "Manual review",
+    "original_complaints": "Always preserve",
+    "transitive_chaining": "Never infer blindly; require a verified complaint-to-master association"
+  },
+  "validation_cases": 12,
+  "passed_cases": 12,
+  "failed_cases": 0,
+  "final_status": "PASS",
+  "note": "This validates deterministic master-issue assignment logic using constructed scenarios. It does not establish real TDMC duplicate-detection accuracy and does not freeze the production database/API workflow."
+}

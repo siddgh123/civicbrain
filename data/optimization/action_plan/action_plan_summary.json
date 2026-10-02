@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scheduled_jobs": 238,
+  "unscheduled_jobs": 203,
+  "eligible_jobs_accounted": 441,
+  "action_plan_groups": 109,
+  "total_service_hours": 839.1,
+  "total_travel_hours": 38.231251,
+  "total_route_hours": 877.331251,
+  "total_distance_km": 1285.5256,
+  "total_estimated_cost": 372011.74,
+  "max_route": {
+    "action_plan_id": "AP-2026-10-05-T001-008",
+    "schedule_date": "2026-10-05",
+    "team_id": "T001",
+    "job_count": 2,
+    "jobs": "350|313",
+    "priority_sum": 87.78,
+    "priority_avg": 43.89,
+    "priority_max": 46.52,
+    "priority_min": 41.26,
+    "workers_required": "",
+    "equipment": "",
+    "prototype_team_equipment": "",
+    "start_time": "2026-10-05 08:06",
+    "end_time": "16:58",
+    "service_time_h": 8.7,
+    "travel_time_h": 0.281222,
+    "total_route_time_h": 8.981222,
+    "distance_km": 7.5688,
+    "estimated_cost": 4863.8,
+    "route": "DEPOT \u2192 350 \u2192 313 \u2192 DEPOT",
+    "status": "READY_FOR_ACTION_PLAN"
+  },
+  "validation": {
+    "SCHEDULED_JOB_COUNT": "PASS",
+    "ACTION_PLAN_GROUP_COUNT": "PASS",
+    "ACTION_PLAN_JOB_COUNT": "PASS",
+    "UNSCHEDULED_JOB_COUNT": "PASS",
+    "ELIGIBLE_TOTAL_ACCOUNTED": "PASS",
+    "ROUTE_GROUPS_ALL_PASS": "PASS",
+    "JOB_UNIQUENESS": "PASS",
+    "TEAM_IDS_VALID": "PASS"
+  },
+  "outputs": {
+    "action_plan": "data\\optimization\\action_plan\\action_plan.csv",
+    "report": "data\\optimization\\action_plan\\action_plan_report.md",
+    "validation": "data\\optimization\\action_plan\\action_plan_validation.csv",
+    "summary": "data\\optimization\\action_plan\\action_plan_summary.json"
+  }
+}

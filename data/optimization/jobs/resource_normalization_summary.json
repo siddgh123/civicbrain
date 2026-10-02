@@ -1,0 +1,57 @@
+{
+  "step": "13.2_resource_normalization",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "input": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\eligible_jobs.csv",
+  "read_only": true,
+  "database_used": false,
+  "approved_work_types": [
+    "ELECTRICITY",
+    "GARBAGE",
+    "ROAD",
+    "WATER"
+  ],
+  "rows": {
+    "input": 441,
+    "normalized": 441
+  },
+  "work_type_counts": {
+    "ELECTRICITY": 67,
+    "GARBAGE": 66,
+    "ROAD": 130,
+    "WATER": 178
+  },
+  "resource_statistics": {
+    "workers_min": 2.0,
+    "workers_max": 4.0,
+    "duration_min_hours": 2.0,
+    "duration_max_hours": 42.0,
+    "cost_min": 784.0,
+    "cost_max": 14001.0
+  },
+  "equipment": {
+    "unique_normalized_equipment_types": 7,
+    "frequency_by_type": {
+      "drain_cleaning_tools": 57,
+      "electrical_maintenance_tools": 67,
+      "joint_cutting_machine": 130,
+      "manual_garbage_collection_tools": 66,
+      "plate_compactor": 130,
+      "truck_5_5_cum_per_10_mt": 62,
+      "water_leakage_repair_tools": 59
+    }
+  },
+  "equipment_availability_policy": "Availability and quantities are intentionally left TO_BE_CONFIGURED. No equipment inventory is invented in resource normalization.",
+  "validation": {
+    "status": "PASS",
+    "checks_total": 8,
+    "checks_passed": 8,
+    "checks_review": 0,
+    "checks_failed": 0
+  },
+  "outputs": {
+    "normalized_job_resources": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\normalized_job_resources.csv",
+    "equipment_catalog": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\config\\equipment_catalog.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\resource_normalization_validation.csv"
+  },
+  "next_step": "After reviewing this resource normalization, configure the Step 13 prototype team master and team-equipment capability."
+}

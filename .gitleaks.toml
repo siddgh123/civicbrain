@@ -1,0 +1,19 @@
+# CivicBrain gitleaks configuration (used by the CI `security` job and the optional pre-commit hook).
+# Default rules + an allowlist for the documented PLACEHOLDERS and the throw-away CI database
+# passwords. Never add a real secret pattern here - rotate the secret instead (docs/07_SECURITY.md §5).
+title = "CivicBrain gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Placeholders in .env.example/.env.test.example/SQL templates and CI-only test passwords"
+regexes = [
+  '''REPLACE_WITH_BASE64_32_BYTES''',
+  '''REPLACE_ME(_BASE32)?''',
+  '''CHANGE_ME_(APP|AI)_PASSWORD''',
+  '''change-me(-[a-z]+)*''',
+  '''ci-(app|ai)-password''',
+  '''dGVzdC1vbmx5[A-Za-z0-9+/=]*''',   # base64 of "test-only-..." fake keys used by CI and tests
+  '''test-only-[a-z0-9-]+''',
+]

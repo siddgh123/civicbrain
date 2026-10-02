@@ -1,0 +1,4 @@
+split,images,labels,objects,valid_objects,invalid_objects,missing_labels,extra_labels,empty_labels
+train,99,99,488,488,0,0,0,0
+valid,25,25,105,105,0,0,0,0
+test,11,11,38,38,0,0,0,0

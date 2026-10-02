@@ -1,0 +1,4 @@
+rule_name,value,unit,source
+nearby_distance,300,meters,project_scoring_configuration
+recent_window,30,days,project_scoring_configuration
+maximum_count_for_100,10,complaints,project_scoring_configuration

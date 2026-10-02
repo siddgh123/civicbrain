@@ -1,0 +1,28 @@
+{
+  "baseline_name": "FIFO Greedy Baseline",
+  "scheduled_jobs": 191,
+  "routing_groups": 110,
+  "service_hours": 772.2,
+  "travel_hours": 38.536,
+  "total_route_hours": 810.736,
+  "total_distance_km": 1353.78,
+  "jobs_per_shift_average": 1.736,
+  "route_groups_pass": 92,
+  "route_groups_violation": 18,
+  "route_violations": 18,
+  "max_route": {
+    "group_index": 106,
+    "team_id": "T004",
+    "schedule_date": "2026-10-13",
+    "job_count": 4,
+    "jobs": "150;128;454;137",
+    "service_h": "9.000",
+    "travel_h": "1.102",
+    "total_route_h": "10.102",
+    "distance_km": "35.648",
+    "shift_limit_h": "9.000",
+    "slack_h": "-1.102",
+    "status": "ROUTE_SHIFT_VIOLATION"
+  },
+  "status": "PASS"
+}

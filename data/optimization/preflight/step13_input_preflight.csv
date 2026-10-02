@@ -1,0 +1,36 @@
+check_id,category,status,actual_value,notes
+STEP8_COMPLAINT_FILE,file,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\complaints\verified\complaints_verified.csv | rows=500,CSV loaded successfully.
+STEP8_COMPLAINT_FILE_COLUMNS,schema,PASS,"['complaint_id', 'title', 'description', 'category', 'latitude', 'longitude', 'created_at', 'status', 'image_path', 'is_synthetic']",All expected columns are present.
+STEP8_ROW_COUNT,step8,PASS,500,Expected 500 synthetic complaints.
+STEP8_DUPLICATE_IDS,data_quality,PASS,0,Step 8 complaints: duplicated complaint_id values.
+STEP10_RESOURCE_FILE,file,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\resources\processed\resource_dataset.csv | rows=500,CSV loaded successfully.
+STEP10_RESOURCE_FILE_COLUMNS,schema,PASS,"['complaint_id', 'issue_type', 'latitude', 'longitude', 'created_at', 'status', 'is_synthetic', 'severity', 'estimated_area', 'estimated_workers', 'estimated_duration_hours', 'labour_cost', 'material_cost', 'equipment_cost', 'transport_cost', 'total_cost', 'required_equipment', 'severity_source', 'area_source']",All expected columns are present.
+STEP10_ROW_COUNT,step10,PASS,500,Expected 500 resource-estimation records.
+STEP10_DUPLICATE_IDS,data_quality,PASS,0,Step 10 resource dataset: duplicated complaint_id values.
+STEP11_PRIORITY_FACTOR_FILE,file,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\priority\priority_factor_dataset.csv | rows=500,CSV loaded successfully.
+STEP11_PRIORITY_FACTOR_FILE_COLUMNS,schema,PASS,"['complaint_id', 'ward_id', 'ward_population', 'population_score', 'population_source', 'population_source_year', 'severity_level', 'severity_score', 'severity_source', 'location_risk_score', 'frequency_count', 'frequency_score', 'wait_days', 'wait_time_score', 'road_id', 'road_type', 'infrastructure_importance_score', 'infrastructure_source', 'historical_count', 'historical_risk_score']",All expected columns are present.
+STEP11_FACTOR_ROW_COUNT,step11,PASS,500,Expected 500 rows.
+STEP11_FACTOR_DUPLICATE_IDS,data_quality,PASS,0,Step 11 factor dataset: duplicated complaint_id values.
+STEP11_PRIORITY_SCORE_FILE,file,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\priority\priority_scores.csv | rows=500,CSV loaded successfully.
+STEP11_PRIORITY_SCORE_FILE_COLUMNS,schema,PASS,"['complaint_id', 'ward_id', 'severity_score', 'population_score', 'location_risk_score', 'frequency_score', 'wait_time_score', 'infrastructure_importance_score', 'historical_risk_score', 'priority_score', 'priority_level', 'priority_reasons']",All expected columns are present.
+STEP11_SCORE_ROW_COUNT,step11,PASS,500,Expected 500 frozen priority scores.
+STEP11_SCORE_DUPLICATE_IDS,data_quality,PASS,0,Step 11 priority scores: duplicated complaint_id values.
+STEP11_PRIORITY_RANGE,step11,PASS,0,Priority scores must be numeric and 0–100.
+STEP12_ENGINE_RESULTS_FILE,file,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\duplicates\duplicate_engine_results.csv | rows=109,CSV loaded successfully.
+STEP12_ENGINE_RESULTS_FILE_COLUMNS,schema,PASS,"['pair_id', 'complaint_id_1', 'complaint_id_2', 'text_similarity', 'distance_meters', 'distance_score', 'time_difference_hours', 'recency_score', 'duplicate_score', 'decision', 'decision_source', 'review_required', 'submitted_at_1', 'submitted_at_2']",All expected columns are present.
+STEP12_ENGINE_ROW_COUNT,step12,PASS,109,Expected 109 current engine relations.
+STEP12_ENGINE_DECISIONS,step12,PASS,0,All decisions must use the frozen 3-state vocabulary.
+STEP12_ENGINE_CONFIG,step12,PASS,7d | weights=0.7/0.2/0.1 | threshold=0.59,Frozen Step 12 engine configuration.
+STEP9_YOLO_ROOT,step9,PASS,C:\Users\Siddhesh\OneDrive\Desktop\CivicBrain\data\yolo | files=45525,"Step 9 YOLO data directory exists. Frozen classes are: 0=Pothole, 1=Garbage Accumulation, 2=Waterlogging, 3=Road Damage"
+STEP12_SUPPORT_FILE_AUDIT,audit,PASS,present=29 / expected=29,Support-file audit only; missing historical/audit files do not invalidate the frozen database state.
+DB_IDENTITY,database,PASS,civicbrain / postgres,Database connection successful.
+DB_COMPLAINT_COUNT,database,PASS,500,Step 8 database contains the 500 synthetic complaints.
+DB_COMPLAINT_STATUSES,eligibility,PASS,{'SUBMITTED': 500},Actual values are reported here. Step 13 must not invent a VERIFIED/ASSIGNABLE status if it does not exist in this database.
+DB_LOCATION_VALIDITY,geospatial,PASS,"{'null_location': 0, 'wrong_srid': 0, 'invalid_coordinates': 0}",Step 13 route jobs require usable coordinates.
+DB_DUPLICATE_STATUS,step12,PASS,"{'DUPLICATE': 8, 'NOT_DUPLICATE': 162, 'NOT_EVALUATED': 328, 'UNCERTAIN': 2}",Informational only. A duplicate pair may mark both complaints as DUPLICATE while only the child receives master_complaint_id.
+DB_DUPLICATE_RELATION,step12,PASS,"rows=109 | decisions={'DUPLICATE': 4, 'NOT_DUPLICATE': 104, 'UNCERTAIN': 1}",Current frozen Step 12 database output. Do not retune it in Step 13.
+DB_MASTER_LINK_COUNT,step12,PASS,4,Complaint rows with a master_complaint_id.
+DB_REVIEW_FLAG_COUNT,step12,PASS,2,Complaint rows requiring review.
+DB_INVALID_MASTER_LINKS,integrity,PASS,0,Must be zero.
+DB_UNSAFE_UNCERTAIN,integrity,PASS,0,UNCERTAIN must remain review-only.
+DB_STEP12_OBJECTS,database,PASS,duplicate_relation=duplicate_relation | review_view=v_duplicate_review_queue,Required Step 12 dependency objects.

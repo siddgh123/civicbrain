@@ -1,0 +1,55 @@
+{
+  "step": "13.0_input_preflight",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "existing_data_directory": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data",
+  "read_only": true,
+  "overall_gate": "PASS",
+  "checks_total": 35,
+  "checks_passed": 35,
+  "checks_review": 0,
+  "checks_missing": 0,
+  "checks_info": 0,
+  "checks_failed": 0,
+  "exact_known_paths": {
+    "step8_complaints": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\complaints\\verified\\complaints_verified.csv",
+    "step10_resources": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\resources\\processed\\resource_dataset.csv",
+    "step11_priority_factor_dataset": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\priority\\priority_factor_dataset.csv",
+    "step11_priority_scores": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\priority\\priority_scores.csv",
+    "step12_engine_results": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\duplicates\\duplicate_engine_results.csv",
+    "step12_engine_config": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\duplicates\\duplicate_engine_config.json"
+  },
+  "step9_classes": {
+    "0": "Pothole",
+    "1": "Garbage Accumulation",
+    "2": "Waterlogging",
+    "3": "Road Damage"
+  },
+  "database_summary": {
+    "database": "civicbrain",
+    "database_user": "postgres",
+    "complaint_count": 500,
+    "complaint_status_counts": {
+      "SUBMITTED": 500
+    },
+    "location_checks": {
+      "null_location": 0,
+      "wrong_srid": 0,
+      "invalid_coordinates": 0
+    },
+    "duplicate_status": {
+      "DUPLICATE": 8,
+      "NOT_DUPLICATE": 162,
+      "NOT_EVALUATED": 328,
+      "UNCERTAIN": 2
+    },
+    "duplicate_relation_count": 109,
+    "duplicate_relation_decisions": {
+      "DUPLICATE": 4,
+      "NOT_DUPLICATE": 104,
+      "UNCERTAIN": 1
+    },
+    "complaints_with_master": 4,
+    "complaints_requiring_review": 2
+  },
+  "next_step_gate": "Proceed to Step 13.1 eligible jobs only after reviewing any REVIEW/MISSING item that affects the actual job join. INFO items alone do not block."
+}

@@ -1,0 +1,15 @@
+metric,value
+candidate_pairs_eligible_7d,109.0
+duplicate_count,4.0
+uncertain_count,1.0
+not_duplicate_count,104.0
+mean_duplicate_score,0.3022309705693916
+mean_text_similarity,0.26518666019680304
+mean_distance_meters,204.64354128440365
+mean_time_difference_hours,78.91071559633026
+db_check_relation_rows,109.0
+db_check_expected_relation_rows,109.0
+db_check_evaluated_complaints,172.0
+db_check_self_pairs,0.0
+db_check_uncertain_without_review,0.0
+db_check_invalid_master_links,0.0

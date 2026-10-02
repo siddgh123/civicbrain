@@ -1,0 +1,40 @@
+{
+  "status": "experimental_nested_validation",
+  "method": "5-fold outer CV with 4-fold inner CV. Threshold is selected only from inner validation data inside each outer training partition, then evaluated on the untouched outer test partition.",
+  "outer_folds": 5,
+  "inner_folds": 4,
+  "random_seed": 42,
+  "time_window_days": 7,
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "threshold_band": [
+    0.55,
+    0.56,
+    0.57,
+    0.58,
+    0.59,
+    0.6,
+    0.61,
+    0.62,
+    0.63,
+    0.64,
+    0.65
+  ],
+  "outer_selected_thresholds": [
+    0.6,
+    0.6,
+    0.59,
+    0.59,
+    0.59
+  ],
+  "threshold_selection_frequency": "0.59=3; 0.60=2",
+  "modal_threshold": 0.59,
+  "mean_precision": 0.7001490555149092,
+  "std_precision": 0.05397148671837468,
+  "mean_recall": 0.9266666666666667,
+  "std_recall": 0.04346134936801765,
+  "mean_f1": 0.7972483846767968,
+  "std_f1": 0.048116396469228793,
+  "note": "Experimental prototype evaluation. Benchmark labels are synthetic-by-construction. Results do not establish an official TDMC complaint-processing policy. Final freezing requires the remaining Step 12 validation and documentation."
+}

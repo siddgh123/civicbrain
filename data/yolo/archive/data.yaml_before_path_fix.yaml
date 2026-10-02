@@ -1,0 +1,6 @@
+﻿train: ../images/train
+val: ../images/val
+test: ../images/test
+
+nc: 4
+names: ['Pothole', 'Garbage Accumulation', 'Waterlogging', 'Road Damage']

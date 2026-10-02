@@ -1,0 +1,14 @@
+road_type,infrastructure_level,importance_score,source
+trunk,CRITICAL,100,project_scoring_configuration
+trunk_link,CRITICAL,100,project_scoring_configuration
+secondary,HIGH,75,project_scoring_configuration
+tertiary,HIGH,75,project_scoring_configuration
+residential,MEDIUM,50,project_scoring_configuration
+living_street,MEDIUM,50,project_scoring_configuration
+service,MEDIUM,50,project_scoring_configuration
+footway,LOW,25,project_scoring_configuration
+path,LOW,25,project_scoring_configuration
+steps,LOW,25,project_scoring_configuration
+track,LOW,25,project_scoring_configuration
+proposed,LOW,25,project_scoring_configuration
+unclassified,LOW,25,project_scoring_configuration

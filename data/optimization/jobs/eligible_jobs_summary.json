@@ -1,0 +1,53 @@
+{
+  "step": "13.1_build_eligible_jobs",
+  "read_only_database": true,
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "source_files": {
+    "step8": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\complaints\\verified\\complaints_verified.csv",
+    "step10": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\resources\\processed\\resource_dataset.csv",
+    "step11": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\priority\\priority_scores.csv",
+    "work_type_mapping": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\config\\work_type_mapping.csv"
+  },
+  "approved_work_types": [
+    "ELECTRICITY",
+    "GARBAGE",
+    "ROAD",
+    "WATER"
+  ],
+  "step9_classes_unchanged": [
+    "Garbage Accumulation",
+    "Pothole",
+    "Road Damage",
+    "Waterlogging"
+  ],
+  "counts": {
+    "total_complaints": 500,
+    "eligible_jobs": 441,
+    "excluded_jobs": 59
+  },
+  "exclusion_counts": {
+    "UNMAPPED_WORK_TYPE": 53,
+    "DUPLICATE_CHILD": 4,
+    "UNCERTAIN_OR_REVIEW_REQUIRED": 2
+  },
+  "eligible_work_type_counts": {
+    "WATER": 178,
+    "ROAD": 130,
+    "ELECTRICITY": 67,
+    "GARBAGE": 66
+  },
+  "eligible_priority_level_counts": {
+    "MEDIUM": 377,
+    "HIGH": 61,
+    "LOW": 3
+  },
+  "outputs": {
+    "eligible_jobs": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\eligible_jobs.csv",
+    "summary_csv": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\eligible_jobs_summary.csv",
+    "validation_csv": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\jobs\\eligible_jobs_validation.csv"
+  },
+  "gate": {
+    "status": "PASS",
+    "next_step": "Proceed to Step 13.2 team/resource normalization and team master only after this output is reviewed."
+  }
+}

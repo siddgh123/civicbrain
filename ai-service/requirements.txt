@@ -1,0 +1,25 @@
+# CivicBrain AI service - Python 3.13 (Windows 11, CPU). Resolved for win_amd64 cp313 on 2026-09-30.
+# OpenCV comes from ultralytics (opencv-python). Do NOT also install opencv-python-headless.
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+python-multipart==0.0.32
+sqlalchemy==2.1.1
+psycopg[binary]==3.3.6
+pyjwt==2.15.1
+httpx==0.28.1
+numpy==2.5.3
+pillow==12.3.0
+shapely==2.1.2
+imagehash==4.3.2
+torch==2.14.0
+torchvision==0.29.0
+ultralytics==8.4.168
+onnxruntime==1.30.0
+onnx==1.23.1                # Ultralytics' ONNX backend checks for it; pinned so it never auto-installs at runtime
+scikit-learn==1.9.1
+joblib==1.6.0
+xgboost==3.4.1
+sentence-transformers==6.1.0
+ortools==9.15.6755

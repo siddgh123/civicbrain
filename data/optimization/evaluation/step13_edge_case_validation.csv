@@ -1,0 +1,14 @@
+edge_case,status,details
+duplicate_child,PASS,"eligible_duplicate_children=0, routed=0"
+uncertain_complaint,PASS,"uncertain_or_review=0, scheduled=0"
+long_duration_job,PASS,"long_jobs=120, scheduled=0"
+missing_equipment,INFO,jobs_with_missing_required_equipment=0; no synthetic case introduced
+no_feasible_team,PASS,"jobs_without_feasible_team=120, scheduled=0"
+multiple_teams,INFO,jobs_with_multiple_feasible_teams=0
+standalone_job,INFO,Current clustering result has no standalone jobs.
+high_priority_job,INFO,"high_or_critical_eligible=61, optimized_scheduled=19"
+no_jobs,INFO,No zero-job production group exists in the current non-empty test dataset.
+invalid_location,PASS,"invalid_location_jobs=0, scheduled=0"
+no_route,PASS,"baseline_no_route=0, optimized_no_route=0"
+job_scheduled_twice,PASS,"baseline_duplicates=0, optimized_duplicates=0"
+every_eligible_job_accounted_for,PASS,"baseline=True, optimized=True"

@@ -1,0 +1,9 @@
+﻿check_id,status,actual_value,expected_value,notes
+INPUT_ROW_COUNT,PASS,441,441,Expected the current Step 13.1 canonical executable-job dataset to contain 441 rows.
+WORK_TYPE_SCOPE,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",Only the frozen four operational work types may remain.
+WORKER_VALUES,PASS,0,0,Every executable job must have a positive worker estimate.
+DURATION_VALUES,PASS,0,0,Every executable job must have a positive service duration.
+COST_VALUES,PASS,0,0,Cost must be numeric and non-negative.
+EQUIPMENT_VALUES,PASS,0,0,Every executable job must have an equipment representation.
+JOB_ID_UNIQUENESS,PASS,0,0,Canonical jobs must be unique.
+EQUIPMENT_NORMALIZATION_DETERMINISTIC,PASS,0,0,Repeated normalization must produce identical output.

@@ -1,0 +1,7 @@
+-r requirements.txt
+# test and quality tools (pinned; Windows lock: requirements-dev-win-py313.lock)
+pytest==9.1.1
+pytest-cov==7.1.0
+freezegun==1.5.5
+pip-audit==2.10.1
+ruff==0.16.9

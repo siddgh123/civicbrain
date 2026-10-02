@@ -1,0 +1,11 @@
+equipment_id,equipment_name,issue_type,unit_cost,unit,source
+E001,Joint Cutting Machine,Pothole,954,hour,Maharashtra PWD SSR 2022-23
+E002,Plate Compactor,Pothole,176,hour,Maharashtra PWD SSR 2022-23
+E003,Joint Cutting Machine,Road Damage,954,hour,Maharashtra PWD SSR 2022-23
+E004,Plate Compactor,Road Damage,176,hour,Maharashtra PWD SSR 2022-23
+E005,Truck 5.5 cum per 10 MT,Waterlogging,1090,hour,Maharashtra PWD SSR 2022-23
+E006,Manual Garbage Collection Tools,Garbage Accumulation,0,job,Not separately specified in Maharashtra PWD SSR 2022-23
+E007,Water Leakage Repair Tools,Water Leakage,0,job,Not separately specified in Maharashtra PWD SSR 2022-23
+E008,Drain Cleaning Tools,Blocked Drain,0,job,Not separately specified in Maharashtra PWD SSR 2022-23
+E009,Electrical Maintenance Tools,Streetlight,0,job,Not separately specified in Maharashtra PWD SSR 2022-23
+E010,General Maintenance Tools,Other,0,job,Not separately specified in Maharashtra PWD SSR 2022-23

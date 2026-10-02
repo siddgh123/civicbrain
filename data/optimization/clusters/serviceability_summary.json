@@ -1,0 +1,41 @@
+{
+  "step": "13_serviceability",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "read_only": true,
+  "input_clusters": 67,
+  "input_eligible_jobs": 441,
+  "configuration": {
+    "shift_start": "08:00",
+    "shift_end": "17:00",
+    "shift_hours": 9.0,
+    "max_internal_distance_meters": 2000,
+    "travel_time_included": false,
+    "depot_status": "TO_BE_CONFIGURED"
+  },
+  "status_counts": {
+    "SCHEDULE_LATER": 48,
+    "SERVICEABLE": 2,
+    "SPLIT": 17
+  },
+  "required_shift_blocks_total": 424,
+  "notes": [
+    "SERVICEABLE means the cluster fits one prototype shift before travel time.",
+    "SPLIT means all individual jobs fit one shift but the combined cluster does not.",
+    "SCHEDULE_LATER means at least one individual job exceeds one prototype shift.",
+    "Routing/travel feasibility is intentionally deferred to later phases.",
+    "Cluster membership is unchanged in this serviceability phase.",
+    "No depot coordinates were invented."
+  ],
+  "validation": {
+    "status": "PASS",
+    "checks_total": 9,
+    "checks_passed": 9,
+    "checks_failed": 0
+  },
+  "outputs": {
+    "serviceability_results": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\serviceability_results.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\serviceability_validation.csv",
+    "summary": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\serviceability_summary.json"
+  },
+  "next_step": "Use SERVICEABLE clusters directly; split SPLIT clusters into shift-sized execution blocks; handle SCHEDULE_LATER jobs explicitly; then proceed to scheduling."
+}

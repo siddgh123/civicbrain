@@ -1,0 +1,25 @@
+{
+  "status": "experimental",
+  "selection_method": "Compare 5-fold held-out mean F1 across time windows using fixed weights from the previous stability experiment. Within each fold, threshold is selected from training data only.",
+  "folds": 5,
+  "random_seed": 42,
+  "tested_windows_days": [
+    7,
+    14,
+    30,
+    60,
+    90
+  ],
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "selected_window_days_by_mean_heldout_f1": 7,
+  "selected_window_mean_precision": 0.7001490555149091,
+  "selected_window_std_precision": 0.05397148671837466,
+  "selected_window_mean_recall": 0.9266666666666667,
+  "selected_window_std_recall": 0.04346134936801766,
+  "selected_window_mean_f1": 0.7972483846767968,
+  "selected_window_std_f1": 0.04811639646922879,
+  "selected_window_mean_threshold": 0.594,
+  "important_note": "This does not establish an official TDMC time window. Benchmark labels are synthetic-by-construction and the time strata were intentionally balanced. The selected window is an experimental result only and must not be frozen until final validation/documentation."
+}

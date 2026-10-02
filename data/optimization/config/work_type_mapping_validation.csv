@@ -1,0 +1,9 @@
+﻿check_id,status,actual_value,expected_value,notes
+SOURCE_STEP8_ROW_COUNT,PASS,500,500,Step 8 must contain 500 complaint records.
+SOURCE_STEP10_ROW_COUNT,PASS,500,500,Step 10 must contain 500 resource records.
+COMMON_COMPLAINT_IDS,PASS,"common=500, step8_only=0, step10_only=0","common=500, step8_only=0, step10_only=0",Step 8 and Step 10 must join one-to-one for all complaint IDs.
+CATEGORY_ISSUE_TYPE_MATCH,PASS,0,0,Step 8 category and Step 10 issue_type must agree after normalization.
+FOUR_OPERATIONAL_WORK_TYPES,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",Step 13 must use exactly the approved four operational work types.
+OTHER_REVIEW_REQUIRED,PASS,['Other'],Other,Other must not be automatically assigned to an operational work type.
+EXPECTED_VALIDATED_MAPPING_ROWS,PASS,14,14,"There are 7 non-Other source values and each appears in both Step 8 and Step 10, giving 14 validated source/type rows."
+EXPECTED_REVIEW_MAPPING_ROWS,PASS,2,2,Other appears once in Step 8 and once in Step 10.

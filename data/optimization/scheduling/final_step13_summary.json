@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "eligible_jobs": 441,
+  "scheduled_jobs": 238,
+  "unscheduled_jobs": 203,
+  "new_travel_infeasible_jobs": [
+    "11",
+    "143",
+    "179"
+  ],
+  "route_groups": 109,
+  "route_violations": 0,
+  "total_service_hours": 839.1,
+  "total_travel_hours": 38.231251,
+  "total_route_hours": 877.331251,
+  "total_distance_km": 1285.5256,
+  "max_route": {
+    "team_id": "T001",
+    "schedule_date": "2026-10-05",
+    "job_count": 2,
+    "jobs": "350|313",
+    "service_h": 8.7,
+    "travel_h": 0.281222,
+    "total_route_h": 8.981222,
+    "distance_km": 7.5688,
+    "finish_time": "16:58",
+    "status": "PASS"
+  },
+  "validation": {
+    "ELIGIBLE_JOB_COUNT": "PASS",
+    "FINAL_SCHEDULED_JOB_COUNT": "PASS",
+    "FINAL_UNSCHEDULED_JOB_COUNT": "PASS",
+    "NO_DUPLICATE_SCHEDULED_JOBS": "PASS",
+    "ALL_441_JOBS_ACCOUNTED": "PASS",
+    "SCHEDULED_UNSCHEDULED_DISJOINT": "PASS",
+    "ROUTE_SHIFT_FEASIBILITY": "PASS"
+  },
+  "outputs": {
+    "schedule": "data\\optimization\\scheduling\\final_step13_schedule_candidate.csv",
+    "unscheduled": "data\\optimization\\scheduling\\final_step13_unscheduled_jobs.csv",
+    "route_audit": "data\\optimization\\routing\\final_step13_route_audit.csv",
+    "validation": "data\\optimization\\scheduling\\final_step13_validation.csv",
+    "summary": "data\\optimization\\scheduling\\final_step13_summary.json"
+  }
+}

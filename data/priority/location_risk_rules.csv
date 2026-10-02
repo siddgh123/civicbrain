@@ -1,0 +1,10 @@
+location_type,importance_score,source
+hospital,100,project_scoring_configuration
+fire_station,100,project_scoring_configuration
+police_station,95,project_scoring_configuration
+railway_station,90,project_scoring_configuration
+school,80,project_scoring_configuration
+college,80,project_scoring_configuration
+market,70,project_scoring_configuration
+government_office,65,project_scoring_configuration
+bus_stop,60,project_scoring_configuration

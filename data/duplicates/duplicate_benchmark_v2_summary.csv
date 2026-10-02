@@ -1,0 +1,4 @@
+pair_type,pair_count,mean_distance_m,median_distance_m,min_distance_m,max_distance_m,mean_time_difference_h,median_time_difference_h,min_time_difference_h,max_time_difference_h,same_category_count,duplicate_label
+synthetic_negative_different_category,50,169.517,170.463,23.312,288.71,1549.881,1621.474,787.12,2097.238,0,0
+synthetic_negative_same_category,100,139.699,137.112,2.258,286.957,281.407,138.302,0.673,1412.576,100,0
+synthetic_positive,150,151.333,149.948,2.3,298.809,708.215,493.185,0.716,2129.736,150,1

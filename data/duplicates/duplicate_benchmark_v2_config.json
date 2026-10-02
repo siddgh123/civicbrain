@@ -1,0 +1,74 @@
+{
+  "version": "2.0",
+  "random_seed": 42,
+  "total_pairs": 300,
+  "positive_pairs": 150,
+  "negative_pairs": 150,
+  "negative_same_category_pairs": 100,
+  "negative_different_category_pairs": 50,
+  "spatial_candidate_radius_m": 300,
+  "distance_strata": [
+    {
+      "min_m": 0.0,
+      "max_m": 50.0,
+      "label": "0-50m"
+    },
+    {
+      "min_m": 50.0,
+      "max_m": 100.0,
+      "label": "50-100m"
+    },
+    {
+      "min_m": 100.0,
+      "max_m": 150.0,
+      "label": "100-150m"
+    },
+    {
+      "min_m": 150.0,
+      "max_m": 200.0,
+      "label": "150-200m"
+    },
+    {
+      "min_m": 200.0,
+      "max_m": 250.0,
+      "label": "200-250m"
+    },
+    {
+      "min_m": 250.0,
+      "max_m": 299.0,
+      "label": "250-300m"
+    }
+  ],
+  "time_strata_hours": [
+    {
+      "min_h": 0.25,
+      "max_h": 72.0,
+      "label": "0-3d"
+    },
+    {
+      "min_h": 72.01,
+      "max_h": 168.0,
+      "label": "3-7d"
+    },
+    {
+      "min_h": 168.01,
+      "max_h": 720.0,
+      "label": "7-30d"
+    },
+    {
+      "min_h": 720.01,
+      "max_h": 1440.0,
+      "label": "30-60d"
+    },
+    {
+      "min_h": 1440.01,
+      "max_h": 2160.0,
+      "label": "60-90d"
+    }
+  ],
+  "positive_definition": "Controlled semantic variant of one source complaint, therefore same benchmark issue.",
+  "negative_definition": "Two distinct source complaints, intentionally placed inside the candidate-search space, therefore different benchmark issues by construction.",
+  "label_source": "synthetic_by_construction",
+  "official_tdmc_duplicate_labels": false,
+  "note": "Benchmark V2 is a controlled prototype evaluation set. It is not official TDMC ground truth and must not be reported as real municipal accuracy."
+}

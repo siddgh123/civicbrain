@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "original_jobs": 241,
+  "final_scheduled_jobs": 233,
+  "final_unplaced_jobs": 8,
+  "hard_unplaced_jobs": 3,
+  "bounded_repair_jobs": 5,
+  "bounded_repair_jobs_placed": 0,
+  "route_groups": 109,
+  "total_service_hours": 829.1,
+  "total_travel_hours": 41.07339,
+  "total_route_hours": 870.17339,
+  "total_distance_km": 1407.8485,
+  "max_route": {
+    "team_id": "T003",
+    "schedule_date": "2026-09-28",
+    "job_count": 3,
+    "service_h": 8.5,
+    "travel_h": 0.464639,
+    "total_route_h": 8.964639,
+    "finish_time": "16:57",
+    "distance_km": 14.7811
+  },
+  "repair_results": [
+    {
+      "job_id": "316",
+      "result": "STATE_LIMIT_REACHED",
+      "team_id": "T001",
+      "states": 1501,
+      "elapsed_s": 0.314
+    },
+    {
+      "job_id": "463",
+      "result": "STATE_LIMIT_REACHED",
+      "team_id": "T001",
+      "states": 1501,
+      "elapsed_s": 0.103
+    },
+    {
+      "job_id": "169",
+      "result": "STATE_LIMIT_REACHED",
+      "team_id": "T001",
+      "states": 1501,
+      "elapsed_s": 0.101
+    },
+    {
+      "job_id": "370",
+      "result": "STATE_LIMIT_REACHED",
+      "team_id": "T001",
+      "states": 1501,
+      "elapsed_s": 0.119
+    },
+    {
+      "job_id": "349",
+      "result": "STATE_LIMIT_REACHED",
+      "team_id": "T001",
+      "states": 1501,
+      "elapsed_s": 0.125
+    }
+  ],
+  "final_unplaced": {
+    "179": "NOT_REPAIRED",
+    "143": "NOT_REPAIRED",
+    "11": "NOT_REPAIRED",
+    "316": "STATE_LIMIT_REACHED",
+    "463": "STATE_LIMIT_REACHED",
+    "169": "STATE_LIMIT_REACHED",
+    "370": "STATE_LIMIT_REACHED",
+    "349": "STATE_LIMIT_REACHED"
+  },
+  "validation": {
+    "ORIGINAL_JOB_COUNT": "PASS",
+    "FINAL_SCHEDULED_JOB_COUNT": "PASS",
+    "FINAL_UNPLACED_COUNT": "PASS",
+    "NO_DUPLICATE_SCHEDULED_JOBS": "PASS",
+    "ALL_JOBS_ACCOUNTED": "PASS",
+    "SCHEDULE_UNPLACED_DISJOINT": "PASS",
+    "ALL_ROUTES_WITHIN_9H": "PASS",
+    "REPAIR_POOL_PLACED": "REVIEW",
+    "OVERALL": "PASS"
+  }
+}

@@ -1,0 +1,10 @@
+﻿check_id,status,actual_value,expected_value,notes
+ELIGIBLE_JOB_COUNT,PASS,441,441,All canonical eligible jobs enter clustering.
+ALL_ELIGIBLE_JOBS_ACCOUNTED_FOR,PASS,441,441,No eligible job may silently disappear.
+JOB_UNIQUENESS,PASS,0,0,Each job appears in exactly one cluster.
+CLUSTER_MEMBER_KEY_UNIQUENESS,PASS,0,0,One row per cluster/job relationship.
+WORK_TYPE_COMPATIBILITY,PASS,0,0,Prototype clusters contain one operational work type.
+MAX_INTERNAL_DISTANCE,PASS,0,0,DBSCAN chaining is checked after clustering; non-standalone clusters must be <= 2 km.
+MAX_CLUSTER_SIZE,PASS,10,<= 10,Explicit prototype size cap; not an official municipal standard.
+STANDALONE_HANDLING,PASS,0,>=0,DBSCAN noise points are retained as standalone jobs.
+APPROVED_WORK_TYPE_SCOPE,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",Only four project operational categories are used.

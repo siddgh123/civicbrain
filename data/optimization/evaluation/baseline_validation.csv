@@ -1,0 +1,10 @@
+check,status,details
+ELIGIBLE_JOB_COUNT,PASS,eligible=441
+FEASIBLE_JOB_COUNT,PASS,feasible=321
+SCHEDULED_UNIQUE,PASS,scheduled=191
+UNSCHEDULED_UNIQUE,PASS,unscheduled=250
+ALL_ELIGIBLE_JOBS_ACCOUNTED_FOR,PASS,"scheduled=191, unscheduled=250, eligible=441"
+TEAM_IDS_VALID,PASS,"teams=T001,T002,T003,T004"
+WORKING_HOURS,PASS,All baseline service-only jobs are inside 08:00-17:00.
+NO_TEAM_OVERLAP,PASS,No overlapping jobs within the same team/date.
+INFEASIBLE_JOB_REASON,PASS,source_infeasible=120

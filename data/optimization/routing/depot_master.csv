@@ -1,0 +1,2 @@
+﻿depot_id,depot_name,latitude,longitude,location_reference,source,source_type,verification_status
+D001,Morkhala Kachara Depo (prototype),18.729411,73.699489,"PMHX+8Q, Talegaon Dabhade R, Maharashtra 410507",User-provided map location,user_verified_map,SPATIALLY_VALIDATED

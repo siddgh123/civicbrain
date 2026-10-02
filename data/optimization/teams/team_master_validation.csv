@@ -1,0 +1,10 @@
+﻿check_id,status,actual_value,expected_value,notes
+TEAM_COUNT,PASS,4,4,Exactly one prototype team is configured per approved work type.
+TEAM_WORK_TYPE_SCOPE,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",Team types must cover the four frozen Step 13 operational categories.
+TEAM_ID_UNIQUENESS,PASS,0,0,Each team must have a unique ID.
+TEAM_CAPACITY_POSITIVE,PASS,0,0,Every prototype team must have positive worker capacity.
+WORKING_HOURS_VALID,PASS,"[('08:00', '17:00')]",08:00-17:00,Prototype working window from the project methodology.
+TEAM_SOURCE_LABEL,PASS,['synthetic_prototype'],synthetic_prototype,Prototype assumptions must be explicitly labeled.
+DEPOT_NOT_INVENTED,PASS,blank coordinates / TO_BE_CONFIGURED,blank coordinates / TO_BE_CONFIGURED,No authoritative depot coordinate exists in current inputs; do not invent one.
+TEAM_EQUIPMENT_COVERAGE,PASS,0,0,Every observed equipment requirement must be available to its work-type team.
+TEAM_CAPACITY_COVERS_SINGLE_JOB,PASS,0,0,"Capacity is checked against the maximum simultaneous workers needed for one sequential job, not the sum of sequential jobs."

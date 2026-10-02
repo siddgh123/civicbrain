@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "t001_input_jobs": 69,
+  "t001_scheduled_jobs": 68,
+  "t001_unplaced_jobs": 1,
+  "total_final_scheduled_jobs": 238,
+  "total_final_unplaced_jobs": 3,
+  "route_groups": 30,
+  "total_service_hours": 240.2,
+  "total_travel_hours": 8.759165,
+  "total_route_hours": 248.959165,
+  "total_distance_km": 276.893,
+  "solver_elapsed_seconds": 60.005,
+  "solver_objective": 14533893,
+  "max_route": {
+    "team_id": "T001",
+    "schedule_date": "2026-10-05",
+    "vehicle": 7,
+    "job_count": 2,
+    "service_h": 8.7,
+    "travel_h": 0.281111,
+    "total_route_h": 8.981111,
+    "finish_time": "16:58",
+    "distance_km": 7.568
+  },
+  "t001_unplaced": [
+    {
+      "job_id": "11",
+      "team_id": "T001",
+      "original_schedule_date": "2026-09-29",
+      "original_group_index": "2",
+      "priority_score": 42.57,
+      "service_duration_h": 8.7,
+      "reason": "TRAVEL_AWARE_VRP_LEFT_UNSCHEDULED",
+      "status": "UNSCHEDULED"
+    }
+  ],
+  "validation": {
+    "T001_INPUT_JOB_COUNT": "PASS",
+    "T001_VRP_SCHEDULED": "PASS",
+    "ALL_ROUTES_WITHIN_9H": "PASS",
+    "NO_SCHEDULE_UNPLACED_OVERLAP": "PASS",
+    "ALL_ORIGINAL_JOBS_ACCOUNTED": "PASS",
+    "VRP_SCHEDULED_PLUS_UNPLACED": "PASS"
+  },
+  "outputs": {
+    "schedule": "data\\optimization\\scheduling\\schedule_results_t001_vrp_candidate.csv",
+    "unplaced": "data\\optimization\\scheduling\\t001_vrp_unplaced_jobs.csv",
+    "validation": "data\\optimization\\scheduling\\t001_vrp_validation.csv",
+    "summary": "data\\optimization\\scheduling\\t001_vrp_summary.json"
+  }
+}

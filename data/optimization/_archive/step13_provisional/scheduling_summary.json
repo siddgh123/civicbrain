@@ -1,0 +1,94 @@
+{
+  "step": "13_scheduling_cp_sat",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "read_only": true,
+  "configuration": {
+    "shift_start": "08:00",
+    "shift_end": "17:00",
+    "shift_hours": 9.0,
+    "schedule_start_date": "2026-09-28",
+    "horizon_days": 30,
+    "routing_included": false,
+    "travel_time_included": false,
+    "team_rule": "one_active_prototype_team_per_work_type",
+    "one_job_at_a_time": true,
+    "priority_objective": "lexicographic: maximize scheduled job count first, then maximize sum of existing Step 11 priority scores"
+  },
+  "counts": {
+    "eligible_jobs": 441,
+    "individually_executable_jobs": 321,
+    "scheduled_jobs": 241,
+    "unscheduled_jobs": 200,
+    "long_jobs_over_9h": 120
+  },
+  "scheduled_by_team": {
+    "T001": 69,
+    "T002": 61,
+    "T003": 44,
+    "T004": 67
+  },
+  "scheduled_by_date": {
+    "2026-09-28": 8,
+    "2026-09-29": 6,
+    "2026-09-30": 6,
+    "2026-10-01": 6,
+    "2026-10-02": 6,
+    "2026-10-03": 9,
+    "2026-10-04": 8,
+    "2026-10-05": 11,
+    "2026-10-06": 12,
+    "2026-10-07": 10,
+    "2026-10-08": 10,
+    "2026-10-09": 10,
+    "2026-10-10": 10,
+    "2026-10-11": 13,
+    "2026-10-12": 11,
+    "2026-10-13": 10,
+    "2026-10-14": 11,
+    "2026-10-15": 9,
+    "2026-10-16": 9,
+    "2026-10-17": 6,
+    "2026-10-18": 5,
+    "2026-10-19": 6,
+    "2026-10-20": 6,
+    "2026-10-21": 7,
+    "2026-10-22": 8,
+    "2026-10-23": 8,
+    "2026-10-24": 5,
+    "2026-10-25": 5,
+    "2026-10-26": 6,
+    "2026-10-27": 4
+  },
+  "unscheduled_reason_counts": {
+    "SCHEDULE_HORIZON_OR_TEAM_CAPACITY": 80,
+    "SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT": 120
+  },
+  "cp_sat": {
+    "scheduled_jobs_by_solver": 241,
+    "solver_status": "FEASIBLE",
+    "lexicographic_priority_scale": 100,
+    "lexicographic_big_m": 1257580
+  },
+  "important_notes": [
+    "This is a provisional schedule before road-network travel time.",
+    "Travel distance/time are set to zero with travel_status=PENDING_ROUTING.",
+    "Short jobs inside a SCHEDULE_LATER cluster remain independently schedulable.",
+    "Jobs exceeding 9 hours are not silently dropped; they are UNSCHEDULED.",
+    "The 08:00–17:00 calendar and 30-day horizon are prototype configurations.",
+    "No weekend/holiday calendar was supplied, so every prototype horizon date is treated as available.",
+    "No depot coordinates were invented."
+  ],
+  "validation": {
+    "status": "PASS",
+    "checks_total": 10,
+    "checks_passed": 10,
+    "checks_failed": 0
+  },
+  "outputs": {
+    "schedule_results": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\scheduling\\schedule_results.csv",
+    "unscheduled_jobs": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\scheduling\\unscheduled_jobs.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\scheduling\\scheduling_validation.csv",
+    "summary": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\scheduling\\scheduling_summary.json"
+  },
+  "next_step": "Resolve/configure depot, validate road-network travel with OSRM, build distance/time matrices, then revalidate the schedule and run OR-Tools RoutingModel."
+}

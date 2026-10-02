@@ -1,0 +1,5 @@
+severity_level,severity_score,source
+LOW,25,project_scoring_configuration
+MEDIUM,50,project_scoring_configuration
+HIGH,75,project_scoring_configuration
+CRITICAL,100,project_scoring_configuration

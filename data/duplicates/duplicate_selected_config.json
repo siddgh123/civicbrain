@@ -1,0 +1,26 @@
+{
+  "version": "1.0-experimental",
+  "status": "SELECTED_FOR_HELD_OUT_EVALUATION",
+  "selection_method": "Highest calibration F1; ties broken by calibration precision, recall, wider recent window, then threshold.",
+  "random_seed": 42,
+  "test_size": 0.4,
+  "recent_window_days": 90,
+  "weight_config": "text70_distance20_recency10",
+  "text_weight": 0.7,
+  "distance_weight": 0.2,
+  "recency_weight": 0.1,
+  "threshold": 0.56,
+  "calibration_precision": 0.6293706293706294,
+  "calibration_recall": 1.0,
+  "calibration_f1": 0.7725321888412017,
+  "held_out_evaluation_precision": 0.6818181818181818,
+  "held_out_evaluation_recall": 1.0,
+  "held_out_evaluation_f1": 0.8108108108108109,
+  "held_out_confusion_matrix": {
+    "tp": 60,
+    "fp": 28,
+    "tn": 32,
+    "fn": 0
+  },
+  "note": "This configuration is experimentally selected from the controlled synthetic benchmark. It is NOT an official TDMC duplicate rule and is not frozen until documented final validation is complete."
+}

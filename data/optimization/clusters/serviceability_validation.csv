@@ -1,0 +1,10 @@
+﻿check_id,status,actual_value,expected_value,notes
+CLUSTER_COUNT,PASS,67,67,Every clustering output cluster receives a serviceability result.
+CLUSTER_ID_UNIQUENESS,PASS,0,0,One serviceability result per cluster.
+ALL_CLUSTER_MEMBERS_ACCOUNTED,PASS,441,441,All 441 eligible jobs remain represented through their clusters.
+WORK_TYPE_SCOPE,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",Only the four approved operational work types are permitted.
+SERVICE_DURATION_RECOMPUTATION,PASS,0,0,Cluster duration equals the sum of member-job service durations.
+MAX_WORKER_RECOMPUTATION,PASS,0,0,Cluster worker requirement equals maximum simultaneous job workers.
+EQUIPMENT_RECOMPUTATION,PASS,0,0,Cluster equipment equals the union of member-job equipment needs.
+INTERNAL_DISTANCE_VALID,PASS,0,0,Existing validated cluster geometry remains within 2 km.
+VALID_SERVICEABILITY_STATUS,PASS,0,0,No cluster may receive an undefined serviceability status.

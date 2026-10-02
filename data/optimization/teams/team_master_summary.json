@@ -1,0 +1,74 @@
+{
+  "step": "13.3_team_master",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "read_only": true,
+  "database_used": false,
+  "approved_work_types": [
+    "ROAD",
+    "WATER",
+    "GARBAGE",
+    "ELECTRICITY"
+  ],
+  "teams": {
+    "count": 4,
+    "ids": [
+      "T001",
+      "T002",
+      "T003",
+      "T004"
+    ],
+    "source": "synthetic_prototype"
+  },
+  "working_window": {
+    "start": "08:00",
+    "end": "17:00"
+  },
+  "worker_capacity_by_work_type": {
+    "ROAD": 6,
+    "WATER": 5,
+    "GARBAGE": 4,
+    "ELECTRICITY": 4
+  },
+  "max_observed_single_job_workers": {
+    "ELECTRICITY": 4.0,
+    "GARBAGE": 4.0,
+    "ROAD": 4.0,
+    "WATER": 4.0
+  },
+  "equipment_requirements_by_work_type": {
+    "ROAD": [
+      "joint_cutting_machine",
+      "plate_compactor"
+    ],
+    "WATER": [
+      "drain_cleaning_tools",
+      "truck_5_5_cum_per_10_mt",
+      "water_leakage_repair_tools"
+    ],
+    "GARBAGE": [
+      "manual_garbage_collection_tools"
+    ],
+    "ELECTRICITY": [
+      "electrical_maintenance_tools"
+    ]
+  },
+  "equipment_count_by_work_type": {
+    "ROAD": 2,
+    "WATER": 3,
+    "GARBAGE": 1,
+    "ELECTRICITY": 1
+  },
+  "depot_policy": "Depot coordinates remain blank and TO_BE_CONFIGURED because no authoritative depot coordinate is present in the current Step 13 inputs. Routing must resolve this before OSRM/OR-Tools.",
+  "validation": {
+    "status": "PASS",
+    "checks_total": 9,
+    "checks_passed": 9,
+    "checks_failed": 0
+  },
+  "outputs": {
+    "team_master": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\teams\\team_master.csv",
+    "team_equipment": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\teams\\team_equipment.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\teams\\team_master_validation.csv"
+  },
+  "next_step": "After reviewing team configuration, build feasible team assignments before operational clustering/scheduling."
+}

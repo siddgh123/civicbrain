@@ -1,0 +1,6 @@
+category,total_cases,passed,failed
+create_new_master,3,3,0
+duplicate_attachment,4,4,0
+uncertain_safety,2,2,0
+invalid_match_safety,2,2,0
+duplicate_id_protection,1,1,0

@@ -1,0 +1,43 @@
+{
+  "status": "REVIEW_REQUIRED",
+  "current_scheduled_jobs": 241,
+  "fixed_jobs": 126,
+  "repair_pool_jobs": 115,
+  "placed_repair_jobs": 107,
+  "unplaced_repair_jobs": 8,
+  "candidate_scheduled_jobs": 233,
+  "candidate_route_groups": 109,
+  "horizon_start": "2026-09-28",
+  "horizon_end": "2026-10-27",
+  "shift_hours": 9.0,
+  "total_service_hours": 829.1,
+  "total_travel_hours": 41.07339,
+  "total_route_hours": 870.17339,
+  "total_road_distance_km": 1407.8485,
+  "max_route": {
+    "team_id": "T003",
+    "schedule_date": "2026-09-28",
+    "job_count": 3,
+    "service_h": 8.5,
+    "travel_h": 0.464639,
+    "total_route_h": 8.964639,
+    "finish_time": "16:57",
+    "distance_km": 14.7811
+  },
+  "validation": {
+    "CURRENT_SCHEDULED_JOB_COUNT": "FAIL",
+    "NO_DUPLICATE_SCHEDULED_JOBS": "PASS",
+    "TEAM_ASSIGNMENT_PRESERVED": "PASS",
+    "FIXED_JOBS_PRESERVED": "PASS",
+    "HORIZON_VALID": "PASS",
+    "ALL_DAILY_ROUTES_WITHIN_9H": "PASS",
+    "REPAIR_POOL_PLACED": "FAIL",
+    "OVERALL": "FAIL"
+  },
+  "outputs": {
+    "schedule": "data\\optimization\\scheduling\\schedule_results_travel_aware_candidate.csv",
+    "unplaced": "data\\optimization\\scheduling\\travel_aware_unplaced_jobs.csv",
+    "validation": "data\\optimization\\scheduling\\travel_aware_repair_validation.csv",
+    "summary": "data\\optimization\\scheduling\\travel_aware_repair_summary.json"
+  }
+}

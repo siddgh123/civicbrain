@@ -1,0 +1,204 @@
+job_id,complaint_id,cluster_id,work_type,priority_score,reason,details,status
+120,120,CL_0042,WATER,67.25,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+102,102,CL_0042,WATER,62.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+54,54,CL_0043,WATER,60.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+243,243,CL_0025,ROAD,60.37,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+414,414,CL_0045,WATER,58.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+339,339,CL_0012,GARBAGE,58.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+156,156,CL_0044,WATER,58.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.20 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+471,471,CL_0045,WATER,57.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+9,9,CL_0044,WATER,56.89,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 32.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+195,195,CL_0013,GARBAGE,56.51,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+207,207,CL_0014,GARBAGE,56.07,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+228,228,CL_0046,WATER,55.82,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 41.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+96,96,CL_0027,ROAD,55.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+198,198,CL_0042,WATER,55.21,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+275,275,CL_0028,ROAD,55.18,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+273,273,CL_0030,ROAD,54.87,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+324,324,CL_0047,WATER,54.39,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 34.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+444,444,CL_0015,GARBAGE,54.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+134,134,CL_0048,WATER,54.12,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+453,453,CL_0012,GARBAGE,53.91,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+105,105,CL_0026,ROAD,53.74,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+87,87,CL_0029,ROAD,53.1,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+341,341,CL_0042,WATER,52.97,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+240,240,CL_0049,WATER,52.03,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 40.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+168,168,CL_0050,WATER,51.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+278,278,CL_0051,WATER,51.82,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+315,315,CL_0052,WATER,51.79,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+330,330,CL_0050,WATER,51.75,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 42.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+201,201,CL_0043,WATER,51.64,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+36,36,CL_0031,ROAD,51.48,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+15,15,CL_0052,WATER,51.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+473,473,CL_0053,WATER,51.38,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+84,84,CL_0032,ROAD,51.26,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+135,135,CL_0054,WATER,51.02,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+302,302,CL_0050,WATER,51.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+138,138,CL_0033,ROAD,50.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+406,406,CL_0043,WATER,50.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+378,378,CL_0046,WATER,50.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+132,132,CL_0028,ROAD,50.35,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+180,180,CL_0050,WATER,50.22,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+108,108,CL_0047,WATER,50.21,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 25.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+239,239,CL_0044,WATER,50.16,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+66,66,CL_0047,WATER,49.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+435,435,CL_0046,WATER,49.72,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+455,455,CL_0023,ROAD,49.53,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+258,258,CL_0048,WATER,49.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+384,384,CL_0045,WATER,49.2,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+234,234,CL_0052,WATER,49.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+489,489,CL_0016,GARBAGE,49.03,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+12,12,CL_0047,WATER,48.98,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+423,423,CL_0048,WATER,48.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+33,33,CL_0018,GARBAGE,48.62,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+264,264,CL_0019,GARBAGE,48.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.20 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+306,306,CL_0055,WATER,48.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+381,381,CL_0033,ROAD,48.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+498,498,CL_0029,ROAD,48.34,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+27,27,CL_0023,ROAD,48.09,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+276,276,CL_0042,WATER,47.89,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+39,39,CL_0056,WATER,47.77,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+42,42,CL_0032,ROAD,47.63,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+438,438,CL_0057,WATER,47.55,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+357,357,CL_0035,ROAD,47.53,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+126,126,CL_0012,GARBAGE,47.47,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+131,131,CL_0025,ROAD,47.42,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+183,183,CL_0045,WATER,47.4,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+218,218,CL_0051,WATER,47.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+399,399,CL_0058,WATER,47.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+303,303,CL_0031,ROAD,47.08,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+72,72,CL_0059,WATER,46.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+309,309,CL_0060,WATER,46.94,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+477,477,CL_0046,WATER,46.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+29,29,CL_0042,WATER,46.87,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+171,171,CL_0057,WATER,46.84,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+56,56,CL_0028,ROAD,46.78,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+318,318,CL_0046,WATER,46.7,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+431,431,CL_0044,WATER,46.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+111,111,CL_0046,WATER,46.54,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+117,117,CL_0034,ROAD,46.43,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+90,90,CL_0013,GARBAGE,46.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+107,107,CL_0029,ROAD,46.27,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+417,417,CL_0052,WATER,46.22,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+116,116,CL_0034,ROAD,46.04,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+279,279,CL_0020,GARBAGE,46.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+434,434,CL_0036,ROAD,45.97,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+450,450,CL_0015,GARBAGE,45.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.20 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+242,242,CL_0042,WATER,45.71,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+6,6,CL_0057,WATER,45.57,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 38.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+486,486,CL_0026,ROAD,45.54,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+173,173,CL_0030,ROAD,45.5,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+312,312,CL_0037,ROAD,45.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+294,294,CL_0021,GARBAGE,45.18,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+20,20,CL_0048,WATER,45.16,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+216,216,CL_0036,ROAD,45.12,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+147,147,CL_0058,WATER,45.11,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+209,209,CL_0056,WATER,45.04,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+420,420,CL_0043,WATER,44.95,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+336,336,CL_0033,ROAD,44.82,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+80,80,CL_0036,ROAD,44.7,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+362,362,CL_0055,WATER,44.64,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+60,60,CL_0053,WATER,44.51,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+75,75,CL_0017,GARBAGE,44.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+179,179,,WATER,44.22,SERVICE_DURATION_PLUS_DEPOT_TRAVEL_EXCEEDS_SHIFT,Single-job OSRM depot round trip plus service duration exceeds the 08:00-17:00 prototype shift.,UNSCHEDULED
+93,93,CL_0062,WATER,44.02,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+165,165,CL_0058,WATER,43.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 23.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+231,231,CL_0059,WATER,43.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 40.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+480,480,CL_0038,ROAD,43.35,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+393,393,CL_0048,WATER,43.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+59,59,CL_0042,WATER,43.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+206,206,CL_0029,ROAD,43.24,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+374,374,CL_0037,ROAD,43.19,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+402,402,CL_0063,WATER,42.98,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 39.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+320,320,CL_0025,ROAD,42.86,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+266,266,CL_0052,WATER,42.85,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+3,3,CL_0028,ROAD,42.82,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+192,192,CL_0063,WATER,42.8,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+366,366,CL_0064,WATER,42.72,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 24.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+254,254,CL_0052,WATER,42.71,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+308,308,CL_0036,ROAD,42.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+11,11,,ROAD,42.57,SERVICE_DURATION_PLUS_DEPOT_TRAVEL_EXCEEDS_SHIFT,Single-job OSRM depot round trip plus service duration exceeds the 08:00-17:00 prototype shift.,UNSCHEDULED
+285,285,CL_0032,ROAD,42.52,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+496,496,CL_0045,WATER,42.2,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+270,270,CL_0062,WATER,42.07,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 39.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+213,213,CL_0021,GARBAGE,41.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+411,411,CL_0039,ROAD,41.93,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+387,387,CL_0018,GARBAGE,41.92,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+69,69,CL_0064,WATER,41.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+363,363,CL_0040,ROAD,41.58,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+123,123,CL_0021,GARBAGE,41.46,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+186,186,CL_0065,WATER,41.41,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+482,482,CL_0055,WATER,41.27,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+348,348,CL_0066,WATER,41.05,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+114,114,CL_0062,WATER,40.19,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+255,255,CL_0020,GARBAGE,40.14,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+342,342,CL_0040,ROAD,40.1,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.20 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+212,212,CL_0060,WATER,40.01,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+257,257,CL_0034,ROAD,40.0,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+282,282,CL_0028,ROAD,39.96,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 19.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+462,462,CL_0066,WATER,39.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+395,395,CL_0062,WATER,39.57,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+437,437,CL_0058,WATER,39.18,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+392,392,CL_0059,WATER,39.09,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+479,479,CL_0052,WATER,38.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+142,142,CL_0049,WATER,38.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+358,358,CL_0043,WATER,38.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+345,345,CL_0035,ROAD,38.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+224,224,CL_0028,ROAD,38.72,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+53,53,CL_0037,ROAD,38.71,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+159,159,CL_0018,GARBAGE,38.68,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+99,99,CL_0035,ROAD,38.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+468,468,CL_0018,GARBAGE,38.52,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 18.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+371,371,CL_0047,WATER,38.33,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 13.40 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+441,441,CL_0039,ROAD,37.72,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+338,338,CL_0038,ROAD,37.54,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+187,187,CL_0028,ROAD,37.38,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+492,492,CL_0067,WATER,37.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 16.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+18,18,CL_0041,ROAD,37.31,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+238,238,CL_0043,WATER,37.05,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+14,14,CL_0038,ROAD,37.0,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+200,200,CL_0036,ROAD,36.84,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+47,47,CL_0061,WATER,36.42,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+288,288,CL_0064,WATER,36.26,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+446,446,CL_0053,WATER,36.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+46,46,CL_0043,WATER,36.16,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+63,63,CL_0066,WATER,36.14,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 31.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+396,396,CL_0041,ROAD,35.79,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+161,161,CL_0035,ROAD,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 9.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+30,30,CL_0021,GARBAGE,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+456,456,CL_0063,WATER,35.73,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 38.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+237,237,CL_0018,GARBAGE,35.35,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.20 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+74,74,CL_0065,WATER,35.34,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+221,221,CL_0064,WATER,35.13,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 12.60 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+300,300,CL_0065,WATER,35.06,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.00 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+115,115,CL_0048,WATER,35.02,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+368,368,CL_0065,WATER,34.9,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 20.50 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+2,2,CL_0038,ROAD,34.79,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+295,295,CL_0045,WATER,34.61,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+361,361,CL_0053,WATER,34.6,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+407,407,CL_0058,WATER,34.27,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+167,167,CL_0038,ROAD,34.15,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+472,472,CL_0046,WATER,34.14,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+422,422,CL_0063,WATER,33.88,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 14.30 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+148,148,CL_0053,WATER,33.81,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+436,436,CL_0057,WATER,33.75,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+122,122,CL_0066,WATER,33.69,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+143,143,,GARBAGE,33.38,SERVICE_DURATION_PLUS_DEPOT_TRAVEL_EXCEEDS_SHIFT,Single-job OSRM depot round trip plus service duration exceeds the 08:00-17:00 prototype shift.,UNSCHEDULED
+194,194,CL_0041,ROAD,33.32,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 10.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+326,326,CL_0047,WATER,33.21,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+203,203,CL_0064,WATER,33.1,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+452,452,CL_0039,ROAD,33.05,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+385,385,CL_0054,WATER,32.94,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+401,401,CL_0065,WATER,32.86,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 15.70 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+62,62,CL_0064,WATER,32.45,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 21.10 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+389,389,CL_0065,WATER,32.24,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 17.90 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+233,233,CL_0067,WATER,31.55,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+104,104,CL_0033,ROAD,31.43,SERVICE_DURATION_EXCEEDS_SINGLE_SHIFT,Service duration 11.80 h exceeds the 9.00 h prototype shift. Requires explicit multi-shift/deferred design.,UNSCHEDULED
+410,410,CL_0035,ROAD,31.33,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+458,458,CL_0040,ROAD,31.19,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+296,296,CL_0054,WATER,30.96,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+211,211,CL_0054,WATER,30.49,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+478,478,CL_0038,ROAD,29.52,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+106,106,CL_0061,WATER,29.37,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+283,283,CL_0065,WATER,27.25,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED
+133,133,CL_0061,WATER,25.59,SCHEDULE_HORIZON_OR_TEAM_CAPACITY,CP-SAT could not schedule this individually executable job within the 30-day prototype horizon.,UNSCHEDULED

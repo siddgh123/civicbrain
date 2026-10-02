@@ -1,0 +1,7 @@
+infrastructure_type,importance_level,importance_score,source
+critical_infrastructure,CRITICAL,100,project_scoring_configuration
+major_road,HIGH,75,project_scoring_configuration
+major_drainage,HIGH,75,project_scoring_configuration
+public_facility,MEDIUM,50,project_scoring_configuration
+local_road,MEDIUM,50,project_scoring_configuration
+minor_asset,LOW,25,project_scoring_configuration

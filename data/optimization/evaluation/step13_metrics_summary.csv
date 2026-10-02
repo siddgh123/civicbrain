@@ -1,0 +1,12 @@
+metric,baseline,optimized,optimized_minus_baseline
+Eligible jobs,441,441,0.0
+Scheduled jobs,191,238,47.0
+Unscheduled jobs,250,203,-47.0
+Route groups / active shifts,110,109,-1.0
+Service hours,772.2,839.1,66.89999999999998
+Travel hours,38.536,38.231251,-0.30474900000000105
+Total route hours,810.736,877.331251,66.59525099999996
+Total road distance km,1353.78,1285.5256,-68.25440000000003
+Average jobs per active shift,1.736,2.183,0.44699999999999984
+Route groups <= 9h,92,109,17.0
+Route groups > 9h,18,0,-18.0

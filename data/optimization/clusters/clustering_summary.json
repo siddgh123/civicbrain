@@ -1,0 +1,47 @@
+{
+  "step": "13_operational_clustering",
+  "project_root": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain",
+  "read_only": true,
+  "input_eligible_jobs": 441,
+  "configuration": {
+    "dbscan_eps_meters": 2000.0,
+    "dbscan_min_samples": 2,
+    "max_internal_distance_meters": 2000.0,
+    "max_cluster_jobs": 10,
+    "work_type_rule": "same_work_type_only",
+    "centroid_rule": "summary_only_not_a_route_stop",
+    "hotspot_detection": false
+  },
+  "counts": {
+    "clusters_total": 67,
+    "clustered_jobs": 441,
+    "standalone_jobs": 0,
+    "max_cluster_size_observed": 10
+  },
+  "clusters_by_work_type": {
+    "ELECTRICITY": 11,
+    "GARBAGE": 11,
+    "ROAD": 19,
+    "WATER": 26
+  },
+  "jobs_by_work_type": {
+    "ELECTRICITY": 67,
+    "GARBAGE": 66,
+    "ROAD": 130,
+    "WATER": 178
+  },
+  "team_assignment_note": "The 120 jobs whose service duration exceeds the 9-hour prototype shift are retained in clustering. Feasible-team assignment is not used as a deletion filter; later serviceability/scheduling must handle multi-shift or deferred execution explicitly.",
+  "validation": {
+    "status": "PASS",
+    "checks_total": 9,
+    "checks_passed": 9,
+    "checks_failed": 0
+  },
+  "outputs": {
+    "cluster_results": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\cluster_results.csv",
+    "cluster_members": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\cluster_members.csv",
+    "validation": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\clustering_validation.csv",
+    "summary": "C:\\Users\\Siddhesh\\OneDrive\\Desktop\\CivicBrain\\data\\optimization\\clusters\\clustering_summary.json"
+  },
+  "next_step": "Proceed to serviceability after reviewing cluster size, internal distance, duration, workers, equipment and team feasibility."
+}

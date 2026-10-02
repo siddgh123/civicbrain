@@ -1,0 +1,9 @@
+﻿check_id,status,actual_value,expected_value,notes
+INPUT_JOB_COUNT,PASS,441,441,Current canonical Step 13 executable-job count.
+ASSIGNMENT_JOB_COVERAGE,PASS,441,441,Every canonical job must be evaluated against a compatible team.
+APPROVED_WORK_TYPE_SCOPE,PASS,"['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']","['ELECTRICITY', 'GARBAGE', 'ROAD', 'WATER']",No fifth operational work type is permitted.
+ASSIGNMENT_KEY_UNIQUENESS,PASS,0,0,One evaluation row per job/team pair.
+VALID_WORK_TYPE_COMPATIBILITY,PASS,0,0,Only work-type-compatible team rows are generated.
+ACTIVE_TEAM_AVAILABILITY,PASS,0,0,Configured prototype teams must be ACTIVE.
+FEASIBLE_JOB_COVERAGE,PASS,321,>0,At least some jobs must have a feasible prototype team. Jobs with no feasible team are retained and documented.
+DEPOT_NOT_INVENTED,PASS,0,0,Depot coordinates remain unresolved rather than being invented. Routing phase will resolve depot coordinates.
