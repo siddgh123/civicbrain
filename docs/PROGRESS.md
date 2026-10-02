@@ -73,6 +73,29 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
+### 2026-10-02 — P01 follow-up — Full-history secret scan, `.env` example files readable
+- Requirement(s): docs/07_SECURITY.md §5 (secrets only in `.env`, gitleaks 0 findings); D1 gate "CI green".
+- Changed: `.claude/settings.json` (human edit, commit `579b14f`): the deny list matched `.env.*` and its `!` exceptions had
+  no effect (Claude Code permission rules have no negation; deny wins), so the Read tool refused `.env.example` and
+  `.env.test.example`. It now denies the real env files by name (`.env`, `.env.test`, `.env.local`, `.env.*.local`,
+  prod/dev/staging/demo/e2e/backup copies, `.env.txt`); `ask`/`allow` unchanged.
+- Verified: `pwsh -NoProfile -File scripts\dev\sync-claude.ps1 -Check` → `PASS  .claude/settings.json is valid JSON (430 deny rules)` ·
+  `PASS  sync-claude: .claude/ is current (10 files)`.
+- Secret scan of the whole history (gitleaks/trufflehog not installed → `git grep -I -E` over `git rev-list --all` = 5 commits;
+  `main` = `origin/main`, so this is what GitHub has):
+  1. Tracked files: env files = only the two examples; no `*.local.json`, key/cert files, logs, `storage/`, weights, backups.
+  2. Token formats (private key, AWS, GitHub, Google, Slack, Twilio SK/AC, Stripe, `sk-`, Hugging Face, SendGrid, JWT,
+     URL with `user:password@`) → 0 real hits (only the P01 scan-pattern text in this file and `docs/INVENTORY.md`).
+  3. `password|secret|token|api_key … = <8+ chars>` → only the CI throw-away DB passwords in `ci.yml` (`postgres`,
+     `ci-*-password`), the allowlisted `dGVzdC1vbmx5…` (base64 "test-only-…") and env/`getpass` lookups in scripts.
+  4. Personal data: all 24 e-mail addresses are `.local`/`example.com`/`.example`; phone-like numbers are fake
+     (`+91900000000x`, `+919111100001`, `9999999999`), OpenStreetMap node IDs (POI GeoJSON) or hex WKB geometry (V1, seed).
+  5. `.env.example` + `.env.test.example` (Read tool): placeholders only - `change-me-*`, `REPLACE_WITH_BASE64_32_BYTES`,
+     `REPLACE_ME`/`REPLACE_ME_BASE32` (all on the `.gitleaks.toml` allowlist), empty SMTP/Meta/Twilio secrets, Twilio's public
+     sandbox sender number, fake `+91900000000x` phones, `@test.local` accounts.
+  Result: **0 secrets, 0 real personal data in git history.**
+- Still open (D1 "CI green"): gitleaks in CI over the full history → human: Actions → CI → "Run workflow" on `main`.
+
 ### 2026-10-02 — P01 — Repo, environment check, databases (DONE, human yes 2026-10-02)
 **Plan** (Claude Code, Auto mode):
 1. Rules check from memory → log; `sync-claude.ps1 -Check` must end `PASS  sync-claude`.
@@ -135,6 +158,7 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
   ("no leaks found", 0 bytes scanned); happens only on a new repository's first push, so `ci.yml` stays unchanged. Later pushes
   scan normally, but the full history (incl. the 427-file root commit) has not been scanned by gitleaks yet → human: Actions →
   CI → "Run workflow" on `main` (`workflow_dispatch` makes gitleaks scan the whole history) and confirm the Security job is green.
+  Local full-history scan 2026-10-02: 0 findings (entry "P01 follow-up" above); the CI run is still needed for the gate.
 - Human answers: Q1 yes (files on GitHub, no `.env`) · Q2 yes (Database job green) · Q3 yes (INVENTORY complete; agent re-checked it:
   fixed 2 rounded label samples, OSRM server count 6 → 8 files, size units note - no count changed).
 - P09: research `ward_id` columns are ward numbers; duplicate loader uses psycopg2 → port the scoring only (docs/INVENTORY.md).
