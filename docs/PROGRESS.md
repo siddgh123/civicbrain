@@ -20,7 +20,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 |---|---|---|---|---|
 | P01 | Repo, environment check, databases | D1 | DONE (human yes 2026-10-02) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
 | P02 | AI service skeleton + venv + worker loop | D1 | DONE (human yes 2026-10-02 19:45) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled (V6 fix = Phase 2) · commit f0575ee |
-| P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | NOT STARTED | |
+| P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | IN PROGRESS (waiting for the human's Kaggle step) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | NOT STARTED | |
 | P05 | Frontend skeleton | D2 | NOT STARTED | |
@@ -75,6 +75,69 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-02 — P03 — Dataset check, test fixtures, Kaggle package (IN PROGRESS)
+- Requirement(s): docs/11_DATA_SOURCES.md §0, §6; docs/08_TEST_PLAN.md §2 (fixtures); frozen rule "YOLO classes (Step 9)".
+**Plan** (Claude Code, Auto mode):
+1. Labels present? `docs/INVENTORY.md`: 2,708/351/339 label files, classes 0-3 only → continue (P03b not needed).
+2. `ai-service\.venv\Scripts\python.exe ai-service\training\prepare_mvp_dataset.py --root data\yolo --out-dir data\yolo\mvp`
+   → exit 0 (exit 1 with < 30 bad lines → `ai-service/training/fix_labels.py`, backups in `data/yolo/backup_labels_P03/`;
+   more → ask). Copy `data/yolo/mvp/dataset_report.json` → `docs/reports/dataset_report_local.json`.
+3. `ai-service/training/make_test_fixtures.py` (Pillow, deterministic): per class the first TEST image (by name) whose label
+   file has exactly one box, of that class, image ≥ 320 px (12 `IMAGE_TOO_SMALL`), box 5-60 % of the image → copy (never move)
+   to `tests/fixtures/images/{pothole,garbage,waterlogging,road_damage}_1.jpg` + `<name>.txt` (recorded box); make
+   `tiny_200px.jpg` (200×150) + `not_an_image.jpg` (text); write `README.md` (split, original name, licence). Look at each
+   picked photo (no readable face / number plate).
+4. `pwsh -NoProfile -File scripts\dev\make-kaggle-package.ps1` → zip size + file count.
+5. Checks (new Python under `ai-service/`): ruff + pytest. Record, commit, push. Human step: Kaggle upload + committed run; Q1-Q2.
+Test: `prepare_mvp_dataset.py` exit 0.
+
+**Results**
+1. Labels present (INVENTORY + the check below: 0 missing label files) → P03b not needed.
+2. `ai-service\.venv\Scripts\python.exe ai-service\training\prepare_mvp_dataset.py --root data\yolo --out-dir data\yolo\mvp`
+   → **exit 0**; again with `--check-images` (Pillow opens every image) → exit 0, same summary:
+   ```
+   train images= 2708 empty=   0 Pothole=2135 Garbage Accumulation=488 Waterlogging=352 Road Damage=2616
+   val   images=  351 empty=   0 Pothole=246 Garbage Accumulation=105 Waterlogging=44 Road Damage=342
+   test  images=  339 empty=   0 Pothole=299 Garbage Accumulation=38 Waterlogging=45 Road Damage=321
+   leakage groups: 0  (train copies left out: 0)
+   train_mvp.txt: 3258 lines, 2708 unique images
+   label problems: 0
+   ```
+   Images per class (train/val/test): Pothole 1044/119/133 · Garbage 99/25/11 · Waterlogging 352/44/45 · Road Damage
+   1743/219/218. Oversampled list: 2,708 + 99×2 (garbage ×3) + 352×1 (waterlogging ×2) = 3,258 lines. No `fix_labels.py`
+   needed. Report → `docs/reports/dataset_report_local.json` (copy of `data/yolo/mvp/dataset_report.json`; local paths only).
+   Weak classes in test: garbage 11 images / 38 boxes, waterlogging 45 - per-class test metrics for garbage will be noisy (P29).
+3. Fixtures: `ai-service/training/make_test_fixtures.py` (dry run, then write) → `tests/fixtures/images/`:
+   `pothole_1.jpg` ← `India_002154_jpg.rf.b26b…` (S1 RDD2022-India, 720x720, box 11 %) · `garbage_1.jpg` ←
+   `IMG_5472_JPG.rf.4a46…` (S3 GarbagePile, 640x640, box 84 %) · `waterlogging_1.jpg` ← `image_101.jpg` (S2, 512x384, box 47 %) ·
+   `road_damage_1.jpg` ← `India_000130_jpg.rf.1858…` (S1, 720x720, box 16 %), each + `<name>.txt` (label line) ·
+   `tiny_200px.jpg` (200x150 crop of pothole_1, JPEG magic `FF D8 FF`) · `not_an_image.jpg` (text, starts `Civi`) · `README.md`.
+   Check: `Get-FileHash` fixture = dataset original for all 4 images, label files identical, originals still in place
+   (copy, not move). The 4 photos looked at by eye: no readable face or number plate (distant riders/pedestrians only).
+   `git check-ignore` → not ignored (will be committed).
+4. `pwsh -NoProfile -File scripts\dev\make-kaggle-package.ps1` → `PASS  kaggle_upload\civicbrain-yolo.zip: 6802 files,
+   174.6 MB (3398 images, 3398 label files)`. Zip listing: `yolo/images` 3398 · `yolo/labels` 3398 · `yolo/data.yaml`,
+   `class_definition.csv`, `dataset_sources.csv` · `training/{prepare_mvp_dataset.py, train_yolo_mvp.py, kaggle_train_mvp.ipynb}`;
+   0 entries from `raw/`, `backup_*`, `archive/`, `mvp/`.
+5. In `ai-service`: `.\.venv\Scripts\python.exe -m ruff check .` → `All checks passed!` (covers `training/*.py`) ·
+   `.\.venv\Scripts\python.exe -m pytest -q` → `82 passed, 1 warning in 3.38s` (unchanged from P02).
+
+   | Component | Command | Result line | Result |
+   |---|---|---|---|
+   | data | `…python.exe ai-service\training\prepare_mvp_dataset.py --root data\yolo --out-dir data\yolo\mvp [--check-images]` | `label problems: 0`, `leakage groups: 0`, exit 0 | PASS |
+   | package | `pwsh -NoProfile -File scripts\dev\make-kaggle-package.ps1` | `6802 files, 174.6 MB (3398 images, 3398 label files)` | PASS |
+   | ai | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
+   | ai | `.\.venv\Scripts\python.exe -m pytest -q` | `82 passed, 1 warning` | PASS |
+- DECISION: fixture pick rule = first TEST image by name whose label file has exactly one box of the class, shorter side
+  ≥ 320 px (12 `IMAGE_TOO_SMALL`), no EXIF rotation, box 5-60 % of the image preferred. Garbage has no such image (the 4
+  single-box garbage test images are close-ups, box 84-100 %) → fallback to the smallest box (84 %). JPEGs copied byte for
+  byte, so P08's golden box needs no rescaling. The script refuses to overwrite fixtures without `--force`.
+- OPEN (licence, human/team): `waterlogging_1.jpg` comes from S2 "Waterlogging Dataset", whose licence is "To be documented"
+  in `data/yolo/dataset_sources.csv` (no licence file in `data/yolo/raw/waterlogging*`). The repo is public. Team: document
+  the S2 licence, or later replace this fixture with a team photo + hand-made label line (every waterlogging test image is
+  S2, so `--exclude` cannot avoid it). S1/S3 are CC BY 4.0 (attribution in the fixture README).
+- Expected Kaggle finish: start + epochs × min/epoch (max 120 epochs, early stop 25) - filled in after the human's cell-4 timing.
 
 ### 2026-10-02 — P02 — AI service skeleton, venv and worker loop (DONE, human yes 2026-10-02 19:45)
 - Requirement(s): NFR-03 (stale jobs requeued); docs/06_AI_PIPELINE.md §1, §5; docs/02_ARCHITECTURE.md §4, §6;

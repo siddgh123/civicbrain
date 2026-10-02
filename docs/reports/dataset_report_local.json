@@ -1,0 +1,71 @@
+{
+  "root": "C:\\dev\\civicbrain\\data\\yolo",
+  "splits": {
+    "train": {
+      "folder": "C:\\dev\\civicbrain\\data\\yolo\\images\\train",
+      "images": 2708,
+      "background_or_empty": 0,
+      "missing_label_files": 0,
+      "instances": {
+        "Pothole": 2135,
+        "Garbage Accumulation": 488,
+        "Waterlogging": 352,
+        "Road Damage": 2616
+      },
+      "images_with_class": {
+        "Pothole": 1044,
+        "Garbage Accumulation": 99,
+        "Waterlogging": 352,
+        "Road Damage": 1743
+      }
+    },
+    "val": {
+      "folder": "C:\\dev\\civicbrain\\data\\yolo\\images\\val",
+      "images": 351,
+      "background_or_empty": 0,
+      "missing_label_files": 0,
+      "instances": {
+        "Pothole": 246,
+        "Garbage Accumulation": 105,
+        "Waterlogging": 44,
+        "Road Damage": 342
+      },
+      "images_with_class": {
+        "Pothole": 119,
+        "Garbage Accumulation": 25,
+        "Waterlogging": 44,
+        "Road Damage": 219
+      }
+    },
+    "test": {
+      "folder": "C:\\dev\\civicbrain\\data\\yolo\\images\\test",
+      "images": 339,
+      "background_or_empty": 0,
+      "missing_label_files": 0,
+      "instances": {
+        "Pothole": 299,
+        "Garbage Accumulation": 38,
+        "Waterlogging": 45,
+        "Road Damage": 321
+      },
+      "images_with_class": {
+        "Pothole": 133,
+        "Garbage Accumulation": 11,
+        "Waterlogging": 45,
+        "Road Damage": 218
+      }
+    }
+  },
+  "leakage": [],
+  "problems": [],
+  "train_list": {
+    "file": "C:\\dev\\civicbrain\\data\\yolo\\mvp\\train_mvp.txt",
+    "lines": 3258,
+    "unique_images": 2708,
+    "left_out_because_of_leakage": 0,
+    "factors": {
+      "Garbage Accumulation": 3,
+      "Waterlogging": 2
+    }
+  }
+}

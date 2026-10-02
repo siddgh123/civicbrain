@@ -1,0 +1,2 @@
+CivicBrain test fixture: this is plain text, not a JPEG.
+The upload check must reject it by its magic bytes (docs/08_TEST_PLAN.md section 2).
