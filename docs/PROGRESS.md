@@ -19,7 +19,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | Prompt | What | Day | Status | Evidence (smoke / tests) |
 |---|---|---|---|---|
 | P01 | Repo, environment check, databases | D1 | DONE (human yes 2026-10-02) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
-| P02 | AI service skeleton + venv + worker loop | D1 | IN PROGRESS (waiting for Q1/Q2) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled |
+| P02 | AI service skeleton + venv + worker loop | D1 | DONE (human yes 2026-10-02 19:45) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled (V6 fix = Phase 2) · commit f0575ee |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | NOT STARTED | |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | NOT STARTED | |
@@ -53,6 +53,9 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 ## Full plan (after the deadline)
 - **App track:** P0 — Machines, repo, Antigravity (status: covered by the MVP days; re-check its gate)
 - **ML track:** P2 — ML data and models (status: NOT STARTED — MVP used the existing images only)
+- **Known issue (P02):** V4 `fn_claim_jobs` can claim more jobs than `p_limit` (LIMIT … FOR UPDATE SKIP LOCKED re-scanned in a
+  nested-loop semi join). MVP: the worker processes / releases every claimed row. Phase 2: V6 migration with
+  `WITH picked AS MATERIALIZED (SELECT … LIMIT p_limit FOR UPDATE SKIP LOCKED) UPDATE jobs … FROM picked` (Task log P02).
 
 ## Phase gates
 | Phase | Status | Gate evidence (command → result) | Approved by / date |
@@ -73,7 +76,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-02 — P02 — AI service skeleton, venv and worker loop (waiting for the human's Q1)
+### 2026-10-02 — P02 — AI service skeleton, venv and worker loop (DONE, human yes 2026-10-02 19:45)
 - Requirement(s): NFR-03 (stale jobs requeued); docs/06_AI_PIPELINE.md §1, §5; docs/02_ARCHITECTURE.md §4, §6;
   docs/04_API_CONTRACT.md §10; docs/07_SECURITY.md §5; docs/12_ERROR_HANDLING.md §7; rule 30.
 **Plan** (Claude Code, Auto mode):
@@ -142,9 +145,13 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
    | ai | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
    | ai | `.\.venv\Scripts\python.exe -m pytest -q` | `82 passed, 1 warning` (5× in a row; 14 integration on civicbrain_test) | PASS |
    | db | `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` | `DB TESTS: ALL PASSED` (7/7, 6/6, 11/11, 11/11) | PASS |
-- DECISION (ASK-FIRST, not done): the real fix is a V6 migration that rewrites `fn_claim_jobs` with
+- DECISION (human, Q2 = no, 2026-10-02 19:45): no migration in the MVP - the worker-side handling stays. KNOWN ISSUE for
+  Phase 2: fix `fn_claim_jobs` in a V6 migration with a MATERIALIZED CTE -
   `WITH picked AS MATERIALIZED (SELECT … LIMIT p_limit FOR UPDATE SKIP LOCKED) UPDATE jobs … FROM picked` (+ db test,
-  three copies) - asked as Q2.
+  three identical copies); then update `test_v4_claim_can_return_more_rows_than_the_limit` (it will fail on purpose).
+- Human answers (2026-10-02 19:45): **Q1 yes** - "schema missing" is expected until P04 runs the migrations ·
+  **Q2 no** - keep the worker-side handling, V6 fix in Phase 2 (above) · password shown in the terminal: the human decides
+  themselves, nothing for the agent to do.
 - DECISION: a missing schema is a dependency problem, not a crash: `/health` checks `jobs` + `fn_claim_jobs` exist
   (`db: ok | schema missing | unavailable`, 503 unless ok); the worker raises `DependencyError` at start-up, logs it and
   retries every 10 s, so it starts polling by itself once Flyway has run (start order does not matter).
@@ -294,6 +301,7 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
 | 2026-09-30 | `V5__capture_answers_plan_release.sql`: depth answer + A4 flag columns, image quality score, plan release trigger, TOTP/LOGOUT_ALL auth events, `audit_logs.entity_key` | Independent kit review found no storage for FR-10 answers and that reopened complaints could never be planned again | Kit |
 | 2026-10-01 | 7-day MVP mode (`09_BUILD_PLAN_7DAY.md`): existing YOLO images only, haversine routing, Twilio sandbox, reduced test list | Deadline 7 Oct 2026; no time for new photos | Team |
 | 2026-09-30 | Requirements v1.1: ADMIN bootstrap script, officer tabs Needs review / Rejected with accept / restore | "Officers see everything" and first-admin creation were not buildable | Kit |
+| 2026-10-02 | `fn_claim_jobs` over-claim (V4): handled in the worker for the MVP; V6 migration with a MATERIALIZED CTE in Phase 2 | Reproduced in P02 tests; V1-V5 frozen, no new migration during the 7-day MVP | Human (P02 Q2) |
 
 ## ASVS L2 checklist evidence (fill in P10)
 | Area | Item | Test / evidence |
