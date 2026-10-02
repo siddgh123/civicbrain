@@ -1,0 +1,25 @@
+# CivicBrain AI service (worker + small internal FastAPI). Dependencies are NOT declared here:
+# they are pinned in requirements.txt / requirements-dev.txt and the Windows lock files (rule 30).
+[project]
+name = "civicbrain-ai-service"
+version = "0.1.0"
+description = "CivicBrain AI worker and internal API (Talegaon Dabhade Municipal Council decision support)"
+requires-python = ">=3.13,<3.14"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+# --tb=short: never print frame arguments in tracebacks (a failed DB connect would show the connection password)
+addopts = "-ra --strict-markers --tb=short"
+markers = [
+    "models: needs the model files in ai-service/models (skips only when they are absent - CI)",
+    "integration: needs the PostgreSQL test database (DB_NAME = DB_TEST_NAME, civicbrain_test)",
+]
+
+[tool.ruff]
+line-length = 140
+target-version = "py313"
+extend-exclude = ["training/*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

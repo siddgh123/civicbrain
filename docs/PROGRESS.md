@@ -19,7 +19,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | Prompt | What | Day | Status | Evidence (smoke / tests) |
 |---|---|---|---|---|
 | P01 | Repo, environment check, databases | D1 | DONE (human yes 2026-10-02) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
-| P02 | AI service skeleton + venv + worker loop | D1 | NOT STARTED | |
+| P02 | AI service skeleton + venv + worker loop | D1 | IN PROGRESS (waiting for Q1/Q2) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | NOT STARTED | |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | NOT STARTED | |
@@ -72,6 +72,112 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-02 — P02 — AI service skeleton, venv and worker loop (waiting for the human's Q1)
+- Requirement(s): NFR-03 (stale jobs requeued); docs/06_AI_PIPELINE.md §1, §5; docs/02_ARCHITECTURE.md §4, §6;
+  docs/04_API_CONTRACT.md §10; docs/07_SECURITY.md §5; docs/12_ERROR_HANDLING.md §7; rule 30.
+**Plan** (Claude Code, Auto mode):
+1. Venv: `py -3.13 -m venv ai-service\.venv` + `… -m pip install -r ai-service\requirements-dev-win-py313.lock`.
+2. `ai-service/pyproject.toml` (pytest markers `models`/`integration`, `testpaths`, ruff 140/py313/E,F,W,I,B,UP).
+3. `app/errors.py` (ConfigError, ModelError, DataError, DependencyError), `app/logging_setup.py` (JSON lines),
+   `app/config.py` (19 rule-30 keys + `REQUIRE_MODELS=false`, lazy `get_settings()`, ASSUMPTION constants 06 §2.1/§2.4).
+4. `app/db.py` (SQLAlchemy 2 + psycopg3 as `civicbrain_ai`, `session_scope()`, `set_system_actor()`).
+5. `app/models_check.py` (MANIFEST.json file + folder entries, SHA-256), `app/security.py` (service JWT, PyJWT HS256).
+6. `app/main.py`: `GET /health` (no auth), `GET /v1/models` + `POST /v1/jobs/{id}/requeue` (service JWT).
+7. `worker/jobs.py` (claim / finish / stale requeue / own-RUNNING requeue / DEAD → `ai_status=FAILED`),
+   `worker/handlers.py` (dispatcher), `worker/run.py` (loop, per-job timeout, graceful stop).
+8. Tests first: `tests/unit` (settings, JWT, dispatcher, manifest, API) + `tests/it` (`@pytest.mark.integration`,
+   `civicbrain_test`: fail → retry, success, stale requeue, own requeue at start, stop flag, DEAD → FAILED).
+9. Verify: ruff + pytest; `start-all.ps1 -Only ai-api,worker`; `/health` → `docs/screenshots/P02_health.json`
+   (CLAUDE.md: P02 has no frontend); `logs\worker.log`; `start-all.ps1 -Stop -Only worker,ai-api`. Record, commit, push.
+
+**Results**
+1. `py -3.13 -m venv ai-service\.venv` → created. The agent's
+   `ai-service\.venv\Scripts\python.exe -m pip install -r ai-service\requirements-dev-win-py313.lock` was permission-denied
+   (not retried): `.claude/settings.json` lines 126-128 put `…python.exe -m pip install *` on the **ask** list, which wins over
+   the allow rule `… -m pip install -r *` (line 63). Human ran the same line in their own window → "done";
+   `ai-service\.venv\Scripts\python.exe -m pytest --version` → `pytest 9.1.1`.
+2. Files: `ai-service/pyproject.toml`; `app/` (`errors`, `logging_setup`, `config`, `db`, `models_check`, `security`,
+   `problems`, `main`); `worker/` (`jobs`, `handlers`, `run`); `tests/conftest.py`; `tests/unit/` (test_config,
+   test_security, test_handlers, test_models_check, test_api, test_worker_loop); `tests/it/` (test_worker_it, test_api_it).
+3. First pytest run: `database "civicbrain_test" does not exist` (built in P01, gone since) →
+   `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` → V1-V5 + R__ + seed PASS, `ROLE 7/7`, `NEGATIVE 6/6`,
+   `V4 11/11`, `V5 11/11`, `DB TESTS: ALL PASSED`. Second run: a test-helper bug (`ItData._sql` read rows from UPDATE/DELETE)
+   broke set-up and cleanup and left rows behind → helper fixed, `db-rebuild-test.ps1 -Force` again (same PASS lines).
+4. In `ai-service`: `.\.venv\Scripts\python.exe -m ruff check .` → `All checks passed!` ·
+   `.\.venv\Scripts\python.exe -m pytest -q` → `79 passed, 1 warning in 3.01s` (twice in a row: cleanup leaves nothing) ·
+   `… -m pytest -q -m integration` (before the last 3 unit tests were added) → `11 passed, 65 deselected`.
+   The warning is Starlette's own deprecation notice for `httpx` in its TestClient (no action; not a new dependency).
+5. `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only ai-api,worker` (1st try) → `PASS ai-api healthy`,
+   `FAIL worker exited during start-up`: `relation "jobs" does not exist` - the dev database `civicbrain` is EMPTY until P04
+   (P01 decision), and `/health` had said `db: ok` (only `SELECT 1`). Fixed (DECISION below), `start-all -Stop`, 2nd try →
+   `PASS worker healthy`; `FAIL ai-api not healthy after 120 s` = `/health` now honestly answers 503 on the empty database.
+   `/health` (local GET, body saved as `docs/screenshots/P02_health.json`) → `HTTP 503`
+   `{"status":"degraded","db":"schema missing","osrm":"not used (haversine)","modelsLoaded":false}`.
+   `logs\worker.log`: JSON lines - `model files not ready, REQUIRE_MODELS=false so the worker still runs: MANIFEST.json: not
+   found in MODELS_DIR; …` · `worker started: database civicbrain, polling every 2 s, job types ANALYZE_COMPLAINT,…` ·
+   every 10 s `database civicbrain has no CivicBrain schema yet (no jobs table) - the backend's Flyway migrations create it
+   (P04) - retrying in 10 s`. `logs\ai-api.log`: JSON lines, `AI API ready (database civicbrain, routing haversine)`.
+   `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Stop -Only worker,ai-api` → `PASS stopped worker` · `PASS stopped ai-api`.
+   Claim → handler → finish / retry / DEAD / stale / own-requeue / graceful stop are proven by the integration tests on
+   `civicbrain_test`; live polling on the dev stack can only be seen after P04 creates the schema.
+6. `/verify ai` before the commit: `test_stop_flag_ends_the_loop_after_the_current_job` failed once
+   (`('RUNNING', 1) == ('QUEUED', 0)`: the 2nd job was claimed but never run), then passed 4×. Root cause found and
+   reproduced: V4 `fn_claim_jobs` = `UPDATE jobs … WHERE job_id IN (SELECT … LIMIT n FOR UPDATE SKIP LOCKED)`. With a
+   nested-loop semi join the LIMIT subquery is re-scanned per outer row, rows already updated by the statement are skipped
+   (self-modified), so LIMIT takes the next queued job - forced plan → `fn_claim_jobs(…, 1)` returned **3 rows**; the default
+   plan (Hash Semi Join) returned 1. The plan depends on table statistics → intermittent. The worker processed only
+   `claimed[0]` and left the extra job RUNNING (recovered only by the 15-min stale requeue).
+   Fix in the worker (V1-V5 are frozen): claim rows sorted in queue order (priority, run_after, job_id), all processed;
+   after a stop request the not-started ones are released with `fn_finish_job(false, 'Released: …')`; a WARNING logs the
+   over-claim. Regression tests `tests/it/test_zz_probe_claim_plan.py` force the plan with planner settings (deterministic):
+   V4 over-claim documented, both jobs processed in order, stop releases the second. The stop test now accepts its two
+   correct outcomes (2nd job never claimed, or claimed + released) - its earlier `attempts == 0` was wrong for V4.
+   Final: `.\.venv\Scripts\python.exe -m ruff check .` → `All checks passed!` · `.\.venv\Scripts\python.exe -m pytest -q`
+   → `82 passed, 1 warning` **5 runs in a row** · `start-all.ps1 -Only worker` (new code) → `PASS worker healthy`, then
+   `start-all.ps1 -Stop -Only worker,ai-api` → `PASS stopped worker`.
+
+   | Component | Command | Result line | Result |
+   |---|---|---|---|
+   | ai | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
+   | ai | `.\.venv\Scripts\python.exe -m pytest -q` | `82 passed, 1 warning` (5× in a row; 14 integration on civicbrain_test) | PASS |
+   | db | `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` | `DB TESTS: ALL PASSED` (7/7, 6/6, 11/11, 11/11) | PASS |
+- DECISION (ASK-FIRST, not done): the real fix is a V6 migration that rewrites `fn_claim_jobs` with
+  `WITH picked AS MATERIALIZED (SELECT … LIMIT p_limit FOR UPDATE SKIP LOCKED) UPDATE jobs … FROM picked` (+ db test,
+  three copies) - asked as Q2.
+- DECISION: a missing schema is a dependency problem, not a crash: `/health` checks `jobs` + `fn_claim_jobs` exist
+  (`db: ok | schema missing | unavailable`, 503 unless ok); the worker raises `DependencyError` at start-up, logs it and
+  retries every 10 s, so it starts polling by itself once Flyway has run (start order does not matter).
+- SECURITY NOTE: in the first pytest run (test DB missing) pytest's default long traceback printed the arguments of
+  psycopg's `connect()`, i.e. the `PG_ADMIN_PASSWORD` value, to the agent's terminal (not to a file, not committed; it is in
+  the Claude Code session transcript). Fix: `--tb=short` in `pyproject.toml` (never prints frame arguments; matters for
+  `verify-all.ps1`, which writes pytest output to `logs/`). Human decides whether to change the local `postgres` password
+  (pgAdmin + `.env` - human-only).
+- DECISION: own RUNNING jobs at worker start (locked_by = WORKER_ID) are finished with `fn_finish_job(id, false,
+  'Interrupted: …')` - only V4 functions touch `jobs` (03 §3.8): retry after 1 min (5 min after the 2nd attempt), the 3rd
+  attempt → DEAD (same attempt counting as `fn_requeue_stale_jobs`). No direct UPDATE of `jobs`, no new migration.
+- DECISION: per-job time limit = handler in a daemon thread, the main thread waits in 0.5-s steps (Windows has no
+  SIGALRM; Ctrl+C stays responsive). On timeout the job fails as `JobTimeoutError` and `ctx.cancelled` is set; handlers
+  (P12/P17) call `ctx.check_cancelled()` right before their commit, so a late handler never writes results.
+- DECISION: service-JWT HMAC key = base64-decoded `AI_SERVICE_JWT_SECRET` (same convention as `JWT_SECRET`; check-env
+  already enforces ≥ 32 bytes base64). PyJWT checks signature/HS256-only/aud/iss/required claims; exp/iat/lifetime ≤ 60 s
+  are checked in our code against an injectable clock (fixed-clock tests).
+- DECISION: `POST /v1/jobs/{id}/requeue` copies a finished job (SUCCEEDED/FAILED/DEAD) into a new QUEUED row
+  (`INSERT … SELECT … ON CONFLICT DO NOTHING`, like the V4 triggers) → 202 `{jobId, requeuedFrom, status}`; job still active
+  or another active job for the same item → 409 `ALREADY_EXISTS`; unknown → 404 `NOT_FOUND`; errors as RFC 9457 Problem
+  Details with `X-Request-Id`. No OpenAPI/docs pages on the internal API.
+- DECISION: `GET /health` answers 503 with `status: degraded` when the database is down or has no schema (so start-all
+  reports the AI API as unhealthy); `modelsLoaded` = every required file present with the MANIFEST SHA-256.
+- DECISION: after `fn_requeue_stale_jobs` (and at start) the worker also sets `ai_status = FAILED` for complaints whose
+  latest ANALYZE_COMPLAINT job is DEAD but still look PENDING/PROCESSING (a stale job at max attempts becomes DEAD inside
+  the DB function, which returns only a count).
+- NOTE for P12: 06 §2.4 says "NULL depth answer → the class prior's depth (Tier C)" but gives no number; `config.py` does
+  not invent one - P12 decides and records it.
+- Open / hand-offs: **P04** - after Flyway builds `civicbrain`, start `ai-api,worker` once and check `/health` → 200
+  `db: ok` and `logs\worker.log` without the "no schema" line. **P12** - set `REQUIRE_MODELS=true`; handlers call
+  `ctx.check_cancelled()` before commit. `.claude/settings.json` ask rule vs `pip install -r` allow rule: human's choice.
+- DoD: [x] traces (06 §1/§5, 04 §10, 07 §5, 12 §7, NFR-03) [x] tests green [x] states/errors (Problem Details, 401/404/409/503)
+  [x] ruff clean [x] committed (see git log: `feat(ai): …`)
 
 ### 2026-10-02 — P01 follow-up — Full-history secret scan, `.env` example files readable
 - Requirement(s): docs/07_SECURITY.md §5 (secrets only in `.env`, gitleaks 0 findings); D1 gate "CI green".
