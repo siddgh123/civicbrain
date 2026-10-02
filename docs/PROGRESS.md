@@ -18,7 +18,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 | Prompt | What | Day | Status | Evidence (smoke / tests) |
 |---|---|---|---|---|
-| P01 | Repo, environment check, databases | D1 | IN PROGRESS (waiting: GitHub URL + Q1-Q4) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
+| P01 | Repo, environment check, databases | D1 | IN PROGRESS (pushed; waiting: Q1-Q3) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
 | P02 | AI service skeleton + venv + worker loop | D1 | NOT STARTED | |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | NOT STARTED | |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
@@ -127,6 +127,8 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
 - GitHub: remote `origin` = `https://github.com/siddgh123/civicbrain.git` (public). First `git push -u origin main` by the agent →
   `fatal: could not read Username for 'https://github.com': terminal prompts disabled` (Git Credential Manager cannot open its
   sign-in window from the agent's non-interactive terminal) → human step: one push from the human's own PowerShell window.
+  After the human's push: `git status -sb` → `## main...origin/main`; `git log -1` → `d666bde (HEAD -> main, origin/main)`;
+  agent retry `git push` → `Everything up-to-date` (stored credential works - the agent can push in later prompts).
 - P09: research `ward_id` columns are ward numbers; duplicate loader uses psycopg2 → port the scoring only (docs/INVENTORY.md).
 - P17: Step 13 routing scripts call `router.project-osrm.org` → reuse solver settings only (MVP haversine).
 - Optional (human): check-env WARN "Windows long paths disabled" - only if a path error ever appears:
