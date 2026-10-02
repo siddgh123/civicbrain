@@ -121,10 +121,12 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
 9. `docker version` → Server: Docker Desktop 4.93.0, Engine 29.8.1 (running) - Testcontainers can run.
 
 **Open issues / hand-offs**
-- **P04:** database `civicbrain` existed BEFORE P01 (Step 0 does not create it; `db-setup-main.ps1` left it unchanged). Its content is
-  unknown to the agent (no psql). P04 expects Flyway to build it from empty (V1-V5). If it is the old research DB (restored
-  `civicbrain_backup`), P04 must use `baseline-on-migrate` + `baseline-version: 1` (docs/03 §1); if it is empty, Flyway builds V1-V5.
-  Check before the first backend start (asked the human, Q4).
+- **P04:** database `civicbrain` existed BEFORE P01 (Step 0 does not create it; `db-setup-main.ps1` left it unchanged).
+  Human answer (2026-10-02): it is EMPTY (0 tables), `civicbrain_backup` was NOT restored.
+  DECISION: P04 uses the normal empty-database path - Flyway builds V1-V5 + R__ from scratch (no `baseline-version` override).
+- GitHub: remote `origin` = `https://github.com/siddgh123/civicbrain.git` (public). First `git push -u origin main` by the agent →
+  `fatal: could not read Username for 'https://github.com': terminal prompts disabled` (Git Credential Manager cannot open its
+  sign-in window from the agent's non-interactive terminal) → human step: one push from the human's own PowerShell window.
 - P09: research `ward_id` columns are ward numbers; duplicate loader uses psycopg2 → port the scoring only (docs/INVENTORY.md).
 - P17: Step 13 routing scripts call `router.project-osrm.org` → reuse solver settings only (MVP haversine).
 - Optional (human): check-env WARN "Windows long paths disabled" - only if a path error ever appears:
