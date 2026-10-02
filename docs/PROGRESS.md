@@ -18,7 +18,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 | Prompt | What | Day | Status | Evidence (smoke / tests) |
 |---|---|---|---|---|
-| P01 | Repo, environment check, databases | D1 | IN PROGRESS | |
+| P01 | Repo, environment check, databases | D1 | IN PROGRESS (waiting: GitHub URL + Q1-Q4) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
 | P02 | AI service skeleton + venv + worker loop | D1 | NOT STARTED | |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | NOT STARTED | |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
@@ -108,6 +108,27 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
    `postgres://u:p@`, key/token literal) → 0 hits; no edits needed. The 3 DB scripts use env `CIVICBRAIN_DB_PASSWORD` or `getpass`.
    BLOCKED: a read-only `git ls-files --others` filter that contained the text `.env` (to list would-be-committed env files) - denied by the
    `.env` deny rule; not retried. Covered instead by check-env `PASS .gitignore protects .env` and the `git status` check of step 6.
+6. First commit: `git add -A` → 427 files staged; root level only `.env.example`/`.env.test.example` of the env files; no images
+   (except the GIS reference map png), weights, `storage/`, `logs/`; largest 4.9 MB → `git commit` → `6c2481e chore: kit + existing research files`.
+   `git ls-files --eol`: `scripts/ci/*.sh` and `flyway/*.sql` stored + checked out LF (`.gitattributes`), so CI is unaffected by `autocrlf`.
+7. `pwsh -NoProfile -File scripts\dev\db-setup-main.ps1` → `PASS roles civicbrain_app and civicbrain_ai ready` ·
+   `PASS database civicbrain already exists (left unchanged)`.
+   `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` → V1-V5 + R__ + seed PASS; `application tables: 74 | wards: 23 |
+   fn_locate_point(18.7440,73.6760) ward_number/ward_id: 1/21`; `ROLE TESTS PASSED: 7 / 7` · `NEGATIVE TESTS PASSED: 6 / 6` ·
+   `V4 TESTS PASSED: 11 / 11` · `V5 TESTS PASSED: 11 / 11` · `DB TESTS: ALL PASSED`.
+8. `pwsh -NoProfile -File scripts\dev\start-all.ps1 -SelfTest` → `selftest window started`; 5 s later the same command →
+   `SELFTEST PASS: the window started by the previous command is still alive` · `PASS stopped selftest`. **AGENT_CAN_START=yes**
+9. `docker version` → Server: Docker Desktop 4.93.0, Engine 29.8.1 (running) - Testcontainers can run.
+
+**Open issues / hand-offs**
+- **P04:** database `civicbrain` existed BEFORE P01 (Step 0 does not create it; `db-setup-main.ps1` left it unchanged). Its content is
+  unknown to the agent (no psql). P04 expects Flyway to build it from empty (V1-V5). If it is the old research DB (restored
+  `civicbrain_backup`), P04 must use `baseline-on-migrate` + `baseline-version: 1` (docs/03 §1); if it is empty, Flyway builds V1-V5.
+  Check before the first backend start (asked the human, Q4).
+- P09: research `ward_id` columns are ward numbers; duplicate loader uses psycopg2 → port the scoring only (docs/INVENTORY.md).
+- P17: Step 13 routing scripts call `router.project-osrm.org` → reuse solver settings only (MVP haversine).
+- Optional (human): check-env WARN "Windows long paths disabled" - only if a path error ever appears:
+  `git config --global core.longpaths true` (the agent never changes global git config).
 
 <!-- Copy this block for every task -->
 <!--
