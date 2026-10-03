@@ -45,8 +45,16 @@ SOURCES = (
     "| Source (`data/yolo/dataset_sources.csv`) | Licence |\n"
     "|---|---|\n"
     "| S1 RDD2022-India (https://universe.roboflow.com/prakhar-kpb1v/rdd2022-india-il8ju/dataset/5) | CC BY 4.0 |\n"
-    "| S2 Waterlogging Dataset (project download source) | to be documented (see `dataset_sources.csv`) |\n"
+    "| S2 Waterlogging Dataset (https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging) | CC BY 4.0 |\n"
     "| S3 GarbagePile (https://universe.roboflow.com/objectdetectiondemo-irh54/garbagepile/dataset/1) | CC BY 4.0 |\n"
+)
+# S2 images went through scripts/yolo/convert_waterlogging_masks.py: re-saved with Pillow (same size), box from the mask
+S2_ATTRIBUTION = (
+    'Attribution for `{fixture}`: "Waterlogging Dataset" by yolo and car accident detection '
+    "(https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging), licensed under CC BY 4.0 "
+    "(https://creativecommons.org/licenses/by/4.0/). Converted, not an unchanged copy: the project re-saved the downloaded "
+    "`{original}` as JPEG (same {size} size, not cropped or resized; `scripts/yolo/convert_waterlogging_masks.py`) and made "
+    "the box in `{label}` from the dataset's segmentation mask.\n"
 )
 
 
@@ -134,6 +142,7 @@ def main(argv: list[str] | None = None) -> int:
     out.mkdir(parents=True, exist_ok=True)
 
     rows = []
+    attributions = []
     for name, img, lbl in picks:
         dest = out / f"{name}.jpg"
         if img.suffix.lower() in {".jpg", ".jpeg"}:
@@ -147,6 +156,9 @@ def main(argv: list[str] | None = None) -> int:
             size = im.size
         rows.append(f"| `{name}.jpg` | test | `{img.name}` | {source_of(img.name)} | {size[0]}x{size[1]} | `{label_line}` "
                     f"| {box_px(label_line, size)} |")
+        if source_of(img.name) == "S2":
+            attributions.append(S2_ATTRIBUTION.format(fixture=f"{name}.jpg", original=img.name, size=f"{size[0]}x{size[1]}",
+                                                      label=f"{name}.txt"))
         print(f"wrote {name}.jpg + {name}.txt  <- test/{img.name}")
 
     with Image.open(out / "pothole_1.jpg") as im:
@@ -177,6 +189,7 @@ def main(argv: list[str] | None = None) -> int:
         "From the project dataset (`data/yolo`, sources and licences in `data/yolo/dataset_sources.csv`). Used here only as\n"
         "test data; the photos are not Talegaon field photos. CC BY 4.0 attribution: the source links below.\n\n"
         + SOURCES
+        + "".join("\n" + a for a in attributions)
     )
     (out / "README.md").write_text(readme, encoding="utf-8")
     print(f"wrote {out / 'README.md'}")

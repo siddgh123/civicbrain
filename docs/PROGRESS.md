@@ -20,7 +20,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 |---|---|---|---|---|
 | P01 | Repo, environment check, databases | D1 | DONE (human yes 2026-10-02) | check-env 0 FAIL (13 WARN) · SQL tests 4/4 (7/7, 6/6, 11/11, 11/11) · AGENT_CAN_START=yes · INVENTORY written · commit 6c2481e |
 | P02 | AI service skeleton + venv + worker loop | D1 | DONE (human yes 2026-10-02 19:45) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled (V6 fix = Phase 2) · commit f0575ee |
-| P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | IN PROGRESS (waiting for the human's Kaggle step) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed |
+| P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | DONE (human yes 2026-10-02 20:29) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed · Kaggle cells 1-4 OK, 0.9 min/epoch, committed run "Running" (finish ≈ 22:30 at the latest) · commit 8141812 |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | NOT STARTED | |
 | P05 | Frontend skeleton | D2 | NOT STARTED | |
@@ -50,6 +50,13 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P29 | Report material (metrics, screenshots, limits) | D7 | NOT STARTED | |
 | P30 | Rehearsal + freeze + tag mvp-v1 | D7 | NOT STARTED | |
 
+**Open issues (carry into the named prompt)**
+- **RESOLVED 2026-10-03 09:36 - P03 S2 licence (`tests/fixtures/images/waterlogging_1.jpg`):** CC BY 4.0, attribution added.
+  S2 = "Waterlogging Dataset" by yolo and car accident detection,
+  https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging (licence confirmed by the human/team).
+  `data/yolo/dataset_sources.csv` S2 row (URL + `CC BY 4.0`) and `tests/fixtures/images/README.md` (attribution) updated;
+  the fixture stays, nothing to do in P13.
+
 ## Full plan (after the deadline)
 - **App track:** P0 — Machines, repo, Antigravity (status: covered by the MVP days; re-check its gate)
 - **ML track:** P2 — ML data and models (status: NOT STARTED — MVP used the existing images only)
@@ -76,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-02 — P03 — Dataset check, test fixtures, Kaggle package (IN PROGRESS)
+### 2026-10-02 — P03 — Dataset check, test fixtures, Kaggle package (DONE, human yes 2026-10-02 20:29)
 - Requirement(s): docs/11_DATA_SOURCES.md §0, §6; docs/08_TEST_PLAN.md §2 (fixtures); frozen rule "YOLO classes (Step 9)".
 **Plan** (Claude Code, Auto mode):
 1. Labels present? `docs/INVENTORY.md`: 2,708/351/339 label files, classes 0-3 only → continue (P03b not needed).
@@ -133,11 +140,26 @@ Test: `prepare_mvp_dataset.py` exit 0.
   ≥ 320 px (12 `IMAGE_TOO_SMALL`), no EXIF rotation, box 5-60 % of the image preferred. Garbage has no such image (the 4
   single-box garbage test images are close-ups, box 84-100 %) → fallback to the smallest box (84 %). JPEGs copied byte for
   byte, so P08's golden box needs no rescaling. The script refuses to overwrite fixtures without `--force`.
-- OPEN (licence, human/team): `waterlogging_1.jpg` comes from S2 "Waterlogging Dataset", whose licence is "To be documented"
-  in `data/yolo/dataset_sources.csv` (no licence file in `data/yolo/raw/waterlogging*`). The repo is public. Team: document
-  the S2 licence, or later replace this fixture with a team photo + hand-made label line (every waterlogging test image is
-  S2, so `--exclude` cannot avoid it). S1/S3 are CC BY 4.0 (attribution in the fixture README).
-- Expected Kaggle finish: start + epochs × min/epoch (max 120 epochs, early stop 25) - filled in after the human's cell-4 timing.
+- Licence finding: `waterlogging_1.jpg` comes from S2 "Waterlogging Dataset", whose licence was "To be documented" in
+  `data/yolo/dataset_sources.csv` (no licence file in `data/yolo/raw/waterlogging*`); all 45 waterlogging test images are S2
+  (`image_<n>`), so `--exclude` cannot avoid it. S1/S3 are CC BY 4.0 (attribution in the fixture README).
+  DECISION (human, 2026-10-02 20:29): keep the file for now, repo stays public; an interim "not yet confirmed - replace in P13"
+  note went into the fixture README and the log (never committed). The CSV edit was blocked - Excel had the file open - and
+  never made.
+  RESOLVED (human, 2026-10-03 09:36): S2 licence confirmed - **CC BY 4.0** (https://creativecommons.org/licenses/by/4.0/),
+  "Waterlogging Dataset" by yolo and car accident detection,
+  https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging. Changes: `data/yolo/dataset_sources.csv`
+  S2 row only (source URL + `CC BY 4.0`; UTF-8 BOM, delimiter, quoting and line endings kept); `make_test_fixtures.py`
+  writes the S2 table row + an attribution line per S2 fixture → `--force` re-run: 10 fixture files byte-identical
+  (`Get-FileHash` before/after), only `README.md` changed. Attribution says "converted, not an unchanged copy": the
+  downloaded `raw/waterlogging_source/Dataset/images/image_101.jpg` (28,670 B) differs from the dataset/fixture file
+  (28,663 B, same 512x384) because `scripts/yolo/convert_waterlogging_masks.py` re-saves every image with Pillow and makes
+  the box from the segmentation mask. P13 replacement cancelled.
+- Human answers (2026-10-02 20:29): **Q1 yes** - cells 1-4 ended with `OK`, cell 4 `TIMING`: **0.9 min per epoch** ·
+  **Q2 yes** - committed version shows "Running".
+- Expected Kaggle finish (P08 needs it): committed ≈ 20:29 + 120 epochs × 0.9 min = 108 min + ≈ 10 min (setup, dataset check,
+  test-split evaluation, ONNX export) → **≈ 22:30 on 2026-10-02 at the latest**; earlier if early stopping (patience 25)
+  ends training. Then: Output tab → `civicbrain_yolo_outputs.zip` → `C:\dev\civicbrain\kaggle_download\` (P08).
 
 ### 2026-10-02 — P02 — AI service skeleton, venv and worker loop (DONE, human yes 2026-10-02 19:45)
 - Requirement(s): NFR-03 (stale jobs requeued); docs/06_AI_PIPELINE.md §1, §5; docs/02_ARCHITECTURE.md §4, §6;
@@ -365,6 +387,7 @@ Files: `docs/INVENTORY.md`, `docs/PROGRESS.md`, `.gitignore` (if needed), kit sc
 | 2026-10-01 | 7-day MVP mode (`09_BUILD_PLAN_7DAY.md`): existing YOLO images only, haversine routing, Twilio sandbox, reduced test list | Deadline 7 Oct 2026; no time for new photos | Team |
 | 2026-09-30 | Requirements v1.1: ADMIN bootstrap script, officer tabs Needs review / Rejected with accept / restore | "Officers see everything" and first-admin creation were not buildable | Kit |
 | 2026-10-02 | `fn_claim_jobs` over-claim (V4): handled in the worker for the MVP; V6 migration with a MATERIALIZED CTE in Phase 2 | Reproduced in P02 tests; V1-V5 frozen, no new migration during the 7-day MVP | Human (P02 Q2) |
+| 2026-10-03 | S2 "Waterlogging Dataset" (yolo and car accident detection, Roboflow) licence = CC BY 4.0: fixture `waterlogging_1.jpg` stays in the public repo with attribution; the interim plan of 2026-10-02 (replace it in P13 if unconfirmed) is cancelled | Licence confirmed by the team; CC BY 4.0 allows redistribution with attribution and a note of changes | Human (P03 follow-up) |
 
 ## ASVS L2 checklist evidence (fill in P10)
 | Area | Item | Test / evidence |

@@ -23,5 +23,7 @@ test data; the photos are not Talegaon field photos. CC BY 4.0 attribution: the 
 | Source (`data/yolo/dataset_sources.csv`) | Licence |
 |---|---|
 | S1 RDD2022-India (https://universe.roboflow.com/prakhar-kpb1v/rdd2022-india-il8ju/dataset/5) | CC BY 4.0 |
-| S2 Waterlogging Dataset (project download source) | to be documented (see `dataset_sources.csv`) |
+| S2 Waterlogging Dataset (https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging) | CC BY 4.0 |
 | S3 GarbagePile (https://universe.roboflow.com/objectdetectiondemo-irh54/garbagepile/dataset/1) | CC BY 4.0 |
+
+Attribution for `waterlogging_1.jpg`: "Waterlogging Dataset" by yolo and car accident detection (https://universe.roboflow.com/yolo-and-car-accident-detection-xaltb/waterlogging), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Converted, not an unchanged copy: the project re-saved the downloaded `image_101.jpg` as JPEG (same 512x384 size, not cropped or resized; `scripts/yolo/convert_waterlogging_masks.py`) and made the box in `waterlogging_1.txt` from the dataset's segmentation mask.
