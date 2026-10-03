@@ -156,10 +156,12 @@ class Ctx:
 
 
 def code_of(r: httpx.Response) -> str:
+    """The problem 'code' of a JSON object body; "" for a JSON array (e.g. docs/04 sec. 3 /public/categories) or non-JSON."""
     try:
-        return str(r.json().get("code", ""))
+        body = r.json()
     except ValueError:
         return ""
+    return str(body.get("code", "")) if isinstance(body, dict) else ""
 
 
 def brief(r: httpx.Response) -> str:
