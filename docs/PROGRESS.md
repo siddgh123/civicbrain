@@ -26,7 +26,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
-| P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | IN PROGRESS (verified 15:10, waiting for the human's yes/no) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
+| P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
 | P11 | Citizen screens | D3 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P08 — Text classifier, YOLO detector, authenticity checks (verified 15:10, waiting for the human's yes/no)
+### 2026-10-03 — P08 — Text classifier, YOLO detector, authenticity checks (DONE, human yes 2026-10-03 15:16)
 - Requirement(s): FR-20 (authenticity), FR-21 (text classification + mismatch badge), FR-22 (YOLO detection); docs/06 §2,
   §2.1, §2.2, §2.3, §5; docs/03 §3-§4; rule 30; 02-frozen-rules (YOLO classes); 09_7DAY §4 (YOLO smoke `pothole_1.jpg`).
 - Human step: `kaggle_download\civicbrain_yolo_outputs.zip` (38.9 MB, 2 Oct 21:21) was already in place → no wait.
@@ -180,6 +180,9 @@ facts from PostGIS on `civicbrain_test`). Verify: ruff, pytest (models tests run
   **Human: please delete the folder `C:\tmp\Ultralytics`** (only a settings file; I may not delete or work outside the repo).
 - Note: `docs/reports/dataset_report.json` (from the Kaggle zip) contains the Kaggle input path with the account name
   (`/kaggle/input/datasets/<account>/civicbrain-yolo/...`) - not a secret, committed as the installer intends.
+- Human answer (2026-10-03 15:16): **Q1 yes** - use the YOLO numbers as they are, stated as "existing test split, not a
+  Talegaon field test". **Q2 yes** - 0.90 accuracy on the 40 kit-written sanity sentences is OK. The human deletes the stray
+  `C:\tmp\Ultralytics` settings folder.
 - Open / hand-offs: **P09** MiniLM (`/health` then all "ok"). **P12** wires the three modules into ANALYZE_COMPLAINT
   (step 1 computes `phash` with `authenticity.phash_int64` and stores it before `load_facts`; YOLO only for categories with a
   `yolo_class_id`; `write_detections` returns the primary `detection_id` for `defect_measurements`), then
