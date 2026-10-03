@@ -22,7 +22,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P02 | AI service skeleton + venv + worker loop | D1 | DONE (human yes 2026-10-02 19:45) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled (V6 fix = Phase 2) · commit f0575ee |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | DONE (human yes 2026-10-02 20:29) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed · Kaggle cells 1-4 OK, 0.9 min/epoch, committed run "Running" (finish ≈ 22:30 at the latest) · commit 8141812 |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
-| P04 | Backend skeleton + Flyway + demo seed | D2 | IN PROGRESS (built + verified, waiting for Q1-Q2) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
+| P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | NOT STARTED | |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | NOT STARTED | |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P04 — Backend skeleton, Flyway, demo seed (IN PROGRESS)
+### 2026-10-03 — P04 — Backend skeleton, Flyway, demo seed (DONE, human yes 2026-10-03 10:24)
 - Requirement(s): docs/02_ARCHITECTURE.md §3, §6; docs/03_DATABASE.md §1, §3, §5; docs/07_SECURITY.md §2, §4;
   docs/12_ERROR_HANDLING.md §1-§3; rule 10; 09_BUILD_PLAN_7DAY §4 "context + Flyway V1-V5 (74 tables, fn_locate_point ward 1)".
 **Plan** (Claude Code, Auto mode):
@@ -179,12 +179,19 @@ Verify: `.\mvnw.cmd -q verify` · `start-all.ps1 -Only backend` (Flyway 6 migrat
   filter + advice + a `@TestComponent` test controller, no DB), integration tests in `com.civicbrain.it.*` (`@IntegrationTest`).
   The generated `CivicbrainApplicationTests` (contextLoads, never run) was moved to `it/ApplicationIT.java` (needs a DB).
   `application.properties` (only `spring.application.name`) renamed to `application.yml`.
+- Human answers (2026-10-03 10:24): **Q1 yes** - Chrome shows `{"status":"UP"}` at http://localhost:8080/actuator/health ·
+  **Q2 yes** - CI job "Backend (mvnw verify, Testcontainers, JaCoCo)" green for `712de71`.
+- BLOCKED (not retried): one combined `git add -A; git status --short | Select-String -Pattern '<forbidden-path regex>'` -
+  permission-denied (the regex contained the text `.env`, which the deny rules match, as in P01). Replaced by `git add -A` and a
+  plain `git status --short` read by eye: 58 source files, no env/secret/storage/logs/target/HELP.md. `gh` is not installed,
+  so the CI result (Q2) is checked by the human.
 - Open / hand-offs: **P06** - JWT resource server + role areas in `SecurityConfig`, `/auth/refresh`+`/logout` Origin/CSRF check
   (`AppProperties.baseUrl/extraOrigins`), e2e rate limits, `@Retryable` for 40001/40P01. **P10** - Thymeleaf template folder
   (removes the WARN). Mockito prints "self-attaching" (JDK 25 warning only). `backend/HELP.md` (Initializr help) is git-ignored by
   `backend/.gitignore`; the human may delete it.
 - DoD: [x] traces (02 §3/§6, 03 §1/§3/§5, 07 §2/§4, 12 §1-§3, 09_7DAY §4) [x] tests written first, green [x] error states
-  (Problem Details for 400/401/403/404/409/413/422/500/503) [x] no secrets in yml/logs [ ] committed (below)
+  (Problem Details for 400/401/403/404/409/413/422/500/503) [x] no secrets in yml/logs [x] committed `712de71`, pushed
+  (`48dbbb8..712de71  main -> main`)
 
 ### 2026-10-02 — P03 — Dataset check, test fixtures, Kaggle package (DONE, human yes 2026-10-02 20:29)
 - Requirement(s): docs/11_DATA_SOURCES.md §0, §6; docs/08_TEST_PLAN.md §2 (fixtures); frozen rule "YOLO classes (Step 9)".
