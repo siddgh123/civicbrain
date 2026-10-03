@@ -5,7 +5,7 @@ The agent updates this file in the same commit as every task. Humans approve eac
 ## Current plan: 7-DAY MVP (`docs/09_BUILD_PLAN_7DAY.md`), 1–7 Oct 2026
 | Day | Date | Gate (from §5) | Status | Evidence / bugs | Approved by |
 |---|---|---|---|---|---|
-| D1 | Thu 1 Oct | build laptop ready, backend + Flyway + seed, Vite layout, worker claims a job, YOLO training started, CI green | PASSED – awaiting approval (2026-10-03 11:59) | check-env all required PASS (8 WARN) · `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 70 + 13 IT 0 failures incl. SchemaIT 74 tables + ward 1 · AI ruff clean, 82 passed · frontend lint/typecheck, 39 passed) · frontend build OK · Flyway v5 on `civicbrain`, 23 wards, seed 500 · dataset check exit 0 · Kaggle run committed · CI green incl. full-history gitleaks (human yes) · SCRIPT FIX `verify-all`/`start-backend`/`seed-e2e` `[NullString]::Value` (Task log "D1 gate") | |
+| D1 | Thu 1 Oct | build laptop ready, backend + Flyway + seed, Vite layout, worker claims a job, YOLO training started, CI green | PASSED (human yes 2026-10-03 12:12; tag `d1-done`) | check-env all required PASS (8 WARN) · `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 70 + 13 IT 0 failures incl. SchemaIT 74 tables + ward 1 · AI ruff clean, 82 passed · frontend lint/typecheck, 39 passed) · frontend build OK · Flyway v5 on `civicbrain`, 23 wards, seed 500 · dataset check exit 0 · Kaggle run committed · CI green incl. full-history gitleaks (human yes) · SCRIPT FIX `verify-all`/`start-backend`/`seed-e2e` `[NullString]::Value` (Task log "D1 gate") · commit b0a5f43 | human (yes 2026-10-03 12:12) |
 | D2 | Fri 2 Oct | register → OTP → login, admin exists, priority 0 mismatches, duplicates test, YOLO ONNX detects | NOT STARTED | | |
 | D3 | Sat 3 Oct | phone capture → submit → "Under review" < 60 s, SUBMITTED mail, duplicate → Linked | NOT STARTED | | |
 | D4 | Sun 4 Oct | officer map/detail/actions, contractor created, WhatsApp sandbox, optimizer test | NOT STARTED | | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — D1 gate (`/phase-gate D1`, "after P05") — PASSED – awaiting approval (2026-10-03 11:59)
+### 2026-10-03 — D1 gate (`/phase-gate D1`, "after P05") — PASSED (human yes 2026-10-03 12:12, tag `d1-done`)
 - Gate items: `prompts/README.md` "Day gates" D1 row + the 09_BUILD_PLAN_7DAY §4 tests that exist so far (DB SQL tests,
   backend IT "context + Flyway V1-V5 (74 tables, fn_locate_point ward 1)"); 09_7DAY §5 Gate D1 extras (worker claims and
   finishes a job, Flyway history on `civicbrain`). No smoke stage exists yet (`auth` comes with P06).
@@ -131,7 +131,12 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
   (script + backend log). One read-only Bash listing of mine used `cd backend/target` in run 1, which moved the PowerShell
   location; the next `npm run build` failed with `ENOENT … backend\target\package.json` (nothing written), re-run in
   `frontend` → green. A diagnostic probe of the `$null` behaviour was denied by the auto-mode check and not retried.
-- Open: human approval "Approve D1? (yes/no)" → on yes: D1 PASSED, commit, push, tag `d1-done`.
+- Commit: the auto-mode check refused my commit of the fix + run-2 record (its message named a human-only script); the human
+  committed and pushed it as `b0a5f43` "fix(infra): really unset env vars in dev scripts; D1 gate passed - awaiting approval".
+  Rule from the human: commit messages never name a human-only script.
+- Human answer (2026-10-03 12:12): **Approve D1: yes** → D1 PASSED, commit, push, tag `d1-done`.
+- Next: `/run-prompt P06` (auth backend + E2E seed runner + smoke auth; first real run of the fixed `seed-e2e.ps1` and the
+  E2E start path).
 
 ### 2026-10-03 — P05 — Frontend skeleton (DONE, human yes 2026-10-03 11:28)
 - Requirement(s): docs/05_UI_SPEC.md §1, §2, §3 (landing), §7, §8; docs/12_ERROR_HANDLING.md §2, §6; rule 20; docs/09_BUILD_PLAN.md
