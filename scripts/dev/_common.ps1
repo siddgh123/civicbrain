@@ -52,7 +52,12 @@ function Import-DotEnv {
             if ($hash -ge 0) { $val = $val.Substring(0, $hash).TrimEnd() }
         }
         $vars[$key] = $val
-        if (-not $NoProcessEnv) { [Environment]::SetEnvironmentVariable($key, $val, 'Process') }
+        if (-not $NoProcessEnv) {
+            # KEY= (empty) removes the variable, as before .NET 9: since .NET 9 SetEnvironmentVariable(name, "") keeps an
+            # empty variable, which would hide Spring defaults like ${KEY:x}; [NullString]::Value is the real null
+            if ($val -eq '') { [Environment]::SetEnvironmentVariable($key, [NullString]::Value, 'Process') }
+            else { [Environment]::SetEnvironmentVariable($key, $val, 'Process') }
+        }
     }
     return $vars
 }

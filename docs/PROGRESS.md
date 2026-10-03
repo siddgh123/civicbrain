@@ -83,6 +83,23 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
+### 2026-10-03 — D1 follow-up — SCRIPT FIX `Import-DotEnv` empty values (DONE 2026-10-03 12:16, human request)
+- **SCRIPT FIX:** same root cause as the D1 gate fix (PowerShell turns `$null` into `""`; since .NET 9
+  `SetEnvironmentVariable(name, "")` keeps an empty variable). `scripts/dev/_common.ps1` `Import-DotEnv`: a `.env` line
+  `KEY=` (empty value) now calls `SetEnvironmentVariable($key, [NullString]::Value, 'Process')` → the variable is removed (as
+  before .NET 9), so Spring defaults like `${KEY:x}` apply again; non-empty values are set as before. The returned dictionary
+  is unchanged (`$vars[$key] = $val`, empty string kept), so callers that read it (e.g. verify-all's `.env` hiding) work as before.
+- Checks (repo root):
+
+  | Check | Command | Result |
+  |---|---|---|
+  | env | `pwsh -NoProfile -File scripts\dev\check-env.ps1` | `RESULT: all required checks PASS (8 WARN)` (same 8 WARN as the D1 gate) |
+  | restart | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | stopped backend/frontend/worker/ai-api; `PASS mailpit healthy` · `PASS ai-api healthy` · `PASS worker healthy` · `PASS frontend healthy` · `PASS backend healthy` · `PASS stack 'dev' is up: http://localhost:5173   (Mailpit http://localhost:8025)` |
+  | status | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Status` | mailpit, ai-api, worker, frontend, backend: Healthy `yes` (all 5) |
+  | backend log (start 06:45 UTC) | `logs/backend.log` | `Successfully validated 6 migrations` · `Started CivicbrainApplication in 5.184 seconds` · `DB check: 23 wards visible to civicbrain_app`; only WARN = Thymeleaf "Cannot find template location" (also in the 10:13 start, not related) |
+  | worker log (since restart) | `logs/worker.log` | `worker started: database civicbrain, polling every 2 s …`; WARNING "model files not ready, REQUIRE_MODELS=false" (expected until P08); no ERROR |
+- Note: Mailpit is now healthy too (it was not running at the D1 gate; P06 needs it for OTP mails).
+
 ### 2026-10-03 — D1 gate (`/phase-gate D1`, "after P05") — PASSED (human yes 2026-10-03 12:12, tag `d1-done`)
 - Gate items: `prompts/README.md` "Day gates" D1 row + the 09_BUILD_PLAN_7DAY §4 tests that exist so far (DB SQL tests,
   backend IT "context + Flyway V1-V5 (74 tables, fn_locate_point ward 1)"); 09_7DAY §5 Gate D1 extras (worker claims and
