@@ -37,10 +37,19 @@ function Invoke-Step([string]$Name, [scriptblock]$Body) {
     $script:results.Add([pscustomobject]@{ Step = $Name; Result = $status; Seconds = [math]::Round($sw.Elapsed.TotalSeconds) })
 }
 # Runs $Body with some environment variables replaced ($null = removed) and restores them afterwards.
+# A removal must pass [NullString]::Value: PowerShell turns $null into "" for .NET string parameters, and since .NET 9
+# SetEnvironmentVariable(name, "") sets an empty value instead of deleting the variable.
 function Invoke-WithEnv([hashtable]$Vars, [scriptblock]$Body) {
     $saved = @{}
-    foreach ($k in $Vars.Keys) { $saved[$k] = [Environment]::GetEnvironmentVariable($k); [Environment]::SetEnvironmentVariable($k, $Vars[$k]) }
-    try { & $Body } finally { foreach ($k in $saved.Keys) { [Environment]::SetEnvironmentVariable($k, $saved[$k]) } }
+    foreach ($k in $Vars.Keys) {
+        $saved[$k] = [Environment]::GetEnvironmentVariable($k)
+        if ($null -eq $Vars[$k]) { [Environment]::SetEnvironmentVariable($k, [NullString]::Value) } else { [Environment]::SetEnvironmentVariable($k, $Vars[$k]) }
+    }
+    try { & $Body } finally {
+        foreach ($k in $saved.Keys) {
+            if ($null -eq $saved[$k]) { [Environment]::SetEnvironmentVariable($k, [NullString]::Value) } else { [Environment]::SetEnvironmentVariable($k, $saved[$k]) }
+        }
+    }
 }
 function Invoke-Checked([string]$Exe, [string[]]$Arguments, [string]$Dir, [string]$What) {
     Push-Location $Dir

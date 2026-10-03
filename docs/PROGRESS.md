@@ -5,7 +5,7 @@ The agent updates this file in the same commit as every task. Humans approve eac
 ## Current plan: 7-DAY MVP (`docs/09_BUILD_PLAN_7DAY.md`), 1–7 Oct 2026
 | Day | Date | Gate (from §5) | Status | Evidence / bugs | Approved by |
 |---|---|---|---|---|---|
-| D1 | Thu 1 Oct | build laptop ready, backend + Flyway + seed, Vite layout, worker claims a job, YOLO training started, CI green | NOT STARTED | | |
+| D1 | Thu 1 Oct | build laptop ready, backend + Flyway + seed, Vite layout, worker claims a job, YOLO training started, CI green | PASSED – awaiting approval (2026-10-03 11:59) | check-env all required PASS (8 WARN) · `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 70 + 13 IT 0 failures incl. SchemaIT 74 tables + ward 1 · AI ruff clean, 82 passed · frontend lint/typecheck, 39 passed) · frontend build OK · Flyway v5 on `civicbrain`, 23 wards, seed 500 · dataset check exit 0 · Kaggle run committed · CI green incl. full-history gitleaks (human yes) · SCRIPT FIX `verify-all`/`start-backend`/`seed-e2e` `[NullString]::Value` (Task log "D1 gate") | |
 | D2 | Fri 2 Oct | register → OTP → login, admin exists, priority 0 mismatches, duplicates test, YOLO ONNX detects | NOT STARTED | | |
 | D3 | Sat 3 Oct | phone capture → submit → "Under review" < 60 s, SUBMITTED mail, duplicate → Linked | NOT STARTED | | |
 | D4 | Sun 4 Oct | officer map/detail/actions, contractor created, WhatsApp sandbox, optimizer test | NOT STARTED | | |
@@ -82,6 +82,56 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — D1 gate (`/phase-gate D1`, "after P05") — PASSED – awaiting approval (2026-10-03 11:59)
+- Gate items: `prompts/README.md` "Day gates" D1 row + the 09_BUILD_PLAN_7DAY §4 tests that exist so far (DB SQL tests,
+  backend IT "context + Flyway V1-V5 (74 tables, fn_locate_point ward 1)"); 09_7DAY §5 Gate D1 extras (worker claims and
+  finishes a job, Flyway history on `civicbrain`). No smoke stage exists yet (`auth` comes with P06).
+- **Run 1 (11:37-11:44) - FAIL:** `pwsh -NoProfile -File scripts\dev\verify-all.ps1 -SkipE2E` → `VERIFY-ALL: FAILED`: DB PASS,
+  Backend FAIL, AI/frontend NOT RUN (log `logs/verify-all_20261003_113731.txt`). All 13 ITs: `BindValidationException … field
+  'baseUrl': rejected value []; … origin System Environment Property "APP_BASE_URL"`. A direct `.\mvnw.cmd -q verify` (in
+  `backend`) was green (70 + 13, 0 failures) → the backend code is fine, the wrapper script was wrong. All other items passed.
+  CI was not yet confirmed. The commit of the run-1 record was refused by the auto-mode check (red verify-all), so it was left
+  staged and goes into this commit.
+- **SCRIPT FIX (human yes 2026-10-03, Q1):** root cause (human): PowerShell turns `$null` into `""` for .NET `string`
+  parameters, and since .NET 9 `[Environment]::SetEnvironmentVariable(name, "")` sets an empty value instead of deleting the
+  variable. `verify-all.ps1` hid the `.env` keys from the test runs with `SetEnvironmentVariable($k, $null)` → the JVM saw
+  `APP_BASE_URL=""`, the environment beats `application-test.yml` (`app.base-url: http://localhost:5173`) → `@NotBlank` failed.
+  CI never defines the variable → green there. Changes (pass `[NullString]::Value`, the real null):
+  1. `scripts/dev/verify-all.ps1` `Invoke-WithEnv`: set loop and restore loop (`$null` value → `[NullString]::Value`, else the value).
+  2. `scripts/dev/start-backend.ps1` line 34 (E2E profile: `SMTP_USER`/`SMTP_PASSWORD` unset → no SMTP login to Mailpit).
+  3. `scripts/dev/seed-e2e.ps1` line 86 (same two keys for the `e2e-seed` run).
+  `scripts/` grep: no other `SetEnvironmentVariable(…, $null)` / `$env:X = $null`. Verified by run 2 (verify-all backend step
+  green). Items 2-3 are verified when the E2E stack first runs (P06: `seed-e2e.ps1`, `start-all.ps1 -E2E`); `start-backend.ps1`
+  is human-only, so it was edited, not run.
+  Observation (not changed): `_common.ps1` `Import-DotEnv` line 55 sets every `.env` key into the process; with .NET 9 a key
+  with an empty value (`KEY=`) is now an empty variable instead of an absent one, so a Spring default `${KEY:x}` would no longer
+  apply for it. The dev stack starts healthy with the current `.env`.
+- **Run 2 (11:57-11:59) - all PASS:**
+
+  | Gate item | Evidence (command → result) | Result |
+  |---|---|---|
+  | check-env 0 FAIL | `pwsh -NoProfile -File scripts\dev\check-env.ps1` → `RESULT: all required checks PASS (8 WARN)` (long paths, `civicbrain_e2e` not yet (P06), OSRM (Phase 2), mailpit exe (Docker fallback), ffmpeg, k6, 7z, YOLO weights (P08)) | PASS |
+  | `verify-all.ps1 -SkipE2E` | `VERIFY-ALL: GREEN (SKIP = component not built yet)` - DB PASS 1 s · Backend PASS 49 s · AI PASS 6 s · Frontend PASS 15 s · E2E SKIP; log `logs/verify-all_20261003_115728.txt` | PASS |
+  | SQL tests 4/4 | (verify-all DB step) `ROLE TESTS PASSED: 7 / 7` · `NEGATIVE TESTS PASSED: 6 / 6` · `V4 TESTS PASSED: 11 / 11` · `V5 TESTS PASSED: 11 / 11` | PASS |
+  | backend verify green | (verify-all backend step, `mvnw -q -B verify` without `.env` values) reports 11:57/11:58: surefire `tests=70 failures=0 errors=0 skipped=0`, failsafe `tests=13 failures=0 errors=0 skipped=0` | PASS |
+  | §4 IT context + Flyway V1-V5, 74 tables, `fn_locate_point` ward 1 | `SchemaIT` `Tests run: 5, Failures: 0, Errors: 0` (`flywayAppliedV1ToV5AndTheGrantsMigration`, `theApplicationTablesOfTheSchemaReferenceExist` (74), `locatePointFindsWardOneInsideTheBoundary`, 23 wards, job enqueue) | PASS |
+  | Flyway built `civicbrain` | `logs/backend.log`: `Successfully applied 6 migrations to schema "public", now at version v5` · `DB check: 23 wards visible to civicbrain_app`; `start-all.ps1 -Status` → backend/frontend/ai-api/worker healthy (backend runs with `ddl-auto=validate`) | PASS |
+  | seed 500 complaints | `pwsh -NoProfile -File scripts\dev\db-setup-main.ps1 -Seed` (read-only when data exists; checks V5 in `flyway_schema_history` first) → `PASS complaints already has 500 rows - seed skipped` | PASS |
+  | AI pytest green (worker claims + finishes a job on `civicbrain_test`) | (verify-all AI step) `All checks passed!` · `82 passed, 1 warning in 4.36s` (0 skipped; `tests/it/test_worker_it.py::test_successful_job_is_succeeded`, retry/dead/stale/timeout/stop cases) | PASS |
+  | dataset check passed | `…python.exe ai-service\training\prepare_mvp_dataset.py --root data\yolo --out-dir data\yolo\mvp` → `leakage groups: 0`, `train_mvp.txt: 3258 lines`, `label problems: 0`, exit 0 (same as P03) | PASS |
+  | Kaggle run committed | P03 human yes 2026-10-02 20:29 (committed version "Running"); `kaggle_download/civicbrain_yolo_outputs.zip` present (git-ignored, installed in P08) | PASS |
+  | frontend lint/typecheck/test/build green | (verify-all frontend step) lint + typecheck exit 0 · `Test Files 6 passed (6)` `Tests 39 passed (39)`; in `frontend`: `npm run build` → `✓ 224 modules transformed` `✓ built in 402ms` | PASS |
+  | CI green (GitHub) | human yes 2026-10-03 (Q2): latest CI run on `main` all green; "Run workflow" on `main` (full-history gitleaks, open since P01) → every job green | PASS |
+  | `git status` clean | before this commit only this gate's files changed (`docs/PROGRESS.md` + the 3 SCRIPT FIX scripts); clean after commit | PASS |
+  | no new TODO/FIXME without issue link | `git grep -n -I -E "TODO\|FIXME"` (code, no docs/lock) → 0 hits | PASS |
+  | PROGRESS entry per task | Task log has P01 (+ follow-up), P02, P03, P04, P05; P03b not needed (labels present) | PASS |
+  | requirement IDs covered | D1 IDs: NFR-03 → `ai-service/tests/it/test_worker_it.py` (stale jobs requeued); others are doc sections, each with its tests in the P01-P05 entries | PASS |
+- Notes: the D1 gate's wording "seed 500 complaints" and "Flyway built `civicbrain`" are proven on the dev DB without psql
+  (script + backend log). One read-only Bash listing of mine used `cd backend/target` in run 1, which moved the PowerShell
+  location; the next `npm run build` failed with `ENOENT … backend\target\package.json` (nothing written), re-run in
+  `frontend` → green. A diagnostic probe of the `$null` behaviour was denied by the auto-mode check and not retried.
+- Open: human approval "Approve D1? (yes/no)" → on yes: D1 PASSED, commit, push, tag `d1-done`.
 
 ### 2026-10-03 — P05 — Frontend skeleton (DONE, human yes 2026-10-03 11:28)
 - Requirement(s): docs/05_UI_SPEC.md §1, §2, §3 (landing), §7, §8; docs/12_ERROR_HANDLING.md §2, §6; rule 20; docs/09_BUILD_PLAN.md

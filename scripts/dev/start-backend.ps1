@@ -31,7 +31,7 @@ if ($env:SPRING_PROFILES_ACTIVE -eq 'e2e') {
     $env:APP_EXTRA_ORIGINS = 'http://127.0.0.1:5173'
     # Test accounts never get real mail or WhatsApp, whatever .env says (Gmail/Twilio may be set for the demo)
     $env:SMTP_HOST = 'localhost'; $env:SMTP_PORT = '1025'; $env:SMTP_STARTTLS = 'false'
-    foreach ($k in 'SMTP_USER', 'SMTP_PASSWORD') { [Environment]::SetEnvironmentVariable($k, $null) }   # unset -> no SMTP login (Mailpit)
+    foreach ($k in 'SMTP_USER', 'SMTP_PASSWORD') { [Environment]::SetEnvironmentVariable($k, [NullString]::Value) }   # unset -> no SMTP login (Mailpit); $null would become "" (empty var since .NET 9)
     $env:WHATSAPP_PROVIDER = 'log'
 }
 if ($env:SPRING_PROFILES_ACTIVE -eq 'e2e' -or ($env:DB_E2E_NAME -and $env:DB_NAME -eq $env:DB_E2E_NAME)) {

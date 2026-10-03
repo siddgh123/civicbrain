@@ -83,7 +83,7 @@ $env:DB_URL = "jdbc:postgresql://$($env:DB_HOST):$($env:DB_PORT)/$db"
 $env:SPRING_PROFILES_ACTIVE = 'e2e-seed'
 $env:STORAGE_ROOT = Join-Path $env:STORAGE_ROOT 'e2e'   # same folder as the E2E backend (start-backend.ps1)
 $env:SMTP_HOST = 'localhost'; $env:SMTP_PORT = '1025'; $env:SMTP_STARTTLS = 'false'   # never real mail for test accounts
-foreach ($k in 'SMTP_USER', 'SMTP_PASSWORD') { [Environment]::SetEnvironmentVariable($k, $null) }   # unset -> no SMTP login
+foreach ($k in 'SMTP_USER', 'SMTP_PASSWORD') { [Environment]::SetEnvironmentVariable($k, [NullString]::Value) }   # unset -> no SMTP login; $null would become "" (empty var since .NET 9)
 $env:WHATSAPP_PROVIDER = 'log'
 $jar = Get-FreshBackendJar -NoPackage:$NoPackage
 Invoke-Native -Exe 'java' -Arguments @('-jar', $jar.FullName) -What 'e2e-seed run'
