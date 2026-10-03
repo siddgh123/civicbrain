@@ -25,7 +25,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
-| P07 | Auth screens + CameraCapture | D2 | IN PROGRESS (verified, waiting for human yes) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
+| P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P07 — Auth screens + CameraCapture (verified 14:24, waiting for the human yes)
+### 2026-10-03 — P07 — Auth screens + CameraCapture (DONE, human yes 2026-10-03 14:41)
 - Requirement(s): FR-01, FR-02, FR-60 (register + notice + consents), FR-10/FR-11 (in-app camera + GPS); NFR-01; docs/05 §2,
   §3, §4 step 2, §7, §8; docs/04 §1-§3; docs/07 §1 (cookie/CSRF), §7; docs/12 §6; rule 20; 09_7DAY §4 (login form validation,
   `CameraCapture` fallback when the camera is denied).
@@ -172,6 +172,8 @@ Verify: `npm run lint` / `typecheck` / `test -- --run` / `build` → E2E walkthr
   `/citizen/profile` (opt-ins via PUT /me, PUBLIC_PHOTO / AI_TRAINING via POST /me/consents; language/export/delete later).
 - DECISION: `vitest.config.ts` aliases `react-router` and `react-router/dom` to the package's ESM files (one router copy in
   tests; Node and the browser build already resolve to these files).
+- Human answer (2026-10-03 14:41): **Q1 yes** - register → OTP from Mailpit → verify → login → logout worked on the laptop (dev
+  stack); after logout the start page with "Report a problem" was shown. **Q2 yes** - all 4 P07 screenshots look right.
 - Open / hand-offs: **P21/P27** production bundle is 601 kB (> 500 kB Vite warning, human: ignore for now) - route-level
   `import()` splitting later. **P11** wizard wraps `CameraCapture` + capture session; P11/P13 show the real camera on the phone.
   **P13** HTTPS tunnel: the cookie is already Secure/Path=/ (Task 0). Known: the first register after a backend start can take
