@@ -8,6 +8,8 @@
 - Every WORKER_POLL_SECONDS: claim 1 job (fn_claim_jobs), run its handler with a hard time limit, then
   fn_finish_job(id, true) or fn_finish_job(id, false, '<ExceptionType>: <message>').
 - Every 5 min: fn_requeue_stale_jobs('15 minutes').
+- Daily 02:00 IST: priority recompute of the open non-synthetic complaints (the wait-time factor grows). A worker that
+  was not running at 02:00 (laptop off) catches up once at its next start; the last run is read from the database.
 - Ctrl+C / SIGTERM / Ctrl+Break: finish the current job, then exit. A second Ctrl+C stops at once (the job is
   then recovered at the next start).
 """
@@ -20,6 +22,7 @@ import sys
 import threading
 import time
 from collections.abc import Mapping
+from datetime import UTC, datetime
 
 from sqlalchemy import Engine
 from sqlalchemy.exc import InterfaceError, OperationalError
@@ -34,9 +37,10 @@ from app.config import (
     get_settings,
 )
 from app.db import get_engine, schema_ready, session_scope
-from app.errors import ConfigError, DependencyError, JobTimeoutError
+from app.errors import ConfigError, DataError, DependencyError, JobTimeoutError
 from app.logging_setup import configure_logging
 from app.models_check import check_models
+from pipeline import priority
 from worker import jobs as jobstore
 from worker.handlers import HANDLERS, Handler, JobContext, get_handler
 
@@ -92,6 +96,7 @@ class Worker:
         self.stop_event = threading.Event()
         self._started = False
         self._next_stale_check = 0.0  # time.monotonic(); 0 = at the first iteration
+        self._priority_done_at: datetime | None = None  # last daily priority recompute (UTC); None = not read yet
 
     @property
     def worker_id(self) -> str:
@@ -143,6 +148,26 @@ class Worker:
             log.warning("%d complaint(s) with a DEAD analysis marked ai_status=FAILED", len(failed), extra=self._extra(count=len(failed)))
         return count
 
+    def recompute_priorities_if_due(self, now: datetime | None = None) -> tuple[int, int] | None:
+        """The daily 02:00 IST priority recompute. Returns (done, failed), or None when it is not due."""
+        now = now or datetime.now(UTC)
+        due = priority.latest_recompute_time(now)
+        if self._priority_done_at is None:
+            with session_scope(self.engine) as s:
+                self._priority_done_at = priority.last_daily_recompute(s) or datetime.min.replace(tzinfo=UTC)
+        if self._priority_done_at >= due:
+            return None
+        try:
+            done, failed = priority.recompute_open(self.engine, now)
+        except (ConfigError, DataError) as exc:  # e.g. a rule file missing: report, try again tomorrow, keep the jobs running
+            log.error("daily priority recompute not possible: %s", exc, extra=self._extra(step="priority"))
+            self._priority_done_at = now
+            return None
+        self._priority_done_at = now
+        log.info("daily priority recompute: %d complaint(s) updated, %d skipped", done, failed,
+                 extra=self._extra(count=done, step="priority"))
+        return done, failed
+
     # ---- one iteration ----
     def run_once(self) -> list[jobstore.Job]:
         """Claim one job and process it. Returns the claimed jobs ([] when the queue was empty).
@@ -154,6 +179,7 @@ class Worker:
         if not self._started:
             self.startup()
         self.requeue_stale_if_due()
+        self.recompute_priorities_if_due()
         with session_scope(self.engine) as s:
             claimed = jobstore.claim_jobs(s, self.worker_id, WORKER_JOB_TYPES, 1)
         if len(claimed) > 1:

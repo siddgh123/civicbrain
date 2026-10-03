@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import base64
 import binascii
+from datetime import timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
@@ -22,6 +23,8 @@ from pydantic import Field, SecretStr, ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from app.errors import ConfigError
+
+REPO_ROOT_DIR = Path(__file__).resolve().parents[2]  # the research data (data/priority, data/duplicates) lives here
 
 
 class Settings(BaseSettings):
@@ -228,3 +231,46 @@ POTHOLE_DEPTH_M = {"SHALLOW": 0.025, "FINGER": 0.050, "DEEP": 0.075}  # IRC:82 s
 WATERLOGGING_DEPTH_M = {"SHALLOW": 0.08, "FINGER": 0.30, "DEEP": 0.50}  # ASSUMPTION: below ankle / below knee / deeper
 DEPTH_SEVERITY_CLASS = {"SHALLOW": "SMALL", "FINGER": "MEDIUM", "DEEP": "LARGE"}
 DEPTH_SOURCE_FROM_ANSWER = "ASSUMED_FROM_SEVERITY_CLASS"
+
+# =============================================================================================
+# 2.6 Duplicates (FROZEN Step 12: docs/06_AI_PIPELINE.md sec. 2.6, data/duplicates/duplicate_engine_config.json)
+# =============================================================================================
+DUP_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+DUP_RADIUS_M = 300.0  # candidates within 300 m (fn_duplicate_candidates) ...
+DUP_WINDOW_HOURS = 7 * 24.0  # ... submitted in the previous 7 days
+DUP_TEXT_WEIGHT = 0.70
+DUP_DISTANCE_WEIGHT = 0.20  # distance_score = 1 - d / 300, clamped 0-1
+DUP_RECENCY_WEIGHT = 0.10  # recency_score = 1 - hours / 168, clamped 0-1
+DUP_THRESHOLD = 0.59  # score >= 0.59 -> DUPLICATE
+DUP_UNCERTAIN_LOWER = 0.55  # 0.55 <= score < 0.59 -> UNCERTAIN (officer review, never auto-merge)
+DUP_ENCODE_BATCH = 32  # as in the research engine
+DUP_FINISHED_MASTER_STATUSES = ("COMPLETED", "CLOSED")  # master already fixed: maybe a new defect -> UNCERTAIN
+
+# =============================================================================================
+# 2.7 Priority (FROZEN Step 11: docs/06_AI_PIPELINE.md sec. 2.7, scripts/priority/priority_engine.py)
+# The rule tables are read from data/priority/*.csv, exactly like the research engine (pipeline/priority.py).
+# =============================================================================================
+PRIORITY_DATA_DIR = REPO_ROOT_DIR / "data" / "priority"
+PRIORITY_FORMULA_VERSION = "STEP11_FROZEN_V1"  # priority_assessments.formula_version
+PRIORITY_WEIGHTS: dict[str, float] = {  # FROZEN; priority_rules.csv must hold exactly these (checked at load)
+    "severity": 0.25,
+    "population_impact": 0.15,
+    "location_risk": 0.15,
+    "frequency": 0.10,
+    "wait_time": 0.10,
+    "infrastructure_importance": 0.15,
+    "historical_risk": 0.10,
+}
+# Dataset-derived maxima of the Step 11 run (the rule files name them, not their value). Both reproduce the
+# research factor files 500/500 (tests/unit/test_priority_golden.py):
+PRIORITY_WAIT_MAX_DAYS = 179.27291666666667  # wait_time_rules.csv "dataset_max_wait_days": span of the 500 complaints
+PRIORITY_HISTORICAL_MAX_COUNT = 14  # historical_risk_rules.csv "max_count_normalization": largest historical_count
+# ASSUMPTION: the research severity levels were synthetic; a live complaint takes its level from the depth answer
+# (V5 complaints.depth_answer), every other complaint (no answer, other categories) is MEDIUM. CRITICAL is never set
+# automatically.
+PRIORITY_SEVERITY_FROM_DEPTH: dict[str, str] = {"SHALLOW": "LOW", "FINGER": "MEDIUM", "DEEP": "HIGH"}
+PRIORITY_SEVERITY_DEFAULT = "MEDIUM"
+# Daily recompute (06 sec. 1): 02:00 Indian Standard Time (UTC+05:30, no daylight saving) for open non-synthetic complaints
+IST = timezone(timedelta(hours=5, minutes=30), "IST")
+PRIORITY_RECOMPUTE_HOUR_IST = 2
+PRIORITY_OPEN_STATUSES = ("SUBMITTED", "VERIFIED", "SCHEDULED", "ASSIGNED", "INSPECTED", "IN_PROGRESS", "REOPENED")

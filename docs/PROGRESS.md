@@ -27,7 +27,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
-| P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
+| P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | VERIFIED - waiting for human yes (2026-10-03 19:25) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
 | P11 | Citizen screens | D3 | NOT STARTED | |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
@@ -82,6 +82,95 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P09 — Priority (FROZEN Step 11) + duplicates (FROZEN Step 12) + MiniLM (VERIFIED, waiting for human yes)
+- Requirement(s): FR-25 (priority + per-factor explanation), FR-22 duplicates part (Step 12); docs/06 §1 (daily 02:00 IST
+  recompute), §2 steps 7-8, §2.6, §2.7, §5; 02-frozen-rules (Step 11, Step 12); 09_7DAY §4 (priority golden 0 mismatches,
+  duplicate scoring reproduces 3 pairs).
+**Plan** (Claude Code, Auto mode; estimate 2 h → time box 3 h):
+1. `download_models.py` → `models/all-MiniLM-L6-v2/` + MANIFEST entry (done: commit 1110a243fdf4, 384-dim check ok).
+2. `pipeline/priority.py`: rules loaded from `data/priority/*.csv` (weights + the factor rule CSVs, engine validations kept),
+   engine combination ported 1:1 (range check, weighted sum, clamp, round 2, level, reasons), the 7 live factor rules as
+   pure functions, explanation JSON, DB loader (PostGIS: ward, road type, POIs ≤ 1 km, frequency/historical counts) and
+   writer (`priority_assessments` is_current switch + `complaints.current_priority_*`).
+3. `pipeline/duplicates.py`: MiniLM embedder (SHA-256 of every folder file vs MANIFEST before loading, offline), pure
+   pair score/decision (research arithmetic order), complaint decision (two masters / COMPLETED-CLOSED master / not
+   SUBMITTED → UNCERTAIN), DB part (`fn_duplicate_candidates`, upsert into `duplicate_relation`, `complaints.duplicate_*`).
+4. Worker: daily 02:00 IST priority recompute for open non-synthetic complaints (catch-up after a missed 02:00).
+Tests first: `tests/unit/test_priority_golden.py` (500 rows, 0 mismatches + per-factor rules vs research CSVs),
+`test_priority.py`, `test_duplicates.py` (edges 0.55/0.59, clamps, masters), `test_duplicates_repro.py` (`models`),
+`tests/it/test_priority_it.py`, `tests/it/test_duplicates_it.py` (40 m, same day, similar text → DUPLICATE, would MERGE),
+worker schedule tests. Verify: ruff, pytest (models tests run), `start-all.ps1 -Only worker,ai-api -Restart`, `/health`.
+- Pre-check (read-only probe on the seeded dev DB as `civicbrain_ai`, scratchpad script, 500 research complaints): the
+  live factor rules reproduce the research factor CSVs - location risk = max over POIs of importance × distance band
+  (0 mismatches; the "nearest POI only" reading: 60), frequency = same category ≤ 300 m in the previous 30 days
+  (0; any category: 240), historical = same ward + same category, earlier ≤ 180 days (0 with the research ward mapping;
+  13 complaints changed ward in V3), wait = days since submit / 179.2729 d (dataset span) × 100 (0), road type and ward
+  population (0).
+
+**Results** (2026-10-03, verified 19:25; no ASK-FIRST stop, no human step)
+1. Files: `ai-service/pipeline/priority.py` (rules loader + engine port + 7 factor rules + explanation + PostGIS loader +
+   is_current writer + daily recompute) · `ai-service/pipeline/duplicates.py` (pair score, complaint decision, MiniLM
+   embedder with MANIFEST check, candidates/upsert/complaint fields) · `app/config.py` (FROZEN `DUP_*`/`PRIORITY_*`
+   constants, ASSUMPTION severity mapping, `IST`, `REPO_ROOT_DIR`) · `worker/run.py` (daily 02:00 IST step) ·
+   `ai-service/models/MANIFEST.json` (MiniLM entry: revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`, 11 files with
+   SHA-256). Tests (all new): `tests/unit/test_priority_golden.py` (10), `test_priority.py` (49), `test_duplicates.py` (32),
+   `test_duplicates_repro.py` (3, `models`), `tests/it/test_priority_it.py` (4), `tests/it/test_duplicates_it.py` (3, one
+   `models`), `tests/unit/test_worker_loop.py` +7 (the 2 existing tests unchanged). 202 → 310.
+2. Runs (in `ai-service` unless noted):
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | MiniLM (repo root) | `ai-service\.venv\Scripts\python.exe ai-service\training\download_models.py` | `CHECK ok: 384 dimensions, similarity of two pothole sentences = 0.897` · `INSTALLED …\all-MiniLM-L6-v2 (commit 1110a243fdf4, 11 files)` | PASS |
+   | factor probe (repo root, read-only, scratchpad) | `ai-service\.venv\Scripts\python.exe <scratchpad>\probe_factors.py` + `probe_hist.py` | see pre-check above (0 mismatches for every factor rule) | PASS |
+   | priority tests | `.\.venv\Scripts\python.exe -m pytest -q tests/unit/test_priority_golden.py tests/unit/test_priority.py` | `PRIORITY GOLDEN: 500 rows checked, 0 mismatches` · `59 passed` | PASS |
+   | duplicate tests, 1st run | `.\.venv\Scripts\python.exe -m pytest -q tests/unit/test_duplicates.py tests/unit/test_duplicates_repro.py -rA` | `1 failed, 34 passed`: my new test expected 1.0 for a perfect pair, but 0.70+0.20+0.10 = 0.9999999999999999 in floating point (the research np.clip gives the same) → test fixed (`<= 1.0`, approx 1.0), code unchanged | FAIL→test fixed |
+   | first ruff | `.\.venv\Scripts\python.exe -m ruff check .` | 10 × E501 → wrapped by hand → `All checks passed!` | FAIL→fixed |
+   | IT, 1st run | `.\.venv\Scripts\python.exe -m pytest -q tests/unit/test_duplicates.py tests/unit/test_worker_loop.py tests/it/test_priority_it.py tests/it/test_duplicates_it.py -rA` | `1 failed, 47 passed`: jsonb keeps no key order, my test compared the stored `factors` keys as a list → compared as a set | FAIL→test fixed |
+   | lint | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
+   | tests | `.\.venv\Scripts\python.exe -m pytest -q` | `310 passed, 1 warning in 27.76s` (warning = Starlette `httpx` deprecation, existed before) | PASS |
+   | models tests | `.\.venv\Scripts\python.exe -m pytest -q -m models -rA` | `12 passed, 298 deselected` (0 skipped: classifier 1, detector 7, duplicates repro 3, duplicates IT 1) | PASS |
+   | restart (repo root) | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only worker,ai-api -Restart` | `PASS worker healthy` · `PASS ai-api healthy` · `PASS stack 'dev' is up` | PASS |
+   | /health (repo root) | `ai-service\.venv\Scripts\python.exe -c "import urllib.request … /health …"` | `{"status":"ok","db":"ok","osrm":"not used (haversine)","modelsLoaded":true,"models":{"yolov8s_civicbrain.onnx":"ok","text_clf.joblib":"ok","all-MiniLM-L6-v2/":"ok"}}` | PASS |
+   | worker log | `Get-Content logs\worker.log -Tail 8` | no model warning any more; `daily priority recompute: 0 complaint(s) updated, 0 skipped` (catch-up at start; the dev DB has only synthetic complaints) | PASS |
+3. Duplicate reproduction (`test_duplicates_repro.py`, texts from `data/complaints/synthetic_complaints_500.csv`, research
+   distance/hours): ENG0059 DUPLICATE text 0.758436 vs 0.758436, score 0.688234 vs 0.688234 · ENG0069 UNCERTAIN 0.603463 vs
+   0.603463, 0.568724 vs 0.568724 · ENG0001 NOT_DUPLICATE 0.497914 vs 0.497913, 0.507758 vs 0.507758 (all < 1e-6, limit 0.001).
+   The pure formula reproduces all 109 research pairs (score, sub-scores < 1e-12, decision) from their recorded inputs.
+- DECISION: rule files read from `data/priority/` (constant `PRIORITY_DATA_DIR`, like `priority_engine.py`'s repo-relative
+  paths) - no copy, so there is one frozen source; the loader keeps the engine's checks and refuses weights that differ
+  from the FROZEN ones in `app/config.py`.
+- DECISION: live factor rules = the research rule files, proven 0-mismatch on the 500 research complaints (pre-check):
+  Rloc max over POIs (bands `[min, max)`; both readings fit the data), F same category ≤ 300 m in the 30 days before
+  submission, H same ward + same category in the 180 days before submission / 14, Twait / 179.2729 days, Iinfra by
+  road type, Ipop by ward NUMBER (`wards.ward_number`, docs/INVENTORY.md). The dataset-derived maxima (179.2729 d, 14)
+  are constants in `app/config.py`, checked against the research files by the golden test.
+- DECISION (ASSUMPTION in `app/config.py`, written into every explanation): live severity level from the depth answer
+  SHALLOW → LOW 25, FINGER → MEDIUM 50, DEEP → HIGH 75; no answer / other categories → MEDIUM 50; CRITICAL never set
+  automatically (the Step 11 levels were synthetic, no live rule exists).
+- DECISION: counts (F, H) use only complaints of the same kind (real vs synthetic) and never REJECTED ones; duplicates
+  never compare real with synthetic complaints (02-frozen-rules "Honesty"; the demo complaints must not pull a phone
+  complaint into a synthetic master). Missing ward or unknown road type → DataError (06 sec. 2 step 8 "factor data missing
+  → job fails"); a row without ward/road gets them from `fn_locate_point`.
+- DECISION: reasons use the wording of `calculate_priority_scores.py` (it wrote `priority_scores.csv`; `priority_engine.py`
+  words two reasons differently) - the golden test compares the reasons too.
+- DECISION: duplicate text = title + " " + description (docs/06); the research joined with a newline - proven identical
+  embeddings (`test_title_and_description_joined_by_space_or_newline_embed_the_same`).
+- DECISION: duplicates writer sets `duplicate_status`, `matched_complaint_id`, `duplicate_checked_at`,
+  `duplicate_review_required`, and `master_complaint_id` only when the decision merges (an officer's earlier merge is never
+  cleared); stale AI pairs of the complaint are deleted, officer-reviewed rows are never overwritten (upsert `WHERE
+  review_decision IS NULL`).
+- DECISION: daily recompute = open statuses (SUBMITTED … REOPENED, not REJECTED/MERGED/COMPLETED/CLOSED), non-synthetic,
+  with a current assessment; one transaction per complaint; IST as fixed UTC+05:30; a worker that missed 02:00 catches up
+  once (last run = latest `explanation.trigger = DAILY_RECOMPUTE` row); a missing rule file is logged and retried the next day.
+- Note: the scratchpad probe and the earlier shell call that named the test env template (blocked by the deny rule, my
+  mistake, not retried) did not change anything. A stray `python -` waited on stdin for 10 min and was stopped (no effect).
+- Open / hand-offs: **P12** orchestrator: step 7 `duplicates.find_duplicates(s, cid, duplicates.get_embedder(settings))`
+  then step 8 `priority.assess_complaint(s, cid)`; when `decision.merge` set status MERGED (SYSTEM) in the SAME transaction
+  (the writer already set `master_complaint_id`), else VERIFIED; then `REQUIRE_MODELS=true` (all three models are now
+  "ok"). **P15** officer UI: list the priority factors in formula order (`FACTORS`), jsonb does not keep the key order;
+  show the severity "assumption" flag. **P10** intake must store `ward_id`/`road_id`/`poi_id` from `fn_locate_point`
+  (historical counts match on `complaints.ward_id`).
 
 ### 2026-10-03 — P08 — Text classifier, YOLO detector, authenticity checks (DONE, human yes 2026-10-03 15:16)
 - Requirement(s): FR-20 (authenticity), FR-21 (text classification + mismatch badge), FR-22 (YOLO detection); docs/06 §2,
