@@ -28,7 +28,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | DONE (human yes 2026-10-03 19:32) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files; location risk 500/500 through the live loader on `civicbrain_test`) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
-| P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | IN PROGRESS (waiting for Q1) | mvnw verify 202 tests 0 failures (135 unit + 67 IT; was 170) · **`SMOKE INTAKE PASSED: 29 / 29`** (after the human-approved `code_of()` smoke fix) · `SMOKE AUTH PASSED: 19 / 19` · log scan 0 hits · SUBMITTED mail in Mailpit |
+| P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | DONE (human yes 2026-10-03 21:21) | mvnw verify 202 tests 0 failures (135 unit + 67 IT; was 170) · **`SMOKE INTAKE PASSED: 29 / 29`** (after the human-approved `code_of()` smoke fix) · `SMOKE AUTH PASSED: 19 / 19` · log scan 0 hits · SUBMITTED mail in Mailpit |
 | P11 | Citizen screens | D3 | NOT STARTED | |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
 | P13 | Phone test over the tunnel | D4 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P10 — Complaint intake API + e-mail outbox dispatcher + smoke intake (IN PROGRESS, started 20:05)
+### 2026-10-03 — P10 — Complaint intake API + e-mail outbox dispatcher + smoke intake (DONE 2026-10-03 21:21, started 20:05)
 - Requirement(s): FR-10 (server part), FR-11, FR-12, FR-13, FR-15, FR-50 (e-mail), FR-51, FR-52; docs/04 §3, §4, §5; 02 §1, §5
   (Submit, Notify rules 1-7 + 10); 07 §3; 12 §2, §4, §5; 03 §3; 09_7DAY §4 (intake happy path + 4 error codes, other citizen 404).
 **Plan** (Claude Code, Auto mode; estimate 3 h → time box 4.5 h). JdbcClient everywhere (P06 decision), no new dependency/migration.
@@ -168,7 +168,9 @@ Verify: `.\mvnw.cmd -q verify` → E2E smoke `intake` (stop → seed-e2e -MinAcc
   | log scan | `Select-String` over `logs\{backend,frontend,worker,ai-api}.log` (JWT, `password=`, `__Host-cb_rt=`, OTP codes, full `+91` numbers) | `hits: 0` each; backend 0 ERROR; `complaint CB-000001 submitted (ward 1, category 1)` · `notification dispatcher: 1 outbox row(s) processed, 1 sent, 0 failed` | PASS |
   | Mailpit (read-only API, scratchpad script) | search `subject:"received"` | `citizen1@test.local \| CivicBrain: complaint CB-000001 received \| html: True \| Dear E2E Citizen One, your complaint CB-000001 (Pothole) at Smoke test was received on 3 Oct 2026, 9:11 pm. …` (a second, earlier copy comes from the diagnosis run) | PASS |
   | dev stack back | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | `PASS stack 'dev' is up` (5 services healthy) | PASS |
-- Waiting for the human: Q1 (Mailpit mail for citizen1@test.local).
+- Human answer (2026-10-03 21:21): Q1 **yes** - the "CivicBrain: complaint CB-000001 received" mail for citizen1@test.local reads
+  well (name, CB number, category, location, IST time and layout correct, no placeholders left).
+- Next: `/run-prompt P11`.
 
 ### 2026-10-03 — D2 follow-up — requirement IDs in the existing tests (DONE 2026-10-03 19:55, human request Q2)
 - Human yes (19:47): add the five IDs the gate found only by test name as comments; comments only, no test logic or assertion
