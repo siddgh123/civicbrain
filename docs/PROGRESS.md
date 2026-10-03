@@ -6,7 +6,7 @@ The agent updates this file in the same commit as every task. Humans approve eac
 | Day | Date | Gate (from §5) | Status | Evidence / bugs | Approved by |
 |---|---|---|---|---|---|
 | D1 | Thu 1 Oct | build laptop ready, backend + Flyway + seed, Vite layout, worker claims a job, YOLO training started, CI green | PASSED (human yes 2026-10-03 12:12; tag `d1-done`) | check-env all required PASS (8 WARN) · `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 70 + 13 IT 0 failures incl. SchemaIT 74 tables + ward 1 · AI ruff clean, 82 passed · frontend lint/typecheck, 39 passed) · frontend build OK · Flyway v5 on `civicbrain`, 23 wards, seed 500 · dataset check exit 0 · Kaggle run committed · CI green incl. full-history gitleaks (human yes) · SCRIPT FIX `verify-all`/`start-backend`/`seed-e2e` `[NullString]::Value` (Task log "D1 gate") · commit b0a5f43 | human (yes 2026-10-03 12:12) |
-| D2 | Fri 2 Oct | register → OTP → login, admin exists, priority 0 mismatches, duplicates test, YOLO ONNX detects | PASSED – awaiting approval (gate run 2026-10-03 19:34-19:43) | `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 124 + 46 IT 0 failures · AI ruff clean, 311 passed · frontend lint/typecheck, 69 passed; log `logs/verify-all_20261003_193442.txt`) · fresh E2E seed → **`SMOKE AUTH PASSED: 19 / 19`** · browser walkthrough P07 (register → Mailpit OTP → verify → login → logout) `1 passed` + P07 human yes · YOLO installed (`/health` 3 models "ok"), 4/4 fixtures find their own class, `yolo_metrics.json` mAP50 0.607 (existing test split) · classifier sanity acc 0.90 / macro-F1 0.8995 · `PRIORITY GOLDEN: 500 rows checked, 0 mismatches` · duplicates repro 3 pairs · `models` tests 12 passed 0 skipped · first admin: bootstrap IT green, real admin in P24 (P06 prompt) · Task log "D2 gate" | |
+| D2 | Fri 2 Oct | register → OTP → login, admin exists, priority 0 mismatches, duplicates test, YOLO ONNX detects | PASSED (human yes 2026-10-03 19:47; tag `d2-done`) | `verify-all.ps1 -SkipE2E` GREEN (SQL 7/7, 6/6, 11/11, 11/11 · backend 124 + 46 IT 0 failures · AI ruff clean, 311 passed · frontend lint/typecheck, 69 passed; log `logs/verify-all_20261003_193442.txt`) · fresh E2E seed → **`SMOKE AUTH PASSED: 19 / 19`** · browser walkthrough P07 (register → Mailpit OTP → verify → login → logout) `1 passed` + P07 human yes · YOLO installed (`/health` 3 models "ok"), 4/4 fixtures find their own class, `yolo_metrics.json` mAP50 0.607 (existing test split) · classifier sanity acc 0.90 / macro-F1 0.8995 · `PRIORITY GOLDEN: 500 rows checked, 0 mismatches` · duplicates repro 3 pairs · `models` tests 12 passed 0 skipped · first admin: bootstrap IT green, real admin in P24 (P06 prompt) · Task log "D2 gate" · commit 7bb904a | human (yes 2026-10-03 19:47) |
 | D3 | Sat 3 Oct | phone capture → submit → "Under review" < 60 s, SUBMITTED mail, duplicate → Linked | NOT STARTED | | |
 | D4 | Sun 4 Oct | officer map/detail/actions, contractor created, WhatsApp sandbox, optimizer test | NOT STARTED | | |
 | D5 | Mon 5 Oct | plan generate → reorder → approve → assign → "Contractor X assigned" to all owners, PDF; feature freeze | NOT STARTED | | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — D2 gate (`/phase-gate D2`, "after P09") — PASSED – awaiting approval (gate run 19:34-19:43)
+### 2026-10-03 — D2 gate (`/phase-gate D2`, "after P09") — PASSED (human yes 2026-10-03 19:47, tag `d2-done`; gate run 19:34-19:43)
 - Gate items: `prompts/README.md` "Day gates" D2 row + the 09_BUILD_PLAN_7DAY §4 tests that exist after P09 (DB SQL tests;
   backend IT context/Flyway, register → OTP → login, generic 401, refresh rotation/reuse; AI priority golden, duplicate repro,
   YOLO smoke `pothole_1.jpg`; frontend login form validation, `CameraCapture` fallback; smoke `auth`) + the 09_7DAY §5
@@ -116,7 +116,9 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 - Note: one read-only Bash listing of mine used `cd backend/target`, which moved the shared working directory (same slip as
   D1); noticed at once, `Set-Location C:\dev\civicbrain` before the next command, nothing ran in the wrong folder.
 - Dev stack back: `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` → `PASS stack 'dev' is up` (5 services healthy).
-- Next: on "Approve D2: yes" → D2 PASSED, commit, push, tag `d2-done`; then `/run-prompt P10`.
+- Human answer (2026-10-03 19:47): **Approve D2: yes** → D2 PASSED, commit, push, tag `d2-done`. **Q2 yes** - add the five
+  missing requirement IDs as comments to the existing tests (comments only), re-run the affected suites → "D2 follow-up".
+- Next: `/run-prompt P10`.
 
 ### 2026-10-03 — P09 — Priority (FROZEN Step 11) + duplicates (FROZEN Step 12) + MiniLM (DONE, human yes 2026-10-03 19:32)
 - Requirement(s): FR-25 (priority + per-factor explanation), FR-22 duplicates part (Step 12); docs/06 §1 (daily 02:00 IST
