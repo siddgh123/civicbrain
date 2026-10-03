@@ -24,7 +24,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
-| P06 | Auth backend + E2E seed runner + smoke auth | D2 | IN PROGRESS (verified, awaiting human Q1) | mvnw verify 152 tests 0 failures (107 unit + 45 IT on Testcontainers PostGIS + Mailpit) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
+| P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P06 — Auth backend, E2E seed runner, smoke auth (IN PROGRESS, started about 12:40)
+### 2026-10-03 — P06 — Auth backend, E2E seed runner, smoke auth (DONE, human yes 2026-10-03 13:31)
 - Requirement(s): FR-01, FR-02, FR-04 (first admin), FR-60, NFR-01; docs/04 §1, §2, §3 (privacy notice), §11; docs/07 §1, §2,
   §6, §7; docs/12 §2; rule 10, rule 50; 09_7DAY §4 (register → OTP → login, generic 401, refresh rotation/reuse).
 **Plan** (Claude Code, Auto mode):
@@ -160,11 +160,33 @@ rate limiter, JWT, OTP codes. Verify: `.\mvnw.cmd -q verify` → E2E smoke (stop
   trigger the client's silent refresh); it counts towards the 10-failure lockout. `POST /me/consents` → 200 with the `/me` body.
 - DECISION: 403 EMAIL_NOT_VERIFIED carries `otpId` (+ `expiresInSec`) as RFC 9457 extension members; inside the 60-s resend limit it
   returns the newest code already sent. Decoy register writes `auth_events` OTP_SENT with `details.decoy=true` (no better V5 type).
-- DECISION: `server.forward-headers-strategy: native` - behind the Vite proxy / Cloudflare tunnel every client is 127.0.0.1, so
-  per-IP limits (5 registrations/h) would be global in the demo; Tomcat trusts X-Forwarded-For only from internal-proxy addresses.
+- ~~DECISION: `server.forward-headers-strategy: native`~~ - SUPERSEDED by the X-Forwarded-For fix below (Tomcat's default trusted
+  list was too wide).
 - DECISION: forgot-password has its own 5/h per-IP bucket (`forgot:<ip>`), the owner notice its own per-destination bucket.
   Rate-limit buckets are in memory with a 100,000-bucket safety reset. `mfa-required=true` without TOTP flows fails closed (403
   MFA_REQUIRED for OFFICER/ADMIN) until P25. E2eSeedRunner/AdminBootstrapRunner never set TOTP while `mfa-required=false`.
+- **Follow-up (human request with the Q1 answer, 13:20-13:31): X-Forwarded-For check.** Finding: the app did not parse the
+  header; `forward-headers-strategy: native` let Tomcat's RemoteIpValve do it. The valve walks from the right, but per Tomcat's
+  documented defaults it trusts every private-range address (10/8, 172.16/12, 192.168/16, 100.64/10) as a proxy, not only
+  loopback: `1.2.3.4, 10.0.0.5` from the proxy would be keyed on the forged `1.2.3.4`, and a LAN device calling :8080 directly
+  could choose its own key (from the documented defaults; the old valve path was not tested).
+  DECISION: new `common/ClientIp` is the only reader of X-Forwarded-For: only a loopback peer (Vite proxy / Cloudflare tunnel) is
+  trusted; the header (all lines, in order) is walked from the RIGHT, loopback hops are skipped, the first other address is the
+  rate-limit/audit IP; an entry that is not an IP literal ends the walk (peer used); literals via `InetAddress.ofLiteral` (no DNS).
+  The left-most entry is never used unless it is the right-most non-loopback one. Tomcat rewriting off
+  (`server.forward-headers-strategy: none`); `CurrentUser.client` and `MeController` use `ClientIp.of`. Side effect: over the
+  tunnel `request.isSecure()` is false again, so no HSTS header there (same as P04).
+  Tests: `ClientIpTest` 15 (loopback + `1.2.3.4, 203.0.113.9` → `203.0.113.9`; other forged first entries → same key and the
+  same Bucket4j bucket (3rd request 429), `…, 203.0.113.10` → own bucket; loopback hops skipped; private hop kept; broken chain
+  → peer; non-loopback peer → header ignored) + `AuthRegistrationIT.behindTheLocalProxyTheLimitIsKeyedOnTheRightMostForwardedAddress`
+  (register 5/h keyed on `203.0.113.9` across 5 forged first entries → 6th 429; `auth_otp_codes.request_ip` = `203.0.113.9`).
+
+  | Check | Command | Result | |
+  |---|---|---|---|
+  | backend run 5 | in `backend`: `.\mvnw.cmd -q verify` | exit 0, **`TOTAL tests=168 failures=0 errors=0 skipped=0`**; test log 0 tokens/passwords/OTPs | PASS |
+  | dev backend | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only backend -Restart` | `PASS stack 'dev' is up`; GET `:5173/api/v1/public/privacy-notice` → 200 | PASS |
+  E2E smoke not re-run for this change (requests without the header are keyed exactly as before; covered by the ITs).
+- Human answer (2026-10-03 13:31): **Q1 yes** - smoke OTP mails seen in Mailpit.
 - Open / hand-offs: **P07** login/register/OTP/forced-change screens use `otpId` from the 403 body and refresh after a password
   change (old access token is revoked). **P14** E2eSeedRunner adds officers/contractors/staff (`SPECS` list). **P28** SPA GET permit
   (07 §2) is not added yet (the P04 test expects `GET /` → 401). Known limit: forgot-password timing differs by the SMTP send time
