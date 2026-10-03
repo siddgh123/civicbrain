@@ -51,6 +51,9 @@ Rules for you:
   `python.exe -c "import urllib.request ..."` one-liner below - never `curl`/`Invoke-RestMethod`.
 - `git commit` and `git push` are reviewed by the auto-mode check (secrets, public repo). In P01 the first push to the new
   GitHub remote may ask the human once - that is expected.
+- Commit messages and all command text: never write `.env`, `.env.test` or the file name of a Human-only script
+  (for example `start-backend.ps1`, `new-env.ps1`). The deny rules match the whole command text, so such a commit is
+  refused. Describe them in words instead ("dotenv loader", "backend start script", "env file").
 - Auto mode makes you keep going without questions. The kit's questions still apply: the ASK-FIRST list and "two failed
   fixes -> stop" (run-prompt skill), the human steps, and the final yes/no questions.
 
