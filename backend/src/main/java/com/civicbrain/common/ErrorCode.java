@@ -16,6 +16,7 @@ public enum ErrorCode {
     EMAIL_NOT_VERIFIED(403, "E-mail not verified"),
     MFA_REQUIRED(403, "Two-factor authentication required"),
     CSRF_CHECK_FAILED(403, "CSRF check failed"),
+    PASSWORD_CHANGE_REQUIRED(403, "Password change required"),
     NOT_FOUND(404, "Not found"),
     INVALID_TRANSITION(409, "Invalid status transition"),
     STALE_VERSION(409, "Changed by someone else"),

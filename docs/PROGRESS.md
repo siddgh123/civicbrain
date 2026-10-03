@@ -24,7 +24,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
-| P06 | Auth backend + E2E seed runner + smoke auth | D2 | NOT STARTED | |
+| P06 | Auth backend + E2E seed runner + smoke auth | D2 | IN PROGRESS (verified, awaiting human Q1) | mvnw verify 152 tests 0 failures (107 unit + 45 IT on Testcontainers PostGIS + Mailpit) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
@@ -82,6 +82,93 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P06 — Auth backend, E2E seed runner, smoke auth (IN PROGRESS, started about 12:40)
+- Requirement(s): FR-01, FR-02, FR-04 (first admin), FR-60, NFR-01; docs/04 §1, §2, §3 (privacy notice), §11; docs/07 §1, §2,
+  §6, §7; docs/12 §2; rule 10, rule 50; 09_7DAY §4 (register → OTP → login, generic 401, refresh rotation/reuse).
+**Plan** (Claude Code, Auto mode):
+1. Error code `PASSWORD_CHANGE_REQUIRED` (403) → docs/12 §2 first, then `ErrorCode` + `en.json`; RFC 9457 extension members
+   (`otpId` on 403 EMAIL_NOT_VERIFIED).
+2. Config: `RateLimitProperties` (`app.rate-limits.*`; `e2e` per-IP ×100, 100 complaints/24 h), `JwtConfig` (HS256 encoder/decoder;
+   validators iss, aud, `typ=at+jwt`, exp ±60 s, `iat ≥ token_valid_after`), `SecurityConfig` role areas + resource server +
+   filters (PASSWORD_CHANGE_REQUIRED, 300/min per user).
+3. `auth`: AuthController + DTOs · AuthService (register/decoy, verify/resend OTP, login/lockout, logout-all, password change) ·
+   OtpService (HMAC, synchronous mail) · RefreshTokenService (`__Host-cb_rt`, rotation, reuse → family revoked) · AccessTokens ·
+   PasswordPolicy (+ small blocklist) · AuthEvents · RateLimiter (Bucket4j, in memory).
+4. `users`: UserAccounts (create user + consents; used by register, seed, bootstrap) + MeController (GET/PUT /me, POST /me/consents);
+   `privacy`: GET /public/privacy-notice; `common/AuditLog`.
+5. Runners: AdminBootstrapRunner (`bootstrap-admin`, no TOTP while mfa-required=false), E2eSeedRunner (`e2e-seed`, `_e2e` guard).
+Tests first: ITs on Testcontainers PostGIS + Mailpit (`axllent/mailpit:v1.31.3`) for the prompt's list; unit tests for policy,
+rate limiter, JWT, OTP codes. Verify: `.\mvnw.cmd -q verify` → E2E smoke (stop → seed-e2e -MinAccounts 3 → -E2E → smoke auth →
+-Restart) → log scan. Forgot/reset (FR-03) last, only inside the time box.
+
+
+**Results** (2026-10-03, verified 13:18 - well inside the 3 h estimate)
+1. Files (`backend/`): `auth/` (`api/AuthController`, `AuthDtos`, `RefreshCookie`, `CurrentUser`; `service/AuthService`, `OtpService`,
+   `AuthMailer`, `AccessTokens`, `RefreshTokens`, `TokenRevocationValidator`, `PasswordPolicy`, `AuthEvents`; `repo/OtpRepository`,
+   `RefreshTokenRepository`) · `users/` (`model/Role`, `UserAccount`; `repo/UserRepository`; `service/UserAccounts`, `MeService`;
+   `api/MeController`; `setup/AdminBootstrapRunner`, `E2eSeedRunner`) · `privacy/` (`PrivacyNoticeController`, `PrivacyRepository`,
+   `ConsentType`) · `common/` (`RateLimiter`, `RateLimitedException`, `AuditLog`, `Db`, `Masking`, `Times`; `ApiException`/`ApiProblem`
+   RFC 9457 extension members; Retry-After in the advice and `ProblemWriter`) · `config/` (`JwtConfig`, `PasswordConfig`,
+   `RateLimitProperties`, `PasswordChangeRequiredFilter`, `UserRateLimitFilter`, `SecurityConfig` role areas + resource server,
+   `SecurityProblemHandler` → SESSION_REVOKED) · `CivicbrainApplication` (exits after the one-shot profiles) · `application.yml`
+   (`app.rate-limits.*`, `server.forward-headers-strategy: native`), `application-e2e.yml` (per-IP ×100, 100 complaints/24 h) ·
+   `resources/security/common-passwords.txt`. Docs: `docs/12_ERROR_HANDLING.md` §2 + `PASSWORD_CHANGE_REQUIRED` (403), also in
+   `ErrorCode` and `frontend/src/i18n/en.json`.
+2. Endpoints: POST `/auth/register` (202; decoy otpId + owner mail for an existing e-mail/phone), `/auth/verify-otp`, `/auth/resend-otp`,
+   `/auth/login` (+ `__Host-cb_rt`), `/auth/refresh`, `/auth/logout`, `/auth/logout-all` (bearer), `/auth/password/change` (bearer),
+   `/auth/password/forgot` + `/auth/password/reset` (FR-03, built last, inside the time box); GET/PUT `/me`, POST `/me/consents`;
+   GET `/public/privacy-notice` (Cache-Control 60 s).
+3. Tests (all new): ITs `AuthRegistrationIT` 8 (register → OTP mail in the Mailpit container → verify → login → /me; decoy for e-mail and
+   phone with owner mail; OTP code absent from `notification_outbox`/`notifications`/`auth_events`; OTP_EXPIRED; 5 attempts →
+   OTP_ATTEMPTS_EXCEEDED; resend 1/60 s → 429 + Retry-After; PASSWORD_POLICY; validation; register 5/h per IP → 429; privacy notice) ·
+   `AuthLoginIT` 9 (same 401 body for wrong password/unknown account; 10 failures → 423, wrong while locked → 401, unlock; phone login
+   forms; JWT header/claims; tampered/typ JWT/other audience → 401; role areas; must_change_password → 403 PASSWORD_CHANGE_REQUIRED
+   then change → old token SESSION_REVOKED, refresh works; logout-all kills existing token + every family; login 30/identifier → 429) ·
+   `AuthSessionIT` 5 (rotation + reuse → family dead + REFRESH_REUSE_DETECTED; no CSRF header/wrong/missing Origin → 403; logout
+   clears cookie; missing/unknown/expired → 401; officer 1 h vs citizen 7 d idle) · `MeIT` 3 · `PasswordResetIT` 4 ·
+   `SetupRunnersIT` 3 (E2eSeedRunner refuses DB `test`; bootstrap refuses when an ADMIN exists; creates a verified Argon2id ADMIN
+   without TOTP/forced change, rolled back). Unit: `AccessTokensTest` 7, `PasswordPolicyTest` 12, `RateLimiterTest` 3, `MaskingTest` 10,
+   `ProblemExtensionsTest` 5. Honest note: the test classes were written after most of the main code (not one-by-one test-first);
+   PasswordResetIT was written before its code. Test infra: `MailpitContainerConfig` + `MailpitClient` (in `@IntegrationTest`),
+   `AuthItSupport`; `WebSliceTest` imports `RateLimiter` + a rejecting JwtDecoder (slice has no user table); 2 endpoints added to
+   `TestController`. No existing test assertion changed.
+4. Runs (in `backend` unless noted):
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | backend run 1 | `.\mvnw.cmd -q verify` | 1 error in my new `AccessTokensTest` (`Jwt.getIssuer()` converts "civicbrain" to a URL) → test reads the claim as a string | FAIL→fixed |
+   | backend run 2 | same | unit all green; IT 1 failure: owner "someone tried to register" mail skipped - it shared the 1/60 s OTP bucket with the owner's own code mail → own bucket key (`registration-attempt:<e-mail>`, same limits) | FAIL→fixed |
+   | backend run 3 | same | exit 0, 148 tests 0 failures | PASS |
+   | seed run 1-2 (repo root) | `pwsh -NoProfile -File scripts\dev\seed-e2e.ps1 -MinAccounts 3` | `e2e-seed run failed (exit 1)`: non-web profile has no `HttpSecurity` bean → `SecurityConfig` `@ConditionalOnWebApplication(SERVLET)` | FAIL→fixed |
+   | backend run 4 (after FR-03) | `.\mvnw.cmd -q verify` | exit 0, **`TOTAL tests=152 failures=0 errors=0 skipped=0`** (surefire 107 + failsafe 45); test log scanned: 0 tokens/passwords/OTPs | PASS |
+   | seed (final jar) | `pwsh -NoProfile -File scripts\dev\seed-e2e.ps1 -MinAccounts 3` | `E2E RESET DONE: 48 tables emptied, 27 reference tables kept` · `E2E seed on civicbrain_e2e: 5 accounts created, 0 already present` · `PASS E2E database civicbrain_e2e ready with 3 fixed accounts` | PASS |
+   | E2E stack | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -E2E` | `PASS stack 'e2e' is up`; backend log `Started CivicbrainApplication`, `DB check: 23 wards visible to civicbrain_app` | PASS |
+   | smoke | `ai-service\.venv\Scripts\python.exe tests\smoke\smoke_flow.py --stage auth` | **`SMOKE AUTH PASSED: 19 / 19`** (run before and again after FR-03) | PASS |
+   | log scan | `Select-String -Path logs\backend.log -Pattern 'eyJ[A-Za-z0-9_-]{10,}\|password=\|otp.{0,20}\d{6}'` | no output (0 hits); frontend/worker/ai-api/seed logs 0 hits; 0 ERROR lines | PASS |
+   | Mailpit | API search `to:@smoke.local` | `smoke-0a093976@smoke.local \| Your CivicBrain verification code` (first run) | PASS |
+   | dev stack back | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | 5 services healthy; GET `:5173/api/v1/public/privacy-notice` → `200 2026-10-v1 …+05:30 max-age=60, public` | PASS |
+   | frontend (en.json) | in `frontend`: `npm run lint` · `npm run typecheck` · `npm test -- --run` | exit 0 · exit 0 · `Tests 39 passed (39)` | PASS |
+- DECISION: auth tables through `JdbcClient` (explicit SQL, `CAST(:ip AS inet)`), no JPA entities yet: avoids `ddl-auto=validate`
+  type pitfalls (`char(64)`, `inet`) and JPA/JDBC flush ordering. Timestamps are bound as UTC `OffsetDateTime` from the app `Clock`.
+- DECISION: `must_change_password` travels as the JWT claim `mcp=true`; the filter allows only GET `/me`, POST `/auth/password/change`,
+  `/auth/logout`, `/auth/logout-all`, `/auth/refresh` (PUT `/me` is blocked too - stricter reading of "except /me").
+- DECISION: `token_valid_after` arithmetic in whole seconds (JWT `iat` has no fraction): revocation sets
+  `greatest(now, trunc(old)+1 s) + 1 s`; tokens get `iat = max(trunc(now), ceil(token_valid_after))` (≤ 2 s in the future right after a
+  revocation). The validator compares `iat >= ceil(token_valid_after)` and also rejects inactive users → 401 SESSION_REVOKED.
+- DECISION: wrong current password on `/auth/password/change` → 400 VALIDATION_FAILED (field `currentPassword`), not 401 (a 401 would
+  trigger the client's silent refresh); it counts towards the 10-failure lockout. `POST /me/consents` → 200 with the `/me` body.
+- DECISION: 403 EMAIL_NOT_VERIFIED carries `otpId` (+ `expiresInSec`) as RFC 9457 extension members; inside the 60-s resend limit it
+  returns the newest code already sent. Decoy register writes `auth_events` OTP_SENT with `details.decoy=true` (no better V5 type).
+- DECISION: `server.forward-headers-strategy: native` - behind the Vite proxy / Cloudflare tunnel every client is 127.0.0.1, so
+  per-IP limits (5 registrations/h) would be global in the demo; Tomcat trusts X-Forwarded-For only from internal-proxy addresses.
+- DECISION: forgot-password has its own 5/h per-IP bucket (`forgot:<ip>`), the owner notice its own per-destination bucket.
+  Rate-limit buckets are in memory with a 100,000-bucket safety reset. `mfa-required=true` without TOTP flows fails closed (403
+  MFA_REQUIRED for OFFICER/ADMIN) until P25. E2eSeedRunner/AdminBootstrapRunner never set TOTP while `mfa-required=false`.
+- Open / hand-offs: **P07** login/register/OTP/forced-change screens use `otpId` from the 403 body and refresh after a password
+  change (old access token is revoked). **P14** E2eSeedRunner adds officers/contractors/staff (`SPECS` list). **P28** SPA GET permit
+  (07 §2) is not added yet (the P04 test expects `GET /` → 401). Known limit: forgot-password timing differs by the SMTP send time
+  for known vs unknown e-mails (real code mail is synchronous). Blocklist is a small local list (07 §1's 100k file = Phase 2).
 
 ### 2026-10-03 — D1 follow-up — SCRIPT FIX `Import-DotEnv` empty values (DONE 2026-10-03 12:16, human request)
 - **SCRIPT FIX:** same root cause as the D1 gate fix (PowerShell turns `$null` into `""`; since .NET 9

@@ -10,12 +10,12 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
-/** Full application context on the shared Testcontainers PostGIS database, profile {@code test}, MockMvc. */
+/** Full application context on the shared Testcontainers PostGIS database and Mailpit, profile {@code test}, MockMvc. */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Import(PostgisContainerConfig.class)
+@Import({PostgisContainerConfig.class, MailpitContainerConfig.class})
 public @interface IntegrationTest {
 }

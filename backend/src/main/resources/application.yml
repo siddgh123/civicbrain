@@ -55,6 +55,9 @@ spring:
 
 server:
   port: 8080
+  # Vite proxy and the Cloudflare tunnel forward from 127.0.0.1: Tomcat takes the client IP from X-Forwarded-For
+  # only when the direct peer is an internal proxy, so the per-IP rate limits see the phone, not the proxy
+  forward-headers-strategy: native
   error:
     include-stacktrace: never
     include-message: never
@@ -110,6 +113,18 @@ app:
     ai-service-jwt-secret: ${AI_SERVICE_JWT_SECRET:}
     # officer/admin TOTP is the optional P25; MVP admins log in with e-mail + password
     mfa-required: false
+  # docs/04_API_CONTRACT.md §11 (in memory, reset on restart); profile e2e relaxes them
+  rate-limits:
+    ip-multiplier: 1
+    login-identifier: { capacity: 30, period: 15m }
+    login-ip: { capacity: 100, period: 15m }
+    register-ip: { capacity: 5, period: 1h }
+    otp-send-short: { capacity: 1, period: 60s }
+    otp-send: { capacity: 5, period: 1h }
+    otp-verify-account: { capacity: 20, period: 1h }
+    complaint-user: { capacity: 5, period: 24h }
+    complaint-ip: { capacity: 20, period: 1h }
+    authenticated-user: { capacity: 300, period: 1m }
   whatsapp:
     provider: ${WHATSAPP_PROVIDER:}
     meta-token: ${META_WA_TOKEN:}

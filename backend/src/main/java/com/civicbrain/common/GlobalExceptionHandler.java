@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -162,9 +163,11 @@ public class GlobalExceptionHandler {
                 log.error("{} {} -> 500 unexpected error", request.getMethod(), request.getRequestURI(), cause);
             }
         }
-        return ResponseEntity.status(e.status())
-                .contentType(MediaType.parseMediaType(ApiProblem.MEDIA_TYPE))
-                .body(ApiProblem.of(e, RequestIdFilter.currentId(request)));
+        var response = ResponseEntity.status(e.status()).contentType(MediaType.parseMediaType(ApiProblem.MEDIA_TYPE));
+        if (e instanceof RateLimitedException limited) {
+            response.header(HttpHeaders.RETRY_AFTER, Long.toString(limited.retryAfterSeconds()));
+        }
+        return response.body(ApiProblem.of(e, RequestIdFilter.currentId(request)));
     }
 
     /** NotBlank → NOT_BLANK, Max → MAX, DecimalMin → DECIMAL_MIN, typeMismatch → TYPE_MISMATCH. */

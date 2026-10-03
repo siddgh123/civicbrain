@@ -21,6 +21,7 @@ One `@RestControllerAdvice` maps exceptions → this body. `detail` never contai
 | 403 | `EMAIL_NOT_VERIFIED` | Citizen not verified | OTP screen |
 | 403 | `MFA_REQUIRED` | Officer/admin without TOTP | TOTP setup |
 | 403 | `CSRF_CHECK_FAILED` | Refresh/logout without header or bad Origin | force re-login |
+| 403 | `PASSWORD_CHANGE_REQUIRED` | `users.must_change_password = true` (one-time password): every endpoint except `GET /me`, `/auth/password/change`, `/auth/logout`, `/auth/logout-all` | change-password screen |
 | 404 | `NOT_FOUND` | Missing **or not yours** | "Not found" |
 | 409 | `INVALID_TRANSITION` | V2 guard: "Invalid complaint status transition" (SQLSTATE 23514 with that message) | "This complaint has already moved on. Refresh." |
 | 409 | `STALE_VERSION` | Plan edited by someone else | "Plan changed — reload" dialog |

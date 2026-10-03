@@ -109,6 +109,7 @@
     "EMAIL_NOT_VERIFIED": "Please verify your e-mail with the code we sent you.",
     "MFA_REQUIRED": "Set up two-factor authentication to continue.",
     "CSRF_CHECK_FAILED": "Your session could not be confirmed. Please log in again.",
+    "PASSWORD_CHANGE_REQUIRED": "Please set a new password to continue.",
     "NOT_FOUND": "Not found.",
     "INVALID_TRANSITION": "This complaint has already moved on. Refresh.",
     "STALE_VERSION": "Plan changed by someone else — reload.",

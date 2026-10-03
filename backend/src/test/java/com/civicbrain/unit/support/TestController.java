@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.civicbrain.common.ApiException;
 import com.civicbrain.common.ErrorCode;
+import com.civicbrain.common.RateLimitedException;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -59,6 +60,16 @@ public class TestController {
     public String dbTransition() {
         throw new DataIntegrityViolationException("could not execute statement", new PSQLException(new ServerErrorMessage(
                 "SERROR\0VERROR\0C23514\0MInvalid complaint status transition SUBMITTED -> CLOSED (complaint 7)\0")));
+    }
+
+    @GetMapping("/api/v1/public/test/extension")
+    public String extension() {
+        throw new ApiException(ErrorCode.EMAIL_NOT_VERIFIED, "Please verify your e-mail.").with("otpId", 42L);
+    }
+
+    @GetMapping("/api/v1/public/test/limited")
+    public String limited() {
+        throw new RateLimitedException(17);
     }
 
     @GetMapping({"/api/v1/public/test/ping", "/api/v1/auth/test/ping", "/actuator/health"})

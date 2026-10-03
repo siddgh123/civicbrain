@@ -1,7 +1,6 @@
 package com.civicbrain.common;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -20,8 +19,15 @@ public class ProblemWriter {
     }
 
     public void write(HttpServletRequest request, HttpServletResponse response, ErrorCode code, String detail) throws IOException {
-        ApiProblem body = ApiProblem.of(code, code.status(), detail, RequestIdFilter.currentId(request), List.of());
-        response.setStatus(code.status());
+        write(request, response, new ApiException(code, detail));
+    }
+
+    public void write(HttpServletRequest request, HttpServletResponse response, ApiException e) throws IOException {
+        ApiProblem body = ApiProblem.of(e, RequestIdFilter.currentId(request));
+        if (e instanceof RateLimitedException limited) {
+            response.setHeader("Retry-After", Long.toString(limited.retryAfterSeconds()));
+        }
+        response.setStatus(e.status());
         response.setContentType(ApiProblem.MEDIA_TYPE);   // JSON is UTF-8 by definition (RFC 8259): no charset parameter
         response.getOutputStream().write(json.writeValueAsBytes(body));
     }
