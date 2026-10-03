@@ -30,7 +30,7 @@
 7. Show: notification log, audit log, PDF export, public map (snapped, no personal data), evaluation report slide (YOLO per-class metrics, classifier macro-F1, measurement error per tier, FIFO vs optimised), limitations slide.
 
 ## 5. Known limitations to state honestly
-Size from one photo is an estimate with a confidence tier; depth is never measured from the photo. Fake-report protection detects and deters, it cannot prove a photo is genuine. Wards are analytical units (not the 2025 electoral wards). Rates/teams/depot are prototype values until TDMC provides official ones. WhatsApp demo uses a test number (5 recipients). Ultralytics AGPL-3.0 applies to the model.
+Size from one photo is an estimate with a confidence tier; depth is never measured from the photo. Fake-report protection detects and deters, it cannot prove a photo is genuine. Wards are analytical units (not the 2025 electoral wards). Rates/teams/depot are prototype values until TDMC provides official ones. WhatsApp demo uses a test number (5 recipients). Ultralytics AGPL-3.0 applies to the model. Priority location risk (Step 11, weight 0.15) knows only the 25 POIs in the database (8 hospitals, 6 bus stops, 5 schools, 3 colleges, 2 government offices, 1 police station; no fire stations, railway stations or markets), so 213 of the 500 research complaints have no POI within 1 km and score 0 for this factor.
 
 ## 6. Incident / breach runbook (also required by CERT-In/DPDP in production)
 1. Contain: disable affected accounts (`/admin/users/{id}/disable`), rotate `JWT_SECRET` (logs everyone out), rotate provider keys.

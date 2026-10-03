@@ -2,12 +2,14 @@
 the complaint columns and the daily recompute. Fixture rows are inserted as the owner (it_data) and deleted afterwards.
 """
 
+import csv
 import datetime as dt
+import re
 
 import pytest
 from sqlalchemy import text
 
-from app.config import PRIORITY_WEIGHTS
+from app.config import PRIORITY_DATA_DIR, PRIORITY_WEIGHTS, REPO_ROOT_DIR
 from app.db import session_scope
 from pipeline import priority as pr
 
@@ -118,6 +120,51 @@ def test_ward_and_road_missing_on_the_row_are_looked_up_from_the_location(it_dat
     with session_scope(ai_engine) as s:
         inputs = pr.load_inputs(s, cid, pr.get_rules())
     assert inputs.ward_number is not None and inputs.road_type is not None
+
+
+SEED_SQL = REPO_ROOT_DIR / "db" / "seed" / "seed_synthetic_demo_data.sql"
+# One complaints row of the pg_dump seed: (id, user, category|NULL, 'title', 'description', 'STATUS', '<EWKB hex point>', ...
+SEED_ROW = re.compile(r"^\s*\((\d+), \d+, (?:\d+|NULL), '(?:[^']|'')*', '(?:[^']|'')*', '[A-Z_]+', '([0-9A-F]{50})'")
+
+
+def _research_locations() -> dict[int, str]:
+    """complaint_id -> location (EWKB hex, SRID 4326) of the 500 research complaints (the seed's complaints block)."""
+    lines = SEED_SQL.read_text(encoding="utf-8").splitlines()
+    start = next(i for i, line in enumerate(lines) if line.startswith("-- Data for Name: complaints;"))
+    end = next(i for i in range(start + 1, len(lines)) if lines[i].startswith("-- Data for Name:"))
+    return {int(m.group(1)): m.group(2) for m in map(SEED_ROW.match, lines[start:end]) if m}
+
+
+def test_live_location_rule_reproduces_all_500_research_location_scores(it_data, ai_engine, capsys):
+    """The 500 Step 11 complaints at their research locations (POIs from V1 as in the research): load_inputs +
+    location_risk_score give data/priority/location_risk_scores.csv exactly."""
+    with (PRIORITY_DATA_DIR / "location_risk_scores.csv").open(encoding="utf-8-sig", newline="") as f:
+        research = {int(r["complaint_id"]): float(r["location_risk_score"]) for r in csv.DictReader(f)}
+    locations = _research_locations()
+    assert len(research) == 500 and set(locations) == set(research)
+
+    rows = it_data._sql(
+        "INSERT INTO complaints (user_id, title, description, location, location_source, is_synthetic) "
+        "SELECT :u, 'research location ' || t.rid, 'Step 11 location-risk fixture', CAST(t.hex AS geometry), 'SYNTHETIC', true "
+        "  FROM unnest(CAST(:rids AS bigint[]), CAST(:hexes AS text[])) AS t(rid, hex) "
+        "RETURNING complaint_id, title",
+        u=it_data.new_user(), rids=list(locations), hexes=list(locations.values()),
+    )
+    fixture = {int(r["title"].rsplit(" ", 1)[1]): int(r["complaint_id"]) for r in rows}
+    it_data.complaint_ids.extend(fixture.values())
+
+    rules = pr.get_rules()
+    mismatches = []
+    with session_scope(ai_engine) as s:
+        for research_id, cid in sorted(fixture.items()):
+            inputs = pr.load_inputs(s, cid, rules)
+            live = pr.location_risk_score([(p.type, p.distance_m) for p in inputs.pois], rules)
+            if abs(live - research[research_id]) > 1e-9:
+                mismatches.append((research_id, live, research[research_id]))
+    with capsys.disabled():
+        print(f"\nLOCATION RISK vs research: {len(fixture)} rows checked, {len(mismatches)} mismatches")
+    assert len(fixture) == 500
+    assert mismatches == []
 
 
 def test_daily_recompute_takes_open_real_complaints_only(it_data, ai_engine):
