@@ -83,6 +83,24 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
+### 2026-10-03 — D2 follow-up — requirement IDs in the existing tests (DONE 2026-10-03 19:55, human request Q2)
+- Human yes (19:47): add the five IDs the gate found only by test name as comments; comments only, no test logic or assertion
+  changed (ASK-FIRST item "changing a test that already passed" - approved).
+- Changes (header comments only; three one-line Javadocs reflowed into multi-line ones with the same text): `AuthLoginIT`
+  (FR-02 without officer TOTP (P25), NFR-01) · `AuthSessionIT` (NFR-01) · `ClientIpTest` (NFR-01) · `SetupRunnersIT` (FR-04
+  first-admin part only - the bootstrap is in the docs/01 roles table, officer management is P14) · `LoginPage.test.tsx` (FR-02)
+  · `CameraCapture.test.tsx` (FR-10 camera part) · `ai-service/tests/unit/test_authenticity.py` (FR-20). `git diff`: 16 lines
+  added, 3 removed (the reflowed comments), no code line touched.
+- Re-runs (same counts as the D2 gate run):
+
+  | Check | Command | Result |
+  |---|---|---|
+  | backend | in `backend`: `.\mvnw.cmd -q verify` | exit 0; reports 19:50: surefire `tests=124 failures=0 errors=0 skipped=0`, failsafe `tests=46 failures=0 errors=0 skipped=0` (`AuthLoginIT` 9, `AuthSessionIT` 5, `SetupRunnersIT` 3, `ClientIpTest` 15, all 0 failures) |
+  | AI lint | in `ai-service`: `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` |
+  | AI tests | `.\.venv\Scripts\python.exe -m pytest -q` | `311 passed, 1 warning in 28.29s` (`tests/unit/test_authenticity.py` alone: `74 passed`) |
+  | frontend | in `frontend`: `npm run lint` · `npm run typecheck` · `npm test -- --run` | exit 0 · exit 0 · `Test Files 14 passed (14)` `Tests 69 passed (69)` |
+  | ID grep | `git grep -l -w <ID>` over backend/AI/frontend tests | FR-01, FR-02, FR-03, FR-04, FR-10, FR-20, FR-21, FR-60, NFR-01 each found (FR-22 / FR-25 via the Step 12 / Step 11 docstrings, unchanged) |
+
 ### 2026-10-03 — D2 gate (`/phase-gate D2`, "after P09") — PASSED (human yes 2026-10-03 19:47, tag `d2-done`; gate run 19:34-19:43)
 - Gate items: `prompts/README.md` "Day gates" D2 row + the 09_BUILD_PLAN_7DAY §4 tests that exist after P09 (DB SQL tests;
   backend IT context/Flyway, register → OTP → login, generic 401, refresh rotation/reuse; AI priority golden, duplicate repro,

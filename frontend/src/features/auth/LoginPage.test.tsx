@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { server } from '../../test/server';
 import { problem, renderApp } from '../../test/renderApp';
 
+// Requirement: FR-02 (login form; the server's generic 401 is shown without saying which part was wrong).
 const PASSWORD = 'correct horse battery';
 
 function countLoginCalls() {

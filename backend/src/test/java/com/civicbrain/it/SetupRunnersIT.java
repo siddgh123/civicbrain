@@ -18,7 +18,11 @@ import com.civicbrain.users.repo.UserRepository;
 import com.civicbrain.users.setup.AdminBootstrapRunner;
 import com.civicbrain.users.setup.E2eSeedRunner;
 
-/** E2eSeedRunner's database guard and AdminBootstrapRunner (prompt P06 build 8, rule 10, docs/08 §2). */
+/**
+ * E2eSeedRunner's database guard and AdminBootstrapRunner (prompt P06 build 8, rule 10, docs/08 §2).
+ * Requirement: FR-04, first-admin part only - the ADMIN who later creates officers is made by the bootstrap runner
+ * (docs/01 roles table); officer management itself is P14.
+ */
 @IntegrationTest
 class SetupRunnersIT extends AuthItSupport {
 

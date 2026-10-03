@@ -1,5 +1,6 @@
 """pipeline/authenticity.py: one test per row of docs/06_AI_PIPELINE.md sec. 2.1 (PASS/WARN/FAIL + delta), clamp,
-FLAGGED threshold, nearby & recent pHash = duplicate hint (PASS), pHash as signed int64."""
+FLAGGED threshold, nearby & recent pHash = duplicate hint (PASS), pHash as signed int64.
+Requirement: FR-20 (authenticity score 0-100 from explainable checks)."""
 
 import datetime as dt
 from pathlib import Path

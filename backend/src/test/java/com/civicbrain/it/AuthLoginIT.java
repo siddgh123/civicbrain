@@ -34,6 +34,8 @@ import tools.jackson.databind.JsonNode;
 /**
  * Login, generic errors, lockout, JWT claims, PASSWORD_CHANGE_REQUIRED, logout-all and the login rate limit
  * (docs/04_API_CONTRACT.md §1, §11; docs/07_SECURITY.md §1, §2; docs/12_ERROR_HANDLING.md §2).
+ * Requirements: FR-02 (password login, same 401 for unknown accounts, lockout after 10 failures; officer TOTP is P25),
+ * NFR-01 (JWT claims, tampered / wrong-typ / other-audience tokens rejected, token_valid_after, login rate limit).
  */
 @IntegrationTest
 class AuthLoginIT extends AuthItSupport {

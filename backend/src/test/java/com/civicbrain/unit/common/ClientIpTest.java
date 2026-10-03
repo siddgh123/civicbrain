@@ -21,6 +21,7 @@ import com.civicbrain.config.RateLimitProperties.Limit;
 /**
  * The rate-limit IP (docs/04_API_CONTRACT.md §11): X-Forwarded-For is read from the right, loopback hops are skipped,
  * the first other address is the client; the client-written left part never becomes the key.
+ * Requirement: NFR-01 (rate limits that a forged header cannot bypass).
  */
 class ClientIpTest {
 

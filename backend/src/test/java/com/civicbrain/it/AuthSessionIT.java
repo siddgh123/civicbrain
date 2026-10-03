@@ -14,7 +14,10 @@ import com.civicbrain.users.model.Role;
 
 import jakarta.servlet.http.Cookie;
 
-/** Refresh cookie: rotation, reuse detection, CSRF header + Origin, logout (docs/04 §1, docs/07 §1, 09_7DAY §4). */
+/**
+ * Refresh cookie: rotation, reuse detection, CSRF header + Origin, logout (docs/04 §1, docs/07 §1, 09_7DAY §4).
+ * Requirement: NFR-01 (session management).
+ */
 @IntegrationTest
 class AuthSessionIT extends AuthItSupport {
 

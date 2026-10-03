@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CaptureResult } from './capture';
 import { CameraCapture } from './CameraCapture';
 
+// Requirement: FR-10, camera part (in-app camera, no gallery, GPS + accuracy + timestamp + tilt; docs/05 §4 step 2, §7).
 // jsdom has no camera, canvas encoder or geolocation: each test installs the browser APIs it needs.
 
 type PositionCallback = (position: GeolocationPosition) => void;
