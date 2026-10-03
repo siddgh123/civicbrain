@@ -217,6 +217,30 @@ class AuthRegistrationIT extends AuthItSupport {
     }
 
     @Test
+    void behindTheLocalProxyTheLimitIsKeyedOnTheRightMostForwardedAddress() throws Exception {
+        // MockMvc's peer is 127.0.0.1 (= the Vite proxy / tunnel); the first X-Forwarded-For entry is forged each time
+        String email = uniqueEmail("xff");
+        mvc.perform(postJson("/api/v1/auth/register", registerBody(email, uniquePhone(), PASSWORD))
+                        .header("X-Forwarded-For", "1.2.3.4, 203.0.113.9"))
+                .andExpect(status().isAccepted());
+        assertThat(jdbc.sql("SELECT host(request_ip) FROM auth_otp_codes WHERE destination = :e").param("e", email)
+                .query(String.class).single()).isEqualTo("203.0.113.9");
+        for (int i = 2; i <= 5; i++) {
+            mvc.perform(postJson("/api/v1/auth/register", registerBody(uniqueEmail("xff"), uniquePhone(), "short"))
+                            .header("X-Forwarded-For", "1.2.3." + i + ", 203.0.113.9"))
+                    .andExpect(status().isUnprocessableContent());
+        }
+        mvc.perform(postJson("/api/v1/auth/register", registerBody(uniqueEmail("xff"), uniquePhone(), PASSWORD))
+                        .header("X-Forwarded-For", "198.51.100.77, 203.0.113.9"))
+                .andExpect(status().isTooManyRequests())
+                .andExpect(jsonPath("$.code").value("RATE_LIMITED"));
+        // another client behind the same proxy has its own bucket
+        mvc.perform(postJson("/api/v1/auth/register", registerBody(uniqueEmail("xff"), uniquePhone(), "short"))
+                        .header("X-Forwarded-For", "1.2.3.4, 203.0.113.10"))
+                .andExpect(status().isUnprocessableContent());
+    }
+
+    @Test
     void privacyNoticeIsPublicAndCached() throws Exception {
         mvc.perform(get("/api/v1/public/privacy-notice"))
                 .andExpect(status().isOk())

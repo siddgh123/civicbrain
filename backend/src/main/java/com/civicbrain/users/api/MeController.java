@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.civicbrain.auth.api.CurrentUser;
+import com.civicbrain.common.ClientIp;
 import com.civicbrain.common.Masking;
 import com.civicbrain.common.RequestIdFilter;
 import com.civicbrain.common.Times;
@@ -63,13 +64,13 @@ public class MeController {
     public MeResponse update(@Valid @RequestBody UpdateMeRequest body, Authentication authentication, HttpServletRequest request) {
         return view(me.update(CurrentUser.id(authentication),
                 new MeService.ProfileChange(body.fullName(), body.preferredLanguage(), body.emailOptIn(), body.whatsappOptIn()),
-                request.getRemoteAddr(), RequestIdFilter.currentId(request)));
+                ClientIp.of(request), RequestIdFilter.currentId(request)));
     }
 
     @PostMapping("/consents")
     public MeResponse consent(@Valid @RequestBody ConsentRequest body, Authentication authentication, HttpServletRequest request) {
         return view(me.consent(CurrentUser.id(authentication), body.consentType(), body.granted(),
-                request.getRemoteAddr(), RequestIdFilter.currentId(request)));
+                ClientIp.of(request), RequestIdFilter.currentId(request)));
     }
 
     private static MeResponse view(MeService.Profile p) {

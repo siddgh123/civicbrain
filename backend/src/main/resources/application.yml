@@ -55,9 +55,9 @@ spring:
 
 server:
   port: 8080
-  # Vite proxy and the Cloudflare tunnel forward from 127.0.0.1: Tomcat takes the client IP from X-Forwarded-For
-  # only when the direct peer is an internal proxy, so the per-IP rate limits see the phone, not the proxy
-  forward-headers-strategy: native
+  # Tomcat must not rewrite the client IP: common/ClientIp reads X-Forwarded-For itself (from the right, loopback
+  # peers only), so the per-IP rate limits see the phone behind the Vite proxy / tunnel and never a forged entry
+  forward-headers-strategy: none
   error:
     include-stacktrace: never
     include-message: never

@@ -5,11 +5,12 @@ import org.springframework.security.oauth2.jwt.Jwt;
 
 import com.civicbrain.auth.service.AuthEvents;
 import com.civicbrain.common.ApiException;
+import com.civicbrain.common.ClientIp;
 import com.civicbrain.common.ErrorCode;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-/** The signed-in user (JWT {@code sub}) and the client of a request (IP, user agent) for audit rows. */
+/** The signed-in user (JWT {@code sub}) and the client of a request (IP via {@link ClientIp}, user agent). */
 public final class CurrentUser {
 
     private CurrentUser() {
@@ -27,6 +28,6 @@ public final class CurrentUser {
     }
 
     public static AuthEvents.Client client(HttpServletRequest request) {
-        return new AuthEvents.Client(request.getRemoteAddr(), request.getHeader("User-Agent"));
+        return new AuthEvents.Client(ClientIp.of(request), request.getHeader("User-Agent"));
     }
 }
