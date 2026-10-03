@@ -1,0 +1,122 @@
+# CivicBrain API - base settings for every profile (docs/02_ARCHITECTURE.md §6, rule 10-backend-spring).
+# Values come from environment variables (scripts/dev/start-*.ps1 load .env). No secrets in this file.
+# Required keys without a default fail the start naming the variable; keys that may be empty in .env get a default
+# (Windows cannot hold empty environment variables). The app.* keys are checked by the @Validated records in
+# com.civicbrain.config, whose messages name the variable.
+spring:
+  application:
+    name: civicbrain
+  profiles:
+    default: dev
+  main:
+    banner-mode: off
+  datasource:
+    # always the least-privilege API role civicbrain_app (never the owner)
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      pool-name: civicbrain-app
+      connection-timeout: 5000
+      # 12 §3: 10-s statement limit for every API query
+      connection-init-sql: SET statement_timeout = '10s'
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    # Flyway owns the schema: V1-V5 + R__civicbrain_grants.sql (kit files, copied unchanged)
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 1
+    placeholder-replacement: false
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  mail:
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      "[mail.smtp.starttls.enable]": ${SMTP_STARTTLS:false}
+      # 12 §4: 10 s connect/read
+      "[mail.smtp.connectiontimeout]": 10000
+      "[mail.smtp.timeout]": 10000
+      "[mail.smtp.writetimeout]": 10000
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 25MB
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-binding-errors: never
+    include-exception: false
+    whitelabel:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      show-components: never
+      # Boot 4 enables liveness/readiness groups by default; no orchestrator here, public health = status only
+      probes:
+        enabled: false
+  health:
+    # SMTP problems must not make the app DOWN; the outbox retries
+    mail:
+      enabled: false
+
+springdoc:
+  # /v3/api-docs only in dev and test (07 §2); never the Swagger UI
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  structured:
+    format:
+      console: logstash
+
+app:
+  base-url: ${APP_BASE_URL:}
+  extra-origins: ${APP_EXTRA_ORIGINS:}
+  storage-root: ${STORAGE_ROOT:}
+  labour-rate-per-hour: ${LABOUR_RATE_PER_HOUR:}
+  mail-from: ${SMTP_FROM:}
+  ai-service-url: ${AI_SERVICE_URL:http://127.0.0.1:8001}
+  scheduling:
+    enabled: true
+  auth:
+    jwt-secret: ${JWT_SECRET:}
+    jwt-issuer: ${JWT_ISSUER:}
+    jwt-audience: ${JWT_AUDIENCE:}
+    otp-hmac-key: ${OTP_HMAC_KEY:}
+    totp-enc-key: ${TOTP_ENC_KEY:}
+    ai-service-jwt-secret: ${AI_SERVICE_JWT_SECRET:}
+    # officer/admin TOTP is the optional P25; MVP admins log in with e-mail + password
+    mfa-required: false
+  whatsapp:
+    provider: ${WHATSAPP_PROVIDER:}
+    meta-token: ${META_WA_TOKEN:}
+    meta-phone-id: ${META_WA_PHONE_ID:}
+    meta-app-secret: ${META_WA_APP_SECRET:}
+    meta-verify-token: ${META_WA_VERIFY_TOKEN:}
+    meta-api-version: ${META_WA_API_VERSION:v26.0}
+    twilio-sid: ${TWILIO_SID:}
+    twilio-token: ${TWILIO_TOKEN:}
+    twilio-from: ${TWILIO_FROM:}

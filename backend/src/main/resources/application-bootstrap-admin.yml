@@ -1,0 +1,12 @@
+# Profile bootstrap-admin: non-web run of bootstrap-admin.ps1 (human-only). AdminBootstrapRunner (P06) reads
+# BOOTSTRAP_ADMIN_EMAIL/NAME/PASSWORD, refuses if any ADMIN exists, creates the first ADMIN, then exits.
+spring:
+  main:
+    web-application-type: none
+  flyway:
+    user: ${PG_ADMIN_USER}
+    password: ${PG_ADMIN_PASSWORD}
+
+app:
+  scheduling:
+    enabled: false

@@ -1,0 +1,10 @@
+# Profile dev (default): each laptop, database civicbrain, Mailpit, WhatsApp provider `log`.
+spring:
+  flyway:
+    # Flyway connects as the database owner; the app itself stays civicbrain_app (rule 10)
+    user: ${PG_ADMIN_USER}
+    password: ${PG_ADMIN_PASSWORD}
+
+springdoc:
+  api-docs:
+    enabled: true

@@ -1,0 +1,5 @@
+# Profile demo: the demo laptop (start-all.ps1 -Demo, human-only). Same database rules as dev; no API docs.
+spring:
+  flyway:
+    user: ${PG_ADMIN_USER}
+    password: ${PG_ADMIN_PASSWORD}

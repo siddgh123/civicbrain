@@ -1,0 +1,6 @@
+# Profile e2e: the Playwright / smoke stack on civicbrain_e2e (start-all.ps1 -E2E sets DB_URL, Mailpit, `log`).
+# Relaxed rate limits (docs/04_API_CONTRACT.md §11) are added with the rate limiter in P06.
+spring:
+  flyway:
+    user: ${PG_ADMIN_USER}
+    password: ${PG_ADMIN_PASSWORD}

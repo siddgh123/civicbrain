@@ -1,0 +1,33 @@
+# Profile test (every backend test, @ActiveProfiles("test")): obviously fake, non-secret values for every required
+# property, so tests never need .env (rule 10). Secrets = base64 of "test-only-...". Integration tests replace the
+# datasource with the Testcontainers PostGIS container (@ServiceConnection); Flyway then uses that connection.
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:1/not-used-tests-use-testcontainers
+    username: test-only-user
+    password: test-only-password
+  mail:
+    host: 127.0.0.1
+    port: 1025
+
+springdoc:
+  api-docs:
+    enabled: true
+
+app:
+  base-url: http://localhost:5173
+  extra-origins: http://127.0.0.1:5173
+  storage-root: ${java.io.tmpdir}/cb-test
+  mail-from: "CivicBrain Test <no-reply@test.local>"
+  ai-service-url: http://127.0.0.1:8001
+  scheduling:
+    enabled: false
+  auth:
+    jwt-secret: dGVzdC1vbmx5LWp3dC1zZWNyZXQtMDEyMzQ1Njc4OWFiY2RlZg==
+    jwt-issuer: civicbrain
+    jwt-audience: civicbrain-web
+    otp-hmac-key: dGVzdC1vbmx5LW90cC1obWFjLWtleS0wMTIzNDU2Nzg5YWJjZA==
+    totp-enc-key: dGVzdC1vbmx5LXRvdHAta2V5LTAxMjM0NTY3ODlhYmM=
+    ai-service-jwt-secret: dGVzdC1vbmx5LWFpLXNlcnZpY2Utand0LTAxMjM0NTY3ODlhYg==
+  whatsapp:
+    provider: log

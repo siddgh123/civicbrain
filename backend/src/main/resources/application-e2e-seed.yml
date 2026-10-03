@@ -1,0 +1,12 @@
+# Profile e2e-seed: non-web run of seed-e2e.ps1. E2eSeedRunner (P06) creates the fixed accounts from the E2E_*
+# variables through the real services, refuses any database whose name does not end with _e2e, then exits.
+spring:
+  main:
+    web-application-type: none
+  flyway:
+    user: ${PG_ADMIN_USER}
+    password: ${PG_ADMIN_PASSWORD}
+
+app:
+  scheduling:
+    enabled: false

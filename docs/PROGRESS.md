@@ -22,7 +22,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P02 | AI service skeleton + venv + worker loop | D1 | DONE (human yes 2026-10-02 19:45) | ruff clean · pytest 82 passed ×5 (14 integration on civicbrain_test) · worker alive, waits for schema (dev DB empty until P04) · /health 503 "schema missing" · V4 claim over-claim found + handled (V6 fix = Phase 2) · commit f0575ee |
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | DONE (human yes 2026-10-02 20:29) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed · Kaggle cells 1-4 OK, 0.9 min/epoch, committed run "Running" (finish ≈ 22:30 at the latest) · commit 8141812 |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
-| P04 | Backend skeleton + Flyway + demo seed | D2 | NOT STARTED | |
+| P04 | Backend skeleton + Flyway + demo seed | D2 | IN PROGRESS (built + verified, waiting for Q1-Q2) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | NOT STARTED | |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | NOT STARTED | |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
@@ -82,6 +82,109 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P04 — Backend skeleton, Flyway, demo seed (IN PROGRESS)
+- Requirement(s): docs/02_ARCHITECTURE.md §3, §6; docs/03_DATABASE.md §1, §3, §5; docs/07_SECURITY.md §2, §4;
+  docs/12_ERROR_HANDLING.md §1-§3; rule 10; 09_BUILD_PLAN_7DAY §4 "context + Flyway V1-V5 (74 tables, fn_locate_point ward 1)".
+**Plan** (Claude Code, Auto mode):
+0. Human step: Spring Initializr zip (Boot 4.1.1, Java 25) → `backend\` (`pom.xml`, `mvnw.cmd`).
+1. `pom.xml`: + flyway-database-postgresql, hibernate-spatial, spring-boot-testcontainers, testcontainers-postgresql,
+   spring-security-test; springdoc 3.x, bucket4j_jdk17-core 8.x, metadata-extractor 2.19.x, openpdf 3.x, bcprov-jdk18on,
+   wiremock-standalone 3.x (newest per `versions:display-dependency-updates`); JaCoCo report; Failsafe for `*IT`.
+2. Copy-Item `flyway\V1…V5` + `R__civicbrain_grants.sql` → `backend\src\main\resources\db\migration\` (unchanged).
+3. `application.yml` + `-dev/-demo/-e2e/-e2e-seed/-bootstrap-admin` skeletons; `src/test/resources/application-test.yml` (fake).
+4. `config`: `@Validated @ConfigurationProperties` records, `Clock`, Jackson, `SecurityConfig` (deny-all, 07 §4 headers).
+5. `common`: `ApiException`, `ErrorCode` (12 §2), `GlobalExceptionHandler` (RFC 9457 + SQLSTATE 12 §3), `RequestIdFilter`, page record.
+6. `workflow.WorkflowActor` + source-scan test for `setStatus(`. 7. `DbStartupCheck` (dev/demo/e2e) logs the ward count.
+Tests first: `SchemaIT`, `ErrorAdviceTest`, `SecurityConfigTest`, `ConfigValidationTest`, SQLSTATE mapping test, setStatus scan.
+Verify: `.\mvnw.cmd -q verify` · `start-all.ps1 -Only backend` (Flyway 6 migrations, `DB check: 23 wards …`) ·
+`db-setup-main.ps1 -Seed` (complaints=500, wards=23) · `db-rebuild-test.ps1 -Force` · P02 hand-off: `-Only ai-api,worker`
+→ `/health` 200 `db: ok`. Record, commit, push; Q1-Q2.
+
+**Results**
+1. Human step done (2026-10-03): Spring Initializr → Boot **4.1.1**, Java 25, Maven wrapper 3.3.4 / Maven 3.9.16 (`only-script`),
+   10 starters + `flyway-database-postgresql` + `thymeleaf-extras-springsecurity6` (both added by Initializr). JDK: Temurin 25.0.4.1.
+2. Versions (`.\mvnw.cmd versions:display-dependency-updates -DprocessDependencyManagement=false`, again with
+   `-DallowMajorUpdates=false` and `-DallowMinorUpdates=false` to stay inside each named line; JaCoCo via
+   `versions:display-plugin-updates`) - newest release of each line, pinned as properties in `pom.xml`:
+   springdoc-openapi-starter-webmvc-ui **3.1.1** · bucket4j_jdk17-core **8.21.0** · metadata-extractor **2.19.0** (newest 2.19.x;
+   2.21.0 exists, not taken) · openpdf **3.0.5** · bcprov-jdk18on **1.86** · wiremock-standalone **3.13.2** (4.0 is beta) ·
+   jacoco-maven-plugin **0.8.15**. Boot-managed (no version in the pom): Flyway 12.4.0 (+ flyway-database-postgresql),
+   hibernate-spatial 7.4.5.Final, Testcontainers 2.0.x (`testcontainers-postgresql`), spring-boot-testcontainers,
+   spring-security-test. No Excel library (MVP OUT). Failsafe runs `*IT` in `verify`; JaCoCo report → `target/site/jacoco/`.
+3. Migrations: `Copy-Item flyway\*.sql backend\src\main\resources\db\migration\` → `Get-FileHash` identical for all 6;
+   `bash scripts/ci/check-migrations.sh` → `MIGRATION COPIES: CONSISTENT (6 files)`.
+4. Files (`backend/`): `pom.xml`; `application.yml` + `-dev/-demo/-e2e/-e2e-seed/-bootstrap-admin.yml`; test `application-test.yml`;
+   `config/` (`AppProperties`, `AuthProperties`, `WhatsAppProperties`, `Secret`, `Base64Key(+Validator)`, `ClockConfig`,
+   `SchedulingConfig`, `SecurityConfig`, `SecurityProblemHandler`, `DatabaseStartupCheck`); `common/` (`ErrorCode` 38 codes,
+   `ApiException`, `ApiProblem`, `FieldErrorItem`, `GlobalExceptionHandler`, `DbErrorTranslator`, `RequestIdFilter`, `ProblemWriter`,
+   `PageResponse`); `workflow/` (`WorkflowActor`, `Actor`, `ActorRole`, `ComplaintStatus`). Tests: `unit/` (ConfigValidationTest 18,
+   ErrorAdviceTest 11, SecurityConfigTest 7, DbErrorTranslatorTest 28, ErrorCodeTest 2, PageResponseTest 2,
+   StatusChangesOnlyInWorkflowTest 2) + `it/` (SchemaIT 5, WorkflowActorIT 4, ApplicationIT 4; one shared
+   `postgis/postgis:18-3.6` container via `@ServiceConnection`).
+5. First runs: unit 2 failures → fixed in the code/scanner (never-passed tests): (a) the filter-level 401 sent
+   `application/problem+json;charset=UTF-8`, the advice plain `application/problem+json` → `ProblemWriter` no longer adds a charset;
+   (b) the `setStatus(` scan flagged `response.setStatus(...)` (servlet HTTP status, not a complaint) → scan skips `response.setStatus(`,
+   self-test added for both cases. ITs: all 13 errored with `FATAL: invalid value for parameter "TimeZone": "Asia/Calcutta"` →
+   DECISION below. Then 1 failure: Boot 4 health showed `"groups"` (probes on by default) → `management.endpoint.health.probes.enabled=false`.
+6. `/verify backend` (in `backend`): `.\mvnw.cmd -q verify` → exit 0, **`Tests run: 83, Failures: 0, Errors: 0, Skipped: 0`**
+   (surefire 70 + failsafe 13), JaCoCo report written. Log: Flyway on the container "Successfully applied 6 migrations … now at
+   version v5", R__ NOTICE "roles not found - grants skipped" (expected); the weak test secret appears 0 times in the whole log.
+7. `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only backend` → `PASS backend healthy`. `logs\backend.log`: profile `dev`,
+   `Migrating schema "public" to version "1 - baseline"` … `"5 - capture answers plan release"`, `with repeatable migration
+   "civicbrain grants"`, **`Successfully applied 6 migrations to schema "public", now at version v5`** (no baseline row: database was
+   empty), `Started CivicbrainApplication in 10.2 s`, **`DB check: 23 wards visible to civicbrain_app`**. Only WARN: Thymeleaf
+   "Cannot find template location: classpath:/templates/" (the e-mail layout template comes with the outbox, P10).
+   Local GET (python urllib): `/actuator/health` → `200 {"status":"UP"}` with CSP, nosniff, `X-Frame-Options: DENY`,
+   Referrer-Policy, Permissions-Policy, COOP, `X-Request-Id`; `/api/v1/x` → `401 application/problem+json`
+   `{"type":"https://civicbrain.app/errors/UNAUTHENTICATED",…,"code":"UNAUTHENTICATED","requestId":"…"}`.
+8. `pwsh -NoProfile -File scripts\dev\db-setup-main.ps1 -Seed` → **`PASS seed loaded: complaints=500 (synthetic, SUBMITTED, never
+   analysed), wards=23, roads=1113`** (seed runs with triggers off → no jobs/outbox rows for demo data).
+9. `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` → V1-V5 + R__ + seed PASS, `application tables: 74 | wards: 23 |
+   … 1/21`, `ROLE 7/7`, `NEGATIVE 6/6`, `V4 11/11`, `V5 11/11`, **`DB TESTS: ALL PASSED`**.
+10. P02 hand-off: `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only ai-api,worker` → `PASS ai-api healthy`, `PASS worker healthy`;
+    AI `/health` → `200 {"status":"ok","db":"ok","osrm":"not used (haversine)","modelsLoaded":false}` (models = P08);
+    `logs\worker.log` since the restart: `worker started: database civicbrain, polling every 2 s …`, 0 "no CivicBrain schema" lines.
+    Backend, ai-api and worker left running (dev stack).
+
+   | Component | Command | Result line | Result |
+   |---|---|---|---|
+   | backend | `.\mvnw.cmd -q verify` | `Tests run: 83, Failures: 0, Errors: 0, Skipped: 0` (exit 0) | PASS |
+   | migrations | `bash scripts/ci/check-migrations.sh` | `MIGRATION COPIES: CONSISTENT (6 files)` | PASS |
+   | stack | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only backend` | `PASS backend healthy`; log `Successfully applied 6 migrations`, `DB check: 23 wards visible to civicbrain_app` | PASS |
+   | seed | `pwsh -NoProfile -File scripts\dev\db-setup-main.ps1 -Seed` | `complaints=500 …, wards=23, roads=1113` | PASS |
+   | db | `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` | `DB TESTS: ALL PASSED` (7/7, 6/6, 11/11, 11/11) | PASS |
+   | ai hand-off | `start-all.ps1 -Only ai-api,worker` + GET `/health` | `200 … "db":"ok"` | PASS |
+- DECISION: every backend JVM runs in UTC - `TimeZone.setDefault(UTC)` first thing in `main()` (dev `spring-boot:run` and the demo
+  jar) and `<argLine>-Duser.timezone=UTC</argLine>` in the pom (surefire + failsafe; JaCoCo prepends its agent). Cause: Windows
+  "India Standard Time" → JVM zone `Asia/Calcutta`, which pgjdbc sends as the `TimeZone` startup parameter; the Debian-based
+  `postgis/postgis:18-3.6` image no longer knows that legacy name (FATAL at connect). Matches rule 10 (UTC inside, Asia/Kolkata
+  only when formatting); JSON log timestamps are now UTC.
+- DECISION: secrets are bound as `config.Secret` (toString `[hidden]`) and checked by `@Base64Key` (present, base64, ≥ 32 bytes;
+  `TOTP_ENC_KEY` exactly 32), so a failed start says e.g. "JWT_SECRET is missing or not base64 of at least 32 random bytes" without
+  echoing the value (ConfigValidationTest proves it). Spring's own keys (`DB_URL`, `DB_USER`, `DB_PASSWORD`, `SMTP_HOST`,
+  `SMTP_PORT`, `PG_ADMIN_*` in the real-DB profiles) are required placeholders - Spring names the missing variable.
+  `WHATSAPP_PROVIDER=twilio|meta` also requires that provider's keys.
+- DECISION: `postgresql` driver moved from `runtime` to compile scope: `DbErrorTranslator` reads `PSQLException.getServerErrorMessage()`
+  (SQLSTATE, primary message, constraint name) instead of parsing `getMessage()`.
+- DECISION (12 §3 details): 42501 is `ROLE_NOT_ALLOWED` only for the V2 guard text "Role … may not move complaint"; any other
+  42501 (missing grant) → 500 (our bug, logged). 23503 "insert or update…" → 404 NOT_FOUND, otherwise 400 VALIDATION_FAILED.
+  57014 (statement timeout), class 08/53/57P → 503. `COMPLAINT_NOT_PLANNABLE` detail names the complaint as `CB-000042`.
+  Spring MVC 4xx without own handler (405 …) keep their status with code MALFORMED_REQUEST. The 40001/40P01 retry (3×) belongs to the
+  service transactions (P06+); the translator gives the final 503.
+- DECISION: 10-s statement limit = Hikari `connection-init-sql: SET statement_timeout = '10s'` (every API connection); Flyway on the
+  dev/demo/e2e databases uses its own owner connection (no limit). `server.error.include-*=never`, whitelabel off;
+  `/v3/api-docs` only in dev/test (springdoc on, Swagger UI off everywhere).
+- DECISION: test layout per 08 §1: unit tests in `com.civicbrain.unit.*` (MVC slice `@WebSliceTest` = real `SecurityConfig` +
+  filter + advice + a `@TestComponent` test controller, no DB), integration tests in `com.civicbrain.it.*` (`@IntegrationTest`).
+  The generated `CivicbrainApplicationTests` (contextLoads, never run) was moved to `it/ApplicationIT.java` (needs a DB).
+  `application.properties` (only `spring.application.name`) renamed to `application.yml`.
+- Open / hand-offs: **P06** - JWT resource server + role areas in `SecurityConfig`, `/auth/refresh`+`/logout` Origin/CSRF check
+  (`AppProperties.baseUrl/extraOrigins`), e2e rate limits, `@Retryable` for 40001/40P01. **P10** - Thymeleaf template folder
+  (removes the WARN). Mockito prints "self-attaching" (JDK 25 warning only). `backend/HELP.md` (Initializr help) is git-ignored by
+  `backend/.gitignore`; the human may delete it.
+- DoD: [x] traces (02 §3/§6, 03 §1/§3/§5, 07 §2/§4, 12 §1-§3, 09_7DAY §4) [x] tests written first, green [x] error states
+  (Problem Details for 400/401/403/404/409/413/422/500/503) [x] no secrets in yml/logs [ ] committed (below)
 
 ### 2026-10-02 — P03 — Dataset check, test fixtures, Kaggle package (DONE, human yes 2026-10-02 20:29)
 - Requirement(s): docs/11_DATA_SOURCES.md §0, §6; docs/08_TEST_PLAN.md §2 (fixtures); frozen rule "YOLO classes (Step 9)".
