@@ -36,4 +36,16 @@ public class AuditLog {
                 .param("ip", Db.inet(ip)).param("requestId", Masking.logSafe(requestId, 64))
                 .update();
     }
+
+    /** The same for an entity keyed by a code or UUID ({@code audit_logs.entity_key}, V5) instead of a number. */
+    public void userActionByKey(long userId, String entityType, String entityKey, String action, Map<String, ?> newValue,
+                                String ip, String requestId) {
+        jdbc.sql("""
+                INSERT INTO audit_logs (user_id, entity_type, entity_key, action, new_value, actor_type, ip_address, request_id)
+                VALUES (:userId, :entityType, :entityKey, :action, CAST(:newValue AS jsonb), 'USER', CAST(:ip AS inet), :requestId)""")
+                .param("userId", userId).param("entityType", entityType).param("entityKey", entityKey).param("action", action)
+                .param("newValue", newValue == null ? null : json.writeValueAsString(newValue))
+                .param("ip", Db.inet(ip)).param("requestId", Masking.logSafe(requestId, 64))
+                .update();
+    }
 }

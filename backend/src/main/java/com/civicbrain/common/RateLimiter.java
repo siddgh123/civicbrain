@@ -70,13 +70,27 @@ public class RateLimiter {
         return consumed;
     }
 
+    /**
+     * Gives back one token taken by {@link #consume} (never above the capacity), for limits that count only accepted
+     * requests - e.g. 5 complaints / 24 h (FR-11) is checked early but a rejected submission is not a complaint.
+     */
+    public void refund(Kind kind, String key) {
+        Bucket bucket = buckets.get(bucketKey(kind, key));
+        if (bucket != null) {
+            bucket.addTokens(1);
+        }
+    }
+
     private ConsumptionProbe probe(Kind kind, String key) {
         if (buckets.size() > MAX_BUCKETS) {
             log.warn("rate limiter: more than {} buckets - all limits start again", MAX_BUCKETS);
             buckets.clear();
         }
-        String bucketKey = kind.name() + '|' + (key == null ? "" : key.strip().toLowerCase(Locale.ROOT));
-        return buckets.computeIfAbsent(bucketKey, k -> newBucket(limits.get(kind))).tryConsumeAndReturnRemaining(1);
+        return buckets.computeIfAbsent(bucketKey(kind, key), k -> newBucket(limits.get(kind))).tryConsumeAndReturnRemaining(1);
+    }
+
+    private static String bucketKey(Kind kind, String key) {
+        return kind.name() + '|' + (key == null ? "" : key.strip().toLowerCase(Locale.ROOT));
     }
 
     private static Bucket newBucket(List<Bandwidth> bandwidths) {

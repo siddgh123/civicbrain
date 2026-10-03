@@ -28,7 +28,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | DONE (human yes 2026-10-03 19:32) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files; location risk 500/500 through the live loader on `civicbrain_test`) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
-| P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
+| P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | IN PROGRESS | |
 | P11 | Citizen screens | D3 | NOT STARTED | |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
 | P13 | Phone test over the tunnel | D4 | NOT STARTED | |
@@ -82,6 +82,80 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P10 — Complaint intake API + e-mail outbox dispatcher + smoke intake (IN PROGRESS, started 20:05)
+- Requirement(s): FR-10 (server part), FR-11, FR-12, FR-13, FR-15, FR-50 (e-mail), FR-51, FR-52; docs/04 §3, §4, §5; 02 §1, §5
+  (Submit, Notify rules 1-7 + 10); 07 §3; 12 §2, §4, §5; 03 §3; 09_7DAY §4 (intake happy path + 4 error codes, other citizen 404).
+**Plan** (Claude Code, Auto mode; estimate 3 h → time box 4.5 h). JdbcClient everywhere (P06 decision), no new dependency/migration.
+1. `complaints/`: `GET /public/categories`, `GET /public/wards` (5 m simplified in UTM 43N, 60 s cache) · `POST /citizen/capture-sessions` ·
+   `POST /citizen/complaints` (validation order of 04 §5 in `ComplaintIntakeService`) · `GET /citizen/complaints[/{id}]` · feedback upsert
+   (REOPENED via `WorkflowActor`). `common/RateLimiter.refund`.
+2. `files/`: `PhotoProcessor` (magic bytes, header dimensions before decode, EXIF facts via metadata-extractor, orientation, long side
+   ≤ 1920, JPEG q85 without metadata, SHA-256) · `PhotoStorage` (`photos/yyyy/mm/<uuid>.jpg`, delete on rollback) · `GET /files/{id}`
+   (owner / officer in scope / assigned contractor / admin, else 404).
+3. `notifications/`: `OutboxDispatcher` (@Scheduled 10 s, SKIP LOCKED, batch 50) → `NotificationPlanner` (rules 1-3, 5) →
+   `TemplateRenderer` (`{{x}}`, HTML-escaping, unknown = error) + `PlaceholderValues` (16 values) → `NotificationChannel`
+   (`EmailChannel` + Thymeleaf `templates/mail/layout.html`, `LogWhatsAppChannel`); retries 1/5/30 min, max 5; provider names rule 7.
+Tests first: unit `TemplateRendererTest` (21 seeded templates from the V2 file render, no `{{`), `PhotoProcessorTest`, `RetryPolicyTest`;
+IT `ComplaintIntakeIT` (happy path + every error code + 429 + rollback deletes the file), `CitizenComplaintsIT` (list/detail/feedback,
+other citizen 404 incl. photo, officer scope/contractor/admin file access), `OutboxDispatcherIT` (Mailpit: SUBMITTED one mail per
+recipient, VERIFIED none, twice → no duplicates, opt-out, WhatsApp `log`), `PublicReferenceIT`.
+Verify: `.\mvnw.cmd -q verify` → E2E smoke `intake` (stop → seed-e2e -MinAccounts 3 → -E2E → smoke → -Restart) → log scan.
+
+**Results so far** (2026-10-03, 20:05-20:40; no new dependency, no migration)
+1. Files (`backend/`): `complaints/` (`api/PublicReferenceController`, `CitizenComplaintController`, `ComplaintData`; `service/ComplaintIntake`,
+   `CitizenComplaints`; `repo/ReferenceRepository`, `CaptureSessionRepository`, `ComplaintRepository`, `FeedbackRepository`;
+   `model/CaptureMethod`, `DepthAnswer`) · `files/` (`service/PhotoProcessor`, `PhotoStorage`; `repo/ImageAccessRepository`;
+   `api/FileController`) · `notifications/` (`service/OutboxDispatcher`, `NotificationPlanner`, `PlaceholderValues`, `TemplateRenderer`,
+   `MessageFormats`, `RetryPolicy`; `repo/NotificationRepository`; `channel/NotificationChannel`, `EmailChannel`, `LogWhatsAppChannel`) ·
+   `resources/templates/mail/layout.html` (also removes the P04 Thymeleaf "Cannot find template location" WARN) · `common/RateLimiter.refund`,
+   `common/AuditLog.userActionByKey` · `workflow/WorkflowActor.actAs` (actor context for the INSERT; `changeStatus` uses it, behaviour unchanged).
+   Tests (all new): unit `PhotoProcessorTest` 5, `TemplateRendererTest` 4, `RetryPolicyTest` 1, `RateLimiterRefundTest` 1; IT `ComplaintIntakeIT` 10,
+   `CitizenComplaintsIT` 5, `OutboxDispatcherIT` 4, `PublicReferenceIT` 2 (+ `it/support/ComplaintItSupport`); fixture
+   `src/test/resources/photos/exif_gps_orientation6.jpg` (800x600, EXIF Make/Model, Orientation 6, DateTimeOriginal, GPS 18.7440/73.6760;
+   written by a scratchpad Pillow script). No existing test changed.
+2. Runs:
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | backend run 1 | in `backend`: `.\mvnw.cmd -q verify` | unit green; IT 2 of my new tests wrong (int vs long count; `listOfRows` gives `java.sql.Timestamp`, not `OffsetDateTime`) → tests fixed, code unchanged | FAIL→test fixed |
+   | backend run 2 | same | IT 1 failure, a real bug: the owner of a merged child got the master's earlier SUBMITTED mail ("your complaint CB-…21 was received") because the recipient function runs at dispatch time → DECISION below, code fixed | FAIL→fixed |
+   | backend run 3 | same | exit 0; reports: surefire `tests=135 failures=0 errors=0 skipped=0`, failsafe `tests=67 failures=0 errors=0 skipped=0` (was 124 + 46); test log: 0 JWTs, 0 `password=`, 0 full `+91` numbers, WhatsApp log line masked (`+91******5091`), 0 template WARN | PASS |
+   | E2E seed (repo root) | `start-all.ps1 -Stop` → `pwsh -NoProfile -File scripts\dev\seed-e2e.ps1 -MinAccounts 3` | `E2E seed on civicbrain_e2e: 5 accounts created, 0 already present` · `PASS E2E database civicbrain_e2e ready with 3 fixed accounts` | PASS |
+   | E2E stack | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -E2E` | `PASS stack 'e2e' is up` (5 services healthy) | PASS |
+   | smoke | `ai-service\.venv\Scripts\python.exe tests\smoke\smoke_flow.py --stage intake` | `FAIL stage 'intake' crashed: AttributeError: 'list' object has no attribute 'get'` after `PASS citizen1 list works` → **smoke script bug**, see "Open" below | FAIL (script) |
+   | diagnosis (scratchpad, not the official evidence) | `probe_list.py` (GET /citizen/complaints → `200 {"items":[],"page":0,"size":20,"totalItems":0,"totalPages":0}`) · `probe_intake.py` = `smoke_flow.main(["--stage","intake"])` with `code_of` patched **in memory** for array bodies (file unchanged) | **`SMOKE INTAKE PASSED: 29 / 29`** (A → 201 `CB-000001` ward 1; used session 422; accuracy 400 → 422; outside → 422; text file → 415; Pothole without depth → 400; detail timeline + images; citizen2 → 404 for complaint and photo; own photo JPEG without EXIF; SUBMITTED mail to citizen1 with the CB number) | (PASS) |
+   | log scan (E2E run) | `Select-String` over `logs\{backend,frontend,worker,ai-api}.log` for JWT / `password=` / `__Host-cb_rt=` / OTP codes / full `+91` numbers | `hits: 0` each; backend 0 ERROR; `complaint CB-000001 submitted (ward 1, category 1)`, `notification dispatcher: 1 outbox row(s) processed, 1 sent, 0 failed`; worker claimed job 1 ANALYZE_COMPLAINT → "built in P12" (expected) | PASS |
+   | dev stack back | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | `PASS stack 'dev' is up`; backend log `DB check: 23 wards visible to civicbrain_app`, 0 ERROR, **0 Thymeleaf template WARN** | PASS |
+- DECISION: per-user limit 5 / 24 h counts **accepted** complaints (FR-11 "> 5 complaints by the same user in 24 h"): the token is taken in
+  the documented position (2nd check) and given back (`RateLimiter.refund`) when a later check rejects the request; the per-IP limit
+  (20 / h) counts every attempt. Reason: 5 GPS/photo mistakes must not lock a citizen out for a day.
+- DECISION: merged-child owners receive a master's status mail only for events from their merge on (MERGED history row ≤ the outbox row's
+  `created_at`); `fn_complaint_notification_recipients` is still the source. Without it the child owner can get the master's SUBMITTED
+  text "your complaint CB-<master> was received" (worker merge within the 10-s dispatcher interval).
+- DECISION: a template that needs a value the event does not have (e.g. ASSIGNED without a contractor) gives a FAILED notification row
+  with `last_error = template error: no value for {{x}}` and no retry ("never a blank", 02 §5 rule 6); seen only for test data.
+- DECISION: e-mail `rendered_body` = the HTML-escaped template text (renderer HTML mode); the Thymeleaf layout adds links and the
+  plain-text part is its unescaped copy; subject and WhatsApp body are rendered as text. Rule 8 photos (`include_photo`) are P21.
+- DECISION: notifications are claimed (SENDING, attempt counted) in a short transaction and sent outside it; a row still SENDING after
+  10 min (process stopped mid-send) is closed FAILED without retry ("at most once", FR-51). Outbox rows are processed one per transaction
+  (`FOR UPDATE SKIP LOCKED`); a failing row is retried next run and closed after 5 attempts.
+- DECISION: photos — shorter side ≥ 320 px; ≤ 40 MP from the header before decoding; EXIF orientation applied before the metadata is
+  dropped (the officer/YOLO see an upright photo); EXIF kept = `present`, `dateTimeOriginal`, `offsetTimeOriginal`, GPS lat/lon/timestamp
+  (no make/model); JPEG magic but undecodable → 415; stored `file_name` = the random name (never the client's). `location_source`
+  BROWSER_GPS. Location freshness = |server time − `locationCapturedAt`| ≤ 10 min (a phone clock ahead is treated like one behind).
+- DECISION: officer scope = an active `officers` row with a scope row whose `ward_id` / `work_type_code` match (NULL = any; no row =
+  nothing, docs/01 §2); assigned contractor = ACTIVE item in an ASSIGNED / IN_PROGRESS plan of the caller's firm (firm login or active
+  staff). Timeline newest first (05 §4.7). Feedback "not fixed" remarks are a fixed sentence, never the citizen's comment (the REOPENED
+  mail also goes to merged-child owners). `GET /public/wards` is GeoJSON served as `application/json` (the SPA sends
+  `Accept: application/json`); simplified 5 m in EPSG:32643. Lat/lon box 18.6–18.8 / 73.6–73.8 = 400 (07 §3), inside the box but
+  outside TDMC = 422 OUTSIDE_BOUNDARY.
+- Not built (outside the prompt's Build list): the nightly orphan-photo cleanup of 12 §5 (marked "(P10)" there = full-plan phase P10
+  "Privacy & hardening"); the plan-completion re-check after a citizen reopen (04 §6) comes with the plans (P18/P23).
+- **Open (ASK-FIRST, waiting for the human):** `tests/smoke/smoke_flow.py` `code_of()` does `r.json().get("code")`, which raises
+  `AttributeError` for any JSON **array** body; `categories()` calls `brief(r)` on `GET /public/categories`, which docs/04 §3 defines as an
+  array (the same line checks `isinstance(r.json(), list)`). So the script misreads a docs/04-conformant response (rule 03: fix only then,
+  record why). Proposed 3-line fix: return the code only when the body is a JSON object. The file passed before (stage `auth`) → asked.
 
 ### 2026-10-03 — D2 follow-up — requirement IDs in the existing tests (DONE 2026-10-03 19:55, human request Q2)
 - Human yes (19:47): add the five IDs the gate found only by test name as comments; comments only, no test logic or assertion

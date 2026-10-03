@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--/* E-mail layout around a template body (docs/02_ARCHITECTURE.md §5 rule 6). bodyHtml is already HTML-escaped
+       by TemplateRenderer (EmailChannel only adds <a> links), so it is inserted with th:utext. Inline styles only:
+       mail clients ignore <style> blocks and external CSS. */-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${subject}">CivicBrain</title>
+</head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:Arial,Helvetica,sans-serif;color:#111827;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f4f6;padding:24px 0;">
+  <tr>
+    <td align="center" style="padding:0 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+             style="max-width:600px;width:100%;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;">
+        <tr>
+          <td style="background:#1e3a8a;color:#ffffff;padding:16px 24px;font-size:18px;font-weight:bold;border-radius:8px 8px 0 0;">
+            CivicBrain <span style="font-weight:normal;font-size:14px;">&middot; Talegaon Dabhade Municipal Council</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:24px;font-size:15px;line-height:1.6;">
+            <p style="margin:0;" th:utext="${bodyHtml}">Message text</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 24px;font-size:12px;line-height:1.5;color:#6b7280;border-top:1px solid #e5e7eb;">
+            <span th:text="${footer}">Footer</span>
+            <span th:if="${baseUrl}"><br><a th:href="${baseUrl}" th:text="${baseUrl}" style="color:#1e3a8a;">CivicBrain</a></span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.civicbrain.workflow;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.civicbrain.common.ApiException;
@@ -28,6 +29,22 @@ public class WorkflowActor {
      */
     @Transactional
     public void changeStatus(long complaintId, ComplaintStatus target, Actor actor, String remarks) {
+        actAs(actor, remarks);
+        int updated = jdbc.sql("UPDATE complaints SET status = :status, updated_at = now() WHERE complaint_id = :id")
+                .param("status", target.name())
+                .param("id", complaintId)
+                .update();
+        if (updated == 0) {
+            throw new ApiException(ErrorCode.NOT_FOUND, "Not found.");
+        }
+    }
+
+    /**
+     * Sets the transaction-local actor context only - for the INSERT of a new complaint, whose SUBMITTED history row
+     * (V2 trigger) then names the citizen. Must run inside the caller's transaction (MANDATORY).
+     */
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void actAs(Actor actor, String remarks) {
         jdbc.sql("""
                 SELECT set_config('civicbrain.actor_user_id', :userId, true),
                        set_config('civicbrain.actor_role', :role, true),
@@ -36,12 +53,5 @@ public class WorkflowActor {
                 .param("role", actor.role().name())
                 .param("remarks", remarks == null ? "" : remarks)
                 .query().singleRow();
-        int updated = jdbc.sql("UPDATE complaints SET status = :status, updated_at = now() WHERE complaint_id = :id")
-                .param("status", target.name())
-                .param("id", complaintId)
-                .update();
-        if (updated == 0) {
-            throw new ApiException(ErrorCode.NOT_FOUND, "Not found.");
-        }
     }
 }
