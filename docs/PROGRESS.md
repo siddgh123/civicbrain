@@ -27,7 +27,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
-| P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | VERIFIED - waiting for human yes (2026-10-03 19:25) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
+| P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | DONE (human yes 2026-10-03 19:32) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files; location risk 500/500 through the live loader on `civicbrain_test`) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
 | P11 | Citizen screens | D3 | NOT STARTED | |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P09 — Priority (FROZEN Step 11) + duplicates (FROZEN Step 12) + MiniLM (VERIFIED, waiting for human yes)
+### 2026-10-03 — P09 — Priority (FROZEN Step 11) + duplicates (FROZEN Step 12) + MiniLM (DONE, human yes 2026-10-03 19:32)
 - Requirement(s): FR-25 (priority + per-factor explanation), FR-22 duplicates part (Step 12); docs/06 §1 (daily 02:00 IST
   recompute), §2 steps 7-8, §2.6, §2.7, §5; 02-frozen-rules (Step 11, Step 12); 09_7DAY §4 (priority golden 0 mismatches,
   duplicate scoring reproduces 3 pairs).
@@ -166,6 +166,16 @@ worker schedule tests. Verify: ruff, pytest (models tests run), `start-all.ps1 -
   once (last run = latest `explanation.trigger = DAILY_RECOMPUTE` row); a missing rule file is logged and retried the next day.
 - Note: the scratchpad probe and the earlier shell call that named the test env template (blocked by the deny rule, my
   mistake, not retried) did not change anything. A stray `python -` waited on stdin for 10 min and was stopped (no effect).
+- Human answer (2026-10-03 19:32): asked first what "location risk matched 0/500" meant - it was my wording for "0 mismatches
+  out of 500"; re-checked through the shipped loader (row above), no bug, nothing relabelled. **Q1 yes.** Asked for:
+  (a) a permanent test → `tests/it/test_priority_it.py::test_live_location_rule_reproduces_all_500_research_location_scores`
+  (the 500 research complaints at their seed locations - EWKB read from `db/seed/seed_synthetic_demo_data.sql` - inserted
+  into `civicbrain_test` as synthetic rows, `load_inputs` + `location_risk_score` vs `location_risk_scores.csv`):
+  `.\.venv\Scripts\python.exe -m pytest -q tests/it/test_priority_it.py -k location_rule_reproduces` →
+  `LOCATION RISK vs research: 500 rows checked, 0 mismatches` · `1 passed`; then `ruff check .` → `All checks passed!` ·
+  `pytest -q` → `311 passed, 1 warning in 34.82s`; (b) the POI limitation in the known limitations → `docs/13_DEMO_AND_DEPLOY.md`
+  §5 (25 POIs: 8 hospitals, 6 bus stops, 5 schools, 3 colleges, 2 government offices, 1 police station; no fire stations,
+  railway stations or markets; 213 of 500 research complaints score 0 for location risk) - for the P29 report.
 - Open / hand-offs: **P12** orchestrator: step 7 `duplicates.find_duplicates(s, cid, duplicates.get_embedder(settings))`
   then step 8 `priority.assess_complaint(s, cid)`; when `decision.merge` set status MERGED (SYSTEM) in the SAME transaction
   (the writer already set `master_complaint_id`), else VERIFIED; then `REQUIRE_MODELS=true` (all three models are now
