@@ -2,12 +2,20 @@ import type { RouteObject } from 'react-router';
 import type { Role } from '../auth/authContext';
 import { RequireAuth } from '../auth/RequireAuth';
 import { RequireRole } from '../auth/RequireRole';
+import { ChangePasswordPage } from '../features/auth/ChangePasswordPage';
+import { LoginPage } from '../features/auth/LoginPage';
+import { OtpPage } from '../features/auth/OtpPage';
+import { RegisterPage } from '../features/auth/RegisterPage';
 import { CitizenComplaintRefPage } from '../features/citizen/CitizenComplaintRefPage';
+import { CitizenHomePage } from '../features/citizen/CitizenHomePage';
 import { CitizenLayout } from '../features/citizen/CitizenLayout';
+import { NewComplaintPage } from '../features/citizen/NewComplaintPage';
+import { ProfilePage } from '../features/citizen/ProfilePage';
 import { ContractorLayout } from '../features/contractor/ContractorLayout';
 import { OfficerLayout } from '../features/officer/OfficerLayout';
 import { LandingPage } from '../features/public/LandingPage';
 import { NotFoundPage } from '../features/public/NotFoundPage';
+import { PrivacyPage } from '../features/public/PrivacyPage';
 import { PublicLayout } from '../features/public/PublicLayout';
 import { RouteErrorPage } from '../features/public/RouteErrorPage';
 import { TrackLinkPage } from '../features/public/TrackLinkPage';
@@ -26,9 +34,18 @@ export const routes: RouteObject[] = [
     errorElement: <RouteErrorPage />,
     children: [
       { index: true, element: <LandingPage /> },
-      { path: 'login', element: <Placeholder titleKey="pages.login" /> }, // P07
-      { path: 'register', element: <Placeholder titleKey="pages.register" /> }, // P07
-      { path: 'privacy', element: <Placeholder titleKey="pages.privacy" /> }, // P07 (GET /public/privacy-notice)
+      { path: 'login', element: <LoginPage /> },
+      { path: 'register', element: <RegisterPage /> },
+      { path: 'verify-email', element: <OtpPage /> },
+      { path: 'privacy', element: <PrivacyPage /> },
+      {
+        path: 'change-password',
+        element: (
+          <RequireAuth allowPasswordChange>
+            <ChangePasswordPage />
+          </RequireAuth>
+        ),
+      },
       {
         path: 'c/:publicRef',
         element: (
@@ -49,8 +66,9 @@ export const routes: RouteObject[] = [
     ),
     errorElement: <RouteErrorPage />,
     children: [
-      { index: true, element: <Placeholder titleKey="pages.citizenHome" /> }, // P11
-      { path: 'new', element: <Placeholder titleKey="pages.citizenNew" /> }, // P11
+      { index: true, element: <CitizenHomePage /> }, // recent complaints list: P11
+      { path: 'new', element: <NewComplaintPage /> }, // photo step (CameraCapture); full wizard: P11
+      { path: 'profile', element: <ProfilePage /> },
       { path: 'complaints', element: <Placeholder titleKey="pages.citizenComplaints" /> }, // P11
       { path: 'complaints/ref/:publicRef', element: <CitizenComplaintRefPage /> }, // P11
       { path: '*', element: <NotFoundPage /> },

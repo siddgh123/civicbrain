@@ -31,9 +31,11 @@ export function OfficerLayout() {
   ];
   if (user?.role === 'ADMIN') items.push({ to: '/officer/admin', label: t('nav.officer.admin'), icon: ShieldIcon });
 
-  const onLogout = () => {
-    void navigate('/', { replace: true });
-    void logout();
+  // Leave the portal first: signing out while still on a portal page would make its guard redirect to the login.
+  // flushSync commits the landing page now (React Router otherwise renders it in a transition, after the sign-out).
+  const onLogout = async () => {
+    await navigate('/', { replace: true, flushSync: true });
+    await logout();
   };
 
   return (
@@ -76,7 +78,7 @@ export function OfficerLayout() {
             )}
             <button
               type="button"
-              onClick={onLogout}
+              onClick={() => void onLogout()}
               data-testid="logout"
               className="flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-100"
             >

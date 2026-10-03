@@ -1,6 +1,8 @@
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { RouterProvider, type createBrowserRouter } from 'react-router';
+import type { createBrowserRouter } from 'react-router';
+// The DOM entry's RouterProvider supports `flushSync` navigations (used by the logout in the portal layouts).
+import { RouterProvider } from 'react-router/dom';
 import type { AuthState } from './auth/authContext';
 import { AuthProvider } from './auth/AuthProvider';
 import { OfflineBanner } from './components/OfflineBanner';

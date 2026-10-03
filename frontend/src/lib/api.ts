@@ -3,7 +3,8 @@ import { getAccessToken } from '../auth/tokenStore';
 
 // Typed fetch wrapper for /api/v1 (docs/04_API_CONTRACT.md, docs/12_ERROR_HANDLING.md §1, §6). Every non-2xx answer
 // becomes an ApiError; every 2xx body is parsed with a zod schema before the app sees it (rule 20: no `any`).
-// P07 adds the 401 -> shared refresh -> retry-once step here.
+// A 401 runs the refresh handler that AuthProvider registers (ONE shared refresh for parallel calls), then the call is
+// retried once with the new token; a second 401 goes to the caller (the guards then send the user to the login page).
 
 export const API_BASE = '/api/v1';
 
@@ -20,6 +21,7 @@ export interface ApiErrorInit {
   fieldErrors?: FieldError[];
   requestId?: string | null;
   retryAfterSeconds?: number | null;
+  extensions?: Record<string, unknown>;
 }
 
 /** A failed API call. `message` is the problem's `detail` (for logs/devs); the UI shows `errors.<code>` instead. */
@@ -29,6 +31,8 @@ export class ApiError extends Error {
   readonly fieldErrors: FieldError[];
   readonly requestId: string | null;
   readonly retryAfterSeconds: number | null;
+  /** RFC 9457 extension members of the problem, e.g. `otpId` on 403 EMAIL_NOT_VERIFIED. Parse with zod before use. */
+  readonly extensions: Readonly<Record<string, unknown>>;
 
   constructor(init: ApiErrorInit) {
     super(init.message);
@@ -38,6 +42,7 @@ export class ApiError extends Error {
     this.fieldErrors = init.fieldErrors ?? [];
     this.requestId = init.requestId ?? null;
     this.retryAfterSeconds = init.retryAfterSeconds ?? null;
+    this.extensions = init.extensions ?? {};
   }
 }
 
@@ -51,15 +56,38 @@ const problemSchema = z.object({
     .optional(),
 });
 
+const STANDARD_MEMBERS = new Set(['type', 'title', 'status', 'code', 'detail', 'instance', 'requestId', 'fieldErrors']);
+
+function extensionsOf(body: unknown): Record<string, unknown> {
+  if (typeof body !== 'object' || body === null || Array.isArray(body)) return {};
+  return Object.fromEntries(Object.entries(body).filter(([key]) => !STANDARD_MEMBERS.has(key)));
+}
+
 type QueryValue = string | number | boolean | null | undefined;
 
 export interface RequestOptions {
   query?: Record<string, QueryValue>;
   signal?: AbortSignal;
   headers?: Record<string, string>;
-  /** `include` only for the refresh/logout calls that need the `__Host-cb_rt` cookie (P07). */
+  /** `include` only for the refresh/logout calls that need the `__Host-cb_rt` cookie. */
   credentials?: RequestCredentials;
+  /** No refresh-and-retry on 401 (AuthProvider's own GET /me right after a refresh). */
+  noRefresh?: boolean;
 }
+
+/** Resolves true when a new access token is in the token store (AuthProvider: one shared refresh promise). */
+export type RefreshHandler = () => Promise<boolean>;
+
+let refreshHandler: RefreshHandler | null = null;
+
+/** AuthProvider registers its shared refresh here; `null` removes it. */
+export function setRefreshHandler(handler: RefreshHandler | null): void {
+  refreshHandler = handler;
+}
+
+// A 401 from these is an answer, not an expired access token: no refresh (login = wrong password, refresh = no
+// session, logout = already gone). The bearer endpoints under /auth (logout-all, password/change) do refresh.
+const NO_REFRESH_PATHS = /^\/auth\/(login|register|verify-otp|resend-otp|refresh|logout|password\/(forgot|reset))$/;
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type Body = { kind: 'json'; value: unknown } | { kind: 'form'; value: FormData } | undefined;
@@ -85,9 +113,12 @@ async function toApiError(response: Response): Promise<ApiError> {
   const headerRequestId = response.headers.get('X-Request-Id');
   const retryAfterSeconds = parseRetryAfter(response.headers.get('Retry-After'));
   let problem: z.infer<typeof problemSchema> | null = null;
+  let extensions: Record<string, unknown> = {};
   if ((response.headers.get('Content-Type') ?? '').includes('json')) {
-    const parsed = problemSchema.safeParse(await response.json().catch(() => null));
+    const body: unknown = await response.json().catch(() => null);
+    const parsed = problemSchema.safeParse(body);
     problem = parsed.success ? parsed.data : null;
+    extensions = problem === null ? {} : extensionsOf(body);
   }
   return new ApiError({
     status: response.status,
@@ -96,6 +127,7 @@ async function toApiError(response: Response): Promise<ApiError> {
     fieldErrors: problem?.fieldErrors ?? [],
     requestId: problem?.requestId ?? headerRequestId,
     retryAfterSeconds,
+    extensions,
   });
 }
 
@@ -116,6 +148,7 @@ async function request(
   schema: z.ZodType | null,
   body: Body,
   options: RequestOptions = {},
+  retried = false,
 ): Promise<unknown> {
   const headers = new Headers(options.headers);
   headers.set('Accept', 'application/json, application/problem+json');
@@ -143,6 +176,10 @@ async function request(
     throw new ApiError({ status: 0, code: 'NETWORK_ERROR', message: 'Network request failed' });
   }
 
+  const mayRefresh = !retried && options.noRefresh !== true && !NO_REFRESH_PATHS.test(path);
+  if (response.status === 401 && mayRefresh && refreshHandler !== null) {
+    if (await refreshHandler()) return request(method, path, schema, body, options, true);
+  }
   if (!response.ok) throw await toApiError(response);
   if (schema === null || response.status === 204) return undefined;
 

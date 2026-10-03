@@ -25,7 +25,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
-| P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
+| P07 | Auth screens + CameraCapture | D2 | IN PROGRESS (verified, waiting for human yes) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
@@ -82,6 +82,100 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P07 — Auth screens + CameraCapture (verified 14:24, waiting for the human yes)
+- Requirement(s): FR-01, FR-02, FR-60 (register + notice + consents), FR-10/FR-11 (in-app camera + GPS); NFR-01; docs/05 §2,
+  §3, §4 step 2, §7, §8; docs/04 §1-§3; docs/07 §1 (cookie/CSRF), §7; docs/12 §6; rule 20; 09_7DAY §4 (login form validation,
+  `CameraCapture` fallback when the camera is denied).
+**Plan** (Claude Code, Auto mode):
+0. Pre-check (human request): `RefreshCookie` hard-codes `secure(true)`, `path("/")`, no Domain and never reads the request →
+   already independent of `request.isSecure()`. Add unit test `RefreshCookieTest` (issue + clear) + DECISION line; backend verify.
+1. `lib/api.ts`: `ApiError.extensions` (RFC 9457 members, e.g. `otpId`); 401 → ONE shared refresh → retry once (`auth/session.ts`).
+2. `AuthProvider`: status loading/signed-in/signed-out, silent refresh on load (refresh → GET /me, `mcp` claim), login, logout
+   (+ `BroadcastChannel('cb-auth')`), guards wait while loading, `mustChangePassword` → `/change-password`, role → portal.
+3. Screens (react-hook-form + zod, `features/auth`): Login, Register (notice from `/public/privacy-notice`), OTP (6 boxes, paste,
+   resend 60 s), Change password, Privacy page, citizen Profile (opt-ins/consents), citizen Home (greeting + Report button).
+4. `components/camera/CameraCapture` (+ orientation/geolocation hooks); `/citizen/new` hosts it until the P11 wizard.
+5. `components/ProtectedImage` (bearer fetch → blob URL, revoked on unmount).
+Tests first (Vitest + MSW): the prompt's 6 + api refresh/retry + camera happy path (tracks stopped on unmount).
+Verify: `npm run lint` / `typecheck` / `test -- --run` / `build` → E2E walkthrough `walkthrough/P07_auth.spec.ts` (stop → seed-e2e
+-MinAccounts 3 → -E2E → 4 screenshots → -Restart).
+
+**Results** (2026-10-03, verified 14:24 - inside the 2.5 h estimate; one stop for the human at 14:10, plan B approved 14:15)
+1. Task 0 (human request): `RefreshCookie.base()` = `ResponseCookie.from("__Host-cb_rt").httpOnly(true).secure(true).sameSite("Strict")
+   .path("/")`, no `domain(...)`; `issue`/`clear` take no request → never depended on `request.isSecure()`. Nothing changed in
+   main code; new unit test `RefreshCookieTest` (2). `AuthSessionIT` already asserted the same attributes over plain-HTTP MockMvc.
+2. Files (`frontend/src/`): `api/{auth,me,publicApi}.ts` (zod schemas per docs/04) · `auth/AuthProvider.tsx` (silent refresh on
+   load → GET /me, ONE shared refresh promise, Web Locks across tabs, `BroadcastChannel('cb-auth')` logout, query cache cleared on
+   sign-out) · `auth/{RequireAuth,authContext,jwt}.ts(x)` (loading skeleton, `mustChangePassword` → `/change-password`,
+   `pathAfterLogin` = safe local `returnTo` of the own portal) · `lib/api.ts` (`ApiError.extensions` = RFC 9457 members such as
+   `otpId`; 401 → registered refresh handler → retry once; no refresh for login/register/otp/refresh/logout/forgot/reset; the
+   planned `auth/session.ts` was not needed) · `components/form/{fields,validation}` · `components/camera/{CameraCapture,capture,
+   sensors}` · `components/ProtectedImage.tsx` · `features/auth/{LoginPage,RegisterPage,OtpPage,OtpInput,ChangePasswordPage,
+   PasswordStrength,PrivacyNoticeBox,AuthCard,verifyEmailPath}` · `features/citizen/{CitizenHomePage,ProfilePage,NewComplaintPage}`
+   · `features/public/PrivacyPage` · `lib/format.ts` · routes (`/verify-email`, `/change-password`, `/citizen/profile`) · `en.json`
+   (auth, profile, validation, citizenHome, newComplaint, camera) · `App.tsx` (`RouterProvider` from `react-router/dom`) ·
+   `components/MobileLayout.tsx` + `features/officer/OfficerLayout.tsx` (logout order) · `vitest.config.ts` (React Router alias) ·
+   `test/{handlers,renderApp}` · `walkthrough/P07_auth.spec.ts`. Backend: `unit/auth/RefreshCookieTest.java`.
+3. Tests (all new; no existing assertion changed): `AuthProvider.test` 5 (two parallel 401s → ONE refresh with `X-CB-CSRF: 1`, both
+   retried; failed refresh → signed out, no second retry; load restores session + `mcp`; no cookie → signed out; BroadcastChannel
+   logout) · `LoginPage.test` 5 (empty / bad e-mail / short password never sent; phone identifier + generic 401 keeps input;
+   returnTo; one-time password → change screen; EMAIL_NOT_VERIFIED → OTP screen with `otpId`) · `RegisterPage.test` 3 (privacy
+   checkbox required, nothing sent; body with `+91`, notice version, consents; PASSWORD_POLICY field error) · `OtpPage.test` 4 (pasted
+   code fills 6 boxes → verify → login prefilled; incomplete code not sent; OTP_INVALID message + resend disabled 60 s; no otpId) ·
+   `ChangePasswordPage.test` 3 · `CameraCapture.test` 6 (NotAllowedError → fallback `accept="image/*" capture="environment"`, only
+   one file input; location denied blocks "Use this photo"; > 150 m blocks; shutter → JPEG 0.9 + fix (`enableHighAccuracy`,
+   `maximumAge 0`, `timeout 20000`) + beta/gamma, tracks stopped, result `IN_APP_CAMERA`; tracks stopped on unmount; http → secure
+   address text) · `ProtectedImage.test` 2 · `MobileLayout.test` 2 (logout from citizen/officer portal ends on `/`, CSRF header).
+4. Runs (in `frontend` unless noted):
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | backend (Task 0) | in `backend`: `.\mvnw.cmd -q verify` | exit 0; reports surefire `tests=124 failures=0 errors=0`, failsafe `tests=46 failures=0 errors=0` (170; `RefreshCookieTest tests="2" failures="0"`) | PASS |
+   | first frontend run | lint · typecheck · `npm test -- --run` · build | exit 0 · 2 TS errors in my new tests (`noUncheckedIndexedAccess`) → fixed · `Tests 67 passed (67)` · built | FAIL→fixed |
+   | E2E seed (repo root) | `pwsh -NoProfile -File scripts\dev\seed-e2e.ps1 -MinAccounts 3` | `E2E RESET DONE: 48 tables emptied` · `5 accounts created, 0 already present` · `PASS E2E database civicbrain_e2e ready with 3 fixed accounts` | PASS |
+   | E2E stack | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -E2E` | `PASS stack 'e2e' is up` | PASS |
+   | walkthrough 1 | `npx playwright test --config playwright.walkthrough.config.ts walkthrough/P07` | my test password contained the name → server PASSWORD_POLICY shown on the field (correct); desktop: first register after the backend start > 5 s | FAIL→test fixed |
+   | walkthrough 2-4 | same | register → Mailpit OTP → verify → login → home PASS; **Log out → `/login?returnTo=%2Fcitizen`** instead of `/` (fix 1: await navigate then logout; fix 2: `flushSync: true`, ignored - Vite warning "not using the `<RouterProvider>` from `react-router/dom`") → STOP, asked the human | FAIL |
+   | plan B (human yes 14:15) | `App.tsx` `RouterProvider` from `react-router/dom`; Vitest then loaded two React Router copies (CJS + ESM, "useContext(...) is null" in 11 tests) → `vitest.config.ts` aliases both entries to the ESM files | `npx vitest run src/components/MobileLayout.test.tsx src/App.test.tsx` → `Tests 11 passed (11)` | PASS |
+   | walkthrough 5 | `pwsh … start-all.ps1 -E2E -Restart`, then the walkthrough | `2 passed (11.4s)` (desktop + phone: register, OTP, verify, login, home, logout → `/`, `/citizen` → login, ui.citizen login, **reload keeps the session (refresh cookie through the Vite proxy)**, camera fallback) | PASS |
+   | screenshots | opened all 4 PNGs | fallback button text touched the edge when wrapped → `py-2.5 text-center` on the shared button classes, re-shot (walkthrough 6: `2 passed (8.4s)`, 7 after a spec-only lint fix: `2 passed (10.4s)`) | PASS |
+   | lint | `npm run lint` | exit 0 (after replacing a literal BOM character in the spec regex by `.trim()`) | PASS |
+   | typecheck | `npm run typecheck` | exit 0 | PASS |
+   | tests | `npm test -- --run` | `Test Files 14 passed (14)` · `Tests 69 passed (69)` | PASS |
+   | build | `npm run build` | `✓ 255 modules transformed` · `✓ built in 505ms` (warning: chunk 601 kB > 500 kB) | PASS |
+   | log scan (repo root) | `Select-String -Path logs\backend.log, logs\frontend.log -Pattern 'eyJ…\|password=\|verification code is\|otp.{0,20}\d{6}\|__Host-cb_rt='` | `hits: 0` | PASS |
+   | dev stack back | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | `PASS stack 'dev' is up` (5 services healthy) | PASS |
+5. Screenshots (phone 390 px, opened and checked: readable, nothing overlapping or cut off, no horizontal scroll - asserted in the
+   spec too): `docs/screenshots/P07_register.png` (filled form, notice v2026-10-v1 in the scroll box, strength "Strong"),
+   `P07_otp.png` (6 empty boxes, "Send a new code in 60 s" disabled; taken before the code is typed), `P07_citizen_home.png`
+   ("Hello, P07 Walkthrough", Report button, empty recent list, bottom nav), `P07_camera_fallback.png` (headless browser without
+   camera: "The camera could not be opened" + "Take a photo with the phone camera" + "Try the in-app camera again").
+- DECISION: the refresh cookie stays unconditionally `Secure; HttpOnly; SameSite=Strict; Path=/` without Domain, independent of
+  `request.isSecure()` (forward headers are off since P06, so behind the HTTPS tunnel the request looks like http; the `__Host-`
+  prefix needs Secure + Path=/ + no Domain; Chrome also accepts Secure cookies on http://localhost). Locked by `RefreshCookieTest`.
+- DECISION (logout): `RouterProvider` from `react-router/dom` + the layouts `await navigate('/', { replace: true, flushSync: true })`
+  BEFORE `await logout()`. Both parts are needed: React Router's `startNavigation` always passes `await handleLoaders(...)` before
+  `completeNavigation`, so a sign-out started in the same click would render first and the portal guard would send the user to
+  its login page; `flushSync` commits the landing page before the sign-out render. Test: `MobileLayout.test.tsx`.
+- DECISION: login redirect parameter stays `returnTo` (P05 routes, tests and walkthrough use it; docs/05 only says "return URL");
+  the prompt's `next` is the same thing. Only a local path of the user's own portal is followed (no open redirect).
+- DECISION: after a refresh the user comes from GET /me (the refresh body has no user) and `mustChangePassword` from the JWT claim
+  `mcp` (UX only, unsigned decode; the server enforces PASSWORD_CHANGE_REQUIRED). Network/5xx refresh failures during a session
+  keep the user signed in (the call fails); 401/403 sign out.
+- DECISION: cross-tab refreshes are serialised with the Web Locks API (`navigator.locks`, lock `cb-auth-refresh`) - refresh tokens
+  rotate and reuse revokes the family (07 §1), so two tabs must not send the same cookie at once. Without Web Locks: tab-local only.
+- DECISION: `CameraCapture` returns `pitchDeg` = DeviceOrientation `beta` and `rollDeg` = `gamma` raw (docs/06 Tier B computes
+  θ = 90° − β); tilt indicator green for 45–70° down (90 − β) and |γ| < 5°. `capturedAt` = timestamp of the fresh fix (the API
+  checks LOCATION_STALE on it). Fallback accepts JPEG/PNG only (server magic-byte rule). Camera stops at the shutter and on unmount.
+- DECISION: `/citizen/new` hosts only the photo step (05 §4 step 2) until P11 builds the wizard; minimal profile at
+  `/citizen/profile` (opt-ins via PUT /me, PUBLIC_PHOTO / AI_TRAINING via POST /me/consents; language/export/delete later).
+- DECISION: `vitest.config.ts` aliases `react-router` and `react-router/dom` to the package's ESM files (one router copy in
+  tests; Node and the browser build already resolve to these files).
+- Open / hand-offs: **P21/P27** production bundle is 601 kB (> 500 kB Vite warning, human: ignore for now) - route-level
+  `import()` splitting later. **P11** wizard wraps `CameraCapture` + capture session; P11/P13 show the real camera on the phone.
+  **P13** HTTPS tunnel: the cookie is already Secure/Path=/ (Task 0). Known: the first register after a backend start can take
+  > 5 s (synchronous SMTP + Argon2, cold JVM).
 
 ### 2026-10-03 — P06 — Auth backend, E2E seed runner, smoke auth (DONE, human yes 2026-10-03 13:31)
 - Requirement(s): FR-01, FR-02, FR-04 (first admin), FR-60, NFR-01; docs/04 §1, §2, §3 (privacy notice), §11; docs/07 §1, §2,
