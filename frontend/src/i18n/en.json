@@ -1,0 +1,143 @@
+{
+  "app": {
+    "name": "CivicBrain",
+    "council": "Talegaon Dabhade Municipal Council",
+    "skipToContent": "Skip to main content"
+  },
+  "common": {
+    "loading": "Loading…",
+    "tryAgain": "Try again",
+    "reload": "Reload",
+    "reference": "Reference: {{requestId}}",
+    "dismiss": "Dismiss",
+    "logout": "Log out",
+    "login": "Log in",
+    "goHome": "Go to the start page",
+    "offline": "You are offline. Nothing can be sent until the connection is back.",
+    "notReady": "This screen is being built."
+  },
+  "nav": {
+    "main": "Main navigation",
+    "citizen": {
+      "home": "Home",
+      "report": "Report",
+      "complaints": "My complaints"
+    },
+    "contractor": {
+      "today": "Today"
+    },
+    "officer": {
+      "dashboard": "Dashboard",
+      "complaints": "Complaints",
+      "plans": "Action plans",
+      "contractors": "Contractors",
+      "admin": "Admin"
+    }
+  },
+  "roles": {
+    "CITIZEN": "Citizen",
+    "OFFICER": "Officer",
+    "ADMIN": "Administrator",
+    "CONTRACTOR": "Contractor",
+    "CONTRACTOR_STAFF": "Contractor staff"
+  },
+  "landing": {
+    "title": "Report civic problems. Follow them until they are fixed.",
+    "intro": "Potholes, garbage, waterlogging, road damage and more: send a photo from the spot and CivicBrain helps the council check, plan and fix it.",
+    "report": "Report a problem",
+    "track": "Track my complaint",
+    "login": "Log in",
+    "stepsTitle": "How it works",
+    "step1Title": "Take a photo at the spot",
+    "step1Text": "Use the in-app camera. Your location is added automatically.",
+    "step2Title": "The council checks it",
+    "step2Text": "AI checks the photo, finds duplicates and suggests a priority. An officer makes every decision.",
+    "step3Title": "Track it until it is fixed",
+    "step3Text": "Get e-mail and WhatsApp updates at every step, then confirm the fix.",
+    "privacy": "Privacy notice",
+    "limits": "AI estimates of size and cost are preliminary. Wards are analytical GIS units, not the electoral wards.",
+    "prototype": "Prototype · SPPU final-year project"
+  },
+  "pages": {
+    "login": "Log in",
+    "register": "Create an account",
+    "privacy": "Privacy notice",
+    "track": "Complaint {{publicRef}}",
+    "citizenHome": "My reports",
+    "citizenNew": "Report a problem",
+    "citizenComplaints": "My complaints",
+    "contractorToday": "Today's work",
+    "officerDashboard": "Dashboard",
+    "officerComplaints": "Complaints",
+    "officerPlans": "Action plans",
+    "officerContractors": "Contractors",
+    "officerAdmin": "Officers and scopes"
+  },
+  "errorPages": {
+    "notFoundTitle": "Page not found",
+    "notFoundText": "The page you opened does not exist or has moved.",
+    "forbiddenTitle": "No access",
+    "forbiddenText": "Your account cannot open this page.",
+    "goToMyPortal": "Go to my start page",
+    "crashTitle": "Something went wrong",
+    "crashText": "This page stopped working. Reload to try again."
+  },
+  "status": {
+    "SUBMITTED": "Received",
+    "VERIFIED": "Under review",
+    "SCHEDULED": "Planned",
+    "ASSIGNED": "Contractor assigned",
+    "INSPECTED": "Site inspected",
+    "IN_PROGRESS": "Work in progress",
+    "COMPLETED": "Work completed — please confirm",
+    "CLOSED": "Closed",
+    "REOPENED": "Reopened",
+    "REJECTED": "Not accepted",
+    "MERGED": "Linked to {{publicRef}}"
+  },
+  "statusExtra": {
+    "anotherComplaint": "another complaint"
+  },
+  "errors": {
+    "VALIDATION_FAILED": "Some fields need attention.",
+    "MALFORMED_REQUEST": "Something went wrong. Please try again.",
+    "UNAUTHENTICATED": "Please log in to continue.",
+    "INVALID_CREDENTIALS": "E-mail/phone or password is incorrect.",
+    "SESSION_REVOKED": "You were signed out. Please log in again.",
+    "FORBIDDEN": "You don't have access to this.",
+    "ROLE_NOT_ALLOWED": "You can't do this step.",
+    "EMAIL_NOT_VERIFIED": "Please verify your e-mail with the code we sent you.",
+    "MFA_REQUIRED": "Set up two-factor authentication to continue.",
+    "CSRF_CHECK_FAILED": "Your session could not be confirmed. Please log in again.",
+    "NOT_FOUND": "Not found.",
+    "INVALID_TRANSITION": "This complaint has already moved on. Refresh.",
+    "STALE_VERSION": "Plan changed by someone else — reload.",
+    "ALREADY_EXISTS": "This is already registered.",
+    "COMPLAINT_NOT_PLANNABLE": "A complaint in this plan can no longer be planned.",
+    "PLAN_STATE_CONFLICT": "This plan has already moved on. Reload.",
+    "BLUR_NOT_READY": "Blurring is still running — try again in a moment.",
+    "CAPTURE_SESSION_EXPIRED": "Please take the photo again.",
+    "FILE_TOO_LARGE": "Photo is too large.",
+    "FILE_TYPE_NOT_ALLOWED": "Only photos (JPG/PNG) are allowed.",
+    "CAPTURE_SESSION_INVALID": "Please take the photo again.",
+    "GPS_ACCURACY_TOO_LOW": "Move to open sky and retry.",
+    "LOCATION_STALE": "Please capture again.",
+    "OUTSIDE_BOUNDARY": "This location is outside Talegaon Dabhade Municipal Council.",
+    "IMAGE_TOO_SMALL": "Photo quality not accepted.",
+    "IMAGE_TOO_LARGE_PIXELS": "Photo quality not accepted.",
+    "OTP_INVALID": "The code is incorrect. Check it or request a new one.",
+    "OTP_EXPIRED": "The code has expired. Request a new one.",
+    "OTP_ATTEMPTS_EXCEEDED": "Too many wrong codes. Request a new one.",
+    "TOTP_INVALID": "Code is incorrect.",
+    "PASSWORD_POLICY": "Use 12 to 128 characters and avoid common passwords.",
+    "CONTRACTOR_NOT_ELIGIBLE": "Choose an active contractor registered for this work type.",
+    "FEEDBACK_NOT_ALLOWED": "Feedback is possible once the work is completed.",
+    "CONSENT_MISSING": "The citizen has not allowed public photos.",
+    "ACCOUNT_LOCKED": "Too many attempts. Try again in 15 minutes.",
+    "RATE_LIMITED": "Please wait {{seconds}} seconds and try again.",
+    "INTERNAL_ERROR": "Something went wrong. Reference: {{requestId}}",
+    "DEPENDENCY_UNAVAILABLE": "Service temporarily unavailable.",
+    "NETWORK_ERROR": "Cannot reach CivicBrain. Check your connection and try again.",
+    "UNKNOWN": "Something went wrong. Please try again."
+  }
+}

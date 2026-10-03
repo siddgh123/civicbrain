@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+
+/* Design tokens (Tailwind 4, no tailwind.config.js). Status tones = docs/05_UI_SPEC.md §1 colour tokens;
+   every fg/bg pair is at least 4.5:1 (WCAG AA, 05 §2). */
+@theme {
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+
+  --color-status-neutral-bg: #f1f5f9;
+  --color-status-neutral-fg: #1e293b;
+  --color-status-neutral-border: #cbd5e1;
+
+  --color-status-info-bg: #e0f2fe;
+  --color-status-info-fg: #075985;
+  --color-status-info-border: #7dd3fc;
+
+  --color-status-warning-bg: #fef3c7;
+  --color-status-warning-fg: #92400e;
+  --color-status-warning-border: #fcd34d;
+
+  --color-status-success-bg: #dcfce7;
+  --color-status-success-fg: #166534;
+  --color-status-success-border: #86efac;
+
+  --color-status-danger-bg: #fee2e2;
+  --color-status-danger-fg: #991b1b;
+  --color-status-danger-border: #fca5a5;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}

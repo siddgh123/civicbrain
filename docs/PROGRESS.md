@@ -23,7 +23,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | DONE (human yes 2026-10-02 20:29) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed · Kaggle cells 1-4 OK, 0.9 min/epoch, committed run "Running" (finish ≈ 22:30 at the latest) · commit 8141812 |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
-| P05 | Frontend skeleton | D2 | NOT STARTED | |
+| P05 | Frontend skeleton | D2 | IN PROGRESS (waiting for human Q1-Q2) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | NOT STARTED | |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
@@ -82,6 +82,92 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P05 — Frontend skeleton (IN PROGRESS)
+- Requirement(s): docs/05_UI_SPEC.md §1, §2, §3 (landing), §7, §8; docs/12_ERROR_HANDLING.md §2, §6; rule 20; docs/09_BUILD_PLAN.md
+  P0 step 5 (frontend); 09_BUILD_PLAN_7DAY §1 (Vite layout).
+**Plan** (Claude Code, Auto mode):
+1. In `frontend`: `npm install` (package.json unchanged) → commit `package-lock.json`; peer conflict → stop and ask.
+2. Config by hand: `index.html`, `vite.config.ts` (react + tailwind plugins, 5173 strictPort, `/api` → :8080 `changeOrigin:false`,
+   `allowedHosts ['.trycloudflare.com']`), `vitest.config.ts` (jsdom, setup = jest-dom + MSW server, include/exclude per prompt),
+   `tsconfig.json`/`.app`/`.node` (strict), `eslint.config.js` (flat), `playwright.walkthrough.config.ts` (CLAUDE.md).
+3. Tests first: `StatusBadge.test.tsx` (11 statuses: label + icon), `App.test.tsx` (landing heading, 404, `/officer` → `/login`),
+   `api.test.ts` (MSW 422 problem+json → `ApiError{code, fieldErrors}`).
+4. `src/lib/api.ts` + `queryClient.ts` (GET 2 retries, not 4xx; mutations 0) · `src/auth/AuthProvider.tsx` placeholder + `RequireAuth`/
+   `RequireRole` · `src/i18n` (`en.json`, `errors.<CODE>` for all 38 codes) · router (`/`, `/login`, `/register`, `/citizen/*`,
+   `/officer/*`, `/contractor/*`, `/c/:publicRef`, 404) · layouts (Citizen/Contractor bottom nav, Officer left nav) · components
+   (`StatusBadge`, `icons/`, `EmptyState`, `ErrorState`, `PageSkeleton`, `Toast`) · landing page (05 §3).
+5. Verify: `npm run lint` · `npm run typecheck` · `npm test -- --run` · `npm run build` · `start-all.ps1 -Only frontend` ·
+   walkthrough `walkthrough/P05_landing.spec.ts` → `P05_landing_desktop.png` / `P05_landing_mobile.png` · GET
+   `:5173/api/v1/public/categories` → backend 401/404 JSON. Record, commit, push; Q1-Q2.
+
+**Results**
+1. `npm install` (in `frontend`, Node 24.19.0 / npm 11.17.0) → `added 345 packages … found 0 vulnerabilities`, no peer conflict;
+   `package.json` unchanged (0 diff lines); `package-lock.json` (lockfileVersion 3) created, contains the linux-x64 native bindings
+   (`@rolldown/binding-linux-x64-gnu`, `@tailwindcss/oxide-linux-x64-gnu`, `lightningcss-linux-x64-gnu`) so CI `npm ci` works.
+   `npm ls`: msw **3.0.1** top level as pinned; vitest's `@vitest/mocker` pulls a nested `msw@2.15.0` (optional peer, browser mode
+   only, unused). npm 11 "allow-scripts" warning: msw's postinstall not run (it only copies the browser worker file - not needed).
+2. Tests first: 5 test files written before the code → first run `Test Files 5 failed (5)` (modules missing) = red.
+3. Files (`frontend/`): `index.html`, `public/favicon.svg`, `vite.config.ts`, `vitest.config.ts`, `tsconfig.json`/`.app`/`.node`,
+   `eslint.config.js`, `playwright.walkthrough.config.ts`, `walkthrough/P05_landing.spec.ts`; `src/`: `main.tsx`, `App.tsx`,
+   `index.css` (Tailwind 4 `@theme`: brand + `--color-status-{neutral,info,warning,success,danger}-{bg,fg,border}`, AA pairs),
+   `app/` (`routes.tsx`, `TranslatedPlaceholder`), `lib/` (`api.ts`, `queryClient.ts`, `errorMessage.ts`, `complaintStatus.ts`),
+   `auth/` (`authContext`, `AuthProvider` placeholder, `useAuth`, `tokenStore`, `RequireAuth`, `RequireRole`), `i18n/` (`en.json`,
+   `index.ts`, typed keys `i18next.d.ts`), `components/` (`StatusBadge`, `icons/` 24 inline SVGs, `EmptyState`, `ErrorState`,
+   `PageSkeleton`, `toast/` (`ToastProvider` aria-live, `useToast`), `OfflineBanner`, `PlaceholderPage`, `MobileLayout`, `Brand`,
+   `SkipLink`), `features/public` (Landing, PublicShell/Layout, NotFound, Forbidden, RouteError, TrackLink, MessageCard),
+   `features/citizen` (CitizenLayout, CitizenComplaintRefPage), `features/contractor/ContractorLayout`, `features/officer/OfficerLayout`,
+   `test/` (`setup.ts`, MSW `server.ts`, `handlers.ts`).
+   Tests (39): `StatusBadge.test.tsx` 13 (11 statuses: label + `data-icon` per 05 §1 + tone; MERGED fallback; list = DB CHECK) ·
+   `App.test.tsx` 9 (landing heading + 3 links, 404, `/officer` → `/login?returnTo=%2Fofficer`, `/c/CB-000123` → login keeps ref,
+   citizen at `/officer` → "No access", officer at `/officer/admin` → "No access" inside the layout, officer nav without Admin,
+   admin nav with Admin, citizen bottom nav) · `api.test.ts` 8 (MSW: 422 problem → `ApiError{status, code, message=detail,
+   fieldErrors, requestId}`, bearer from memory, query params, JSON vs multipart content type, 502 text → DEPENDENCY_UNAVAILABLE +
+   `X-Request-Id`, 429 `Retry-After`, network → NETWORK_ERROR, schema mismatch → UNEXPECTED_RESPONSE) · `queryClient.test.ts` 3
+   (2 retries, never on 4xx, mutations 0) · `ErrorState.test.tsx` 5 (en.json has all 38 codes of 12 §2, message by code + requestId +
+   Try again, INTERNAL_ERROR reference once, unknown code / plain Error → generic text, RATE_LIMITED seconds) · `Toast.test.tsx` 1.
+4. First green run: 37/38 - my new test `getByRole('link', 'Go to my start page')` found the header link and the card link →
+   scoped to `<main>` (test never passed before). `tsc -b` then failed on `document`/`window` in the walkthrough's `page.evaluate`
+   → `tsconfig.node.json` `lib: ["ES2023","DOM"]`.
+5. `/verify frontend` (in `frontend`) + build + CI command:
+
+   | Component | Command | Result line | Result |
+   |---|---|---|---|
+   | frontend | `npm run lint` | `eslint .` - no problems (exit 0) | PASS |
+   | frontend | `npm run typecheck` | `tsc -b --noEmit` - no errors (exit 0; 50 `src` files + 3 configs + walkthrough checked) | PASS |
+   | frontend | `npm test -- --run` | `Test Files 6 passed (6)` · `Tests 39 passed (39)` | PASS |
+   | frontend | `npm run build` | `✓ 224 modules transformed` · `dist/assets/index-*.js 492.49 kB │ gzip: 152.15 kB` · `✓ built` | PASS |
+   | frontend | `npm run test:coverage` (CI) | `39 passed` · Lines 87.25 % · Statements 83.8 % · Branches 78.91 % | PASS |
+   | stack | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only frontend` | `PASS frontend healthy` · `PASS stack 'dev' is up: http://localhost:5173`; log `VITE v8.3.1 ready in 390 ms` | PASS |
+   | browser | `npx playwright test --config playwright.walkthrough.config.ts walkthrough/P05` | `6 passed (6.9s)` (desktop 1280 + phone 390: landing, Report → `/login?returnTo=%2Fcitizen%2Fnew`, proxy) | PASS |
+   | proxy | (same spec) GET `http://localhost:5173/api/v1/public/categories` | `404 {"type":"https://civicbrain.app/errors/NOT_FOUND",…,"code":"NOT_FOUND","detail":"Not found.","requestId":"8c4d00cd-…"}` from the backend | PASS |
+6. Screenshots (opened and checked: readable, nothing cut off or overlapping, no horizontal scroll at 390 px, all badges text + icon):
+   `docs/screenshots/P05_landing_desktop.png` (1280×800, full page), `docs/screenshots/P05_landing_mobile.png` (390 wide, full page).
+- DECISION: client in `src/lib/api.ts` + `src/lib/queryClient.ts` as the prompt says; rule 20's `src/api/` will hold the per-resource
+  typed hooks (from P07). Every 2xx body goes through a zod schema (`api.get(path, schema)`), `null` schema = no body.
+- DECISION: non-problem error bodies (Vite proxy error, empty) get a code by HTTP status (401 UNAUTHENTICATED, 403 FORBIDDEN, 404
+  NOT_FOUND, 413 FILE_TOO_LARGE, 429 RATE_LIMITED, 502-504 DEPENDENCY_UNAVAILABLE, other 5xx INTERNAL_ERROR, other 4xx
+  MALFORMED_REQUEST) and the `X-Request-Id` header. Client-only codes: `NETWORK_ERROR` (status 0), `UNEXPECTED_RESPONSE`,
+  `UNKNOWN` (in `en.json`). The UI never shows the server `detail` (ErrorState/toasts use `errors.<code>`).
+- DECISION: access token in module memory (`auth/tokenStore.ts`), written synchronously by AuthProvider, read by the API client
+  (no effect lag); `AuthProvider initialState` is for tests only. P07 adds login, silent refresh, shared refresh promise, 401 retry,
+  BroadcastChannel logout.
+- DECISION: data router (`createBrowserRouter`/`RouterProvider`), one `errorElement` per portal (12 §6 "error boundary per portal":
+  friendly page + Reload); reporting to `POST /client-errors` waits for that endpoint. Track link `/c/:publicRef` (must match
+  `CB-\d{6,}`, else 404) → login with `returnTo` → citizen `/citizen/complaints/ref/:publicRef` (placeholder, P11), other roles → their
+  start page. Wrong role → "No access" page with "Go to my start page".
+- DECISION (MVP OUT): officer nav = Dashboard, Complaints, Action plans, Contractors, Admin (ADMIN only) - no Duplicates queue or
+  Notifications log (09_7DAY §1 OUT). Landing has no public-map link (public map OUT); footer: privacy link (`/privacy` placeholder,
+  P07 fills it from `GET /public/privacy-notice`), the limits sentence (AI estimates preliminary; wards are analytical units) and
+  "Prototype · SPPU final-year project" (honesty rule). Contractor bottom nav has one item (Today) until P22.
+- DECISION: i18n keys are typed (`i18n/i18next.d.ts` = `typeof en`), so a missing key fails `tsc`. ESLint also bans
+  `dangerouslySetInnerHTML`, `eval`, `any`. MSW 3 renamed `onUnhandledRequest` → `onUnhandledFrame`; setup uses `'error'`.
+- Note: `start-all.ps1 -Status` shows Mailpit not healthy (not used in P05; P06 needs it for OTP mails - start-all brings it up).
+  Two read-only Bash listings of mine used `cd`, which moved the shell into `frontend\node_modules`; npm still found the project;
+  fixed with `Set-Location`, no effect on results.
+- Open / hand-offs: **P07** auth screens, `src/api/` hooks, refresh/401 flow, `/privacy` content. **P11** citizen screens incl. the
+  track target. **Later** `client-errors` reporting from `RouteErrorPage`; bundle is one 492 kB chunk (route-level `lazy` when the
+  portals grow).
 
 ### 2026-10-03 — P04 — Backend skeleton, Flyway, demo seed (DONE, human yes 2026-10-03 10:24)
 - Requirement(s): docs/02_ARCHITECTURE.md §3, §6; docs/03_DATABASE.md §1, §3, §5; docs/07_SECURITY.md §2, §4;
