@@ -23,7 +23,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P03 | Dataset check + fixtures + Kaggle package (YOLO training starts) | D1 | DONE (human yes 2026-10-02 20:29) | dataset check exit 0 (0 label problems, 0 leakage, 3,258 train lines) · 6 fixtures + README · zip 6,802 files / 174.6 MB · ruff clean · pytest 82 passed · Kaggle cells 1-4 OK, 0.9 min/epoch, committed run "Running" (finish ≈ 22:30 at the latest) · commit 8141812 |
 | P03b | Fallback: auto-label (only if labels are missing) | D1 | NOT STARTED | |
 | P04 | Backend skeleton + Flyway + demo seed | D2 | DONE (human yes 2026-10-03 10:24) | mvnw verify 83 tests 0 failures (70 unit + 13 IT on Testcontainers PostGIS) · Flyway "Successfully applied 6 migrations" on `civicbrain` · `DB check: 23 wards visible to civicbrain_app` · seed complaints=500, wards=23 · SQL tests 4/4 · AI /health 200 db ok |
-| P05 | Frontend skeleton | D2 | IN PROGRESS (waiting for human Q1-Q2) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed |
+| P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | NOT STARTED | |
 | P07 | Auth screens + CameraCapture | D2 | NOT STARTED | |
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-03 — P05 — Frontend skeleton (IN PROGRESS)
+### 2026-10-03 — P05 — Frontend skeleton (DONE, human yes 2026-10-03 11:28)
 - Requirement(s): docs/05_UI_SPEC.md §1, §2, §3 (landing), §7, §8; docs/12_ERROR_HANDLING.md §2, §6; rule 20; docs/09_BUILD_PLAN.md
   P0 step 5 (frontend); 09_BUILD_PLAN_7DAY §1 (Vite layout).
 **Plan** (Claude Code, Auto mode):
@@ -168,6 +168,10 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 - Open / hand-offs: **P07** auth screens, `src/api/` hooks, refresh/401 flow, `/privacy` content. **P11** citizen screens incl. the
   track target. **Later** `client-errors` reporting from `RouteErrorPage`; bundle is one 492 kB chunk (route-level `lazy` when the
   portals grow).
+- Human answers (2026-10-03 11:28): **Q1 yes** - landing page with "Report a problem" seen at http://localhost:5173 ·
+  **Q2 yes** - both screenshots look clean (desktop and phone width).
+- DoD: [x] traces (05 §1-§3/§7/§8, 12 §2/§6, rule 20, 09_7DAY §1) [x] tests written first (red run), green [x] loading/empty/error
+  components + error codes in `en.json` [x] lint/type clean, no secrets [x] committed `79d097b`, pushed (`2e2f779..79d097b  main -> main`)
 
 ### 2026-10-03 — P04 — Backend skeleton, Flyway, demo seed (DONE, human yes 2026-10-03 10:24)
 - Requirement(s): docs/02_ARCHITECTURE.md §3, §6; docs/03_DATABASE.md §1, §3, §5; docs/07_SECURITY.md §2, §4;
