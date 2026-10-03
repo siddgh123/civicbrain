@@ -22,7 +22,7 @@ def test_health_reports_db_ok(client, monkeypatch):
     monkeypatch.setattr(db, "db_status", lambda: "ok")
     r = client.get("/health")
     assert r.status_code == 200
-    assert r.json() == {"status": "ok", "db": "ok", "osrm": "not used (haversine)", "modelsLoaded": False}
+    assert r.json() == {"status": "ok", "db": "ok", "osrm": "not used (haversine)", "modelsLoaded": False, "models": {}}
     assert r.headers["X-Request-Id"]
 
 

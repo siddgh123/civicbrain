@@ -1,0 +1,62 @@
+{
+  "manifest_version": 1,
+  "created_at": "2026-10-03T14:48:20+05:30",
+  "files": [
+    {
+      "path": "text_clf.joblib",
+      "sha256": "d7b5ebf2df3a06bfdc706e3b20ad91a70b950cae55996420d36d2e391be18e20",
+      "kind": "text-classifier",
+      "version": "d7b5ebf2df3a",
+      "labels": [
+        "Blocked Drain",
+        "Garbage Accumulation",
+        "Other",
+        "Pothole",
+        "Road Damage",
+        "Streetlight",
+        "Water Leakage",
+        "Waterlogging"
+      ],
+      "C": 10.0,
+      "data": [
+        {
+          "file": "data/complaints/synthetic_complaints_500.csv",
+          "rows": 500,
+          "sha256": "9f2f011f23436f5e7d43241dfe0668931cf3a8d45019e7541e470037f9d3f575"
+        },
+        {
+          "file": "data/complaints/kit_authored_train.csv",
+          "rows": 160,
+          "sha256": "bb6d6f7ca1bc7f19d2ec925555aa87ec2f6944c24ff20cf8da07bdca7176e602"
+        }
+      ],
+      "metrics_file": "text_clf_metrics.json",
+      "metrics": {
+        "sanity_accuracy": 0.9,
+        "sanity_macro_f1": 0.8995,
+        "sanity_label": "sanity check on 40 kit-written sentences"
+      },
+      "sklearn": "1.9.1",
+      "trained_at": "2026-10-03T14:51:58+05:30"
+    },
+    {
+      "path": "yolov8s_civicbrain.onnx",
+      "sha256": "93af36422072661b66e006b89b466650ce271ad6f387bb62bc8a55cafc50470d",
+      "kind": "yolo",
+      "classes": [
+        "Pothole",
+        "Garbage Accumulation",
+        "Waterlogging",
+        "Road Damage"
+      ],
+      "imgsz": 640,
+      "dataset_version": "existing data/yolo (3,398 images, MVP) - see dataset_report.json",
+      "training_run": "yolov8s_640_mvp_seed42",
+      "metrics_file": "yolo_metrics.json",
+      "licence": "AGPL-3.0 (Ultralytics); training data licences in data/yolo/dataset_sources.csv",
+      "installed_at": "2026-10-03T14:48:20+05:30",
+      "source_zip": "civicbrain_yolo_outputs.zip"
+    }
+  ],
+  "updated_at": "2026-10-03T14:51:58+05:30"
+}

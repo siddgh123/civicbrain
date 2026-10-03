@@ -2,7 +2,7 @@
 
     uvicorn app.main:app --host 127.0.0.1 --port 8001      (from ai-service/, see scripts/dev/start-ai-api.ps1)
 
-GET /health                    no auth   {status, db, osrm, modelsLoaded}
+GET /health                    no auth   {status, db, osrm, modelsLoaded, models: {<manifest name>: "ok" | problem}}
 GET /v1/models                 service JWT
 POST /v1/jobs/{jobId}/requeue  service JWT - a new QUEUED row for a finished job (the backend's admin page
                                inserts that row itself; this endpoint exists for manual use)
@@ -23,7 +23,7 @@ from app import db, problems
 from app.config import get_settings
 from app.errors import ConfigError
 from app.logging_setup import configure_logging
-from app.models_check import check_models, describe_models
+from app.models_check import check_models, describe_models, model_status
 from app.problems import ProblemError
 from app.security import ServiceAuthError, verify_service_jwt
 
@@ -52,6 +52,7 @@ async def lifespan(app: FastAPI):
             raise ConfigError("required model files missing or changed: " + "; ".join(model_problems))
         log.warning("model files not ready, REQUIRE_MODELS=false so the API still starts: %s", "; ".join(model_problems))
     app.state.model_problems = model_problems
+    app.state.model_status = model_status(settings, model_problems)  # checked once at start (hashing is slow)
     log.info("AI API ready (database %s, routing %s)", settings.db_name, settings.routing_mode)
     yield
     if db.get_engine.cache_info().currsize:
@@ -86,6 +87,7 @@ def health(request: Request) -> JSONResponse:
         "db": db_state,
         "osrm": "not used (haversine)" if settings.routing_mode == "haversine" else "not checked",
         "modelsLoaded": model_problems == [],
+        "models": getattr(request.app.state, "model_status", None) or {},  # {} = start-up check has not run
     }
     return JSONResponse(body, status_code=200 if db_state == "ok" else 503)
 

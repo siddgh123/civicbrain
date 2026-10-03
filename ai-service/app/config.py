@@ -132,6 +132,22 @@ TEXT_CLF_FILE = "text_clf.joblib"
 YUNET_FILE = "face_detection_yunet_2023mar.onnx"  # required only when BLUR_ENABLED=true
 
 # =============================================================================================
+# 2.2 Text classification (docs/06_AI_PIPELINE.md sec. 2.2, FR-21)
+# =============================================================================================
+TEXT_CLF_MODEL_NAME = "text_clf_tfidf_lr"  # ai_classifications.model_name; model_version = file SHA-256[:12]
+TEXT_TOP_K = 3  # top-3 categories with probabilities
+TEXT_MISMATCH_MIN_P = 0.70  # top-1 != citizen category with p >= 0.70 -> is_accepted = false ("possible wrong category")
+
+# =============================================================================================
+# 2.3 YOLO (docs/06_AI_PIPELINE.md sec. 2.3) - classes FROZEN above
+# =============================================================================================
+YOLO_MODEL_NAME = "yolov8s_civicbrain"  # yolo_detections/ai_classifications.model_name; model_version = SHA-256[:12]
+YOLO_IMGSZ = 640
+YOLO_CONF = 0.25
+YOLO_IOU = 0.5
+YOLO_DEVICE = "cpu"
+
+# =============================================================================================
 # Worker loop (docs/06_AI_PIPELINE.md sec. 1, docs/12_ERROR_HANDLING.md sec. 4)
 # =============================================================================================
 WORKER_JOB_TYPES: tuple[str, ...] = ("ANALYZE_COMPLAINT", "ANALYZE_IMAGE", "OPTIMIZE_PLAN", "BLUR_IMAGE")

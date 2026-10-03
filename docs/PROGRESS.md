@@ -26,7 +26,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P05 | Frontend skeleton | D2 | DONE (human yes 2026-10-03 11:28) | lint 0 problems · typecheck 0 errors · vitest 39 passed (6 files, lines 87 %) · build OK · `start-all -Only frontend` healthy · walkthrough 6 passed (desktop + 390 px) · proxy `/api/v1/public/categories` → backend 404 problem+json · `package-lock.json` committed · commit 79d097b |
 | P06 | Auth backend + E2E seed runner + smoke auth | D2 | DONE (human yes 2026-10-03 13:31) | mvnw verify 168 tests 0 failures (122 unit + 46 IT on Testcontainers PostGIS + Mailpit; 152 before the X-Forwarded-For fix) · `SMOKE AUTH PASSED: 19 / 19` (twice) · seed-e2e 5 accounts (3 fixed) · log scan 0 hits · frontend lint/typecheck/39 tests green |
 | P07 | Auth screens + CameraCapture | D2 | DONE (human yes 2026-10-03 14:41) | lint/typecheck 0 errors · vitest 69 passed (14 files) · build OK · walkthrough 2 passed (desktop + phone, E2E stack) · 4 screenshots · backend verify 170 tests 0 failures (`RefreshCookieTest`) |
-| P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | NOT STARTED | |
+| P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | IN PROGRESS (verified 15:10, waiting for the human's yes/no) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | NOT STARTED | |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | NOT STARTED | |
 | P11 | Citizen screens | D3 | NOT STARTED | |
@@ -82,6 +82,109 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-03 — P08 — Text classifier, YOLO detector, authenticity checks (verified 15:10, waiting for the human's yes/no)
+- Requirement(s): FR-20 (authenticity), FR-21 (text classification + mismatch badge), FR-22 (YOLO detection); docs/06 §2,
+  §2.1, §2.2, §2.3, §5; docs/03 §3-§4; rule 30; 02-frozen-rules (YOLO classes); 09_7DAY §4 (YOLO smoke `pothole_1.jpg`).
+- Human step: `kaggle_download\civicbrain_yolo_outputs.zip` (38.9 MB, 2 Oct 21:21) was already in place → no wait.
+**Plan** (Claude Code, Auto mode; estimate 2.5 h → time box 3.75 h):
+1. Install YOLO: `install_kaggle_model.py --check` → `models/yolov8s_civicbrain.onnx` + MANIFEST + `docs/reports/yolo_metrics.json`, plots.
+2. `training/train_text_clf.py` (recipe of the prompt: TF-IDF word 1-2 + `char_wb` 2-5 → LR balanced, C by 5-fold stratified CV
+   over [1, 2, 5, 10]) → `models/text_clf.joblib` + metrics json (+ `docs/reports/` copy) + MANIFEST entry `kind: text-classifier`.
+3. `pipeline/classify.py`: SHA-256-checked load once, `predict` top-3, mismatch rule (p ≥ 0.70) → `is_accepted`, TEXT row writer.
+4. `pipeline/detect.py`: Ultralytics on the ONNX (640, 0.25, 0.5, cpu), loaded once, pixel boxes, `model_version` = sha[:12],
+   primary detection, `yolo_detections` + IMAGE row writer, CPU ms per image.
+5. `pipeline/authenticity.py`: pure check functions for the 10 MVP checks + score/clamp/FLAGGED, `phash` signed int64,
+   DB helpers (facts query with PostGIS edge distance + `fn_similar_images`), delete-then-insert writer + `complaints.authenticity_*`.
+Tests first: `tests/unit/test_text_clf.py`, `test_classify.py`, `test_authenticity.py` (one per table row), `test_detect.py`
+(`@pytest.mark.models`), model-manifest start-up test (`REQUIRE_MODELS`); `tests/it/test_pipeline_it.py` (writers idempotent,
+facts from PostGIS on `civicbrain_test`). Verify: ruff, pytest (models tests run), metrics printout, CPU ms,
+`start-all.ps1 -Only worker,ai-api -Restart` → `/health` per-model status.
+
+**Results** (2026-10-03, verified 15:10 - well inside the 2.5 h estimate; one ASK-FIRST stop, human yes at ≈ 15:00)
+1. Files: `ai-service/pipeline/{__init__,classify,detect,authenticity}.py` · `ai-service/training/train_text_clf.py` ·
+   `app/config.py` (TEXT_* and YOLO_* constants) · `app/models_check.py` (`expected_sha256`, `verify_file` = hash BEFORE
+   joblib/Ultralytics touch a file, `model_status`) · `app/main.py` (`/health` `models`) · `ai-service/models/MANIFEST.json`
+   (committed; YOLO + text-classifier entries) · `docs/reports/{yolo_metrics,dataset_report,text_clf_metrics}.json` +
+   `docs/reports/yolo_plots/` (8 files, 1.4 MB) · `docs/04_API_CONTRACT.md` §10 (`/health` `models`) ·
+   `tests/fixtures/images/README.md` (P08 smoke results). Tests: `tests/unit/test_{text_clf,classify,detect,authenticity,
+   model_startup}.py`, `tests/it/test_pipeline_it.py`; `tests/unit/test_api.py` expected `/health` body + `"models": {}`
+   (the only change to an existing test - ASK-FIRST, human yes; nothing loosened).
+2. YOLO (`install_kaggle_model.py --check`): `INSTALLED …\yolov8s_civicbrain.onnx (sha256 93af36422072...)` ·
+   `ONNX CHECK input images [1, 3, 640, 640], output (1, 8, 8400)` · run `yolov8s_640_mvp_seed42`, 65 of 120 epochs ran
+   (48.5 min on Kaggle). **Existing test split (339 images), not a Talegaon field test:**
+
+   | Class | Precision | Recall | mAP50 | mAP50-95 |
+   |---|---|---|---|---|
+   | overall | 0.588 | 0.601 | 0.607 | 0.379 |
+   | Pothole | 0.384 | 0.386 | 0.347 | 0.120 |
+   | Garbage Accumulation | 0.580 | 0.711 | 0.715 | 0.470 |
+   | Waterlogging | 0.804 | 0.933 | 0.918 | 0.730 |
+   | Road Damage | 0.583 | 0.374 | 0.448 | 0.196 |
+3. Text classifier (`train_text_clf.py`): 660 train rows (500 synthetic + 160 kit; 184 distinct texts) · CV macro-F1 by C
+   {1: 0.9420, 2: 0.9450, 5: 0.9466, 10: 0.9481} → **C = 10** · **sanity check on 40 kit-written sentences: accuracy 0.90,
+   macro-F1 0.8995** (4 wrong: Marathi waterlogging → Road Damage p 0.31; Hinglish blocked drain → Garbage 0.58; "lamp post
+   … dead" → Other 0.25; "loud speakers" (Other) → Streetlight 0.40) · `text_clf.joblib` sha256 `d7b5ebf2df3a…`.
+4. Detector on the fixtures (CPU, 640): pothole_1 → Pothole 0.51 + 0.43 (+ Road Damage 0.26), garbage_1 → Garbage 0.66 (IoU
+   0.77 vs label), waterlogging_1 → Waterlogging 0.88 (IoU 0.96), road_damage_1 → Road Damage 0.53 (IoU 0.73). pothole_1's
+   Pothole boxes lie inside the one large labelled patch (IoU 0.02; the Road Damage box covers the patch) - the smoke test
+   passes, no fixture replaced, noted in the fixtures README. **CPU time per image: median 81.6 ms (75.4-91.7, 20 runs);**
+   load + warm-up ≈ 3.7 s once per process.
+5. Runs (in `ai-service` unless noted):
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | YOLO install (repo root) | `ai-service\.venv\Scripts\python.exe ai-service\training\install_kaggle_model.py --check` | exit 0, metrics above | PASS |
+   | classifier (repo root) | `ai-service\.venv\Scripts\python.exe ai-service\training\train_text_clf.py` | `SANITY accuracy=0.9 macro_F1=0.8995` · `SAVED … (sha256 d7b5ebf2df3a...)` | PASS |
+   | first IT run | `.\.venv\Scripts\python.exe -m pytest -q tests/it/test_pipeline_it.py` | `1 failed, 4 passed`: psycopg "inconsistent types deduced for parameter" (`:category` used twice) → `CAST(:category AS varchar)` → `5 passed` | FAIL→fixed |
+   | first ruff | `.\.venv\Scripts\python.exe -m ruff check .` | 17 × E501 in new files → wrapped by hand → `All checks passed!` | FAIL→fixed |
+   | lint | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
+   | tests | `.\.venv\Scripts\python.exe -m pytest -q` | `202 passed, 1 warning in 20.01s` (warning = Starlette `httpx` deprecation, existed before) | PASS |
+   | models tests | `.\.venv\Scripts\python.exe -m pytest -q -m models -rA` | `8 passed, 191 deselected` (classifier 1, detector 7; 0 skipped) - run before the last 3 tests were added | PASS |
+   | restart (repo root) | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Only worker,ai-api -Restart` | `PASS worker healthy` · `PASS ai-api healthy` · `PASS stack 'dev' is up` | PASS |
+   | /health (repo root) | `ai-service\.venv\Scripts\python.exe -c "import urllib.request … /health …"` | `{"status":"ok","db":"ok","osrm":"not used (haversine)","modelsLoaded":false,"models":{"yolov8s_civicbrain.onnx":"ok","text_clf.joblib":"ok","all-MiniLM-L6-v2/":"folder missing"}}` | PASS |
+   | worker log | `Get-Content logs\worker.log -Tail 6` | `model files not ready, REQUIRE_MODELS=false so the worker still runs: all-MiniLM-L6-v2/: folder missing` (before P08: all three missing) | PASS |
+6. Tests written (all new except the one approved key): classifier training 7 (recipe, CV grid + tie rule, determinism, sanity
+   guard ≥ 0.80, metrics label, MANIFEST entry) · classify 12 (mismatch rule 5 cases, top-3, checksum before unpickling,
+   missing model, empty text, loaded once, installed model `models`) · detect 13 (xyxy → pixel boxes, primary detection,
+   IMAGE summary, checksum, unreadable image, Ultralytics config dir, 7 `models`) · authenticity 74 (every table row incl.
+   boundaries, clamp, FLAGGED < 40, duplicate hint, worst match, signed int64 pHash = `fn_phash_distance`) · start-up 9
+   (`REQUIRE_MODELS=true` + wrong hash / missing file → worker exit 2 with the file name, API ConfigError; false → warning;
+   `/health` per-model; pipeline imports no model library) · IT 5 on `civicbrain_test` (facts from PostGIS +
+   `fn_similar_images`, writers run twice → same rows, REJECTED kept, near-edge WARN, rate/travel). New: 120 (82 → 202).
+- DECISION: "API already rejects" cases that still reach the worker → FAIL with the row's WARN delta (GPS_ACCURACY −10,
+  GPS_FRESHNESS −10, BOUNDARY outside −5); CAPTURE_SESSION has no delta in the table → FAIL 0. No new numbers.
+- DECISION: missing input → SKIPPED 0 (no accuracy / capture time / boundary row); missing or unreadable photo → both
+  IMAGE_REUSE checks WARN 0 (06 §2 step 1 "authenticity WARN"), CATEGORY_IMAGE_MISMATCH SKIPPED.
+- DECISION: IMAGE_REUSE_PHASH 5-10 bits **nearby & recent** → PASS with duplicate hint (the table only names ≤ 4 bits; same
+  place + same week is the duplicate step's job); the worst of several matches decides. SUBMISSION_RATE > 5 in 24 h stays
+  WARN −10 (the table has no FAIL). IMPOSSIBLE_TRAVEL uses the two GPS fix times when both exist, else submit times; 0 s
+  apart with any distance = WARN. CATEGORY_IMAGE_MISMATCH own class < 0.4 and no other class ≥ 0.5 (or no box) → PASS
+  ("no evidence").
+- DECISION: an officer's `authenticity_status = REJECTED` is never overwritten by a re-analysis (score still updated).
+  Delete-then-insert removes only this analysis' rows (image_id NULL or the citizen photo), so later ANALYZE_IMAGE rows of
+  contractor photos stay.
+- DECISION: IMAGE `ai_classifications` row = best class over all boxes, `top_k` = best confidence per class,
+  `is_accepted` = the CATEGORY_IMAGE_MISMATCH evidence (own class ≥ 0.4 → true, only other classes ≥ 0.5 → false, else NULL);
+  no row when nothing is detected. TEXT row: `top_k` = top-3 `[{category, p}]`, `is_accepted` NULL for a complaint
+  without a category. `model_version` = SHA-256[:12] for both models; names `text_clf_tfidf_lr`, `yolov8s_civicbrain`.
+- DECISION: C chosen by macro-F1 (the reported metric), ties → smallest C. Note: the CV scores are optimistic - the 500
+  synthetic rows have only 24 distinct texts, so identical texts fall into training and validation folds; the sanity
+  set (never trained on, overlap checked) is the honest number.
+- DECISION: `/health` `models` = per required file "ok" (present + SHA-256 = MANIFEST, checked once at API start) or the
+  problem; nothing is loaded into the API process (it runs no inference). docs/04 §10 updated (human yes).
+- FIX (found while verifying): Ultralytics wrote its `settings.json` to **`C:\tmp\Ultralytics\`** (drive root, outside the
+  workspace) because `YOLO_CONFIG_DIR` (`ai-service\.ultralytics`) did not exist yet and it silently falls back to `/tmp`.
+  `detect._ultralytics_env()` now creates the folder before the import; regression test
+  `test_ultralytics_keeps_its_settings_in_yolo_config_dir`; now `USER_CONFIG_DIR = …\ai-service\.ultralytics\Ultralytics`.
+  **Human: please delete the folder `C:\tmp\Ultralytics`** (only a settings file; I may not delete or work outside the repo).
+- Note: `docs/reports/dataset_report.json` (from the Kaggle zip) contains the Kaggle input path with the account name
+  (`/kaggle/input/datasets/<account>/civicbrain-yolo/...`) - not a secret, committed as the installer intends.
+- Open / hand-offs: **P09** MiniLM (`/health` then all "ok"). **P12** wires the three modules into ANALYZE_COMPLAINT
+  (step 1 computes `phash` with `authenticity.phash_int64` and stores it before `load_facts`; YOLO only for categories with a
+  `yolo_class_id`; `write_detections` returns the primary `detection_id` for `defect_measurements`), then
+  `REQUIRE_MODELS=true`. **Phase 2:** YOLO golden test (IoU ≥ 0.5) needs a better pothole fixture; Pothole mAP50 0.35 is
+  the weakest class (more/cleaner pothole labels).
 
 ### 2026-10-03 — P07 — Auth screens + CameraCapture (DONE, human yes 2026-10-03 14:41)
 - Requirement(s): FR-01, FR-02, FR-60 (register + notice + consents), FR-10/FR-11 (in-app camera + GPS); NFR-01; docs/05 §2,

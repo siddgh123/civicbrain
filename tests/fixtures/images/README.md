@@ -1,8 +1,23 @@
 # Test fixtures - images (shared by backend, AI and Playwright tests)
 
 Made by `ai-service/training/make_test_fixtures.py` (P03) from the project dataset `data/yolo` (TEST split, never
-used for training). The dataset files were copied, not changed. Do not edit these files by hand: P08's golden test
-compares the YOLO box with the recorded label line (±10 px).
+used for training). The dataset files were copied, not changed. Do not edit these files by hand: the recorded label
+lines are the reference for a later golden test (docs/08_TEST_PLAN.md: IoU ≥ 0.5, Phase 2).
+
+**P08 (MVP) YOLO smoke test** (`ai-service/tests/unit/test_detect.py`, `@pytest.mark.models`): `pothole_1.jpg` gives at
+least one Pothole box with conf ≥ 0.25, and all four class fixtures run without error. Measured on 2026-10-03 with
+`yolov8s_civicbrain.onnx` (sha256 `93af36422072…`, CPU, imgsz 640, conf 0.25, iou 0.5) - the real model numbers are
+`docs/reports/yolo_metrics.json`, this is only a smoke test:
+
+| Fixture | Boxes found | Best box of the own class vs the recorded box |
+|---|---|---|
+| `pothole_1.jpg` | Pothole 0.51, Pothole 0.43, Road Damage 0.26 | IoU 0.02: both Pothole boxes are small boxes **inside** the one large labelled patch (422, 506)-(715, 699); the Road Damage box covers that patch |
+| `garbage_1.jpg` | Garbage Accumulation 0.66 | IoU 0.77 |
+| `waterlogging_1.jpg` | Waterlogging 0.88 | IoU 0.96 |
+| `road_damage_1.jpg` | Road Damage 0.53 | IoU 0.73 |
+
+No fixture had to be replaced (the model detects its class on every one). For the Phase 2 golden test (IoU ≥ 0.5)
+`pothole_1.jpg` would need a test image with a single, tightly labelled pothole.
 
 | Fixture | Split | Original file | Source | Size (px) | Recorded box (`<name>.txt`, YOLO: class cx cy w h) | Box in px (x1, y1) - (x2, y2) |
 |---|---|---|---|---|---|---|

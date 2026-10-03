@@ -1,0 +1,212 @@
+{
+  "model": "text_clf.joblib",
+  "kind": "text-classifier",
+  "model_sha256": "d7b5ebf2df3a06bfdc706e3b20ad91a70b950cae55996420d36d2e391be18e20",
+  "recipe": {
+    "features": "TF-IDF union: word 1-2-grams + char_wb 2-5-grams, sublinear tf",
+    "classifier": "LogisticRegression(class_weight='balanced', max_iter=2000, random_state=42)",
+    "c_selection": "5-fold stratified CV (shuffle, seed 42, f1_macro) over [1.0, 2.0, 5.0, 10.0]; ties -> smallest C"
+  },
+  "C": 10.0,
+  "cv_mean_by_C": {
+    "1.0": 0.942041,
+    "2.0": 0.944968,
+    "5.0": 0.946634,
+    "10.0": 0.948121
+  },
+  "train": {
+    "rows": 660,
+    "distinct_texts": 184,
+    "files": [
+      {
+        "file": "data/complaints/synthetic_complaints_500.csv",
+        "rows": 500,
+        "sha256": "9f2f011f23436f5e7d43241dfe0668931cf3a8d45019e7541e470037f9d3f575"
+      },
+      {
+        "file": "data/complaints/kit_authored_train.csv",
+        "rows": 160,
+        "sha256": "bb6d6f7ca1bc7f19d2ec925555aa87ec2f6944c24ff20cf8da07bdca7176e602"
+      }
+    ],
+    "note": "synthetic Step 8 complaints (only 24 distinct texts) + kit-written bootstrap sentences - not real citizen reports"
+  },
+  "sanity": {
+    "label": "sanity check on 40 kit-written sentences",
+    "file": "data/complaints/sanity_test_mvp.csv",
+    "sha256": "6d455f494dd024ff980dc20de64992565133f975158582cdf96c1c7f969eba89",
+    "rows": 40,
+    "accuracy": 0.9,
+    "macro_f1": 0.8995,
+    "labels": [
+      "Blocked Drain",
+      "Garbage Accumulation",
+      "Other",
+      "Pothole",
+      "Road Damage",
+      "Streetlight",
+      "Water Leakage",
+      "Waterlogging"
+    ],
+    "confusion_matrix": [
+      [
+        4,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        4,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        4
+      ]
+    ],
+    "per_class": {
+      "Blocked Drain": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 5
+      },
+      "Garbage Accumulation": {
+        "precision": 0.8333,
+        "recall": 1.0,
+        "f1": 0.9091,
+        "support": 5
+      },
+      "Other": {
+        "precision": 0.8,
+        "recall": 0.8,
+        "f1": 0.8,
+        "support": 5
+      },
+      "Pothole": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5
+      },
+      "Road Damage": {
+        "precision": 0.8333,
+        "recall": 1.0,
+        "f1": 0.9091,
+        "support": 5
+      },
+      "Streetlight": {
+        "precision": 0.8,
+        "recall": 0.8,
+        "f1": 0.8,
+        "support": 5
+      },
+      "Water Leakage": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 5
+      },
+      "Waterlogging": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8889,
+        "support": 5
+      }
+    },
+    "errors": [
+      {
+        "text": "pavsat rasta talyasarkha hoto",
+        "true": "Waterlogging",
+        "predicted": "Road Damage",
+        "p": 0.3077
+      },
+      {
+        "text": "naali me kachra phasa hai, paani ruk gaya",
+        "true": "Blocked Drain",
+        "predicted": "Garbage Accumulation",
+        "p": 0.578
+      },
+      {
+        "text": "The lamp post outside our building is dead",
+        "true": "Streetlight",
+        "predicted": "Other",
+        "p": 0.2517
+      },
+      {
+        "text": "loud speakers playing late at night",
+        "true": "Other",
+        "predicted": "Streetlight",
+        "p": 0.4011
+      }
+    ]
+  },
+  "sklearn": "1.9.1",
+  "created_at": "2026-10-03T14:51:58+05:30"
+}

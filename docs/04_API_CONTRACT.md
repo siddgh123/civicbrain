@@ -69,7 +69,7 @@ Notifications: `GET /officer/notifications?complaintId&channel&status&page`.
 `GET /webhooks/meta` (hub.verify_token challenge) · `POST /webhooks/meta` (verify `X-Hub-Signature-256` HMAC with app secret, constant-time) · `POST /webhooks/twilio` (verify `X-Twilio-Signature`). Unknown/invalid signature → 401, logged.
 
 ## 10. AI service (127.0.0.1:8001 only)
-`GET /health` → `{status, db, osrm, modelsLoaded}` — **no auth** (bound to localhost; used by `start-e2e.ps1` and the admin page) · `GET /v1/models` → `{yolo:{file, sha256, classes}, classifier:{version}, embedding:{name}}` and `POST /v1/jobs/{jobId}/requeue` — service JWT (HS256 `AI_SERVICE_JWT_SECRET`, `iss=civicbrain-api`, `aud=civicbrain-ai`, 60 s). The backend's `POST /admin/jobs/{id}/requeue` inserts a new QUEUED job row itself (no call needed); the AI endpoint exists for manual use.
+`GET /health` → `{status, db, osrm, modelsLoaded, models}` (`models` = per required model file, by its `MANIFEST.json` name: `"ok"` = present with the listed SHA-256, else the problem, e.g. `"folder missing"`; checked once at start, P08) — **no auth** (bound to localhost; used by `start-e2e.ps1` and the admin page) · `GET /v1/models` → `{yolo:{file, sha256, classes}, classifier:{version}, embedding:{name}}` and `POST /v1/jobs/{jobId}/requeue` — service JWT (HS256 `AI_SERVICE_JWT_SECRET`, `iss=civicbrain-api`, `aud=civicbrain-ai`, 60 s). The backend's `POST /admin/jobs/{id}/requeue` inserts a new QUEUED job row itself (no call needed); the AI endpoint exists for manual use.
 
 ## 11. Rate limits (Bucket4j, key = IP + account/destination)
 | Endpoint | Limit |

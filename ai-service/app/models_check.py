@@ -15,6 +15,7 @@ import json
 from pathlib import Path, PurePosixPath
 
 from app.config import TEXT_CLF_FILE, YUNET_FILE, Settings
+from app.errors import ConfigError
 
 MANIFEST_NAME = "MANIFEST.json"
 
@@ -38,6 +39,33 @@ def load_manifest(models_dir: Path) -> dict | None:
     return data
 
 
+def expected_sha256(models_dir: Path, name: str) -> str:
+    """The SHA-256 MANIFEST.json lists for a file entry. ConfigError when the manifest or the entry is missing."""
+    try:
+        manifest = load_manifest(models_dir)
+    except (OSError, ValueError) as exc:
+        raise ConfigError(f"{MANIFEST_NAME}: cannot be read ({type(exc).__name__})") from None
+    if manifest is None:
+        raise ConfigError(f"{MANIFEST_NAME}: not found in MODELS_DIR")
+    for entry in manifest["files"]:
+        if isinstance(entry, dict) and entry.get("path") == name:
+            digest = str(entry.get("sha256") or "").lower()
+            if not digest:
+                raise ConfigError(f"{name}: manifest entry has no sha256")
+            return digest
+    raise ConfigError(f"{name}: not listed in {MANIFEST_NAME}")
+
+
+def verify_file(path: Path, expected: str, name: str) -> str:
+    """Hash the file BEFORE any loader touches it (a joblib file is a pickle). Returns the digest."""
+    if not path.is_file():
+        raise ConfigError(f"{name}: file missing")
+    digest = sha256_file(path)
+    if digest != expected.lower():
+        raise ConfigError(f"{name}: SHA-256 differs from {MANIFEST_NAME}")
+    return digest
+
+
 def required_files(settings: Settings) -> list[tuple[str, Path]]:
     """(manifest path, local path) of every model the worker needs. A trailing '/' marks a folder."""
     required = [
@@ -52,6 +80,19 @@ def required_files(settings: Settings) -> list[tuple[str, Path]]:
 
 def check_models(settings: Settings) -> list[str]:
     return check_manifest(settings.models_dir, required_files(settings))
+
+
+def model_status(settings: Settings, problems: list[str]) -> dict[str, str]:
+    """Per required model (manifest name): "ok" (present, SHA-256 matches MANIFEST.json) or its problem - for /health."""
+    general = [p for p in problems if p.startswith(MANIFEST_NAME)]
+    status = {}
+    for name, _ in required_files(settings):
+        own = [p[len(name):].removeprefix(": ") for p in problems if p.startswith(name)]
+        if own:
+            status[name] = "; ".join(own)
+        else:
+            status[name] = f"not verified ({general[0]})" if general else "ok"
+    return status
 
 
 def check_manifest(models_dir: Path, required: list[tuple[str, Path]]) -> list[str]:
