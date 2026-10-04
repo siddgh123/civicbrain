@@ -61,7 +61,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 - **App track:** P0 — Machines, repo, Antigravity (status: covered by the MVP days; re-check its gate)
 - **ML track:** P2 — ML data and models (status: NOT STARTED — MVP used the existing images only)
 - **Known issue (P02):** V4 `fn_claim_jobs` can claim more jobs than `p_limit` (LIMIT … FOR UPDATE SKIP LOCKED re-scanned in a
-  nested-loop semi join). MVP: the worker processes / releases every claimed row. Phase 2: V6 migration with
+  nested-loop semi join). MVP: the worker processes / releases every claimed row. Phase 2: next free migration (V7; V6 = MVP categories) with
   `WITH picked AS MATERIALIZED (SELECT … LIMIT p_limit FOR UPDATE SKIP LOCKED) UPDATE jobs … FROM picked` (Task log P02).
 
 ## Phase gates
@@ -82,6 +82,112 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-04 — Categories: 5 citizen-selectable (V6) — team scope change after P11 (DONE 10:30, started 09:58)
+- **DECISION (team scope, approved by the human 2026-10-04 09:56 incl. the new migration and the test changes - ASK-FIRST items):**
+  citizens may report only 5 categories - Pothole, Road Damage, Waterlogging, Garbage Accumulation, Other. Water Leakage, Blocked Drain and
+  Streetlight stay in the database (synthetic research data, the priority golden dataset, officer views) but are not selectable by citizens
+  (`complaint_categories.citizen_selectable = false`, migration V6). No delete, rename, work-type or YOLO-class change; frozen Step 11/12
+  weights and thresholds untouched; the text classifier stays 8-class. Requirement(s): FR-10, FR-12; docs/01 §1, 04 §3/§5, 05 §4, 03 §1.
+- DECISION: `GET /public/categories` keeps returning every active category with its `citizenSelectable` flag (docs/04 §3 shape carries the
+  flag; officer screens name all 8 on existing complaints and filters); citizens see 5 because the wizard shows only selectable ones; the
+  server enforces it on submit: 400 VALIDATION_FAILED, field `categoryId`, code `INVALID_VALUE` (already built that way in P10 -
+  `ComplaintIntake` filters `active && citizenSelectable`; now covered by a test).
+- DECISION (UI): odd number of tiles → the last one spans the row (5 tiles: "Other"). A refused category (stale list) → step 1 with
+  "This category can no longer be chosen…", the list is refetched, photo and text stay; after choosing, straight to the details step.
+- Note: docs/01 is "FROZEN v1.1 - changes need team + guide approval and a new version number": only the MVP note was added under §1 (the
+  8-category requirement text is unchanged), version not bumped - asked in the report. AGENTS.md §2 still says "tested migrations V1–V5"
+  (agent may not edit it) - flagged to the human.
+
+**Files**: `db/V6__citizen_selectable_categories.sql`, `flyway/…`, `backend/src/main/resources/db/migration/…` (3 copies: db = with
+BEGIN/COMMIT, flyway = + header line, backend = byte-identical to flyway; check: `diff <(grep -vxE 'BEGIN;|COMMIT;' db/…) <(sed '1{/^-- Flyway
+copy:/d}' flyway/…)` → no difference, `cmp flyway/… backend/…` → identical, 0 `${`) · `db/tests/test_V6.sql` (7 tests) · backend tests
+`SchemaIT` (+V6 in the applied list, + `v6HidesExactlyThreeCategoriesFromCitizensAndKeepsTheMapping`), `PublicReferenceIT` (+1),
+`ComplaintIntakeIT` (+1) · frontend `CategoryStep`, `NewComplaintPage`, `en.json`, `NewComplaintWizard.test` (fixture = the real 8 rows in
+their V6 state; +2 tests), `walkthrough/P11_citizen.spec.ts` (5-tile check; screenshot write with retry) · AI `tests/it/test_other_category_it.py`
+(new, 2), `tests/it/test_pipeline_it.py` (one fixture category), `pipeline/detect.py` + `tests/unit/test_detect.py` (bug found in this run,
+below) · docs 01 §1, 03 §1, 04 §3/§5, 05 §4 · `.github/workflows/ci.yml` (job label V1-V6) · this file.
+
+**Runs** (every command run in this session):
+
+| Check | Command | Result | |
+|---|---|---|---|
+| SQL (repo root) | `pwsh -NoProfile -File scripts\dev\db-rebuild-test.ps1 -Force` | `PASS V6__citizen_selectable_categories.sql` · seed PASS · `ROLE 7/7` · `NEGATIVE 6/6` · `V4 11/11` · `V5 11/11` · **`V6 TESTS PASSED: 7 / 7`** · `DB TESTS: ALL PASSED` | PASS |
+| backend (in `backend`, stack stopped) | `.\mvnw.cmd -q verify` | exit 0; surefire `tests=137 failures=0 errors=0 skipped=0`, failsafe **`tests=70 failures=0 errors=0 skipped=0`** (was 67: `SchemaIT` 6, `PublicReferenceIT` 3, `ComplaintIntakeIT` 11, all 0 failures). 1st background attempt never started (my redirect to a not-yet-existing scratchpad folder) - rerun | PASS |
+| AI lint (in `ai-service`) | `.\.venv\Scripts\python.exe -m ruff check .` | `All checks passed!` | PASS |
+| AI new tests | `… -m pytest -q tests/it/test_other_category_it.py -rA` | `2 passed` (incl. the `models` one: real ONNX + classifier + MiniLM) | PASS |
+| AI full, 1st | `… -m pytest -q` | `1 failed, 312 passed`: `test_detect.py::test_unreadable_image_is_a_data_error` → `ModuleNotFoundError: No module named 'pi_heif'` (exposed by test order, see finding) | FAIL→fixed |
+| AI regression test first | `… -m pytest -q tests/unit/test_detect.py -k patched_pil` | before the fix `1 failed` (same ModuleNotFoundError, reproduced in a subprocess) → after the fix `-k unreadable` → `2 passed` | PASS |
+| AI full | `… -m pytest -q` | **`314 passed`** (was 311) · **`PRIORITY GOLDEN: 500 rows checked, 0 mismatches`** · `LOCATION RISK vs research: 500 rows checked, 0 mismatches` · duplicates repro unchanged | PASS |
+| AI models | `… -m pytest -q -m models -p no:cacheprovider` | `13 passed, 301 deselected` (0 skipped; was 12) | PASS |
+| frontend (in `frontend`) | `npm run lint` · `npm run typecheck` · `npm test -- --run` · `npm run build` | exit 0 · exit 0 · `Test Files 18 passed (18)` **`Tests 106 passed (106)`** (was 104) · `✓ built in 812ms` | PASS |
+| dev Flyway (repo root) | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` + `logs\backend.log` | `Current version of schema "public": 5` → `Migrating schema "public" to version "6 - citizen selectable categories"` → `Successfully applied 1 migration … now at version v6`; `PASS stack 'dev' is up` | PASS |
+| dev API | `ai-service\.venv\Scripts\python.exe -c '…urlopen("http://localhost:8080/api/v1/public/categories")…'` | Pothole / Road Damage / Waterlogging / Garbage Accumulation / Other `True`; Water Leakage / Blocked Drain / Streetlight `False` | PASS |
+| E2E Flyway | `start-all.ps1 -Stop` → `seed-e2e.ps1 -MinAccounts 3` | seed runner: `Successfully applied 1 migration … now at version v6` on `civicbrain_e2e`; `E2E RESET DONE: 48 tables emptied, 27 reference tables kept` · `5 accounts created` | PASS |
+| smoke (fresh E2E, final stack) | `start-all.ps1 -E2E` → `…\python.exe tests\smoke\smoke_flow.py --stage intake` · `--stage auth` | **`SMOKE INTAKE PASSED: 29 / 29`** (`category Pothole/Road Damage/Garbage Accumulation/Waterlogging exists`) · **`SMOKE AUTH PASSED: 19 / 19`** (also green on the first V6 E2E stack) | PASS |
+| walkthrough, 1st round | P11 phone + P11 desktop + P07 desktop | **my mistake**: issued together, so they may have overlapped (both P11 projects use ui.citizen); phone failed, desktop P11 `1 passed`, P07 `1 passed` | FAIL |
+| walkthrough, phone alone (fresh seed) | `npx playwright test --config playwright.walkthrough.config.ts walkthrough/P11 --project phone` | 2× `UNKNOWN: unknown error, open '…\docs\screenshots\P11_*.png'` at a screenshot write (a different file each time; a moment later the file opened for writing fine) → a brief lock by another process; spec now takes the screenshot into memory and writes it with up to 10 retries (300 ms) | FAIL→spec fixed |
+| walkthrough final (fresh seed, one run at a time) | P11 `--project phone` → P11 `--project desktop` → P07 `--project desktop` | `1 passed (6.5s)` · `1 passed (5.1s)` · `1 passed (3.6s)`; 5 tiles in display order, no Water Leakage / Blocked Drain / Streetlight button, "Other" wider than 1.8 × a normal tile | PASS |
+| screenshots | opened all 9 `docs/screenshots/P11_*.png` of the final run | `P11_wizard_1_category.png`: 5 tiles (2 + 2 + "Other" across the row), nothing cut off; the other 8 unchanged in layout (CB-000002: smoke created CB-000001 on that stack); git shows 4 PNGs changed (the rest byte-identical) | PASS |
+| log scan (final E2E run) | backend lines since the stack start; secrets over `logs\{backend,frontend,worker,ai-api}.log` | backend **0 ERROR, 0 WARN**; secret hits 0 / 0 / 0 / 0 | PASS |
+| dev stack back | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | `PASS stack 'dev' is up` | PASS |
+
+- **FINDING + FIX (AI, P08 code, not caused by the category change):** importing Ultralytics replaces `PIL.Image.open` with a wrapper that,
+  on a file PIL cannot identify, tries the optional `pi-heif` plugin (`check_requirements("pi-heif")` - auto-install is off, so nothing is
+  downloaded - then `from pi_heif import …`). The plugin is not pinned, so `load_rgb` raised `ModuleNotFoundError` instead of `DataError`
+  once the detector had run in the process - i.e. in the worker a corrupt photo would fail the job with an unexpected error type
+  (docs/12 §7 wants `DataError`). Seen because the new `models` test runs the detector before `tests/unit`. Fix: `load_rgb` also catches
+  `ImportError` → `DataError("image cannot be read (UnidentifiedImageError)")`; regression test runs in a subprocess (failed before the fix).
+- **Impact list** (repo-wide search for the 8 category names, the category ids and `citizen_selectable`/`citizenSelectable`; `data/` = 32 files,
+  code/docs = 114 files with a kept name, 51 files with a hidden name):
+
+  | Place | Changed? | Reason |
+  |---|---|---|
+  | `db/V6…`, `flyway/V6…`, `backend/…/db/migration/V6…` | changed (new) | the scope decision: 3 rows `citizen_selectable = false`, guard + column comment |
+  | `db/tests/test_V6.sql` | changed (new) | 7 tests incl. "a complaint in a hidden category is still stored with its work type" and idempotency |
+  | `db/V1` (8-category seed), `db/V2` (work type + YOLO class + display order), `db/V5` (`needs_depth_answer`) + flyway/backend copies | unchanged | applied migrations are never edited; V6 changes data only |
+  | `db/SCHEMA_REFERENCE_after_V5.sql` | unchanged | V6 changes no schema (data + comment only) |
+  | `db/seed/seed_synthetic_demo_data.sql` (97 hidden-category rows) | unchanged | synthetic research data stays as is and labelled; loads after V6 (`db-rebuild-test` seed PASS) |
+  | `db/tests/test_roles`, `test_V2_workflow`, `test_V4`, `test_V5` | unchanged | their complaints are Pothole (name or id 1); the only `6` near a category is an inspector accuracy |
+  | `db/tools/e2e_reset.sql` | unchanged | `complaint_categories` is in the keep list, so V6 values survive every E2E reset |
+  | `data/**` (complaints, duplicates, resources, optimization, yolo: 32 files) | unchanged | research / golden data (frozen); golden 500 rows 0 mismatches, duplicate repro and location rule unchanged |
+  | `backend` `ComplaintIntake` | unchanged | already refuses non-selectable categories (P10); now tested |
+  | `backend` `PublicReferenceController`, `ReferenceRepository` | unchanged | return every active category with the flag (DECISION above) |
+  | `backend` `CitizenComplaints` (list/detail) | unchanged | a citizen's existing complaints of any category are still shown |
+  | `backend` tests `SchemaIT` | changed | applied-migrations list +V6 (a passed test, approved) + new 8-row V6 check |
+  | `backend` tests `PublicReferenceIT`, `ComplaintIntakeIT` | changed (+1 test each) | flag per category; 3 hidden → 400 `categoryId`, nothing stored; "Other" → 201 |
+  | `backend` tests `CitizenComplaintsIT`, `OutboxDispatcherIT`, existing `ComplaintIntakeIT` methods, `WorkflowActorIT`, `SchemaIT` insert, `TemplateRendererTest` | unchanged | submit/insert only Pothole, Road Damage, Garbage Accumulation (id 1 in the direct inserts) |
+  | `tests/smoke/smoke_flow.py` | unchanged | submits Pothole / Road Damage; checks 4 selectable categories exist; 29 / 29 |
+  | `frontend` `CategoryStep`, `NewComplaintPage`, `en.json` | changed | 5 tiles, "Other" spans the row; refused-category path |
+  | `frontend` `NewComplaintWizard.test` | changed | fixture is now the real 8 rows in their V6 state (was 3 + an invented "Internal only"); its "not a tile" check moved into the new 5-tile test; +2 tests (intended scope change, not a weakened test) |
+  | `frontend` `CategoryIcon.tsx` (icons for all 8), `ComplaintCard`, `CitizenComplaints.test`, `api.test`, `DetailsStep`/`detailsForm` | unchanged | existing complaints of hidden categories still show their icon; depth labels go by `needsDepthAnswer` / Waterlogging |
+  | `frontend/walkthrough/P11_citizen.spec.ts` | changed | 5-tile + "Other" width check; screenshot write retry; re-shot `P11_wizard_1_category.png` |
+  | `frontend/walkthrough/P07_auth.spec.ts` | unchanged (in this task) | picks Pothole |
+  | `ai-service/pipeline/{classify,authenticity,priority,duplicates}.py`, `app/config.py` | unchanged | category-agnostic; "Other" = no YOLO class → `CATEGORY_IMAGE_MISMATCH` PASS "category has no YOLO class"; no depth answer → severity MEDIUM 50 (existing documented ASSUMPTION "no answer or other categories MEDIUM"); Step 12 candidates have no category rule; frozen weights asserted equal |
+  | `ai-service/pipeline/detect.py` | changed | the pi-heif finding above (not category-related) |
+  | `ai-service/models/MANIFEST.json`, `text_clf.joblib`, `docs/reports/text_clf_metrics.json` | unchanged | the classifier stays 8-class (the `models` test asserts its 8 labels); sanity 0.90 stays valid |
+  | `ai-service/tests/unit/test_text_clf.py` (8 classes), `test_classify.py` (Streetlight label) | unchanged | classifier training labels, not a citizen submission |
+  | `ai-service/tests/it/test_pipeline_it.py` | changed | its fixture complaint "like the intake API stores it" used Streetlight → Garbage Accumulation (the API can no longer store Streetlight); assertion meaning unchanged |
+  | `ai-service/tests/it/test_other_category_it.py` | changed (new) | "Other" through classify, detect, authenticity, priority, duplicates (CI version + `models` version); category stays Other/REVIEW_REQUIRED |
+  | `ai-service/tests/it/test_priority_it.py`, `test_duplicates_it.py`, unit `test_priority`, `test_detect`, `test_config`, `test_models_check`, `test_duplicates_repro` | unchanged | Pothole / Garbage fixtures or YOLO class names only |
+  | `scripts/**` research (yolo, optimization, resources, complaints validation) | unchanged | research pipeline on the frozen data |
+  | `scripts/dev/*`, `scripts/ci/*` | unchanged | find `flyway/V*__*.sql` and `db/tests/test_*.sql` by pattern (V6 + test_V6 picked up automatically) |
+  | `.github/workflows/ci.yml` | changed | job label "V1-V6" only |
+  | `docs/01` §1, `docs/03` §1, `docs/04` §3/§5, `docs/05` §4 | changed | MVP note, V6 row, endpoint + submit validation, 5 tiles |
+  | `docs/06` (estimate defaults for Water leakage / Blocked drain / Streetlight; classifier over 8) | unchanged | still true for existing / synthetic complaints; P12 note below |
+  | `docs/00`, `02`, `08`, `09`, `09_7DAY`, `13` ("V1–V5"), `docs/11` (8 categories for future text data), `docs/INVENTORY.md` | unchanged | kit build-time descriptions / Phase 2 data plans; scripts and CI pick up V6 automatically |
+  | `AGENTS.md` ("tested migrations V1–V5"), `.agents/rules/02-frozen-rules.md` (work types) | unchanged | agent may not edit them (flagged); work types and mapping unchanged - ELECTRICITY simply has no citizen-selectable category now |
+  | `prompts/**`, `START_HERE.md` | unchanged | kit instructions / YOLO class names; notes for later prompts below |
+- **Notes for later prompts:**
+  - **P12:** no estimate for "Other" (REVIEW_REQUIRED → officer review; write no estimate lines, say "officer review" - not a guessed number).
+    The TEXT mismatch check treats a suggestion of a hidden category (Water Leakage, Blocked Drain, Streetlight) as a hint only: it never
+    changes the citizen's category, and the officer cannot reclassify into a hidden category. Existing / synthetic complaints of hidden
+    categories keep the docs/06 §2.5 estimate defaults.
+  - **P14/P15:** if officer reclassify of "Other" is built (P00: Phase 2 unless the human adds it), it offers only Pothole, Road Damage,
+    Waterlogging, Garbage Accumulation. Officers still see every category on existing complaints and in the category filter
+    (`GET /public/categories` returns all 8 with `citizenSelectable`).
+- Note: two shell slips without effect: a Bash `cd` left the working directory in `ai-service` (one `db-rebuild-test` call failed to find
+  the script, rerun from the repo root), and one PowerShell call chained `Set-Location; npm run lint`.
 
 ### 2026-10-04 — P11 — Citizen screens: report wizard, my complaints, detail (DONE, human yes 2026-10-04 09:56; verified 09:33)
 - Requirement(s): FR-10 (wizard + in-app camera), FR-12 (depth answer + A4 flag), FR-13 (own list/detail/timeline), FR-15 (contractor

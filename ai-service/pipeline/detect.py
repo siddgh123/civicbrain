@@ -84,8 +84,11 @@ def load_rgb(image: Path | Image.Image) -> Image.Image:
                 return ImageOps.exif_transpose(img).convert("RGB")
         image.load()
         return ImageOps.exif_transpose(image).convert("RGB")
-    except (UnidentifiedImageError, OSError, ValueError) as exc:
-        raise DataError(f"image cannot be read ({type(exc).__name__})") from None
+    except (UnidentifiedImageError, OSError, ValueError, ImportError) as exc:
+        # ImportError: once Ultralytics is imported it wraps PIL.Image.open and tries the optional pi-heif plugin for a
+        # file PIL cannot identify; the plugin is not pinned and auto-install is off - the photo is unreadable either way
+        reason = "UnidentifiedImageError" if isinstance(exc, ImportError) else type(exc).__name__
+        raise DataError(f"image cannot be read ({reason})") from None
 
 
 def to_detections(xyxy: np.ndarray, conf: np.ndarray, cls: np.ndarray, width: int, height: int) -> list[Detection]:

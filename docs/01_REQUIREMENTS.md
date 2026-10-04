@@ -8,6 +8,7 @@ This is the single source of truth for WHAT CivicBrain does. Every feature, test
 - **Client:** Talegaon Dabhade Municipal Council (TDMC), Maval taluka, Pune district, Maharashtra.
 - **Area:** municipal boundary 25.26 km², divided into **23 wards** (CivicBrain analytical GIS units, cleaned file `gis/tdmc_wards_clean_v2.geojson`; UI label "Ward 1" … "Ward 23"). These are not the 2025 electoral wards (14 wards / 28 seats); the About page says so in one line.
 - **Complaint categories (8):** Pothole, Road Damage, Garbage Accumulation, Waterlogging, Water Leakage, Blocked Drain, Streetlight, Other.
+  - *7-day MVP note (2026-10-04, team scope decision in `docs/PROGRESS.md`, migration V6): all 8 stay in the data model (existing, synthetic and research data; officers see every category), but citizens can report only **5**: Pothole, Road Damage, Garbage Accumulation, Waterlogging and Other (`complaint_categories.citizen_selectable`). Water Leakage, Blocked Drain and Streetlight are not selectable by citizens; "Other" goes to officer review (REVIEW_REQUIRED).*
 - **Work types (4 + review):** ROAD (Pothole, Road Damage), WATER (Waterlogging, Water Leakage, Blocked Drain), GARBAGE (Garbage Accumulation), ELECTRICITY (Streetlight), REVIEW_REQUIRED (Other → officer must reclassify).
 - **YOLO classes (4, frozen):** 0 Pothole, 1 Garbage Accumulation, 2 Waterlogging, 3 Road Damage. Categories without a YOLO class keep the photo as evidence only.
 

@@ -37,6 +37,24 @@ class PublicReferenceIT extends AuthItSupport {
         assertThat(byName(list, "Road Damage").path("needsDepthAnswer").asBoolean()).isFalse();
     }
 
+    /**
+     * V6 + docs/04 §3: the list keeps every active category with its {@code citizenSelectable} flag (officer screens
+     * show existing complaints of all 8); the citizen wizard offers only the 5 selectable ones.
+     */
+    @Test
+    void categoriesSayWhichFiveCitizensMayChoose() throws Exception {
+        JsonNode list = body(mvc.perform(get("/api/v1/public/categories")).andReturn());
+        List<String> selectable = new ArrayList<>();
+        List<String> hidden = new ArrayList<>();
+        for (JsonNode c : list) {
+            (c.path("citizenSelectable").asBoolean() ? selectable : hidden).add(c.path("name").asString());
+        }
+        assertThat(selectable).containsExactlyInAnyOrder("Pothole", "Road Damage", "Waterlogging", "Garbage Accumulation", "Other");
+        assertThat(hidden).containsExactlyInAnyOrder("Water Leakage", "Blocked Drain", "Streetlight");
+        assertThat(byName(list, "Other").path("workTypeCode").asString()).isEqualTo("REVIEW_REQUIRED");
+        assertThat(byName(list, "Other").path("needsDepthAnswer").asBoolean()).isFalse();
+    }
+
     @Test
     void wardsAreAGeoJsonFeatureCollectionOfThe23WardNumbers() throws Exception {
         MvcResult r = mvc.perform(get("/api/v1/public/wards")).andReturn();

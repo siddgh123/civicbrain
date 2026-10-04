@@ -1,6 +1,6 @@
 # 03 — Database
 
-PostgreSQL 18 + PostGIS 3.6, database `civicbrain`, schema `public`, SRID 4326 everywhere. The full schema after all migrations is in `db/SCHEMA_REFERENCE_after_V5.sql` (74 application tables + PostGIS `spatial_ref_sys`; 6 application views + 2 PostGIS views) — read it before writing any entity or query.
+PostgreSQL 18 + PostGIS 3.6, database `civicbrain`, schema `public`, SRID 4326 everywhere. The full schema after all migrations is in `db/SCHEMA_REFERENCE_after_V5.sql` (V6 changes data only) (74 application tables + PostGIS `spatial_ref_sys`; 6 application views + 2 PostGIS views) — read it before writing any entity or query.
 
 ## 1. Migrations (all tested on 2026-09-30)
 | File | What | Tested |
@@ -10,14 +10,15 @@ PostgreSQL 18 + PostGIS 3.6, database `civicbrain`, schema `public`, SRID 4326 e
 | `V3__wards_topology_clean.sql` | Replaces ward geometry with the clean tiling (0 overlap, 0 gap); archives old geometry; re-derives complaint/POI/road ward_id and logs changes | 13 complaints, 22 POIs, 65 roads reassigned; idempotent; works without V2 |
 | `V4__security_privacy_jobs.sql` | TOTP + token revocation, privacy notices, consents, data requests, public photo approval, public map view, job queue + enqueue triggers, retention purge | 11/11 tests |
 | `V5__capture_answers_plan_release.sql` | Citizen `depth_answer` + `a4_in_frame` on complaints, `needs_depth_answer` on categories (Pothole, Waterlogging), `complaint_images.quality_score`; trigger `trg_complaints_status_release` frees a complaint from its plan on REOPENED and on SCHEDULED/ASSIGNED/INSPECTED → VERIFIED (plan item → REMOVED, except in a plan that already COMPLETED); auth_events TOTP_* / LOGOUT_ALL; `audit_logs.entity_key` | 11/11 tests (re-plan after reopen/pull-back proven); idempotent |
+| `V6__citizen_selectable_categories.sql` | 7-day MVP scope (2026-10-04, `docs/PROGRESS.md`): `complaint_categories.citizen_selectable = false` for Water Leakage, Blocked Drain, Streetlight (data only: no delete, rename, work-type or YOLO-class change; guard raises if the 3 rows are missing); column comment | 7/7 tests (`db/tests/test_V6.sql`, 2026-10-04); idempotent; `SchemaIT` checks all 8 rows |
 | `R__civicbrain_grants.sql` (repeatable) | Least-privilege GRANT/REVOKE for `civicbrain_app` and `civicbrain_ai`; skipped with a NOTICE if the roles do not exist (Testcontainers). Flyway re-applies it whenever it changes | roles 7/7; idempotent (applied twice in CI) |
 
 - `db/` versions have `BEGIN/COMMIT` (for pgAdmin/psql). `flyway/` versions are identical without the outer transaction (Flyway wraps each migration) → copy them to `backend/src/main/resources/db/migration/`. `scripts/ci/check-migrations.sh` (CI) fails if the three copies drift.
 - **Roles first:** `db/tools/create_roles_template.sql` creates the two login roles once per PostgreSQL server (passwords = `DB_PASSWORD` / `DB_AI_PASSWORD` from `.env`; `scripts/dev/db-rebuild-test.ps1` does it for you). Then any migrate applies `R__civicbrain_grants.sql` automatically.
-- **Main dev database `civicbrain`, restored from civicbrain_backup:** let **Flyway** apply V2–V5 + R__ on the first backend start (`baseline-on-migrate: true`, `baseline-version: 1` → V1 is skipped). Do **not** also run V2–V5 by hand in pgAdmin on this database. If someone already did, set `spring.flyway.baseline-version` to the highest version they ran (e.g. 5) for the first start only (then those are not re-applied), and remove it after the history table exists.
-- **Empty database (new laptop without the backup, `civicbrain_e2e`, Testcontainers):** Flyway runs V1–V5 + R__; optional demo data: `db/seed/seed_synthetic_demo_data.sql` (as superuser).
+- **Main dev database `civicbrain`, restored from civicbrain_backup:** let **Flyway** apply V2–V6 + R__ on the first backend start (`baseline-on-migrate: true`, `baseline-version: 1` → V1 is skipped). Do **not** also run V2–V5 by hand in pgAdmin on this database. If someone already did, set `spring.flyway.baseline-version` to the highest version they ran (e.g. 5) for the first start only (then those are not re-applied), and remove it after the history table exists.
+- **Empty database (new laptop without the backup, `civicbrain_e2e`, Testcontainers):** Flyway runs V1–V6 + R__; optional demo data: `db/seed/seed_synthetic_demo_data.sql` (as superuser).
 - **`civicbrain_test`** is built by `scripts/dev/db-rebuild-test.ps1` with psql from the same `flyway/` files (identical to what CI does) + seed. It has no Flyway history table, so **the backend never connects to it**; it serves the SQL tests and the AI integration tests.
-- Never edit an applied migration. New change = next free number, e.g. `V6__<name>.sql` (+ test SQL in `db/tests/`). Flyway placeholders are disabled (`spring.flyway.placeholder-replacement=false`).
+- Never edit an applied migration. New change = next free number, e.g. `V7__<name>.sql` (+ test SQL in `db/tests/`). Flyway placeholders are disabled (`spring.flyway.placeholder-replacement=false`).
 
 ## 2. Tables by module (main ones)
 - **Reference/GIS:** `wards` (23; join by `ward_id`; `ward_number` 1–23 is what users see), `municipal_boundary`, `roads`, `pois`, `complaint_categories` (+`work_type_code`, `yolo_class_id`), `work_types`, `depots` (D001 prototype), `equipment_catalog`, `material_catalog`.

@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -220,6 +221,22 @@ class ComplaintIntakeIT extends ComplaintItSupport {
         expect(submitRaw(c, "{not json".getBytes(StandardCharsets.UTF_8), jpeg(800, 600, 15), uniqueIp()), 400, "MALFORMED_REQUEST");
         assertField(submitRaw(c, null, jpeg(800, 600, 16), uniqueIp()), "data");
         assertThat(countComplaints(c)).isZero();
+    }
+
+    /** V6 MVP scope: citizens report only 5 categories; the 3 others stay in the data model but are refused here. */
+    @Test
+    void aCategoryCitizensCannotChooseIsRefusedAndOtherIsAccepted() throws Exception {
+        Citizen c = citizen();
+        int seed = 30;
+        for (String hidden : List.of("Water Leakage", "Blocked Drain", "Streetlight")) {
+            assertField(submit(c, data(hidden, captureSession(c)), jpeg(800, 600, seed++)), "categoryId");
+        }
+        assertThat(countComplaints(c)).isZero();
+
+        JsonNode other = submitOk(c, "Other");
+        assertThat(other.path("status").asString()).isEqualTo("SUBMITTED");
+        assertThat(jdbc.sql("SELECT category_id FROM complaints WHERE complaint_id = :id").param("id", other.path("complaintId").asLong())
+                .query(Long.class).single()).isEqualTo(categoryId("Other"));
     }
 
     @Test

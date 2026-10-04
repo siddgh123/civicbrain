@@ -25,7 +25,7 @@ concurrency:
 jobs:
   # ---------------------------------------------------------------------------
   db:
-    name: Database (V1-V5 + R__ grants + SQL tests)
+    name: Database (V1-V6 + R__ grants + SQL tests)
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     services:

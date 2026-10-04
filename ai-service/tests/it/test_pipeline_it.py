@@ -186,7 +186,9 @@ def test_text_classification_row_is_written_once_per_model_version(it_data, ai_e
     texts = ["deep pothole on road", "pothole near school", "garbage heap", "garbage not collected", "street light off", "dark light"]
     labels = ["Pothole", "Pothole", "Garbage Accumulation", "Garbage Accumulation", "Streetlight", "Streetlight"]
     clf = TextClassifier(build_pipeline(5.0).fit(texts, labels), "e" * 64)
-    cid = _complaint(it_data, _user(it_data), category="Streetlight", session=False)
+    # V6: citizens can no longer choose Streetlight, so the stored complaint uses a selectable category (the classifier
+    # itself stays 8-class: Streetlight remains one of its labels)
+    cid = _complaint(it_data, _user(it_data), category="Garbage Accumulation", session=False)
     for _ in range(2):
         with session_scope(ai_engine) as s:
             result = classify_complaint(s, cid, clf)
@@ -202,7 +204,7 @@ def test_text_classification_row_is_written_once_per_model_version(it_data, ai_e
     assert (row["predicted_category"], row["category_name"], row["model_name"], row["model_version"]) == (
         "Pothole", "Pothole", "text_clf_tfidf_lr", "e" * 12)
     assert row["conf"] == result.confidence and [t["category"] for t in row["top_k"]] == [c for c, _ in result.top]
-    assert row["is_accepted"] is (result.confidence < 0.70)  # citizen said Streetlight: a confident Pothole is a mismatch
+    assert row["is_accepted"] is (result.confidence < 0.70)  # citizen said Garbage: a confident Pothole is a mismatch
 
 
 def test_yolo_boxes_and_image_row_are_rewritten_not_added(it_data, ai_engine):

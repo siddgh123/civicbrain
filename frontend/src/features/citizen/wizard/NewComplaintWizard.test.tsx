@@ -19,11 +19,16 @@ import { server } from '../../../test/server';
 // docs/05 §4 steps 1-5, docs/04 §5, docs/12 §2 intake codes + §6 "never lose form input"; 09_7DAY §4 wizard test.
 // The real CameraCapture runs through its file fallback (jsdom has no camera, like the headless browser).
 
+// GET /public/categories after V6 (display order): all 8 with the flag, 5 selectable by citizens.
 const CATEGORIES = [
   { id: 1, name: 'Pothole', workTypeCode: 'ROAD', citizenSelectable: true, needsDepthAnswer: true },
-  { id: 3, name: 'Garbage Accumulation', workTypeCode: 'GARBAGE', citizenSelectable: true, needsDepthAnswer: false },
+  { id: 2, name: 'Road Damage', workTypeCode: 'ROAD', citizenSelectable: true, needsDepthAnswer: false },
   { id: 4, name: 'Waterlogging', workTypeCode: 'WATER', citizenSelectable: true, needsDepthAnswer: true },
-  { id: 9, name: 'Internal only', workTypeCode: 'ROAD', citizenSelectable: false, needsDepthAnswer: false },
+  { id: 5, name: 'Water Leakage', workTypeCode: 'WATER', citizenSelectable: false, needsDepthAnswer: false },
+  { id: 6, name: 'Blocked Drain', workTypeCode: 'WATER', citizenSelectable: false, needsDepthAnswer: false },
+  { id: 3, name: 'Garbage Accumulation', workTypeCode: 'GARBAGE', citizenSelectable: true, needsDepthAnswer: false },
+  { id: 7, name: 'Streetlight', workTypeCode: 'ELECTRICITY', citizenSelectable: false, needsDepthAnswer: false },
+  { id: 8, name: 'Other', workTypeCode: 'REVIEW_REQUIRED', citizenSelectable: true, needsDepthAnswer: false },
 ];
 
 interface Calls {
@@ -84,13 +89,50 @@ afterEach(() => {
 });
 
 describe('New complaint wizard', () => {
+  it('offers only the 5 citizen-selectable categories (V6), "Other" on a row of its own', async () => {
+    mockIntake(created);
+    openWizard();
+
+    const tiles = await screen.findAllByTestId(/^category-tile-/);
+    expect(tiles.map((t) => t.textContent)).toEqual(['Pothole', 'Road Damage', 'Waterlogging', 'Garbage Accumulation', 'Other']);
+    for (const hidden of ['Water Leakage', 'Blocked Drain', 'Streetlight']) {
+      expect(screen.queryByRole('button', { name: hidden })).not.toBeInTheDocument();
+    }
+    expect(screen.getByRole('button', { name: 'Other' }).closest('li')).toHaveClass('col-span-2');
+    expect(screen.getByRole('button', { name: 'Pothole' }).closest('li')).not.toHaveClass('col-span-2');
+  });
+
+  it('a category the server refuses goes back to step 1 with a notice; photo and text are kept', async () => {
+    installGeolocation({ fix: TDMC_FIX });
+    const calls = mockIntake(() =>
+      problem(400, 'VALIDATION_FAILED', {
+        fieldErrors: [{ field: 'categoryId', code: 'INVALID_VALUE', message: 'is not a category you can choose' }],
+      }),
+    );
+    const { user } = openWizard();
+
+    await chooseCategory(user, 'Road Damage');
+    await capturePhoto(user);
+    await fillDetails(user, 'Broken road edge');
+    await user.click(screen.getByRole('button', { name: 'Next' }));
+    await user.click(await screen.findByRole('button', { name: 'Send report' }));
+
+    expect(await screen.findByText(/This category can no longer be chosen/)).toBeInTheDocument();
+    expect(screen.getByText('Step 1 of 4: Category')).toBeInTheDocument();
+    await chooseCategory(user, 'Pothole');
+    // the photo is still there: straight to the details, now with the Pothole depth question
+    expect(await screen.findByText('Step 3 of 4: Details')).toBeInTheDocument();
+    expect(screen.getByLabelText('Short title')).toHaveValue('Broken road edge');
+    expect(screen.getByRole('radiogroup', { name: 'How deep is the pothole?' })).toBeInTheDocument();
+    expect(calls.submits).toBe(1);
+  });
+
   it('blocks submit without photo or GPS: no way past step 2 and nothing is sent', async () => {
     installGeolocation({ deniedCode: 1 });
     const calls = mockIntake(created);
     const { user } = openWizard();
 
     expect(await screen.findByText('Step 1 of 4: Category')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Internal only' })).not.toBeInTheDocument();
     await chooseCategory(user, 'Pothole');
     expect(await screen.findByText('Step 2 of 4: Photo and location')).toBeInTheDocument();
     // no photo yet: neither Next nor Send exist

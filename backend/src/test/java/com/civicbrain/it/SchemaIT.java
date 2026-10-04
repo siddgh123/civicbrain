@@ -35,7 +35,7 @@ class SchemaIT {
     TransactionTemplate tx;
 
     @Test
-    void flywayAppliedV1ToV5AndTheGrantsMigration() {
+    void flywayAppliedV1ToV6AndTheGrantsMigration() {
         List<String> applied = jdbc.sql("""
                 SELECT coalesce(version, 'R') || ':' || script
                   FROM flyway_schema_history WHERE success ORDER BY installed_rank""")
@@ -46,9 +46,29 @@ class SchemaIT {
                 "3:V3__wards_topology_clean.sql",
                 "4:V4__security_privacy_jobs.sql",
                 "5:V5__capture_answers_plan_release.sql",
+                "6:V6__citizen_selectable_categories.sql",
                 "R:R__civicbrain_grants.sql");
         assertThat(jdbc.sql("SELECT count(*) FROM flyway_schema_history WHERE NOT success").query(Long.class).single())
                 .isZero();
+    }
+
+    /** V6 (MVP scope 2026-10-04): 8 categories stay, 3 are hidden from citizens, mapping unchanged. */
+    @Test
+    void v6HidesExactlyThreeCategoriesFromCitizensAndKeepsTheMapping() {
+        List<String> rows = jdbc.sql("""
+                SELECT category_name || ':' || coalesce(work_type_code, '-') || ':' || coalesce(yolo_class_id::text, '-') || ':'
+                       || citizen_selectable || ':' || is_active
+                  FROM complaint_categories ORDER BY display_order""")
+                .query(String.class).list();
+        assertThat(rows).containsExactly(
+                "Pothole:ROAD:0:true:true",
+                "Road Damage:ROAD:3:true:true",
+                "Waterlogging:WATER:2:true:true",
+                "Water Leakage:WATER:-:false:true",
+                "Blocked Drain:WATER:-:false:true",
+                "Garbage Accumulation:GARBAGE:1:true:true",
+                "Streetlight:ELECTRICITY:-:false:true",
+                "Other:REVIEW_REQUIRED:-:true:true");
     }
 
     @Test

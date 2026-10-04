@@ -3,15 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { CATEGORIES_QUERY_KEY, publicApi, type Category } from '../../../api/publicApi';
 import { EmptyState } from '../../../components/EmptyState';
 import { ErrorState } from '../../../components/ErrorState';
+import { FormAlert } from '../../../components/form/fields';
 import { CategoryIcon } from './CategoryIcon';
 
 interface CategoryStepProps {
   selectedId: number | null;
   onSelect: (category: Category) => void;
+  /** Why the citizen is back here (the server refused the category). */
+  notice?: string | null;
 }
 
-/** Step 1: large tiles for the citizen-selectable categories (docs/05_UI_SPEC.md §4 step 1). */
-export function CategoryStep({ selectedId, onSelect }: CategoryStepProps) {
+/**
+ * Step 1: large tiles for the citizen-selectable categories only (docs/05_UI_SPEC.md §4 step 1; V6 MVP scope: 5 of
+ * the 8). With an odd number of tiles the last one ("Other") spans the whole row.
+ */
+export function CategoryStep({ selectedId, onSelect, notice = null }: CategoryStepProps) {
   const { t } = useTranslation();
   const categories = useQuery({ queryKey: CATEGORIES_QUERY_KEY, queryFn: ({ signal }) => publicApi.categories(signal) });
 
@@ -30,12 +36,14 @@ export function CategoryStep({ selectedId, onSelect }: CategoryStepProps) {
   if (selectable.length === 0) return <EmptyState message={t('wizard.categoriesEmpty')} />;
   return (
     <div className="flex flex-col gap-3">
+      {notice !== null && <FormAlert>{notice}</FormAlert>}
       <p className="text-slate-700">{t('wizard.categoryIntro')}</p>
       <ul className="grid grid-cols-2 gap-3">
-        {selectable.map((category) => {
+        {selectable.map((category, index) => {
           const selected = category.id === selectedId;
+          const fullRow = selectable.length % 2 === 1 && index === selectable.length - 1;
           return (
-            <li key={category.id}>
+            <li key={category.id} className={fullRow ? 'col-span-2' : undefined}>
               <button
                 type="button"
                 onClick={() => onSelect(category)}

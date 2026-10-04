@@ -9,7 +9,7 @@ import {
   type ComplaintSubmission,
   type SubmitResponse,
 } from '../../api/citizenComplaints';
-import type { Category } from '../../api/publicApi';
+import { CATEGORIES_QUERY_KEY, type Category } from '../../api/publicApi';
 import type { CaptureResult } from '../../components/camera/capture';
 import { applyServerFieldErrors } from '../../components/form/validation';
 import { ApiError } from '../../lib/api';
@@ -65,6 +65,7 @@ export function NewComplaintPage() {
   const [capture, setCapture] = useState<WizardCapture | null>(null);
   const [details, setDetails] = useState<DetailsValues | null>(null);
   const [photoNotice, setPhotoNotice] = useState<string | null>(null);
+  const [categoryNotice, setCategoryNotice] = useState<string | null>(null);
   const [cameraKey, setCameraKey] = useState(0);
   const [reviewError, setReviewError] = useState<unknown>(null);
   const [result, setResult] = useState<SubmitResponse | null>(null);
@@ -120,6 +121,9 @@ export function NewComplaintPage() {
           setStep('details');
           break;
         case 'category':
+          // the category is no longer selectable (V6) or unknown: choose again from a fresh list; the photo and text stay
+          setCategoryNotice(t('wizard.categoryNotAllowed'));
+          void queryClient.invalidateQueries({ queryKey: CATEGORIES_QUERY_KEY });
           setStep('category');
           break;
         case 'review':
@@ -133,7 +137,9 @@ export function NewComplaintPage() {
     if (category?.id !== chosen.id) form.setValue('depthAnswer', '');
     form.setValue('needsDepth', chosen.needsDepthAnswer);
     setCategory(chosen);
-    setStep('photo');
+    setCategoryNotice(null);
+    // back from a refused category with a photo already taken: straight on to the details
+    setStep(categoryNotice !== null && capture !== null ? 'details' : 'photo');
   };
 
   const onCapture = (captured: CaptureResult) => {
@@ -181,7 +187,9 @@ export function NewComplaintPage() {
         )}
       </div>
 
-      {step === 'category' && <CategoryStep selectedId={category?.id ?? null} onSelect={onCategory} />}
+      {step === 'category' && (
+        <CategoryStep selectedId={category?.id ?? null} onSelect={onCategory} notice={categoryNotice} />
+      )}
       {step === 'photo' && category !== null && (
         <PhotoStep
           category={category}

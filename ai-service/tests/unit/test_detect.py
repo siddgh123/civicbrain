@@ -88,6 +88,28 @@ def test_unreadable_image_is_a_data_error():
         load_rgb(FIXTURES / "not_an_image.jpg")
 
 
+def test_unreadable_image_is_still_a_data_error_after_ultralytics_patched_pil():
+    """Regression (found in the V6 run): importing Ultralytics replaces PIL.Image.open with a wrapper that tries the
+    optional pi-heif plugin when a file cannot be identified; the plugin is not pinned and auto-install is off, so the
+    wrapper raised ModuleNotFoundError - in the worker (detector loaded) a corrupt photo was not a DataError."""
+    code = (
+        "from pathlib import Path\n"
+        "from pipeline import detect\n"
+        "from app.errors import DataError\n"
+        "detect._ultralytics_env()\n"
+        "import ultralytics.utils.patches  # applies the PIL patch, as loading the detector does\n"
+        f"path = Path(r'{FIXTURES / 'not_an_image.jpg'}')\n"
+        "try:\n"
+        "    detect.load_rgb(path)\n"
+        "except DataError as exc:\n"
+        "    print('DATAERROR', exc)\n"
+    )
+    env = {k: v for k, v in os.environ.items() if k != "DB_AI_PASSWORD"}
+    result = subprocess.run([sys.executable, "-c", code], cwd=AI_DIR, env=env, capture_output=True, text=True, timeout=180)
+    assert result.returncode == 0, result.stderr[-2000:]
+    assert "DATAERROR image cannot be read" in result.stdout
+
+
 # ------------------------------------------------------------------ models (the installed ONNX file)
 @pytest.fixture(scope="module")
 def detector():

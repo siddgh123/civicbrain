@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { expect, test, type BrowserContext, type Page } from '@playwright/test';
 
@@ -62,6 +62,22 @@ function uiCitizen(): { email: string; password: string } {
   throw new Error('tests/e2e-ui-accounts.local.json has no citizen account (run seed-e2e.ps1)');
 }
 
+/**
+ * On the build laptop a just-written PNG in docs/screenshots is sometimes locked for a moment by another process
+ * (Playwright's own write then fails with "UNKNOWN: unknown error, open …"), so the bytes are written with retries.
+ */
+async function writeWithRetry(path: string, data: Buffer) {
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      writeFileSync(path, data);
+      return;
+    } catch (error) {
+      if (attempt >= 10) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 300));
+    }
+  }
+}
+
 async function expectNoHorizontalScroll(page: Page) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(overflow).toBeLessThanOrEqual(0);
@@ -72,6 +88,14 @@ async function wizardToReview(page: Page, title: string, shot: (name: string) =>
   await page.goto('/citizen/new');
   await expect(page.getByTestId('wizard-step')).toHaveText('Step 1 of 4: Category');
   await expect(page.getByRole('button', { name: 'Pothole' })).toBeVisible();
+  // V6 MVP scope: 5 citizen-selectable categories, "Other" alone on the last row
+  await expect(page.getByTestId(/^category-tile-/)).toHaveText(['Pothole', 'Road Damage', 'Waterlogging', 'Garbage Accumulation', 'Other']);
+  for (const hidden of ['Water Leakage', 'Blocked Drain', 'Streetlight']) {
+    await expect(page.getByRole('button', { name: hidden })).toHaveCount(0);
+  }
+  const otherBox = await page.getByRole('button', { name: 'Other' }).boundingBox();
+  const potholeBox = await page.getByRole('button', { name: 'Pothole' }).boundingBox();
+  expect(otherBox!.width).toBeGreaterThan(potholeBox!.width * 1.8);
   await expectNoHorizontalScroll(page);
   await shot('P11_wizard_1_category');
   await page.getByRole('button', { name: 'Pothole' }).click();
@@ -112,8 +136,8 @@ test('ui.citizen: empty list → wizard → CB number → list → detail; outsi
     if (!phone) return;
     await page.evaluate(() => window.scrollTo(0, 0));
     const tall = await page.evaluate(() => document.documentElement.scrollHeight > window.innerHeight);
-    const path = `../docs/screenshots/${name}.png`;
-    await page.screenshot({ path, fullPage: true, ...(tall ? { style: FULL_PAGE_STYLE } : {}) });
+    const png = await page.screenshot({ fullPage: true, ...(tall ? { style: FULL_PAGE_STYLE } : {}) });
+    await writeWithRetry(`../docs/screenshots/${name}.png`, png);
   };
   await context.route('https://tile.openstreetmap.org/**', (route) => route.abort());
   await useFakeGps(context, INSIDE_TDMC);
