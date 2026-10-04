@@ -9,4 +9,8 @@ export const handlers: RequestHandler[] = [
       { status: 401, headers: { 'Content-Type': 'application/problem+json' } },
     ),
   ),
+  // The citizen home lists the recent complaints (P11): by default the account has none.
+  http.get('/api/v1/citizen/complaints', () =>
+    HttpResponse.json({ items: [], page: 0, size: 20, totalItems: 0, totalPages: 0 }),
+  ),
 ];

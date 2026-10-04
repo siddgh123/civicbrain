@@ -18,6 +18,14 @@ export type ComplaintStatus = (typeof COMPLAINT_STATUSES)[number];
 
 export type StatusTone = 'neutral' | 'info' | 'warning' | 'success' | 'danger';
 
+/**
+ * The citizen's "Closed" chip (05 §4.6): finished for good. Everything else is "Open" - COMPLETED still waits for
+ * the citizen's confirmation and MERGED follows its master.
+ */
+export function isClosedForCitizen(status: ComplaintStatus): boolean {
+  return status === 'CLOSED' || status === 'REJECTED';
+}
+
 export const STATUS_TONE: Record<ComplaintStatus, StatusTone> = {
   SUBMITTED: 'neutral',
   VERIFIED: 'neutral',

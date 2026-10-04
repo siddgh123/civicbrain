@@ -1,4 +1,11 @@
-import { useId, useState, type InputHTMLAttributes, type ReactNode, type Ref } from 'react';
+import {
+  useId,
+  useState,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type Ref,
+  type TextareaHTMLAttributes,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { AlertIcon } from '../icons/icons';
 import { validationText } from './validation';
@@ -32,17 +39,32 @@ interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'pr
   hint?: string;
   /** Fixed text before the input, e.g. "+91". */
   prefix?: string;
+  /** Live character counter next to the label, e.g. "12 / 120". */
+  counter?: string;
   ref?: Ref<HTMLInputElement>;
 }
 
-export function TextField({ label, error, hint, prefix, ref, className, ...input }: TextFieldProps) {
+function FieldLabel({ id, label, counter }: { id: string; label: string; counter?: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3">
+      <label htmlFor={id} className="font-medium text-slate-900">
+        {label}
+      </label>
+      {counter !== undefined && (
+        <span aria-hidden="true" className="shrink-0 text-sm text-slate-600 tabular-nums">
+          {counter}
+        </span>
+      )}
+    </div>
+  );
+}
+
+export function TextField({ label, error, hint, prefix, counter, ref, className, ...input }: TextFieldProps) {
   const id = useId();
   const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(' ');
   return (
     <div className={`flex flex-col gap-1.5 ${className ?? ''}`}>
-      <label htmlFor={id} className="font-medium text-slate-900">
-        {label}
-      </label>
+      <FieldLabel id={id} label={label} counter={counter} />
       <div className="flex">
         {prefix && (
           <span className="flex min-h-12 items-center rounded-l-lg border border-r-0 border-slate-300 bg-slate-100 px-3 text-base font-medium text-slate-700">
@@ -58,6 +80,40 @@ export function TextField({ label, error, hint, prefix, ref, className, ...input
           {...input}
         />
       </div>
+      {hint && (
+        <p id={`${id}-hint`} className="text-sm text-slate-600">
+          {hint}
+        </p>
+      )}
+      <FieldError id={`${id}-error`} message={error} />
+    </div>
+  );
+}
+
+interface TextAreaFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+  name: string;
+  error?: string;
+  hint?: string;
+  counter?: string;
+  ref?: Ref<HTMLTextAreaElement>;
+}
+
+export function TextAreaField({ label, error, hint, counter, ref, ...textarea }: TextAreaFieldProps) {
+  const id = useId();
+  const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(' ');
+  return (
+    <div className="flex flex-col gap-1.5">
+      <FieldLabel id={id} label={label} counter={counter} />
+      <textarea
+        id={id}
+        ref={ref}
+        rows={4}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy || undefined}
+        className={`${inputClass} ${borderClass(error)} py-2.5 leading-relaxed`}
+        {...textarea}
+      />
       {hint && (
         <p id={`${id}-hint`} className="text-sm text-slate-600">
           {hint}

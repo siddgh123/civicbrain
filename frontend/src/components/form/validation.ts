@@ -26,6 +26,15 @@ function keyForServerCode(field: string, code: string): ValidationKey {
     case 'NOT_BLANK':
     case 'NOT_NULL':
       return 'required';
+    case 'REQUIRED': // ComplaintIntake: depthAnswer for Pothole / Waterlogging
+      return field === 'depthAnswer' ? 'depthRequired' : 'required';
+    case 'SIZE':
+      if (field === 'title') return 'titleLength';
+      if (field === 'description') return 'descriptionLength';
+      return field === 'landmark' ? 'tooLong' : 'invalid';
+    case 'PATTERN': // the complaint text fields only forbid control characters
+      if (field === 'title' || field === 'description' || field === 'landmark') return 'controlChars';
+      return field === 'email' ? 'email' : field === 'phone' ? 'phone' : 'invalid';
     default:
       if (field === 'email') return 'email';
       if (field === 'phone') return 'phone';

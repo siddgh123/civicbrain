@@ -1,16 +1,25 @@
+import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { CITIZEN_COMPLAINTS_KEY, citizenApi } from '../../api/citizenComplaints';
 import { useAuth } from '../../auth/useAuth';
 import { EmptyState } from '../../components/EmptyState';
+import { ErrorState } from '../../components/ErrorState';
+import { linkClass } from '../../components/form/fields';
 import { CameraIcon, UserCheckIcon } from '../../components/icons/icons';
+import { PageSkeleton } from '../../components/PageSkeleton';
+import { ComplaintCard } from './complaints/ComplaintCard';
 
-/**
- * docs/05_UI_SPEC.md §4.1 Home: big "Report a problem" button and the recent complaints. The list (GET
- * /citizen/complaints) comes with P11; until then the empty state says where they will appear.
- */
+const RECENT = 3;
+
+/** docs/05_UI_SPEC.md §4.1 Home: big "Report a problem" button and the most recent complaints with their status. */
 export function CitizenHomePage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const recent = useQuery({
+    queryKey: [...CITIZEN_COMPLAINTS_KEY, 'recent'],
+    queryFn: ({ signal }) => citizenApi.list(0, RECENT, signal),
+  });
   return (
     <div className="flex flex-col gap-6">
       <section className="flex flex-col gap-4 rounded-2xl bg-brand-800 px-5 py-6 text-white shadow-sm">
@@ -32,7 +41,23 @@ export function CitizenHomePage() {
         <h2 id="recent-title" className="text-lg font-bold text-slate-900">
           {t('citizenHome.recentTitle')}
         </h2>
-        <EmptyState message={t('citizenHome.recentEmpty')} />
+        {recent.isPending && <PageSkeleton rows={2} />}
+        {recent.isError && <ErrorState error={recent.error} onRetry={() => void recent.refetch()} />}
+        {recent.isSuccess && recent.data.items.length === 0 && <EmptyState message={t('citizenHome.recentEmpty')} />}
+        {recent.isSuccess && recent.data.items.length > 0 && (
+          <>
+            <ul className="flex flex-col gap-3">
+              {recent.data.items.map((item) => (
+                <li key={item.complaintId}>
+                  <ComplaintCard complaint={item} />
+                </li>
+              ))}
+            </ul>
+            <Link to="/citizen/complaints" className={`${linkClass} self-start`}>
+              {t('citizenHome.seeAll')}
+            </Link>
+          </>
+        )}
       </section>
 
       <Link

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type ReactNode, type RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
+import { errorMessage } from '../../lib/errorMessage';
 import { primaryButtonClass, secondaryButtonClass } from '../form/fields';
 import { AlertIcon, CameraIcon, CheckIcon, MapPinIcon, RotateIcon } from '../icons/icons';
 import {
@@ -43,6 +44,11 @@ interface CameraCaptureProps {
   onCapture: (result: CaptureResult) => void;
   /** Pothole / Waterlogging: "Optional: place an A4 sheet next to it". */
   showA4Tip?: boolean;
+  /**
+   * Opens a capture session (POST …/capture-sessions) right before the camera - or its fallback - opens; the id is
+   * returned with the capture. Every in-page camera start gets a new session (04 §5: single use, 10 min).
+   */
+  openSession?: () => Promise<string>;
 }
 
 function stopTracks(stream: RefObject<MediaStream | null>): void {
@@ -90,7 +96,7 @@ function Chip({ tone, icon, children, testId }: { tone: Tone; icon: ReactNode; c
  * Location denied or worse than 150 m → explanation, "Use this photo" stays disabled. Camera tracks stop on capture
  * and on unmount.
  */
-export function CameraCapture({ onCapture, showA4Tip = false }: CameraCaptureProps) {
+export function CameraCapture({ onCapture, showA4Tip = false, openSession }: CameraCaptureProps) {
   const { t } = useTranslation();
   const [phase, setPhase] = useState<Phase>({ name: 'idle' });
   const [fix, setFix] = useState<Fix>({ status: 'pending' });
@@ -99,6 +105,7 @@ export function CameraCapture({ onCapture, showA4Tip = false }: CameraCapturePro
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const fixRequest = useRef(0);
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const { orientation, latest } = useDeviceOrientation();
   const watch = useGpsWatch(sensorsOn && (phase.name === 'live' || phase.name === 'fallback'));
 
@@ -144,6 +151,17 @@ export function CameraCapture({ onCapture, showA4Tip = false }: CameraCapturePro
 
   const startCamera = useCallback(async () => {
     setFailure(null);
+    if (openSession !== undefined) {
+      setPhase({ name: 'starting' });
+      setSessionId(null);
+      try {
+        setSessionId(await openSession());
+      } catch (error) {
+        setFailure(errorMessage(t, error));
+        setPhase({ name: 'idle' });
+        return;
+      }
+    }
     const unavailable = cameraUnavailable();
     if (unavailable !== null) {
       setPhase({ name: 'fallback', problem: unavailable });
@@ -157,7 +175,7 @@ export function CameraCapture({ onCapture, showA4Tip = false }: CameraCapturePro
     } catch (error) {
       setPhase({ name: 'fallback', problem: cameraProblemOf(error) });
     }
-  }, []);
+  }, [openSession, t]);
 
   const onStart = async () => {
     await requestOrientationPermission(); // iOS: must happen inside this tap
@@ -211,11 +229,13 @@ export function CameraCapture({ onCapture, showA4Tip = false }: CameraCapturePro
     else void startCamera();
   };
 
-  const canContinue = phase.name === 'preview' && fix.status === 'ok' && fix.accuracyM <= MAX_ACCURACY_M;
+  const hasSession = openSession === undefined || sessionId !== null;
+  const canContinue = phase.name === 'preview' && fix.status === 'ok' && fix.accuracyM <= MAX_ACCURACY_M && hasSession;
   const onContinue = () => {
-    if (phase.name !== 'preview' || fix.status !== 'ok' || fix.accuracyM > MAX_ACCURACY_M) return;
+    if (phase.name !== 'preview' || fix.status !== 'ok' || fix.accuracyM > MAX_ACCURACY_M || !hasSession) return;
     const { photo } = phase;
     onCapture({
+      ...(openSession !== undefined && sessionId !== null ? { captureSessionId: sessionId } : {}),
       blob: photo.blob,
       lat: fix.lat,
       lon: fix.lon,
@@ -249,6 +269,7 @@ export function CameraCapture({ onCapture, showA4Tip = false }: CameraCapturePro
           </span>
           <p className="text-slate-700">{t('camera.intro')}</p>
           {a4Tip}
+          {failureAlert}
           <button type="button" onClick={() => void onStart()} data-testid="capture-start" className={primaryButtonClass}>
             <CameraIcon className="size-5" />
             {t('camera.start')}

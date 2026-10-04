@@ -214,3 +214,81 @@ export function MapPinIcon(props: IconProps) {
     </Svg>
   );
 }
+
+// Category tiles (docs/05_UI_SPEC.md §4 step 1).
+
+export function PotholeIcon(props: IconProps) {
+  return (
+    <Svg name="pothole" {...props}>
+      <path d="M2 17h20" />
+      <path d="M6 17c1-3.5 3-5 6-5s5 1.5 6 5" />
+      <path d="M9 14.5l1 1.5M14 13.5l-1 2" />
+    </Svg>
+  );
+}
+
+export function RoadCrackIcon(props: IconProps) {
+  return (
+    <Svg name="road-crack" {...props}>
+      <path d="M6 21 9 3M18 21 15 3" />
+      <path d="M12 6l-1 3 2 2-1.5 3 1 3-.5 3" />
+    </Svg>
+  );
+}
+
+export function TrashIcon(props: IconProps) {
+  return (
+    <Svg name="trash" {...props}>
+      <path d="M4 7h16M9 7V4h6v3" />
+      <path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" />
+      <path d="M10 11v6M14 11v6" />
+    </Svg>
+  );
+}
+
+export function WavesIcon(props: IconProps) {
+  return (
+    <Svg name="waves" {...props}>
+      <path d="M2 9c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" />
+      <path d="M2 14c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" />
+      <path d="M2 19c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" />
+    </Svg>
+  );
+}
+
+export function DropletIcon(props: IconProps) {
+  return (
+    <Svg name="droplet" {...props}>
+      <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z" />
+    </Svg>
+  );
+}
+
+export function DrainIcon(props: IconProps) {
+  return (
+    <Svg name="drain" {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M7 5v14M11 5v14M15 5v14M19 5v14" />
+    </Svg>
+  );
+}
+
+export function LampIcon(props: IconProps) {
+  return (
+    <Svg name="lamp" {...props}>
+      <path d="M8 21h8M12 21V8" />
+      <path d="M12 8c0-3 2-5 5-5h1" />
+      <path d="M16 3h4l-1 4h-2z" />
+    </Svg>
+  );
+}
+
+export function DotsIcon(props: IconProps) {
+  return (
+    <Svg name="dots" {...props}>
+      <circle cx="6" cy="12" r="1.5" />
+      <circle cx="12" cy="12" r="1.5" />
+      <circle cx="18" cy="12" r="1.5" />
+    </Svg>
+  );
+}

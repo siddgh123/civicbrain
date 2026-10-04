@@ -29,7 +29,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | DONE (human yes 2026-10-03 19:32) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files; location risk 500/500 through the live loader on `civicbrain_test`) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | DONE (human yes 2026-10-03 21:21) | mvnw verify 202 tests 0 failures (135 unit + 67 IT; was 170) · **`SMOKE INTAKE PASSED: 29 / 29`** (after the human-approved `code_of()` smoke fix) · `SMOKE AUTH PASSED: 19 / 19` · log scan 0 hits · SUBMITTED mail in Mailpit |
-| P11 | Citizen screens | D3 | NOT STARTED | |
+| P11 | Citizen screens | D3 | IN PROGRESS (verified 2026-10-04 09:33, waiting for the human's answers) | lint/typecheck 0 errors · vitest 104 passed (18 files; was 69) · build OK · walkthrough phone + desktop `1 passed` each (E2E, submit → CB-000001 Ward 1, OUTSIDE_BOUNDARY message) · 9 screenshots · backend verify 137 + 67 IT 0 failures (client-disconnect fix) · `SMOKE INTAKE PASSED: 29 / 29` · `SMOKE AUTH PASSED: 19 / 19` |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
 | P13 | Phone test over the tunnel | D4 | NOT STARTED | |
 | P14 | Officer/admin/contractor-management API + smoke officer | D4 | NOT STARTED | |
@@ -82,6 +82,92 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P12 Demo readiness | NOT STARTED | | |
 
 ## Task log (newest first)
+
+### 2026-10-04 — P11 — Citizen screens: report wizard, my complaints, detail (verified 09:33, started 08:53; waiting for the human's Q1)
+- Requirement(s): FR-10 (wizard + in-app camera), FR-12 (depth answer + A4 flag), FR-13 (own list/detail/timeline), FR-15 (contractor
+  name, "Linked to"); docs/05 §1, §2, §4, §7, §8; docs/04 §3, §5; docs/12 §2 (intake codes), §5 (single-use session), §6; 09_7DAY §4
+  (wizard blocks submit without photo/GPS).
+**Plan** (Claude Code, Auto mode; estimate 2.5 h → time box 3.75 h). No new dependency (react-leaflet 5 / Leaflet 1.9.4 pinned), no backend change.
+1. `api/citizenComplaints.ts` + `api/publicApi.ts` categories (zod per 04 §3/§5) · `CameraCapture` optional `openSession` prop: POST
+   capture-session right before the camera (or its fallback) opens, id returned with the capture · `components/Timeline`, `PinMap`
+   (read-only Leaflet pin, CircleMarker, OSM attribution), category icons.
+2. Wizard `/citizen/new` (`features/citizen/wizard/`): 1 tiles → 2 camera (A4 tip) → 3 details (RHF + zod, counters, depth radios with
+   Pothole/Waterlogging labels, A4 toggle) → 4 review (photo, pin, values; multipart submit) → 5 success (CB number, ward, updates note).
+   Pure `intakeErrorTarget(code)` sends every intake code to the right step; one form instance = typed data never lost.
+3. `/citizen` home (Report + 3 recent), `/citizen/complaints` (Open/Closed chips, skeleton, empty, refresh + pull-to-refresh),
+   `/citizen/complaints/:id` detail (ProtectedImage photos, timeline newest first, contractor + planned date, MERGED "Linked to"),
+   `/citizen/complaints/ref/:publicRef` (behind `/c/:publicRef`): own complaint, else own merged child of it, else friendly 404.
+Tests first (Vitest + MSW): the prompt's 5 + error-target table + ref lookup + session prop. Shared MSW defaults for the new GETs.
+Verify: lint · typecheck · test · build → E2E walkthrough `walkthrough/P11_citizen.spec.ts` (stop → seed-e2e → -E2E → screenshots
+`P11_*.png` → -Restart).
+
+**Results** (2026-10-04 09:33 - 40 min, inside the 2.5 h estimate; no ASK-FIRST stop, no human step; one small backend fix, see below)
+1. Files (`frontend/src/`): `api/citizenComplaints.ts` (zod per 04 §5, multipart submit, `findOwnComplaintId`) · `api/publicApi.ts` (categories) ·
+   `components/camera/{CameraCapture,capture}` (optional `openSession`: POST capture-session right before the camera or its fallback opens,
+   `captureSessionId` returned with the capture; session failure → message, camera not opened) · `components/{Timeline,statusIcons}`,
+   `components/map/PinMap` (read-only Leaflet pin, CircleMarker, OSM credit) · `components/form/fields` (optional `counter`, `TextAreaField`),
+   `form/validation` (server codes SIZE / PATTERN / REQUIRED for the complaint fields) · 8 category icons · `features/citizen/NewComplaintPage`
+   (wizard container) + `wizard/{CategoryStep,PhotoStep,DetailsStep,ReviewStep,SuccessStep,CategoryIcon,detailsForm,intakeErrors}` ·
+   `features/citizen/{CitizenHomePage,CitizenComplaintRefPage}` · `complaints/{ComplaintsListPage,ComplaintDetailPage,ComplaintCard,
+   ComplaintNotFound,usePullToRefresh}` · `lib/{complaintStatus (isClosedForCitizen),format (formatDate)}` · routes · `en.json` (wizard,
+   complaints, complaintDetail, trackRef, 3 validation keys; the P07 `newComplaint` placeholder keys removed) · `test/handlers.ts` (default
+   empty `GET /citizen/complaints`, so the existing layout tests that open `/citizen` stay quiet; no assertion touched) · `test/browserFakes.ts` ·
+   `walkthrough/P11_citizen.spec.ts`. Backend: `common/GlobalExceptionHandler` + `unit/common/ClientDisconnectTest` + one test-only
+   endpoint in `unit/support/TestController`.
+2. Tests (all new; no existing test changed): `NewComplaintWizard.test` 5 (blocks submit without photo or GPS · depth question only for
+   Pothole/Waterlogging with their labels and required there · multipart `data` + photo with the capture session → CB number + ward ·
+   422 GPS_ACCURACY_TOO_LOW → open-sky message, new capture, typed text kept · server title field error → details step on the field) ·
+   `intakeErrors.test` 17 (every intake code → its step; wait text) · `CitizenComplaints.test` 11 (list empty state · skeleton + Open/Closed
+   chips · error + reference · home recent · detail MERGED "Linked to" · link to an own master · photos + timeline newest first + contractor +
+   planned date · other/missing → friendly 404 · `/c/` own · `/c/` master → own merged child · `/c/` not own → friendly 404) ·
+   `CameraCapture.session.test` 2 · backend `ClientDisconnectTest` 2.
+3. Runs:
+
+   | Check | Command | Result | |
+   |---|---|---|---|
+   | first unit run (in `frontend`) | typecheck · lint · `npx vitest run src/features/citizen src/components/camera` | exit 0 · exit 0 · `1 failed \| 40 passed`: my new multipart test read the body in the MSW handler and Node's fetch cannot stream a jsdom FormData ("AbortError … Premature close") → the test reads the app's FormData from a call-through `vi.spyOn(api, 'postMultipart')`, code unchanged → `41 passed` | FAIL→test fixed |
+   | E2E seed (repo root) | `start-all.ps1 -Stop` → `pwsh -NoProfile -File scripts\dev\seed-e2e.ps1 -MinAccounts 3` → `start-all.ps1 -E2E` | `E2E RESET DONE: 48 tables emptied, 27 reference tables kept` · `5 accounts created, 0 already present` · `PASS stack 'e2e' is up` | PASS |
+   | walkthrough 1 (in `frontend`) | `npx playwright test --config playwright.walkthrough.config.ts walkthrough/P11 --project phone` | empty list PASS; preview stuck on "Finding your location…" → diagnosis: a direct `navigator.geolocation.getCurrentPosition` in the page → `error 3 Timeout expired` (phone **and** desktop project); after 20 s the app showed its own "Your location could not be found … Retry location" (correct) → DECISION (fake GPS) below | FAIL→spec fixed |
+   | walkthrough 2 | same, phone | `1 passed (7.4s)`; screenshots opened: details / review / detail had the sticky header and fixed bottom nav drawn over the content (full-page capture artefact) → spec: scroll to top + Playwright screenshot `style` puts both bars into the page flow for pages taller than the screen | FAIL→spec fixed |
+   | log scan after walkthrough 2 | `Select-String` over `logs\*.log` | secrets 0 hits, but **10 backend ERROR lines** `GET /api/v1/files/{id} -> 500 unexpected error` = `AsyncRequestNotUsableException … connection was aborted`: `ProtectedImage` aborts its fetch on unmount (05 §2; React StrictMode mounts twice in dev) and the catch-all logged the client's disconnect as a 500 with stack trace → backend fix below | FAIL→fixed |
+   | backend (in `backend`, E2E stack stopped - the jar is in use otherwise) | `.\mvnw.cmd -q verify` | 1st: test compile error (the exception is checked; my test endpoint lacked `throws`) → 2nd: exit 0; reports surefire `tests=137 failures=0 errors=0 skipped=0` (was 135; `ClientDisconnectTest` 2, `ErrorAdviceTest` 11 unchanged), failsafe `tests=67 failures=0 errors=0 skipped=0` | PASS |
+   | fresh E2E + walkthrough (final) | stop → seed (`E2E RESET DONE …` · `5 accounts created`) → `-E2E` → `… walkthrough/P11 --project phone` → `--project desktop` | `1 passed (8.9s)` · `1 passed (6.6s)`: empty list of the new account → Pothole → camera fallback + `pothole_1.jpg` at 18.7440, 73.6760 → details (finger depth, A4) → review (photo, map pin, values) → **201 `CB-000001`, Ward 1** → detail (photo via ProtectedImage, timeline "Received") → list "Open" card with thumbnail → second report at 18.7700, 73.7500 → **"This location is outside Talegaon Dabhade Municipal Council." + "Your title and description are kept."** on step 2; desktop `CB-000002` | PASS |
+   | log scan (this run only) | backend lines since the stack start; `Select-String` secrets over `logs\{backend,frontend,worker,ai-api}.log` | backend **0 ERROR, 0 WARN** · `complaint CB-000001 submitted (ward 1, category 1)` · `CB-000002 …` · secret hits 0 / 0 / 0 / 0 | PASS |
+   | smoke (fresh seed, backend changed) | stop → seed → `-E2E` → `ai-service\.venv\Scripts\python.exe tests\smoke\smoke_flow.py --stage intake` · `--stage auth` | **`SMOKE INTAKE PASSED: 29 / 29`** · `SMOKE AUTH PASSED: 19 / 19` | PASS |
+   | dev stack back (repo root) | `pwsh -NoProfile -File scripts\dev\start-all.ps1 -Restart` | `PASS stack 'dev' is up` (5 services healthy) | PASS |
+   | final frontend (in `frontend`) | `npm run lint` · `npm run typecheck` · `npm test -- --run` · `npm run build` | exit 0 · exit 0 · `Test Files 18 passed (18)` `Tests 104 passed (104)` (was 69), no stderr · `✓ 315 modules transformed` `✓ built in 737ms` (JS 791 kB: Leaflet now in the bundle, > 500 kB warning already handed to P21/P27) | PASS |
+4. Screenshots (phone 390 px, final run, all 9 opened and checked: readable, nothing overlapping or cut off; no horizontal scroll is also
+   asserted in the spec): `docs/screenshots/P11_list_empty.png` · `P11_wizard_1_category.png` (8 tiles) · `P11_wizard_2_camera_fallback.png`
+   (A4 tip, phone-camera button) · `P11_wizard_3_details.png` (counters, finger-depth pictograms, A4 toggle) · `P11_wizard_4_review.png`
+   (photo, pin on grey - tiles blocked, credit visible - values) · `P11_wizard_5_success.png` (CB-000001, Ward 1, updates note) ·
+   `P11_detail.png` · `P11_list.png` · `P11_error_outside_boundary.png`.
+- DECISION (walkthrough location): Playwright's geolocation grant never answers in headless Chrome on this laptop (direct
+  `getCurrentPosition` → error 3 after 8 s in both projects; likely the Windows location service, not the app), so `P11_citizen.spec.ts`
+  replaces `navigator.geolocation` with a fixed position through `context.addInitScript` (a later call wins, used for the outside point).
+  The real GPS + camera are P13. The app's own timeout path was seen working (message + "Retry location").
+- DECISION (walkthrough map): OSM tile requests are aborted in the spec (`context.route`) - the agent's browser stays on localhost (01-safety);
+  the review map shows the pin and "© OpenStreetMap contributors" on grey. Tiles load normally in the app (CSP already allows the host).
+- DECISION: Open/Closed chips - Closed = CLOSED, REJECTED; everything else Open (COMPLETED waits for the citizen, MERGED follows its master).
+  The API filters by one status only, so the chips filter the loaded pages (100 per page, "Show older complaints" loads more).
+- DECISION: `/c/:publicRef` → own complaint with that number, else the citizen's own MERGED complaint linked to it (status mails of a merged
+  report carry the master's track link), else a friendly not-found page. The detail's "Linked to CB-…" shows the master as a link only when
+  it is the citizen's own complaint (another citizen's is a 404 by design, 04 §5); otherwise text + "you get its updates" sentence.
+- DECISION: every in-page camera start opens a new capture session (single use, 10 min); a fallback retake keeps the session of that start.
+  Any session / location / photo error code (CAPTURE_SESSION_*, GPS_ACCURACY_TOO_LOW, LOCATION_STALE, OUTSIDE_BOUNDARY, FILE_*, IMAGE_*)
+  → step 2 with the code's message + "Your title and description are kept." and a fresh camera; field errors → their step; network /
+  server / RATE_LIMITED → stay on review (rate limit as seconds / minutes / hours: the 5-per-24-h limit can mean hours).
+- DECISION: depth labels by category name (Waterlogging = ankle/knee, every other `needsDepthAnswer` category = finger); A4 tip shown for
+  `needsDepthAnswer` categories (V5 sets it exactly for Pothole and Waterlogging). Pull-to-refresh = > 80 px swipe from the top + a Refresh button.
+- **BACKEND FIX (outside the P11 Build list, found by the P11 verification):** `GlobalExceptionHandler` now handles
+  `AsyncRequestNotUsableException` (the client closed the connection while the response was written) with a void handler: DEBUG log only,
+  nothing written to the closed connection. Before, every aborted photo request was logged as `-> 500 unexpected error` with a stack trace
+  (docs/12 §2: INTERNAL_ERROR is for the unexpected) and would trip the "backend 0 ERROR" log checks of the later gates. Unexpected errors
+  are still logged as ERROR (second test). No API behaviour changed (the client is gone).
+- Not built: public map link on the home (public map is on the OUT list); feedback buttons (P22, as the prompt says).
+- Open / hand-offs: **P07 walkthrough** (`walkthrough/P07_auth.spec.ts`, step 6) clicks Capture right after opening `/citizen/new`; with the
+  wizard a category must be chosen first, so that spec now fails at step 6 if it is re-run (e.g. at a gate). Changing a passed test is
+  ASK-FIRST → asked as Q2. **P13** real camera + GPS + map tiles on the phone. **P22** feedback UI uses `canGiveFeedback` (already in the
+  zod schema). **P21/P27** bundle 791 kB (route-level splitting; Leaflet could load only with the review/map screens).
 
 ### 2026-10-03 — P10 — Complaint intake API + e-mail outbox dispatcher + smoke intake (DONE 2026-10-03 21:21, started 20:05)
 - Requirement(s): FR-10 (server part), FR-11, FR-12, FR-13, FR-15, FR-50 (e-mail), FR-51, FR-52; docs/04 §3, §4, §5; 02 §1, §5

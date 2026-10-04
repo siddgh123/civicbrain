@@ -9,6 +9,8 @@ import { RegisterPage } from '../features/auth/RegisterPage';
 import { CitizenComplaintRefPage } from '../features/citizen/CitizenComplaintRefPage';
 import { CitizenHomePage } from '../features/citizen/CitizenHomePage';
 import { CitizenLayout } from '../features/citizen/CitizenLayout';
+import { ComplaintDetailPage } from '../features/citizen/complaints/ComplaintDetailPage';
+import { ComplaintsListPage } from '../features/citizen/complaints/ComplaintsListPage';
 import { NewComplaintPage } from '../features/citizen/NewComplaintPage';
 import { ProfilePage } from '../features/citizen/ProfilePage';
 import { ContractorLayout } from '../features/contractor/ContractorLayout';
@@ -66,11 +68,12 @@ export const routes: RouteObject[] = [
     ),
     errorElement: <RouteErrorPage />,
     children: [
-      { index: true, element: <CitizenHomePage /> }, // recent complaints list: P11
-      { path: 'new', element: <NewComplaintPage /> }, // photo step (CameraCapture); full wizard: P11
+      { index: true, element: <CitizenHomePage /> },
+      { path: 'new', element: <NewComplaintPage /> },
       { path: 'profile', element: <ProfilePage /> },
-      { path: 'complaints', element: <Placeholder titleKey="pages.citizenComplaints" /> }, // P11
-      { path: 'complaints/ref/:publicRef', element: <CitizenComplaintRefPage /> }, // P11
+      { path: 'complaints', element: <ComplaintsListPage /> },
+      { path: 'complaints/:id', element: <ComplaintDetailPage /> },
+      { path: 'complaints/ref/:publicRef', element: <CitizenComplaintRefPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

@@ -23,6 +23,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
@@ -30,6 +31,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.exc.MismatchedInputException;
@@ -137,6 +139,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     ResponseEntity<ApiProblem> authentication(AuthenticationException e, HttpServletRequest request) {
         return respond(new ApiException(ErrorCode.UNAUTHENTICATED, "Please log in."), request, null);
+    }
+
+    /**
+     * The client closed the connection while the response was written (e.g. the SPA aborts a photo request when the
+     * page changes): nothing can be sent any more and it is not a server error (12 §2), so DEBUG only. A void handler
+     * with the response parameter counts as fully handled (no problem body is written to the closed connection).
+     */
+    @ExceptionHandler(AsyncRequestNotUsableException.class)
+    void clientGone(AsyncRequestNotUsableException e, HttpServletRequest request, HttpServletResponse response) {
+        log.debug("{} {} -> client closed the connection", request.getMethod(), request.getRequestURI());
     }
 
     /** Database errors (12 §3), Spring MVC's own errors by status, and everything unexpected → 500. */

@@ -6,6 +6,7 @@ import org.postgresql.util.PSQLException;
 import org.postgresql.util.ServerErrorMessage;
 import org.springframework.boot.test.context.TestComponent;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,6 +71,13 @@ public class TestController {
     @GetMapping("/api/v1/public/test/limited")
     public String limited() {
         throw new RateLimitedException(17);
+    }
+
+    /** What Spring throws when the client closed the connection while the response was written. */
+    @GetMapping("/api/v1/public/test/client-gone")
+    public String clientGone() throws AsyncRequestNotUsableException {
+        throw new AsyncRequestNotUsableException(
+                "ServletOutputStream failed to write: java.io.IOException: An established connection was aborted");
     }
 
     @GetMapping({"/api/v1/public/test/ping", "/api/v1/auth/test/ping", "/actuator/health"})

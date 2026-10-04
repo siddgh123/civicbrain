@@ -12,6 +12,8 @@ export interface CaptureResult {
   /** DeviceOrientation `gamma` at the shutter; null = not available. */
   rollDeg: number | null;
   method: 'IN_APP_CAMERA' | 'FILE_CAPTURE';
+  /** Set when CameraCapture got `openSession`: the capture session opened right before this camera start. */
+  captureSessionId?: string;
 }
 
 export const JPEG_QUALITY = 0.9;

@@ -9,6 +9,15 @@ const DATE_TIME = new Intl.DateTimeFormat('en-IN', {
   hour12: true,
 });
 
+const DATE_ONLY = new Intl.DateTimeFormat('en-IN', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' });
+
+/** A calendar date `YYYY-MM-DD` (e.g. a plan's date), shown as "6 Oct 2026" without any time-zone shift. */
+export function formatDate(isoDate: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate);
+  if (match === null) return isoDate;
+  return DATE_ONLY.format(new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]))));
+}
+
 export function formatDateTime(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
