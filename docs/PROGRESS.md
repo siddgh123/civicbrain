@@ -29,7 +29,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 | P08 | Text classifier, YOLO detector (install Kaggle model), authenticity | D3 | DONE (human yes 2026-10-03 15:16) | YOLO installed sha256 `93af36422072…`, ONNX check 1x8x8400 · test split mAP50 0.607 / mAP50-95 0.379 (Pothole 0.347) · text clf C=10, sanity acc 0.90 / macro-F1 0.8995 · ruff clean · pytest 202 passed (8 `models` tests ran, 0 skipped; 5 new IT) · CPU 82 ms/image (median) · `/health` yolo + text clf "ok", MiniLM "folder missing" (P09) |
 | P09 | Priority + duplicates (FROZEN) + MiniLM | D3 | DONE (human yes 2026-10-03 19:32) | priority golden **500 rows, 0 mismatches** (+ 6 factor rules 500/500 vs research factor files; location risk 500/500 through the live loader on `civicbrain_test`) · duplicates repro 3 pairs (DUPLICATE/UNCERTAIN/NOT_DUPLICATE) within 1e-6, formula 109/109 pairs · MiniLM installed (commit 1110a243fdf4, 11 files, 384-dim ok) · ruff clean · pytest 310 passed (12 `models` tests ran, 0 skipped) · `/health` all 3 models "ok" |
 | P10 | Complaint intake API + e-mail outbox + smoke intake | D3 | DONE (human yes 2026-10-03 21:21) | mvnw verify 202 tests 0 failures (135 unit + 67 IT; was 170) · **`SMOKE INTAKE PASSED: 29 / 29`** (after the human-approved `code_of()` smoke fix) · `SMOKE AUTH PASSED: 19 / 19` · log scan 0 hits · SUBMITTED mail in Mailpit |
-| P11 | Citizen screens | D3 | IN PROGRESS (verified 2026-10-04 09:33, waiting for the human's answers) | lint/typecheck 0 errors · vitest 104 passed (18 files; was 69) · build OK · walkthrough phone + desktop `1 passed` each (E2E, submit → CB-000001 Ward 1, OUTSIDE_BOUNDARY message) · 9 screenshots · backend verify 137 + 67 IT 0 failures (client-disconnect fix) · `SMOKE INTAKE PASSED: 29 / 29` · `SMOKE AUTH PASSED: 19 / 19` |
+| P11 | Citizen screens | D3 | DONE (human yes 2026-10-04 09:56) | lint/typecheck 0 errors · vitest 104 passed (18 files; was 69) · build OK · walkthrough phone + desktop `1 passed` each (E2E, submit → CB-000001 Ward 1, OUTSIDE_BOUNDARY message) · 9 screenshots · backend verify 137 + 67 IT 0 failures (client-disconnect fix) · `SMOKE INTAKE PASSED: 29 / 29` · `SMOKE AUTH PASSED: 19 / 19` |
 | P12 | Measure, estimate, quality, analyze orchestrator + smoke analysis | D4 | NOT STARTED | |
 | P13 | Phone test over the tunnel | D4 | NOT STARTED | |
 | P14 | Officer/admin/contractor-management API + smoke officer | D4 | NOT STARTED | |
@@ -83,7 +83,7 @@ Status values: NOT STARTED · IN PROGRESS · BLOCKED · DONE (human yes <date ti
 
 ## Task log (newest first)
 
-### 2026-10-04 — P11 — Citizen screens: report wizard, my complaints, detail (verified 09:33, started 08:53; waiting for the human's Q1)
+### 2026-10-04 — P11 — Citizen screens: report wizard, my complaints, detail (DONE, human yes 2026-10-04 09:56; verified 09:33)
 - Requirement(s): FR-10 (wizard + in-app camera), FR-12 (depth answer + A4 flag), FR-13 (own list/detail/timeline), FR-15 (contractor
   name, "Linked to"); docs/05 §1, §2, §4, §7, §8; docs/04 §3, §5; docs/12 §2 (intake codes), §5 (single-use session), §6; 09_7DAY §4
   (wizard blocks submit without photo/GPS).
@@ -168,6 +168,13 @@ Verify: lint · typecheck · test · build → E2E walkthrough `walkthrough/P11_
   wizard a category must be chosen first, so that spec now fails at step 6 if it is re-run (e.g. at a gate). Changing a passed test is
   ASK-FIRST → asked as Q2. **P13** real camera + GPS + map tiles on the phone. **P22** feedback UI uses `canGiveFeedback` (already in the
   zod schema). **P21/P27** bundle 791 kB (route-level splitting; Leaflet could load only with the review/map screens).
+- Human answers (2026-10-04 09:56): **Q1 yes** - the wizard, error, list and detail screenshots look right on the phone width.
+  **Q2 yes** - `walkthrough/P07_auth.spec.ts` step 6 now clicks the Pothole tile before Capture (one line + comment; ASK-FIRST "changing a
+  test that already passed" - approved; nothing else in the spec changed). Re-run on a fresh E2E stack (`start-all.ps1 -Stop` →
+  `seed-e2e.ps1 -MinAccounts 3` → `E2E RESET DONE: 48 tables emptied` · `5 accounts created` → `start-all.ps1 -E2E`), in `frontend`:
+  `npx playwright test --config playwright.walkthrough.config.ts walkthrough/P07 --project desktop` → `1 passed (8.4s)` (desktop only, as at
+  the D2 gate: the spec takes screenshots on the phone project, so the 4 approved P07 screenshots stay unchanged - `git status` shows only
+  the spec). `npm run lint` → exit 0. **Q3 yes** (category scope change) → separate task "Categories: 5 citizen-selectable".
 
 ### 2026-10-03 — P10 — Complaint intake API + e-mail outbox dispatcher + smoke intake (DONE 2026-10-03 21:21, started 20:05)
 - Requirement(s): FR-10 (server part), FR-11, FR-12, FR-13, FR-15, FR-50 (e-mail), FR-51, FR-52; docs/04 §3, §4, §5; 02 §1, §5

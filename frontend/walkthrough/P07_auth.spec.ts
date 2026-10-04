@@ -126,9 +126,11 @@ test('register → OTP → login → logout → ui.citizen → camera fallback',
   await page.reload();
   await expect(page.getByRole('heading', { level: 1, name: 'Hello, UI Citizen' })).toBeVisible();
 
-  // 6. /citizen/new → Capture → no camera in the headless browser → explanation + file fallback
+  // 6. /citizen/new → (P11 wizard: category first) Pothole → Capture → no camera in the headless browser →
+  // explanation + file fallback
   await page.getByTestId('home-report').click();
   await expect(page).toHaveURL('/citizen/new');
+  await page.getByRole('button', { name: 'Pothole' }).click();
   await page.getByTestId('capture-start').click();
   await expect(page.getByRole('heading', { name: 'The camera could not be opened' })).toBeVisible();
   const fileInput = page.getByTestId('capture-file');
